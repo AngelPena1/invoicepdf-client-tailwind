@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import Search from "./components/Search";
 import MaintenanceForm from "./components/MaintenanceForm";
-import { useParams } from "react-router-dom";
 import useInputData from "./hooks/useInputData";
 import useTabNavigation from "./hooks/useTabNavigation";
 import NavigationBar from "./components/NavigationBar";
@@ -66,7 +65,7 @@ const Index = () => {
   }, [resfresh]);
 
   return (
-    <section className="pt-32 md:pt-32 xl:px-60 lg:px-40 md:px-20 px-10">
+    <section className="">
       <NavigationBar
         currentTab={currentTab}
         ResetInputValues={ResetInputValues}

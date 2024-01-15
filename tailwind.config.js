@@ -13,7 +13,7 @@ module.exports = {
         "primary": "#27415a"
       },
       animation: {
-        show_up_container: "show_up_container .2s  forwards",
+        show_up_container: "show_up_container .1s  forwards",
         show_up_results: "show_up_results .2s  forwards",
         wiggle: "wiggle 1s ease-in-out infinite",
       },

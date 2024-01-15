@@ -10,7 +10,7 @@ import Login from "./pages/Login/LoginIndex";
 function App() {
 
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-gray-100 h-screen pt-32 md:pt-32 xl:px-60 lg:px-40 md:px-20 px-10">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="login" element={<Login />} />
