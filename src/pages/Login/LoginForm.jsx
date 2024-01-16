@@ -2,10 +2,10 @@ import React from "react";
 
 const LoginForm = (props) => {
   return (
-    <section className="w-screen h-screen flex items-center justify-center">
+    <section className="grid justify-items-center items-center">
       <form
         onSubmit={props.HandleLogin}
-        className="w-96 h-30r bg-white rounded-lg p-8"
+        className="w-96 h-30r bg-white rounded-lg p-8 relative top-12"
       >
         <h4 className="text-center  font-bold text-2xl mb-16">
           Inicio de sesión
