@@ -5,6 +5,8 @@ import Select from "../../../components/Select/Index";
 function MaintenanceForm({
   inputData,
   loadingImg,
+  onlyNamesCategories,
+  onlyNamesSubcategories,
   getOnlyNames,
   HandleInputData,
   HandleCategorySelect,
@@ -28,7 +30,7 @@ function MaintenanceForm({
             }}
           />
         </div>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-8 mb-10">
           <div>
             <label htmlFor="" className="text-base">
               Categoría
@@ -36,10 +38,35 @@ function MaintenanceForm({
             <Select
               value={inputData?.category_id}
               onClick={HandleCategorySelect}
-              elements={getOnlyNames()}
+              elements={onlyNamesCategories}
             />
           </div>
-          <div className="mb-10">
+          <div>
+            <label htmlFor="" className="text-base">
+              Subcategoría
+            </label>
+            <Select
+              value={inputData?.category_id}
+              onClick={HandleCategorySelect}
+              elements={onlyNamesSubcategories}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-8 mb-10">
+          <div className="">
+            <label htmlFor="" className="text-base">
+              Costo
+            </label>
+            <input
+              type="text"
+              placeholder="Inserte el costo..."
+              value={inputData?.price}
+              onChange={(e) => {
+                HandleInputData({ ...inputData, price: e.target.value });
+              }}
+            />
+          </div>
+          <div className="">
             <label htmlFor="" className="text-base">
               Precio
             </label>
@@ -94,7 +121,12 @@ function MaintenanceForm({
               />
             </div>
           )}
-          {loadingImg && <div id="img-skeleton" className="w-full h-52 rounded-lg skeleton" />}
+          {loadingImg && (
+            <div
+              id="img-skeleton"
+              className="w-full h-52 rounded-lg skeleton"
+            />
+          )}
           {inputData?.image && (
             <div>
               <FontAwesomeIcon
@@ -214,7 +246,11 @@ function MaintenanceForm({
       </section>
       <section>
         <div className="grid p-8">
-          <button type="submit" className="bg-primary" onClick={HandleCreateProduct}>
+          <button
+            type="submit"
+            className="bg-primary"
+            onClick={HandleCreateProduct}
+          >
             Añadir producto
           </button>
           <button

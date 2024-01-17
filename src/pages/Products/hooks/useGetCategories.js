@@ -8,7 +8,7 @@ const useGetCategories = () => {
 
   const companyId = auth?.company?.id;
 
-  const endpoint = `/category/company/${companyId}/getall`;
+  const endpoint = `/category/company/${companyId}/getall/subcategory`;
 
   const { data, loading } = useGetData({
     url: endpoint,
@@ -19,9 +19,9 @@ const useGetCategories = () => {
     return setSearch(true);
   }
 
-  function getOnlyNames() {
-    if (!data) return [];
-    const onlyNames = data?.map((d) => {
+  function getOnlyNames(array) {
+    if (!array) return [];
+    const onlyNames = array?.map((d) => {
       return { id: d?.id, name: d?.name };
     });
     return onlyNames;

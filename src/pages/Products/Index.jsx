@@ -12,6 +12,13 @@ import ProductsForm from "./components/ProductsForm";
 import useSearchProduct from "./hooks/useSearchProduct";
 
 const Index = () => {
+
+  const {
+    data: categoriesData,
+    getOnlyNames,
+    HandleSearch: HandleSearchCategories,
+  } = useGetCategories();
+
   const {
     inputData,
     ResetInputValues,
@@ -20,17 +27,14 @@ const Index = () => {
     HandleCategorySelect,
     HandleImageChange,
     HandleEditProduct,
-  } = useInputData();
+  } = useInputData({categoriesData});
+
+
+  console.log(inputData);
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation({
     ResetInputValues,
   });
-
-  const {
-    data: categoriesData,
-    getOnlyNames,
-    HandleSearch: HandleSearchCategories,
-  } = useGetCategories();
 
   const { resfresh, HandleCreateProduct, HandleUpdateProduct } = usePostProduct(
     {
@@ -63,6 +67,8 @@ const Index = () => {
     HandleSearchCategories();
     HandleSearchProducts();
   }, [resfresh]);
+  
+  console.log(getOnlyNames(inputData?.subcategories));
 
   return (
     <section className="">
@@ -95,6 +101,8 @@ const Index = () => {
           inputData={inputData}
           categoriesData={categoriesData}
           loadingImg={loadingImg}
+          onlyNamesCategories={getOnlyNames(categoriesData)}
+          onlyNamesSubcategories={getOnlyNames(inputData?.subcategories)}
           getOnlyNames={getOnlyNames}
           HandleInputData={HandleInputData}
           HandleCategorySelect={HandleCategorySelect}

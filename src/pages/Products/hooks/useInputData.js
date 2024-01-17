@@ -1,24 +1,36 @@
 import { useState } from "react";
 
-const useInputData = () => {
+const useInputData = ({categoriesData}) => {
   const [inputData, setInputData] = useState({
     search: null,
     name: null,
     category_id: null,
+    subcategory_id: null,
+    subcategories: null,
     price: null,
     description: null,
     image: null,
     image_size: null,
     product_code: null,
-    isActive: true
+    isActive: true,
   });
 
   function HandleInputData(data) {
     return setInputData(data);
   }
 
-  function HandleCategorySelect(category) {
-    return setInputData({...inputData, category_id: category})
+  function HandleCategorySelect(category_id) {
+
+    let subcategories;
+
+    categoriesData.forEach((category) => {
+      if(category?.id !== category_id) return
+      if(!(category?.subcategories?.length > 0)) return
+      subcategories = category?.subcategories
+    })
+    
+
+    return setInputData({...inputData, category_id: category_id, subcategories: subcategories})
   }
 
   function HandleEditProduct(data) {
