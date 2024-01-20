@@ -5,9 +5,16 @@ module.exports = {
     extend: {
       height: {
         "30r": "32rem",
+        "xl": "30rem",
+        "2xl": "40rem",
+        "3xl": "50rem",
+        "4xl": "60rem",
       },
       width: {
-        "xl": "30rem"
+        "xl": "30rem",
+        "2xl": "40rem",
+        "3xl": "50rem",
+        "4xl": "60rem",
       },
       colors: {
         "primary": "#27415a"

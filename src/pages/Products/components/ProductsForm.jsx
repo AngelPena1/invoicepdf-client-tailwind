@@ -26,7 +26,10 @@ const ProductsForm = ({
                   Código
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Categoria
+                  Categoría
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Subcategoría
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Precio
@@ -34,8 +37,8 @@ const ProductsForm = ({
                 <th scope="col" className="px-6 py-3">
                   Creado por
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Estado
+                <th scope="col" className="px-6 py-3 text-center">
+                  Editar
                 </th>
               </tr>
             </thead>
@@ -52,13 +55,14 @@ const ProductsForm = ({
                       </th>
                       <td className="px-6 py-4">{product?.code}</td>
                       <td className="px-6 py-4">{product?.category?.name}</td>
+                      <td className="px-6 py-4">{product?.subcategory?.name}</td>
                       <td className="px-6 py-4">{product?.price}</td>
                       <td className="px-6 py-4">{product?.createdBy}</td>
-                      <td className="px-6 py-4 grid grid-cols-2 min-w-52 relative">
-                        {product?.isActive ? "Activo" : "Desactivado"}
+                      <td className="px-6 py-4 text-center">
+                        {/* {product?.isActive ? "Activo" : "Desactivado"} */}
                         <FontAwesomeIcon
                           icon={faEdit}
-                          className="absolute right-10 top-2 pt-2 text-xl cursor-pointer hover:text-primary"
+                          className="text-xl cursor-pointer hover:text-primary"
                           onClick={() => {
                             HandleSearchImg({ productId: product?.id });
                             HandleEditProduct(product);
@@ -81,13 +85,14 @@ const ProductsForm = ({
                       </th>
                       <td className="px-6 py-4">{product?.code}</td>
                       <td className="px-6 py-4">{product?.category?.name}</td>
+                      <td className="px-6 py-4">{product?.subcategory?.name}</td>
                       <td className="px-6 py-4">{product?.price}</td>
                       <td className="px-6 py-4">{product?.createdBy}</td>
-                      <td className="px-6 py-4 grid grid-cols-2 min-w-52 relative">
-                        {product?.isActive ? "Activo" : "Desactivado"}
+                      <td className="px-6 py-4 text-center">
+                        {/* {product?.isActive ? "Activo" : "Desactivado"} */}
                         <FontAwesomeIcon
                           icon={faEdit}
-                          className="absolute right-10 top-2 pt-2 text-xl"
+                          className="text-xl cursor-pointer hover:text-primary"
                           onClick={() => {
                             HandleSearchImg({ productId: product?.id });
                             HandleEditProduct(product);

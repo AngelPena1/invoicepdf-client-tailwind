@@ -25,12 +25,11 @@ const Index = () => {
     CheckForNotEmptyValues,
     HandleInputData,
     HandleCategorySelect,
+    HandleSubcategorySelect,
     HandleImageChange,
     HandleEditProduct,
   } = useInputData({categoriesData});
 
-
-  console.log(inputData);
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation({
     ResetInputValues,
@@ -67,8 +66,6 @@ const Index = () => {
     HandleSearchCategories();
     HandleSearchProducts();
   }, [resfresh]);
-  
-  console.log(getOnlyNames(inputData?.subcategories));
 
   return (
     <section className="">
@@ -106,6 +103,7 @@ const Index = () => {
           getOnlyNames={getOnlyNames}
           HandleInputData={HandleInputData}
           HandleCategorySelect={HandleCategorySelect}
+          HandleSubcategorySelect={HandleSubcategorySelect}
           HandleImageChange={HandleImageChange}
           HandleCreateProduct={HandleCreateProduct}
           HandleUpdateProduct={HandleUpdateProduct}

@@ -19,11 +19,13 @@ const usePostProduct = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
       .post(endpoint, {
         company_id: auth?.company?.id,
         category_id: data?.category_id,
+        subcategory_id: data?.subcategory_id,
         name: data?.name,
         code: data?.product_code,
         description: data?.description,
         size: data?.image_size,
         price: data?.price,
+        cost: data?.cost,
         createdBy: auth?.username,
         image: data?.image,
         isActive: true,
@@ -53,11 +55,13 @@ const usePostProduct = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
       .put(endpoint, {
         product_id: data?.product_id,
         category_id: data?.category_id,
+        subcategory_id: data?.subcategory_id,
         name: data?.name,
         code: data?.product_code,
         description: data?.description,
         size: data?.image_size,
         price: data?.price,
+        cost: data?.cost,
         image: data?.image,
         updatedBy: auth?.username,
         isActive: data?.isActive

@@ -7,15 +7,15 @@ const Select = ({ onClick, value, elements }) => {
 
   const searchIdElement = () => {
     const result = elements.filter((element) => {
-      return element?.id === value
-    })
-    return result[0]?.name
-  }
+      return element?.id === value;
+    });
+    return result[0]?.name;
+  };
 
   const valueIsDefault =
-    value === null || value === "default" ? "Seleccione" : searchIdElement();
-  
-  
+    value === null || value === "default" || !elements
+      ? "Seleccione"
+      : searchIdElement();
 
   function HandleToggle(bool) {
     return setToggle(bool);

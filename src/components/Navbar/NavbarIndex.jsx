@@ -1,6 +1,6 @@
 import { useState } from "react";
 import NavbarForm from "./NavbarForm";
-import AccountIndex from "../Modals/Account/AccountIndex";
+import BusinessModal from "../Modals/Business/Index";
 import { useLocation, Link } from "react-router-dom";
 
 const NavbarIndex = () => {
@@ -14,7 +14,12 @@ const NavbarIndex = () => {
     setShow({ ...show, maintenance: bool });
   }
 
-  return <NavbarForm show={show} toggleMaintenance={toggleMaintenance} />;
+  return (
+    <>
+      <NavbarForm show={show} toggleMaintenance={toggleMaintenance} />
+      <BusinessModal />
+    </>
+  );
 };
 
 export default NavbarIndex;

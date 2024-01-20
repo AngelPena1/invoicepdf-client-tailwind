@@ -8,6 +8,7 @@ const useInputData = ({categoriesData}) => {
     subcategory_id: null,
     subcategories: null,
     price: null,
+    cost: null,
     description: null,
     image: null,
     image_size: null,
@@ -19,18 +20,33 @@ const useInputData = ({categoriesData}) => {
     return setInputData(data);
   }
 
-  function HandleCategorySelect(category_id) {
-
-    let subcategories;
+  function getSubcategories(category_id) {
+    let subcategories = [];
 
     categoriesData.forEach((category) => {
       if(category?.id !== category_id) return
       if(!(category?.subcategories?.length > 0)) return
       subcategories = category?.subcategories
     })
-    
+
+    return subcategories
+  }
+
+  function HandleCategorySelect(category_id) {
+    let subcategories = [];
+
+    categoriesData.forEach((category) => {
+      if(category?.id !== category_id) return
+      if(!(category?.subcategories?.length > 0)) return
+      subcategories = category?.subcategories
+    })
 
     return setInputData({...inputData, category_id: category_id, subcategories: subcategories})
+  }
+
+  function HandleSubcategorySelect(subcategory_id) {
+
+    return setInputData({...inputData, subcategory_id: subcategory_id})
   }
 
   function HandleEditProduct(data) {
@@ -39,7 +55,10 @@ const useInputData = ({categoriesData}) => {
       product_id: data?.id,
       name: data?.name,
       category_id: data?.category?.id,
+      subcategory_id: data?.subcategory?.id,
+      subcategories: getSubcategories(data?.category?.id),
       price: data?.price,
+      cost: data?.cost,
       description: data?.description,
       image_size: data?.size,
       product_code: data?.code,
@@ -74,7 +93,10 @@ const useInputData = ({categoriesData}) => {
     return setInputData({
       name: "",
       category_id: "default",
+      subcategory_id: "default",
+      subcategories: null,
       price: "",
+      cost: "",
       description: "",
       image: "",
       image_size: null,
@@ -102,6 +124,7 @@ const useInputData = ({categoriesData}) => {
     CheckForNotEmptyValues,
     HandleInputData,
     HandleCategorySelect,
+    HandleSubcategorySelect,
     HandleImageChange,
     HandleEditProduct
   };

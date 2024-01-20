@@ -10,6 +10,7 @@ function MaintenanceForm({
   getOnlyNames,
   HandleInputData,
   HandleCategorySelect,
+  HandleSubcategorySelect,
   HandleImageChange,
   HandleCreateProduct,
   HandleUpdateProduct,
@@ -46,8 +47,8 @@ function MaintenanceForm({
               Subcategoría
             </label>
             <Select
-              value={inputData?.category_id}
-              onClick={HandleCategorySelect}
+              value={inputData?.subcategory_id}
+              onClick={HandleSubcategorySelect}
               elements={onlyNamesSubcategories}
             />
           </div>
@@ -60,9 +61,9 @@ function MaintenanceForm({
             <input
               type="text"
               placeholder="Inserte el costo..."
-              value={inputData?.price}
+              value={inputData?.cost}
               onChange={(e) => {
-                HandleInputData({ ...inputData, price: e.target.value });
+                HandleInputData({ ...inputData, cost: e.target.value });
               }}
             />
           </div>
