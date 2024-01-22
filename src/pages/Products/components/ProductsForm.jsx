@@ -15,7 +15,7 @@ const ProductsForm = ({
   return (
     <section>
       {!searchInputHasValue || resultHasValues ? (
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto overflow-y-auto max-h-xl">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>

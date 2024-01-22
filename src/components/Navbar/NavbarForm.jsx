@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-const NavbarForm = ({ show, toggleMaintenance }) => {
+const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
   return (
     <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -21,6 +21,9 @@ const NavbarForm = ({ show, toggleMaintenance }) => {
           <button
             type="button"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+            onClick={() => {
+              toggleCompanyInfo(true)
+            }}
           >
             Negocio
           </button>

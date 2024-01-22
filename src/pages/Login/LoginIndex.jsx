@@ -52,22 +52,22 @@ const LoginIndex = () => {
   }
 
   function HandleSetCookie({ username, company, accessToken }) {
-    Cookies.set("auth-username", `${username}`, {
+    Cookies.set("auth-invoice-username", `${username}`, {
       expires: 1,
     });
-    Cookies.set("auth-company", `${JSON.stringify(company)}`, {
+    Cookies.set("auth-invoice-company", `${JSON.stringify({id: company?.id, name: company?.name})}`, {
       expires: 1,
     });
-    Cookies.set("auth-accessToken", `${accessToken}`, {
+    Cookies.set("auth-invoice-accessToken", `${accessToken}`, {
       expires: 1,
     });
   }
 
   useEffect(() => {
     try {
-      const usernameCookie = Cookies.get("auth-username");
-      const companyCookie = Cookies.get("auth-company");
-      const tokenCookie = Cookies.get("auth-accessToken");
+      const usernameCookie = Cookies.get("auth-invoice-username");
+      const companyCookie = Cookies.get("auth-invoice-company");
+      const tokenCookie = Cookies.get("auth-invoice-accessToken");
 
       if (!usernameCookie || !tokenCookie || !companyCookie) return;
 

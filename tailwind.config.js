@@ -10,6 +10,13 @@ module.exports = {
         "3xl": "50rem",
         "4xl": "60rem",
       },
+      maxHeight: {
+        "30r": "32rem",
+        "xl": "30rem",
+        "2xl": "40rem",
+        "3xl": "50rem",
+        "4xl": "60rem", 
+      },
       width: {
         "xl": "30rem",
         "2xl": "40rem",

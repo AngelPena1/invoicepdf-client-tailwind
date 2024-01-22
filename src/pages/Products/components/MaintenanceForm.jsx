@@ -1,4 +1,4 @@
-import { faImage, faX, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select from "../../../components/Select/Index";
 

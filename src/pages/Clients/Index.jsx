@@ -61,7 +61,7 @@ const Index = () => {
 
       {currentTab === "default" && (
         <ClientsForm
-          clientsData={clientsData}
+          clientsData={[...clientsData, ...clientsData, ...clientsData, ...clientsData, ...clientsData, ...clientsData, ...clientsData]}
           searchInput={inputData?.search}
           result={result}
           HandleChangeTab={HandleChangeTab}

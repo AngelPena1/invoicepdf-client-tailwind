@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import HomeForm from "./components/HomeForm";
 
 const Index = () => {
-  return (
-    <div>Index</div>
-  )
-}
+  return <HomeForm />;
+};
 
-export default Index
+export default Index;

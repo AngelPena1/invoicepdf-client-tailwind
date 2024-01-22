@@ -10,7 +10,7 @@ const useGetImgProduct = () => {
   const { data, loading } = useGetData({
     url: endpoint,
     search: search,
-  });
+  })
 
   function HandleSearch({ productId }) {
     setProductId(productId);
