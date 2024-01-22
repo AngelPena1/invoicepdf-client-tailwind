@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import useTabNavigation from "./hooks/useTabNavigation";
 import NavigationBar from "./components/NavigationBar";
 import useInputData from "./hooks/useInputData";
-import useGetClients from "./hooks/useGetClients";
+import useGetClients from "../../hooks/useGetClients";
 import useSearchClient from "./hooks/useSearchClient";
 import Search from "./components/Search";
 import ClientsForm from "./components/ClientsForm";

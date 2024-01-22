@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import useGetData from "../../../hooks/useGetData";
-import useAuth from "../../../hooks/useAuth";
+import useGetData from "./useGetData";
+import useAuth from "./useAuth";
 
 const useGetClients = () => {
   const { auth } = useAuth();
