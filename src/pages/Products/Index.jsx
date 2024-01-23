@@ -6,7 +6,7 @@ import useTabNavigation from "./hooks/useTabNavigation";
 import NavigationBar from "./components/NavigationBar";
 import useGetCategories from "./hooks/useGetCategories";
 import usePostProduct from "./hooks/usePostProduct";
-import useGetProducts from "./hooks/useGetProducts";
+import useGetProducts from "../../hooks/useGetProducts";
 import useGetImgProduct from "./hooks/useGetImgProduct";
 import ProductsForm from "./components/ProductsForm";
 import useSearchProduct from "./hooks/useSearchProduct";

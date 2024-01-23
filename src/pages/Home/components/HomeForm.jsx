@@ -1,11 +1,18 @@
 import React from "react";
 import Select from "../../../components/Select/Index";
 
-const HomeForm = ({ clientsData, companyInputData, clientInputData, HandleInputData }) => {
+const HomeForm = ({
+  clientsData,
+  companyInputData,
+  clientInputData,
+  HandleInputData,
+  HandleDataClient,
+  HandleChangeTab
+}) => {
   return (
     <section className="bg-white p-8 rounded-lg">
       <section className="mt-8 mb-20">
-        <h2 className="text-3xl text-center font-bold">Crear Cotización</h2>
+        <h2 className="text-3xl text-center font-bold">Información General</h2>
       </section>
       <div className="grid grid-cols-2 gap-28">
         <section className="">
@@ -16,7 +23,7 @@ const HomeForm = ({ clientsData, companyInputData, clientInputData, HandleInputD
           </section>
           <section className="grid grid-cols-2 gap-8">
             <div>
-              <label htmlFor="">Nombre del Cliente</label>
+              <label htmlFor="">Razón Social</label>
               <input
                 type="text"
                 value={companyInputData?.name}
@@ -24,22 +31,6 @@ const HomeForm = ({ clientsData, companyInputData, clientInputData, HandleInputD
                   HandleInputData({
                     type: "company",
                     value: { ...companyInputData, name: e.target.value },
-                  });
-                }}
-              />
-            </div>
-            <div>
-              <label htmlFor="">Razón Social</label>
-              <input
-                type="text"
-                value={companyInputData?.razon_social}
-                onChange={(e) => {
-                  HandleInputData({
-                    type: "company",
-                    value: {
-                      ...companyInputData,
-                      razon_social: e.target.value,
-                    },
                   });
                 }}
               />
@@ -53,6 +44,19 @@ const HomeForm = ({ clientsData, companyInputData, clientInputData, HandleInputD
                   HandleInputData({
                     type: "company",
                     value: { ...companyInputData, rnc: e.target.value },
+                  });
+                }}
+              />
+            </div>
+            <div>
+              <label htmlFor="">Email</label>
+              <input
+                type="text"
+                value={companyInputData?.email}
+                onChange={(e) => {
+                  HandleInputData({
+                    type: "company",
+                    value: { ...companyInputData, email: e.target.value },
                   });
                 }}
               />
@@ -103,8 +107,9 @@ const HomeForm = ({ clientsData, companyInputData, clientInputData, HandleInputD
             <div className="grid grid-cols-2">
               <h2 className="text-2xl inline-block mr-5">Datos del Cliente</h2>
               <Select 
-                className=""
+                className="" 
                 elements={clientsData}
+                onClick={HandleDataClient}
               />
               {/* <label htmlFor="">Seleccione el cliente</label> */}
             </div>
@@ -192,7 +197,11 @@ const HomeForm = ({ clientsData, companyInputData, clientInputData, HandleInputD
         </section>
       </div>
       <section className="flex justify-end mt-20">
-        <button className="px-4 ">Siguiente</button>
+        <button className="px-4 "
+          onClick={() => {
+            HandleChangeTab("products")
+          }}
+        >Siguiente</button>
       </section>
     </section>
   );
