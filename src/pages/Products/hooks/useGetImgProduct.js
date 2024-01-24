@@ -12,8 +12,8 @@ const useGetImgProduct = () => {
     search: search,
   })
 
-  function HandleSearch({ productId }) {
-    setProductId(productId);
+  function HandleSearch(data) {
+    setProductId(data?.productId);
     return setSearch(true);
   }
 

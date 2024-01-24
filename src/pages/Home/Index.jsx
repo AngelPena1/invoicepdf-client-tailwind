@@ -1,12 +1,12 @@
-import React from "react";
+import { useEffect } from "react";
 import HomeForm from "./components/HomeForm";
 import ProductsForm from "./components/ProductsForm";
 import useInputData from "./hooks/useInputData";
 import useGetClients from "../../hooks/useGetClients";
-import { useEffect } from "react";
 import useGetCompanyInfo from "../../components/Modals/Business/hooks/useGetCompanyInfo";
 import useTabNavigation from "./hooks/useTabNavigation";
 import useGetProducts from "../../hooks/useGetProducts";
+import useSearchProduct from "../../hooks/useSearchProduct";
 
 const Index = () => {
   const { data: clientsData, HandleSearch: HandleSearchClient } =
@@ -15,22 +15,31 @@ const Index = () => {
   const { data: companyData, HandleSearch: HandleCompanySearch } =
     useGetCompanyInfo();
 
-  const { data: productsData, HandleSearch: HandleProductSearch } = useGetProducts()
+  const { data: productsData, HandleSearch: HandleProductSearch } =
+    useGetProducts();
 
   const {
+    inputData,
     companyInputData,
     clientInputData,
-    ResetInputValues,
     HandleInputData,
+    HandleSearchInput,
     HandleDataClient,
+    HandleSelectedProducts
   } = useInputData({ clientsData, companyData });
+
+  const { result } = useSearchProduct({
+    dataArray: productsData,
+
+    searchInput: inputData?.search,
+  });
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation();
 
   useEffect(() => {
     HandleSearchClient();
     HandleCompanySearch();
-    HandleProductSearch()
+    HandleProductSearch();
   }, []);
 
   return (
@@ -47,8 +56,12 @@ const Index = () => {
       )}
       {currentTab === "products" && (
         <ProductsForm
+          result={result}
+          inputData={inputData}
+          HandleSearchInput={HandleSearchInput}
           HandleDataClient={HandleDataClient}
           HandleChangeTab={HandleChangeTab}
+          HandleSelectedProducts={HandleSelectedProducts}
         />
       )}
     </>

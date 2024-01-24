@@ -20,12 +20,37 @@ const useInputData = ({ clientsData, companyData }) => {
     address: null,
   });
 
+  const [inputData, setInputData] = useState({
+    search: null,
+    selectedProducts: []
+  })
+
+  function HandleSelectedProducts(event) {
+    const localArray = inputData?.selectedProducts
+    console.log(event?.target);
+    const object = event?.target?.value
+    console.log(object);
+    return setInputData(localArray)
+  }
+
   function HandleInputData({ type, value }) {
-    if (type === "company") {
-      return setCompanyInputData(value);
-    } else if (type === "client") {
-      return setClientInputData(value);
+
+    switch (type) {
+      case "company":
+        setCompanyInputData(value);
+        break;
+
+      case "client":
+        setClientInputData(value);
+        break;
+    
+      default:
+        break;
     }
+  }
+
+  function HandleSearchInput(event) {
+    return setInputData({...inputData, search: event?.target?.value});
   }
 
   function HandleDataClient(client_id) {
@@ -95,9 +120,12 @@ const useInputData = ({ clientsData, companyData }) => {
   return {
     companyInputData,
     clientInputData,
+    inputData,
     ResetInputValues,
     HandleImageChange,
     HandleInputData,
+    HandleSearchInput,
+    HandleSelectedProducts,
     HandleDataClient,
   };
 };

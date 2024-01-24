@@ -1,9 +1,15 @@
 import React from "react";
-import Search from "./Search";
+import Search from "../../../components/Search";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ProductsForm = ({ HandleChangeTab }) => {
+const ProductsForm = ({
+  result,
+  inputData,
+  HandleSearchInput,
+  HandleChangeTab,
+  HandleSelectedProducts,
+}) => {
   return (
     <section className="bg-white p-8 rounded-lg">
       <section className="mt-8 mb-20">
@@ -12,7 +18,13 @@ const ProductsForm = ({ HandleChangeTab }) => {
         </h2>
       </section>
       <section>
-        <Search />
+        <Search
+          result={result}
+          value={inputData?.search}
+          conditionToShowResults={true}
+          onChange={HandleSearchInput}
+          onClick={HandleSelectedProducts}
+        />
       </section>
       <section>
         <div className="relative overflow-x-auto overflow-y-auto max-h-xl">
@@ -43,27 +55,31 @@ const ProductsForm = ({ HandleChangeTab }) => {
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-white border-b" key="0">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                >
-                  DEMO
-                </th>
-                <td className="px-6 py-4">000</td>
-                <td className="px-6 py-4">Prueba</td>
-                <td className="px-6 py-4">Prueba</td>
-                <td className="px-6 py-4">000</td>
-                <td className="px-6 py-4">Admin</td>
-                <td className="px-6 py-4 text-center">
-                  {/* {product?.isActive ? "Activo" : "Desactivado"} */}
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    className="text-xl cursor-pointer hover:text-primary"
-                    onClick={() => {}}
-                  />
-                </td>
-              </tr>
+              {inputData?.selectedProducts?.map((product, index) => {
+                return (
+                  <tr className="bg-white border-b" key="0">
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                    >
+                      {product?.name}
+                    </th>
+                    <td className="px-6 py-4">000</td>
+                    <td className="px-6 py-4">Prueba</td>
+                    <td className="px-6 py-4">Prueba</td>
+                    <td className="px-6 py-4">000</td>
+                    <td className="px-6 py-4">Admin</td>
+                    <td className="px-6 py-4 text-center">
+                      {/* {product?.isActive ? "Activo" : "Desactivado"} */}
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-xl cursor-pointer hover:text-primary"
+                        onClick={() => {}}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

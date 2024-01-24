@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Search from "./components/Search";
+import Search from "../../components/Search";
 import MaintenanceForm from "./components/MaintenanceForm";
 import useInputData from "./hooks/useInputData";
 import useTabNavigation from "./hooks/useTabNavigation";
@@ -12,7 +12,6 @@ import ProductsForm from "./components/ProductsForm";
 import useSearchProduct from "./hooks/useSearchProduct";
 
 const Index = () => {
-
   const {
     data: categoriesData,
     getOnlyNames,
@@ -24,12 +23,12 @@ const Index = () => {
     ResetInputValues,
     CheckForNotEmptyValues,
     HandleInputData,
+    HandleEventSearch,
     HandleCategorySelect,
     HandleSubcategorySelect,
     HandleImageChange,
     HandleEditProduct,
-  } = useInputData({categoriesData});
-
+  } = useInputData({ categoriesData });
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation({
     ResetInputValues,
@@ -76,12 +75,14 @@ const Index = () => {
       />
       <Search
         result={result}
-        inputData={inputData}
-        currentTab={currentTab}
-        ResetInputValues={ResetInputValues}
-        HandleInputData={HandleInputData}
-        HandleEditProduct={HandleEditProduct}
-        HandleSearchImg={HandleSearchImg}
+        value={inputData?.search}
+        onChange={HandleEventSearch}
+        onClick={(event) => {
+          console.log(event.currentTarget.value );
+          HandleEditProduct();
+          HandleSearchImg();
+        }}
+        conditionToShowResults={currentTab !== "default"}
       />
       {currentTab === "default" && (
         <ProductsForm

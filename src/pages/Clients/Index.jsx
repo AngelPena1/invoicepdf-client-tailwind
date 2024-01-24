@@ -4,7 +4,7 @@ import NavigationBar from "./components/NavigationBar";
 import useInputData from "./hooks/useInputData";
 import useGetClients from "../../hooks/useGetClients";
 import useSearchClient from "./hooks/useSearchClient";
-import Search from "./components/Search";
+import Search from "../../components/Search";
 import ClientsForm from "./components/ClientsForm";
 import MaintenanceForm from "./components/MaintenanceForm";
 import usePostClient from "./hooks/usePostClient";
@@ -15,6 +15,7 @@ const Index = () => {
     ResetInputValues,
     CheckForNotEmptyValues,
     HandleInputData,
+    HandleSearchInput,
     HandleEditClient,
   } = useInputData();
 
@@ -30,13 +31,11 @@ const Index = () => {
     searchInput: inputData?.search,
   });
 
-  const { resfresh, HandleCreateClient, HandleUpdateClient } = usePostClient(
-    {
-      data: inputData,
-      ResetInputValues,
-      CheckForNotEmptyValues,
-    }
-  );
+  const { resfresh, HandleCreateClient, HandleUpdateClient } = usePostClient({
+    data: inputData,
+    ResetInputValues,
+    CheckForNotEmptyValues,
+  });
 
   useEffect(() => {
     HandleSearchClients();
@@ -52,16 +51,15 @@ const Index = () => {
 
       <Search
         result={result}
-        inputData={inputData}
-        currentTab={currentTab}
-        ResetInputValues={ResetInputValues}
-        HandleInputData={HandleInputData}
-        HandleEditClient={HandleEditClient}
+        value={inputData?.search}
+        onChange={HandleSearchInput}
+        onClick={HandleEditClient}
+        conditionToShowResults={currentTab !== "default"}
       />
 
       {currentTab === "default" && (
         <ClientsForm
-          clientsData={[...clientsData, ...clientsData, ...clientsData, ...clientsData, ...clientsData, ...clientsData, ...clientsData]}
+          clientsData={clientsData}
           searchInput={inputData?.search}
           result={result}
           HandleChangeTab={HandleChangeTab}

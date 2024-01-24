@@ -20,6 +20,10 @@ const useInputData = ({categoriesData}) => {
     return setInputData(data);
   }
 
+  function HandleEventSearch(event) {
+    return setInputData({...inputData, search: event?.target?.value});
+  }
+
   function getSubcategories(category_id) {
     let subcategories = [];
 
@@ -123,6 +127,7 @@ const useInputData = ({categoriesData}) => {
     ResetInputValues,
     CheckForNotEmptyValues,
     HandleInputData,
+    HandleEventSearch,
     HandleCategorySelect,
     HandleSubcategorySelect,
     HandleImageChange,
