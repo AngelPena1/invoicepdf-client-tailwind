@@ -22,6 +22,7 @@ const Index = () => {
     inputData,
     companyInputData,
     clientInputData,
+    selectedProducts,
     HandleInputData,
     HandleSearchInput,
     HandleDataClient,
@@ -58,6 +59,7 @@ const Index = () => {
         <ProductsForm
           result={result}
           inputData={inputData}
+          selectedProducts={selectedProducts}
           HandleSearchInput={HandleSearchInput}
           HandleDataClient={HandleDataClient}
           HandleChangeTab={HandleChangeTab}

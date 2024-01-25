@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Search from "../../components/Search";
+import Search from "../../components/SearchProducts";
 import MaintenanceForm from "./components/MaintenanceForm";
 import useInputData from "./hooks/useInputData";
 import useTabNavigation from "./hooks/useTabNavigation";
@@ -77,10 +77,10 @@ const Index = () => {
         result={result}
         value={inputData?.search}
         onChange={HandleEventSearch}
-        onClick={(event) => {
-          console.log(event.currentTarget.value );
-          HandleEditProduct();
-          HandleSearchImg();
+        onClick={(value) => {
+          HandleEditProduct(value);
+          HandleSearchImg(value);
+          HandleInputData({...inputData, search: ""})
         }}
         conditionToShowResults={currentTab !== "default"}
       />

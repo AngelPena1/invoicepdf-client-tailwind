@@ -22,19 +22,21 @@ const useInputData = ({ clientsData, companyData }) => {
 
   const [inputData, setInputData] = useState({
     search: null,
-    selectedProducts: []
-  })
+  });
 
-  function HandleSelectedProducts(event) {
-    const localArray = inputData?.selectedProducts
-    console.log(event?.target);
-    const object = event?.target?.value
-    console.log(object);
-    return setInputData(localArray)
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  function HandleSelectedProducts(value) {
+    const localArray = [...selectedProducts];
+    localArray.push({ ...value, quantity: 1 });
+    return setSelectedProducts(localArray);
+  }
+
+  function HandleQuantityProduct({ product_id }) {
+    return 
   }
 
   function HandleInputData({ type, value }) {
-
     switch (type) {
       case "company":
         setCompanyInputData(value);
@@ -43,14 +45,14 @@ const useInputData = ({ clientsData, companyData }) => {
       case "client":
         setClientInputData(value);
         break;
-    
+
       default:
         break;
     }
   }
 
   function HandleSearchInput(event) {
-    return setInputData({...inputData, search: event?.target?.value});
+    return setInputData({ ...inputData, search: event?.target?.value });
   }
 
   function HandleDataClient(client_id) {
@@ -113,14 +115,15 @@ const useInputData = ({ clientsData, companyData }) => {
   }
 
   useEffect(() => {
-    if(!companyData) return
-    HandleCompanyData()
+    if (!companyData) return;
+    HandleCompanyData();
   }, [companyData]);
 
   return {
     companyInputData,
     clientInputData,
     inputData,
+    selectedProducts,
     ResetInputValues,
     HandleImageChange,
     HandleInputData,

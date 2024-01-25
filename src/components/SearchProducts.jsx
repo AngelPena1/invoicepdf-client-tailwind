@@ -40,9 +40,9 @@ const Search = ({
               <ul
                 key={index}
                 className="grid grid-cols-4 text-center rounded-lg text-sm hover:bg-slate-100 p-2 transition duration-200"
-                value={data?.id}
-                onClick={(e) => {
-                  console.log(e.target.value);
+                value={"este es el valor"}
+                onClick={() => {
+                  onClickHasFunction(data)
                 }}
               >
                 <li>{data?.code}</li>

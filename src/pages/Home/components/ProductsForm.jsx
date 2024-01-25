@@ -1,11 +1,12 @@
 import React from "react";
-import Search from "../../../components/Search";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Search from "../../../components/SearchProducts";
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ProductsForm = ({
   result,
   inputData,
+  selectedProducts,
   HandleSearchInput,
   HandleChangeTab,
   HandleSelectedProducts,
@@ -34,6 +35,9 @@ const ProductsForm = ({
                 <th scope="col" className="px-6 py-3">
                   Nombre
                 </th>
+                <th scope="col" className="px-6 py-3 text-center">
+                  Cantidad
+                </th>
                 <th scope="col" className="px-6 py-3">
                   Código
                 </th>
@@ -46,29 +50,37 @@ const ProductsForm = ({
                 <th scope="col" className="px-6 py-3">
                   Precio
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Creado por
-                </th>
                 <th scope="col" className="px-6 py-3 text-center">
                   Eliminar Seleccion
                 </th>
               </tr>
             </thead>
             <tbody>
-              {inputData?.selectedProducts?.map((product, index) => {
+              {selectedProducts?.map((product, index) => {
+                console.log(product);
                 return (
-                  <tr className="bg-white border-b" key="0">
+                  <tr className="bg-white border-b" key={index}>
                     <th
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                     >
                       {product?.name}
                     </th>
-                    <td className="px-6 py-4">000</td>
-                    <td className="px-6 py-4">Prueba</td>
-                    <td className="px-6 py-4">Prueba</td>
-                    <td className="px-6 py-4">000</td>
-                    <td className="px-6 py-4">Admin</td>
+                    <td className="px-6 py-4 text-center">
+                      <FontAwesomeIcon
+                        className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 right-2 cursor-pointer"
+                        icon={faMinus}
+                      />
+                      {product?.quantity}
+                      <FontAwesomeIcon
+                        className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 -right-2 cursor-pointer"
+                        icon={faPlus}
+                      />
+                    </td>
+                    <td className="px-6 py-4">{product?.code}</td>
+                    <td className="px-6 py-4">{product?.category?.name}</td>
+                    <td className="px-6 py-4">{product?.subcategory?.name}</td>
+                    <td className="px-6 py-4">{product?.price}</td>
                     <td className="px-6 py-4 text-center">
                       {/* {product?.isActive ? "Activo" : "Desactivado"} */}
                       <FontAwesomeIcon

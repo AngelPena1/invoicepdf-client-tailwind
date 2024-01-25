@@ -4,7 +4,7 @@ import NavigationBar from "./components/NavigationBar";
 import useInputData from "./hooks/useInputData";
 import useGetClients from "../../hooks/useGetClients";
 import useSearchClient from "./hooks/useSearchClient";
-import Search from "../../components/Search";
+import Search from "./components/Search";
 import ClientsForm from "./components/ClientsForm";
 import MaintenanceForm from "./components/MaintenanceForm";
 import usePostClient from "./hooks/usePostClient";
