@@ -2,6 +2,7 @@ import React from "react";
 import Search from "../../../components/SearchProducts";
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { generarPDF } from "../../../utils/CreateQuotePDF";
 
 const ProductsForm = ({
   result,
@@ -108,7 +109,7 @@ const ProductsForm = ({
         <button
           className="px-4 "
           onClick={() => {
-            HandleChangeTab("products");
+            generarPDF()
           }}
         >
           Imprimir
