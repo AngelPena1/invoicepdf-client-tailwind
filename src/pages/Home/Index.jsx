@@ -7,10 +7,10 @@ import useGetCompanyInfo from "../../components/Modals/Business/hooks/useGetComp
 import useTabNavigation from "./hooks/useTabNavigation";
 import useGetProducts from "../../hooks/useGetProducts";
 import useSearchProduct from "../../hooks/useSearchProduct";
+import useGetImgProduct from "./hooks/useGetImgProductsArray";
+import { GenerarPDF } from "../../utils/CreateQuotePDF";
 
 const Index = () => {
- 
-
   const { data: clientsData, HandleSearch: HandleSearchClient } =
     useGetClients();
 
@@ -28,18 +28,40 @@ const Index = () => {
     HandleInputData,
     HandleSearchInput,
     HandleDataClient,
-    HandleSelectedProducts
+    HandleSelectedProducts,
   } = useInputData({ clientsData, companyData });
+
+  const {
+    data: imagesData,
+    loading: imagesLoading,
+    alreadyFetch,
+    HandleSearch: HandleImagesSearch,
+    HandleAlreadyFetch,
+  } = useGetImgProduct({ selectedProducts: selectedProducts });
 
   const { result } = useSearchProduct({
     dataArray: productsData,
-
     searchInput: inputData?.search,
   });
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation();
 
-  console.log(selectedProducts);
+  function HandlePrintQuote() {
+    if (!alreadyFetch) {
+      return HandleImagesSearch();
+    }
+  }
+
+  useEffect(() => {
+    if(!imagesData && !alreadyFetch) return
+    GenerarPDF({ selectedProducts });
+  }, [imagesData])
+
+  // useEffect(() => {
+  //   if (imagesLoading || !alreadyFetch) return;
+  //   console.log("tamo aqui");
+  //   HandlePrintQuote();
+  // }, [imagesLoading]);
 
   useEffect(() => {
     HandleSearchClient();
@@ -64,10 +86,13 @@ const Index = () => {
           result={result}
           inputData={inputData}
           selectedProducts={selectedProducts}
+          imagesData={imagesData}
           HandleSearchInput={HandleSearchInput}
           HandleDataClient={HandleDataClient}
           HandleChangeTab={HandleChangeTab}
           HandleSelectedProducts={HandleSelectedProducts}
+          HandleImagesSearch={HandleImagesSearch}
+          HandlePrintQuote={HandlePrintQuote}
         />
       )}
     </>

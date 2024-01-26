@@ -11,6 +11,7 @@ const ProductsForm = ({
   HandleSearchInput,
   HandleChangeTab,
   HandleSelectedProducts,
+  HandlePrintQuote
 }) => {
   return (
     <section className="bg-white p-8 rounded-lg">
@@ -108,9 +109,7 @@ const ProductsForm = ({
         </button>
         <button
           className="px-4 "
-          onClick={() => {
-            GenerarPDF({selectedProducts});
-          }}
+          onClick={HandlePrintQuote}
         >
           Imprimir
         </button>
