@@ -9,6 +9,8 @@ import useGetProducts from "../../hooks/useGetProducts";
 import useSearchProduct from "../../hooks/useSearchProduct";
 
 const Index = () => {
+ 
+
   const { data: clientsData, HandleSearch: HandleSearchClient } =
     useGetClients();
 
@@ -36,6 +38,8 @@ const Index = () => {
   });
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation();
+
+  console.log(selectedProducts);
 
   useEffect(() => {
     HandleSearchClient();

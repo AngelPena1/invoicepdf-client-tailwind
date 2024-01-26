@@ -1,85 +1,30 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import perro from "../assets/perro.jpeg";
 import logo from "../assets/cocacola.png";
+import perro from "../assets/perro.jpeg";
+// import cachorra from "../assets/cachorra 1.jpg";
 
-export const generarPDF = () => {
+export const GenerarPDF = ({ selectedProducts }) => {
   const pdf = new jsPDF();
 
   const logoWidth = 50;
   const logoHeight = 25;
-  const maxHeight = 180;
+  const maxHeight = 190;
 
   const client = "Grupo Demo";
   const phone = "(809) 111 - 2222";
   const address = "Constructora DUPLA/ Arq.: STUDIO FINI Arquitectura";
 
-  const data = [
-    {
-      nombre: "perro",
-      imagen: perro,
-      size: "small",
-      cantidad: 1,
-      precio: 100,
-      total: 1000,
-    },
-    {
-      nombre: "perro",
-      imagen: perro,
-      size: "small",
-      cantidad: 1,
-      precio: 100,
-      total: 1000,
-    },
-    {
-      nombre: "perro",
-      imagen: perro,
-      size: "small",
-      cantidad: 1,
-      precio: 100,
-      total: 1000,
-    },
-    {
-      nombre: "perro",
-      imagen: perro,
-      size: "medium",
-      cantidad: 1,
-      precio: 100,
-      total: 1000,
-    },
-    {
-      nombre: "perro",
-      imagen: perro,
-      size: "small",
-      cantidad: 1,
-      precio: 100,
-      total: 1000,
-    },
-    {
-      nombre: "perro",
-      imagen: perro,
-      size: "small",
-      cantidad: 1,
-      precio: 100,
-      total: 1000,
-    },
-    {
-      nombre: "perro",
-      imagen: perro,
-      size: "small",
-      cantidad: 1,
-      precio: 100,
-      total: 1000,
-    },
-    {
-      nombre: "perro",
-      imagen: perro,
-      size: "small",
-      cantidad: 1,
-      precio: 100,
-      total: 1000,
-    },
-  ];
+  // const data = [
+  //   {
+  //     nombre: "Herramienta",
+  //     imagen: perro,
+  //     size: "small",
+  //     cantidad: 1,
+  //     precio: 100,
+  //     total: 1000,
+  //   },
+  // ];
 
   function getSizePixel(value) {
     let pixel;
@@ -97,6 +42,7 @@ export const generarPDF = () => {
     return pixel;
   }
 
+  ////Header/////
   pdf.autoTable({
     body: [[""]],
     theme: "grid",
@@ -137,49 +83,47 @@ export const generarPDF = () => {
       fontStyle: "bold",
     },
     columnStyles: {
-      0: { cellWidth: 96.3 },
-      1: { cellWidth: 16.3 },
-      2: { cellWidth: 36.3 },
-      3: { cellWidth: 16.3 },
-      4: { cellWidth: 16.3 },
+      0: { cellWidth: 86.3 },
+      1: { cellWidth: 16.3, halign: "center" },
+      2: { cellWidth: 36.3, halign: "center" },
+      3: { cellWidth: 26.3, halign: "center" },
+      4: { cellWidth: 16.3, halign: "center" },
     },
   });
 
-  //   console.log(Object.values(data[0]));
-
+  /////Body///////
   let controlPixelHeight = 0;
-
-  data.forEach((d) => {
+  let newPage = false;
+  
+  selectedProducts.forEach((d) => {
     const sizeImg = getSizePixel(d?.size);
     controlPixelHeight += sizeImg;
-    const name = d?.nombre;
-    const image = d?.imagen;
-    const cantidad = d?.cantidad;
-    const precio = d?.precio;
-    const total = d?.total;
-
-    console.log(controlPixelHeight, maxHeight,  controlPixelHeight > maxHeight);
+    const description = d?.description;
+    const image = perro;
+    const quantity = d?.quantity;
+    const price = d?.price;
+    const total = parseInt(quantity) * parseInt(price);
 
     if (controlPixelHeight > maxHeight) {
-        controlPixelHeight = 0
-        pdf.addPage();
+      controlPixelHeight = 0;
+      newPage = true;
+      pdf.addPage();
     }
 
     //180 max
-
     pdf.autoTable({
-      startY: pdf.lastAutoTable.finalY,
-      body: [[name, cantidad, "", precio, total]],
+      startY: !newPage ? pdf.lastAutoTable.finalY : 10,
+      body: [[description, quantity, "", price, total]],
       theme: "grid",
       bodyStyles: {
         minCellHeight: sizeImg,
       },
       columnStyles: {
-        0: { cellWidth: 96.3 },
-        1: { cellWidth: 16.3 },
+        0: { cellWidth: 86.3 },
+        1: { cellWidth: 16.3, halign: "center" },
         2: { cellWidth: 36.3, halign: "center" },
-        3: { cellWidth: 16.3 },
-        4: { cellWidth: 16.3 },
+        3: { cellWidth: 26.3, halign: "right" },
+        4: { cellWidth: 16.3, halign: "right" },
       },
       didDrawCell: function (data) {
         if (data.column.index === 3 && data.cell.section === "body") {
@@ -193,6 +137,43 @@ export const generarPDF = () => {
         }
       },
     });
+
+    newPage = false;
+  });
+
+  controlPixelHeight += 40;
+  if (controlPixelHeight > maxHeight) {
+    controlPixelHeight = 0;
+    newPage = true;
+    pdf.addPage();
+  }
+
+  pdf.autoTable({
+    startY: !newPage ? pdf.lastAutoTable.finalY : 10,
+    body: [
+      [
+        "1. Tiempo de Entrega: 5-7 semanas una vez confirmado el pedido con anticipo.",
+        "Subtotal",
+        "0000",
+      ],
+      [
+        "2. Forma de pago: 70% de anticipo. Saldo contra entrega.",
+        "ITBIS",
+        "0000",
+      ],
+      ["3. No incluye ITBIS.", "Total", "0000"],
+      ["", "Anticipo", "0000"],
+      ["", "Con Entrega", "0000"],
+    ],
+    theme: "grid",
+    bodyStyles: {
+      minCellHeight: 8,
+    },
+    columnStyles: {
+      0: { cellWidth: 138.9 },
+      1: { cellWidth: 26.3, halign: "right" },
+      2: { cellWidth: 16.3, halign: "right" },
+    },
   });
 
   // Guardar el documento
