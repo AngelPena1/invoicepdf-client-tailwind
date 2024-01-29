@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import usePostData from "../../../hooks/usePostData";
 import { useEffect, useState } from "react";
 
@@ -8,30 +9,30 @@ const useGetImgProduct = ({ selectedProducts }) => {
 
   const endpoint = `/product/images-array`;
 
-  console.log(productsArrayId);
-
-  const { data, loading } = usePostData({
+  const { data, loading, ResetValue } = usePostData({
     url: endpoint,
     search: search,
     bodyData: productsArrayId,
   });
 
   function HandleSearch() {
+    if (!(selectedProducts?.length > 0))
+      return toast.error("Necesitas seleccionar al menos un producto.");
     const productsId = selectedProducts.map((product) => product?.id);
     setProductsArrayId(productsId);
-    HandleAlreadyFetch()
+    HandleAlreadyFetch(true);
     return setSearch(true);
   }
 
-  function HandleAlreadyFetch() {
-    setAlreadyFetch(true)
+  function HandleAlreadyFetch(bool) {
+    setAlreadyFetch(bool);
   }
 
   useEffect(() => {
     return setSearch(false);
   }, [data]);
 
-  return { data, loading, alreadyFetch, HandleAlreadyFetch, HandleSearch };
+  return { data, loading, alreadyFetch, ResetValue, HandleAlreadyFetch, HandleSearch };
 };
 
 export default useGetImgProduct;

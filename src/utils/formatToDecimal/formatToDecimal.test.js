@@ -24,8 +24,3 @@ test("When the input is 0, must return 0", () => {
   const result = formatToDecimal(0);
   expect(result).toBe("0.00");
 });
-
-test("When the input is 0, must return 0", () => {
-  const result = formatToDecimal(0);
-  expect(result).toBe("0.00");
-});
