@@ -1,14 +1,12 @@
 import { useEffect } from "react";
-import HomeForm from "./components/HomeForm";
 import ProductsForm from "./components/ProductsForm";
 import useInputData from "./hooks/useInputData";
+import { GenerarPDF } from "../../utils/CreateQuotePDF";
 import useGetClients from "../../hooks/useGetClients";
 import useGetCompanyInfo from "../../components/Modals/Business/hooks/useGetCompanyInfo";
-import useTabNavigation from "./hooks/useTabNavigation";
 import useGetProducts from "../../hooks/useGetProducts";
 import useSearchProduct from "../../hooks/useSearchProduct";
 import useGetImgProduct from "./hooks/useGetImgProductsArray";
-import { GenerarPDF } from "../../utils/CreateQuotePDF";
 import useGetCompanyImage from "../../hooks/useGetCompanyImage";
 import useSelectedProducts from "./hooks/useSelectedProducts";
 import useToggles from "./hooks/useToggles";
@@ -59,12 +57,18 @@ const Index = () => {
     searchInput: inputData?.search,
   });
 
-  const { toggles, toggleCode, toggleCost } = useToggles();
+  const { toggles, toggleCode, toggleCost, togglePreview } = useToggles();
 
   function HandlePrintQuote() {
-    if (!alreadyFetch) {
-      return HandleImagesSearch();
-    }
+    if (alreadyFetch) return null;
+
+    return HandleImagesSearch(), togglePreview(false);
+  }
+
+  function HandlePrintPreview() {
+    if (alreadyFetch) return null;
+
+    return HandleImagesSearch(), togglePreview(true);
   }
 
   useEffect(() => {
@@ -80,6 +84,7 @@ const Index = () => {
         imagesData,
         clientInputData,
         companyImgData,
+        isPreview: toggles?.preview
       });
       clearSelectedProducts();
       HandleAlreadyFetch(false);
@@ -120,6 +125,7 @@ const Index = () => {
         HandlePrintQuote={HandlePrintQuote}
         HandleQuantityProducts={HandleQuantityProducts}
         HandleDeleteProduct={HandleDeleteProduct}
+        HandlePrintPreview={HandlePrintPreview}
       />
     </>
   );

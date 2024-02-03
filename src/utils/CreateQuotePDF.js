@@ -1,12 +1,10 @@
-import React from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import toast from "react-hot-toast";
 import { formatToDecimal } from "./formatToDecimal/formatToDecimal";
 import calculate from "../pages/Home/utils/calculate";
 
-
-const maxHeight = 180;
+const maxHeight = 170;
 
 function getSizePixel(value) {
   let pixel;
@@ -119,7 +117,13 @@ function createHeading({ pdf, companyData, clientInputData, companyImgData }) {
   });
 }
 
-function createBody({ pdf, controlPixelHeight, newPage, selectedProducts, imagesData }) {
+function createBody({
+  pdf,
+  controlPixelHeight,
+  newPage,
+  selectedProducts,
+  imagesData,
+}) {
   //Header
   pdf.autoTable({
     body: [["Descripción", "Cant", "Imagen", "Precio", "Total"]],
@@ -145,8 +149,8 @@ function createBody({ pdf, controlPixelHeight, newPage, selectedProducts, images
     const sizeImg = getSizePixel(product?.size);
     controlPixelHeight += sizeImg;
     const getImage = imagesData.filter((image) => {
-      return product?.id === image?.id
-    })[0]?.image
+      return product?.id === image?.id;
+    })[0]?.image;
     const description = product?.description;
     const quantity = parseFloat(product?.quantity);
     const price = parseFloat(product?.price);
@@ -236,12 +240,28 @@ function createFooter({ pdf, controlPixelHeight, newPage, results }) {
   });
 }
 
+function addWaterMark(pdf) {
+  const totalPages = pdf.internal.getNumberOfPages();
+
+  const watermarkText = "Borrador";
+
+  for (let i = 1; i <= totalPages; i++) {
+    pdf.setPage(i);
+    pdf.setTextColor(150);
+    pdf.setFontSize(95);
+    pdf.text(watermarkText, 65, 100, { angle: -45 });
+  }
+
+  return pdf;
+}
+
 export const GenerarPDF = ({
   companyData,
   selectedProducts,
   imagesData,
   clientInputData,
   companyImgData,
+  isPreview
 }) => {
   try {
     const pdf = new jsPDF({
@@ -252,11 +272,23 @@ export const GenerarPDF = ({
     const results = calculate({ selectedProducts });
     const quote_counter = companyData[0]?.quote_counter;
     createHeading({ pdf, companyData, clientInputData, companyImgData });
-    createBody({ pdf, newPage, controlPixelHeight,  selectedProducts, imagesData });
+    createBody({
+      pdf,
+      newPage,
+      controlPixelHeight,
+      selectedProducts,
+      imagesData,
+    });
     createFooter({ pdf, newPage, controlPixelHeight, results });
-    pdf.save("Cotización RC-" + quote_counter);
+    
+    if(isPreview) {
+      const pdfWithWatermark = addWaterMark(pdf);
+      return pdfWithWatermark.output();
+    }
+    
+    return pdf.save("Cotización RC-" + quote_counter);
   } catch (error) {
-    console.error(error)
+    console.error(error);
     toast.error("Error al crear la cotización");
   }
 };

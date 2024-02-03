@@ -7,7 +7,6 @@ function MaintenanceForm({
   loadingImg,
   onlyNamesCategories,
   onlyNamesSubcategories,
-  getOnlyNames,
   HandleInputData,
   HandleCategorySelect,
   HandleSubcategorySelect,

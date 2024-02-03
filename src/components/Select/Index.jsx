@@ -3,6 +3,8 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Select = ({ className, onClick, value, elements }) => {
+
+  // const className = 
   const [toggle, setToggle] = useState(false);
 
   const searchIdElement = () => {
@@ -22,7 +24,7 @@ const Select = ({ className, onClick, value, elements }) => {
   }
 
   return (
-    <div className={className + "relative"}>
+    <div className={className ? className : "" + "relative"}>
       <button
         className="w-full bg-transparent border-2 text-primary hover:bg-primary hover:text-white outline-none duration-200"
         onClick={() => {
@@ -35,7 +37,7 @@ const Select = ({ className, onClick, value, elements }) => {
       {toggle && (
         <div
           id="elements"
-          className="absolute w-full bg-white left-0 top-12 rounded-lg shadow-lg"
+          className="absolute w-full bg-white rounded-lg shadow-lg"
         >
           <ul className="overflow-y-auto max-h-24 rounded">
             {elements?.map((element, index) => {

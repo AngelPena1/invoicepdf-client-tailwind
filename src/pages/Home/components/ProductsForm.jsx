@@ -18,6 +18,7 @@ const ProductsForm = ({
   HandlePrintQuote,
   HandleQuantityProducts,
   HandleDeleteProduct,
+  HandlePrintPreview
 }) => {
   return (
     <section className="bg-white p-8 rounded-lg">
@@ -200,7 +201,7 @@ const ProductsForm = ({
         </div>
       </section>
       <section className="flex justify-end mt-20">
-        <button className="px-4 mr-8 button-2" onClick={HandlePrintQuote}>
+        <button className="px-4 mr-8 button-2" onClick={HandlePrintPreview}>
           Preview
         </button>
         <button className="px-4 " onClick={HandlePrintQuote}>

@@ -4,6 +4,7 @@ const useToggles = () => {
   const [toggles, setToggles] = useState({
     code: false,
     cost: false,
+    preview: false,
   });
 
   function toggleCode() {
@@ -14,7 +15,11 @@ const useToggles = () => {
     return setToggles({ ...toggles, cost: !toggles?.cost });
   }
 
-  return { toggles, toggleCode, toggleCost };
+  function togglePreview(bool) {
+    return setToggles({ ...toggles, preview: bool });
+  }
+
+  return { toggles, toggleCode, toggleCost, togglePreview };
 };
 
 export default useToggles;
