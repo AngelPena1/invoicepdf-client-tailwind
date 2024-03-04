@@ -6,11 +6,13 @@ import Home from "./pages/Home/Index";
 import Products from "./pages/Products/Index";
 import Client from "./pages/Clients/Index";
 import Login from "./pages/Login/LoginIndex";
+import History from './pages/History/Index'
 
 function App() {
 
   return (
-    <div className="bg-gray-100 h-screen pt-32 md:pt-32 xl:px-60 lg:px-40 md:px-20 px-10">
+    <div className="lg:pb-28 md:pt-32 xl:px-40 lg:px-24 md:px-20 px-10">
+      <div className="bg-white fixed top-0 left-0 bottom-0 right-0 -z-10"/>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="login" element={<Login />} />
@@ -18,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
             <Route path="/clients" element={<Client />} />
+            <Route path="/history" element={<History />} />
           </Route>
         </Route>
       </Routes>

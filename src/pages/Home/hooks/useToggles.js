@@ -5,21 +5,20 @@ const useToggles = () => {
     code: false,
     cost: false,
     preview: false,
+    itbis: true,
   });
 
-  function toggleCode() {
-    return setToggles({ ...toggles, code: !toggles?.code });
-  }
-
-  function toggleCost() {
-    return setToggles({ ...toggles, cost: !toggles?.cost });
+  function HandleToggleChange(event) {
+    const { name, value } = event?.target;
+    const convertValue = value === 'true' ? true : false
+    return setToggles({ ...toggles, [name]: !convertValue});
   }
 
   function togglePreview(bool) {
     return setToggles({ ...toggles, preview: bool });
   }
 
-  return { toggles, toggleCode, toggleCost, togglePreview };
+  return { toggles, togglePreview, HandleToggleChange };
 };
 
 export default useToggles;

@@ -18,6 +18,8 @@ const usePostProduct = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
     await axiosPrivate
       .post(endpoint, {
         company_id: auth?.company?.id,
+        brand_id: data?.brand_id,
+        finishes_id: data?.finishes_id,
         category_id: data?.category_id,
         subcategory_id: data?.subcategory_id,
         name: data?.name,
@@ -50,10 +52,12 @@ const usePostProduct = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
       return toast.error("Por favor, llene todos los campos.");
 
     const endpoint = "product/update";
-
+    
     await axiosPrivate
       .put(endpoint, {
         product_id: data?.product_id,
+        brand_id: data?.brand_id,
+        finishes_id: data?.finishes_id,
         category_id: data?.category_id,
         subcategory_id: data?.subcategory_id,
         name: data?.name,

@@ -4,7 +4,7 @@ import MaintenanceForm from "./components/MaintenanceForm";
 import useInputData from "./hooks/useInputData";
 import useTabNavigation from "./hooks/useTabNavigation";
 import NavigationBar from "./components/NavigationBar";
-import useGetCategories from "./hooks/useGetCategories";
+import useGetBranchWithDivisions from "./hooks/useGetBranchWithDivisions";
 import usePostProduct from "./hooks/usePostProduct";
 import useGetProducts from "../../hooks/useGetProducts";
 import useGetImgProduct from "./hooks/useGetImgProduct";
@@ -13,10 +13,10 @@ import useSearchProduct from "./hooks/useSearchProduct";
 
 const Index = () => {
   const {
-    data: categoriesData,
+    data: divisionsData,
     getOnlyNames,
     HandleSearch: HandleSearchCategories,
-  } = useGetCategories();
+  } = useGetBranchWithDivisions();
 
   const {
     inputData,
@@ -24,11 +24,13 @@ const Index = () => {
     CheckForNotEmptyValues,
     HandleInputData,
     HandleEventSearch,
+    HandleBrandSelect,
+    HandleFinishesSelect,
     HandleCategorySelect,
     HandleSubcategorySelect,
     HandleImageChange,
     HandleEditProduct,
-  } = useInputData({ categoriesData });
+  } = useInputData({ divisionsData });
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation({
     ResetInputValues,
@@ -42,8 +44,11 @@ const Index = () => {
     }
   );
 
-  const { data: productsData, HandleSearch: HandleSearchProducts } =
-    useGetProducts();
+  const {
+    data: productsData,
+    loading,
+    HandleSearch: HandleSearchProducts,
+  } = useGetProducts();
 
   const {
     data: imgData,
@@ -79,11 +84,21 @@ const Index = () => {
         onChange={HandleEventSearch}
         onClick={(value) => {
           HandleEditProduct(value);
-          HandleSearchImg(value);
-          HandleInputData({...inputData, search: ""})
+          HandleSearchImg(value?.id);
+          // HandleInputData({...inputData, search: ""})
         }}
         conditionToShowResults={currentTab !== "default"}
       />
+      {/* <section className="grid place-items-center">
+        <div
+          className="inline-block h-8 w-8  animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          role="status"
+        >
+          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+            Loading...
+          </span>
+        </div>
+      </section> */}
       {currentTab === "default" && (
         <ProductsForm
           productsData={productsData}
@@ -94,15 +109,19 @@ const Index = () => {
           HandleSearchImg={HandleSearchImg}
         />
       )}
-      {currentTab === "create" && (
+      {currentTab === "create" && !loading && (
         <MaintenanceForm
           inputData={inputData}
-          categoriesData={categoriesData}
+          divisionsData={divisionsData}
           loadingImg={loadingImg}
-          onlyNamesCategories={getOnlyNames(categoriesData)}
+          onlyNamesBranch={getOnlyNames(divisionsData)}
+          onlyNamesFinishes={getOnlyNames(inputData?.finishes)}
+          onlyNamesCategories={getOnlyNames(inputData?.categories)}
           onlyNamesSubcategories={getOnlyNames(inputData?.subcategories)}
           getOnlyNames={getOnlyNames}
           HandleInputData={HandleInputData}
+          HandleBrandSelect={HandleBrandSelect}
+          HandleFinishesSelect={HandleFinishesSelect}
           HandleCategorySelect={HandleCategorySelect}
           HandleSubcategorySelect={HandleSubcategorySelect}
           HandleImageChange={HandleImageChange}

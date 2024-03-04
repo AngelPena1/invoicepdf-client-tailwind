@@ -1,15 +1,18 @@
 import { useState } from "react";
 
-const useInputData = ({categoriesData}) => {
+const useInputData = ({ divisionsData }) => {
   const [inputData, setInputData] = useState({
     search: null,
-    name: null,
+    description: null,
+    brand_id: null,
+    finishes_id: null,
+    finishes: null,
     category_id: null,
+    categories: null,
     subcategory_id: null,
     subcategories: null,
     price: null,
     cost: null,
-    description: null,
     image: null,
     image_size: null,
     product_code: null,
@@ -21,36 +24,90 @@ const useInputData = ({categoriesData}) => {
   }
 
   function HandleEventSearch(event) {
-    return setInputData({...inputData, search: event?.target?.value});
+    return setInputData({ ...inputData, search: event?.target?.value });
+  }
+
+  function getFinishes(brand_id) {
+    let finishes = [];
+
+    divisionsData.forEach((brand) => {
+      if (brand?.id !== brand_id) return;
+      if (!(brand?.finishes?.length > 0)) return;
+      finishes = brand?.finishes;
+    });
+
+    return finishes;
+  }
+
+  function getCategories(brand_id) {
+    let categories = [];
+
+    divisionsData.forEach((brand) => {
+      if (brand?.id !== brand_id) return;
+      if (!(brand?.categories?.length > 0)) return;
+      categories = brand?.categories;
+    });
+
+    return categories;
   }
 
   function getSubcategories(category_id) {
     let subcategories = [];
 
-    categoriesData.forEach((category) => {
-      if(category?.id !== category_id) return
-      if(!(category?.subcategories?.length > 0)) return
-      subcategories = category?.subcategories
-    })
+    divisionsData.forEach((brand) => {
+      brand.categories.forEach((category) => {
+        if (category?.id !== category_id) return;
+        if (!(category?.subcategories?.length > 0)) return;
+        subcategories = category?.subcategories;
+      });
+    });
 
-    return subcategories
+    return subcategories;
+  }
+
+  function HandleBrandSelect(brand_id) {
+    let categories = [];
+    let finishes = [];
+
+    divisionsData.forEach((brand) => {
+      if (brand?.id !== brand_id) return;
+      if (!(brand?.categories?.length > 0)) return;
+      categories = brand?.categories;
+      finishes = brand?.finishes;
+    });
+
+    return setInputData({
+      ...inputData,
+      brand_id: brand_id,
+      categories: categories,
+      finishes: finishes,
+    });
   }
 
   function HandleCategorySelect(category_id) {
     let subcategories = [];
 
-    categoriesData.forEach((category) => {
-      if(category?.id !== category_id) return
-      if(!(category?.subcategories?.length > 0)) return
-      subcategories = category?.subcategories
-    })
+    divisionsData.forEach((brand) => {
+      brand.categories.forEach((category) => {
+        if (category?.id !== category_id) return;
+        if (!(category?.subcategories?.length > 0)) return;
+        subcategories = category?.subcategories;
+      });
+    });
 
-    return setInputData({...inputData, category_id: category_id, subcategories: subcategories})
+    return setInputData({
+      ...inputData,
+      category_id: category_id,
+      subcategories: subcategories,
+    });
+  }
+
+  function HandleFinishesSelect(finishes_id) {
+    return setInputData({ ...inputData, finishes_id });
   }
 
   function HandleSubcategorySelect(subcategory_id) {
-
-    return setInputData({...inputData, subcategory_id: subcategory_id})
+    return setInputData({ ...inputData, subcategory_id: subcategory_id });
   }
 
   function HandleEditProduct(data) {
@@ -58,7 +115,11 @@ const useInputData = ({categoriesData}) => {
       search: null,
       product_id: data?.id,
       name: data?.name,
+      brand_id: data?.brand?.id,
+      finishes_id: data?.finish?.id,
+      finishes: getFinishes(data?.brand?.id),
       category_id: data?.category?.id,
+      categories: getCategories(data?.brand?.id),
       subcategory_id: data?.subcategory?.id,
       subcategories: getSubcategories(data?.category?.id),
       price: data?.price,
@@ -66,12 +127,13 @@ const useInputData = ({categoriesData}) => {
       description: data?.description,
       image_size: data?.size,
       product_code: data?.code,
-      isActive: data?.isActive
+      isActive: data?.isActive,
     });
   }
 
   function CheckForNotEmptyValues() {
-    if (inputData?.name.trim() === "" || inputData?.name === null) return true;
+    if (inputData?.description === "" || inputData?.description === null)
+      return true;
     if (
       inputData?.category?.name.trim() === "" ||
       inputData?.category?.name === null ||
@@ -80,8 +142,7 @@ const useInputData = ({categoriesData}) => {
       return true;
     if (inputData?.price.trim() === "" || inputData?.price === null)
       return true;
-    if (inputData?.description === "" || inputData?.description === null)
-      return true;
+
     // if (inputData?.image === "" || inputData?.image === null) return true;
     if (inputData?.image_size === "" || inputData?.image_size === null)
       return true;
@@ -95,17 +156,22 @@ const useInputData = ({categoriesData}) => {
 
   function ResetInputValues() {
     return setInputData({
+      search: null,
       name: "",
+      brand_id: "default",
       category_id: "default",
+      category: null,
       subcategory_id: "default",
       subcategories: null,
+      finishes_id: "default",
+      finishes: null,
       price: "",
       cost: "",
       description: "",
       image: "",
       image_size: null,
       product_code: "",
-      isActive: true
+      isActive: true,
     });
   }
 
@@ -128,10 +194,12 @@ const useInputData = ({categoriesData}) => {
     CheckForNotEmptyValues,
     HandleInputData,
     HandleEventSearch,
+    HandleBrandSelect,
+    HandleFinishesSelect,
     HandleCategorySelect,
     HandleSubcategorySelect,
     HandleImageChange,
-    HandleEditProduct
+    HandleEditProduct,
   };
 };
 

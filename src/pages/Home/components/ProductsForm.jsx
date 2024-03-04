@@ -3,55 +3,91 @@ import Search from "../../../components/SearchProducts";
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
+import Select from "../../../components/Select/Index";
 
 const ProductsForm = ({
   result,
   inputData,
+  clientsData,
+  clientInputData,
   selectedProducts,
   clearSearchInput,
   totals,
   toggles,
-  toggleCode,
-  toggleCost,
-  HandleSearchInput,
+  HandleToggleChange,
+  HandleInputData,
+  HandleDataClient,
   HandleSelectedProducts,
   HandlePrintQuote,
   HandleQuantityProducts,
   HandleDeleteProduct,
-  HandlePrintPreview
+  HandlePrintPreview,
 }) => {
   return (
-    <section className="bg-white p-8 rounded-lg">
-      <section className="mt-8 mb-20">
-        <h2 className="text-3xl text-center font-bold">
-          Selección de Productos
-        </h2>
-      </section>
+    <section className="bg-white p-8 rounded-lg shadow-style-2 h-2xl">
+      <div className="grid grid-cols-2">
+        <section
+          name="heading"
+          className="text-2xl font-bold mb-8 justify-start"
+        >
+          <h2>Cotización de Productos</h2>
+        </section>
+        <section className="mb-8 h-10 flex justify-end">
+          <div className="w-80">
+            <Select
+              className=""
+              value={clientInputData?.name}
+              elements={clientsData}
+              onClick={HandleDataClient}
+              placeHolder={"Seleccione el Cliente"}
+            />
+            {/* <label htmlFor="">Seleccione el cliente</label> */}
+          </div>
+        </section>
+      </div>
       <section>
         <Search
           result={result}
           value={inputData?.search}
           conditionToShowResults={true}
-          onChange={HandleSearchInput}
+          onChange={HandleInputData}
           onClick={(e) => {
             clearSearchInput();
             HandleSelectedProducts(e);
           }}
         />
       </section>
-      <section>
+      <section className="">
         <section className="flex justify-end relative bottom-5">
           <div className="mr-10">
             <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
               <input
                 type="checkbox"
-                checked={toggles?.code}
-                onClick={toggleCode}
+                checked={toggles?.itbis}
+                value={toggles?.itbis}
+                name="itbis"
+                onClick={HandleToggleChange}
                 className="sr-only peer outline-none"
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
               <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
-                Mostrar código
+                Aplicar ITBIS
+              </span>
+            </label>
+          </div>
+          <div className="mr-10">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+              <input
+                type="checkbox"
+                checked={toggles?.code}
+                value={toggles?.code}
+                name="code"
+                onClick={HandleToggleChange}
+                className="sr-only peer outline-none"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
+                Mostrar Código
               </span>
             </label>
           </div>
@@ -60,49 +96,54 @@ const ProductsForm = ({
               <input
                 type="checkbox"
                 checked={toggles?.cost}
-                onClick={toggleCost}
+                value={toggles?.cost}
+                name="cost"
+                onClick={HandleToggleChange}
                 className="sr-only peer outline-none"
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
               <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
-                Mostrar costo
+                Mostrar Precio de Lista
               </span>
             </label>
           </div>
         </section>
-        <div className="relative overflow-x-auto overflow-y-auto max-h-xl">
+        <div className="relative overflow-x-auto overflow-y-auto max-h-72">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0 z-30">
               <tr>
-                <th scope="col" className="px-2 py-3 w-64">
+                <th scope="col" className="px-2 py-3">
                   Descripción
                 </th>
-                <th scope="col" className="px-2 py-3 text-center max-w-24">
+                <th scope="col" className="px-2 py-3 text-center ">
                   Cantidad
                 </th>
                 {toggles?.code && (
-                  <th scope="col" className="px-2 py-3 text-center max-w-24">
+                  <th scope="col" className="px-2 py-3 text-left ">
                     Código
                   </th>
                 )}
-                <th scope="col" className="px-2 py-3 text-left max-w-28">
+                <th scope="col" className="px-2 py-3 text-left ">
                   Marca
                 </th>
-                <th scope="col" className="px-2 py-3 text-left max-w-32">
+                <th scope="col" className="px-2 py-3 text-left ">
                   Categoría
                 </th>
-                <th scope="col" className="px-2 py-3 text-left max-w-32">
+                <th scope="col" className="px-2 py-3 text-left ">
                   Subcategoría
                 </th>
+                <th scope="col" className="px-2 py-3 text-left ">
+                  Acabado
+                </th>
                 {toggles?.cost && (
-                  <th scope="col" className="px-2 py-3 max-w-28 text-right">
-                    Costo
+                  <th scope="col" className="px-2 py-3 text-right">
+                    Precio lista
                   </th>
                 )}
-                <th scope="col" className="px-2 py-3 text-right max-w-32">
+                <th scope="col" className="px-2 py-3 text-right">
                   Precio
                 </th>
-                <th scope="col" className="px-2 py-3 text-center max-w-32">
+                <th scope="col" className="px-2 py-3 text-center">
                   Eliminar
                 </th>
               </tr>
@@ -113,11 +154,11 @@ const ProductsForm = ({
                   <tr className="bg-white border-b" key={index}>
                     <th
                       scope="row"
-                      className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap max-w-64"
+                      className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap"
                     >
-                      {product?.name.substring(0, 42)}
+                      {product?.description.substring(0, 42)}
                     </th>
-                    <td className="px-2 py-4 text-center max-w-24">
+                    <td className="px-2 py-4 text-center">
                       <FontAwesomeIcon
                         className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 right-2 cursor-pointer"
                         icon={faMinus}
@@ -134,43 +175,40 @@ const ProductsForm = ({
                         icon={faPlus}
                         onClick={() => {
                           HandleQuantityProducts({
-                            productId: product?.id,
+                            local_id: product?.local_id,
                             bool: true,
                           });
                         }}
                       />
                     </td>
                     {toggles?.code && (
-                      <td className="px-2 py-4 text-center max-w-24">
-                        {product?.code}
-                      </td>
+                      <td className="px-2 py-4 text-left">{product?.code}</td>
                     )}
 
-                    <td className="px-2 py-4 text-left max-w-28">
-                      {product?.brand?.substring(0, 15)}
+                    <td className="px-2 py-4 text-left">
+                      {product?.brand?.name?.substring(0, 15)}
                     </td>
-                    <td className="px-2 py-4 text-left max-w-32">
+                    <td className="px-2 py-4 text-left">
                       {product?.category?.name}
                     </td>
-                    <td className="px-2 py-4 text-left max-w-32">
+                    <td className="px-2 py-4 text-left ">
                       {product?.subcategory?.name}
                     </td>
+                    <td className="px-2 py-4 text-left">
+                      {product?.finish?.name}
+                    </td>
                     {toggles?.cost && (
-                      <td className="px-2 py-4 text-right max-w-28">
-                        {product?.cost}
-                      </td>
+                      <td className="px-2 py-4 text-right">{product?.cost}</td>
                     )}
 
-                    <td className="px-2 py-4 text-right max-w-32">
-                      {product?.price}
-                    </td>
-                    <td className="px-2 py-4 text-center max-w-32">
+                    <td className="px-2 py-4 text-right">{product?.price}</td>
+                    <td className="px-2 py-4 text-center">
                       {/* {product?.isActive ? "Activo" : "Desactivado"} */}
                       <FontAwesomeIcon
                         icon={faTrash}
                         className="text-xl cursor-pointer hover:text-primary"
                         onClick={() => {
-                          HandleDeleteProduct({ productId: product?.id });
+                          HandleDeleteProduct({ local_id: product?.local_id });
                         }}
                       />
                     </td>
@@ -178,34 +216,143 @@ const ProductsForm = ({
                 );
               })}
             </tbody>
-            <tfoot>
-              <tr>
-                <td className="max-w-64 px-2 py-4"></td>
-                <td className="max-w-24 px-2 py-4"></td>
-                {toggles?.code && <td className="max-w-24 px-2 py-4"></td>}
-                <td className="max-w-28 px-2 py-4"></td>
-                <td className="max-w-32 px-2 py-4"></td>
-                <th className="max-w-32 px-2 py-4">TOTAL</th>
-                {toggles?.cost && (
-                  <th className="max-w-32 px-2 py-4 text-right">
-                    {formatToDecimal(totals?.cost)}
+            {toggles?.itbis ? (
+              <tfoot className="text-right">
+                <tr className="">
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  {toggles?.code && <td className=" px-2"></td>}
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  <th className="px-2 pt-4 text-red-400">DESCUENTO</th>
+                  {toggles?.cost && <th className="px-2 pt-4 text-right"></th>}
+                  <th className="px-2 pt-4 text-right text-red-400">
+                    {formatToDecimal(parseFloat(inputData?.discount))}
                   </th>
-                )}
-                <th className="max-w-32 px-2 py-4 text-right">
-                  {formatToDecimal(totals?.price)}
-                </th>
-                <td className="max-w-32 px-2 py-4"></td>
-              </tr>
-            </tfoot>
+                  <td className=" px-2 "></td>
+                </tr>
+                <tr className="">
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  {toggles?.code && <td className=" px-2"></td>}
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  <th className="px-2">SUBTOTAL</th>
+                  {toggles?.cost && (
+                    <th className="px-2 text-right">
+                      {formatToDecimal(totals?.cost)}
+                    </th>
+                  )}
+                  <th className="px-2 text-right">
+                    {formatToDecimal(totals?.price)}
+                  </th>
+                  <td className=" px-2"></td>
+                </tr>
+                <tr>
+                  <td className="px-2 pb-10"></td>
+                  <td className="px-2 "></td>
+                  {toggles?.code && <td className=" px-2 "></td>}
+                  <td className="px-2 "></td>
+                  <td className=" px-2 "></td>
+                  <td className=" px-2 "></td>
+                  <th className="px-2 ">ITBIS</th>
+                  {toggles?.cost && <th className="px-2  text-right"></th>}
+                  <th className=" px-2  text-right">
+                    {formatToDecimal(totals?.itbis)}
+                  </th>
+                  <td className="px-2"></td>
+                </tr>
+                <tr>
+                  <td className="px-2 py-5"></td>
+                  <td className="px-2 "></td>
+                  {toggles?.code && <td className=" px-2 "></td>}
+                  <td className="px-2 "></td>
+                  <td className=" px-2 "></td>
+                  <td className=" px-2 "></td>
+                  <th className="px-2 border-t-2 border-gray-500">TOTAL</th>
+                  {toggles?.cost && (
+                    <th className="px-2  text-right border-t-2 border-gray-500"></th>
+                  )}
+                  <th className=" px-2 text-right border-t-2 border-gray-500">
+                    {formatToDecimal(totals?.withITBIS)}
+                  </th>
+                  <td className="px-2"></td>
+                </tr>
+              </tfoot>
+            ) : (
+              <tfoot className="text-right">
+                <tr className="">
+                  <td className="px-2 pb-10"></td>
+                  <td className="px-2"></td>
+                  {toggles?.code && <td className=" px-2"></td>}
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  <th className="px-2 pt-4 text-red-400">DESCUENTO</th>
+                  {toggles?.cost && <th className="px-2 pt-4 text-right"></th>}
+                  <th className="px-2 pt-4 text-right text-red-400">
+                    {formatToDecimal(parseFloat(inputData?.discount))}
+                  </th>
+                  <td className=" px-2 "></td>
+                </tr>
+                {/* <hr className="border-t-2 border-indigo-500 grid place-items-end" /> */}
+                <tr className="">
+                  <td className="px-2 py-5"></td>
+                  <td className="px-2"></td>
+                  {toggles?.code && <td className=" px-2"></td>}
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  <td className="px-2"></td>
+                  <th className="px-2 border-t-2 border-gray-500 font-bold">
+                    TOTAL
+                  </th>
+                  {toggles?.cost && (
+                    <th className="px-2 text-right border-t-2 border-gray-500">
+                      {formatToDecimal(totals?.cost)}
+                    </th>
+                  )}
+                  <th className="px-2 text-right border-t-2 border-gray-500">
+                    {formatToDecimal(totals?.price)}
+                  </th>
+                  <td className="px-2 "></td>
+                </tr>
+              </tfoot>
+            )}
           </table>
         </div>
       </section>
-      <section className="flex justify-end mt-20">
+      <section className="flex  justify-end mt-5">
+        <input
+          type="text"
+          className="w-36 mr-8 h-10"
+          name="discount"
+          placeholder="Descuento"
+          value={inputData?.discount}
+          onChange={HandleInputData}
+        />
+        <input
+          type="text"
+          className="w-36 mr-8 h-10"
+          name="deposit"
+          placeholder="Anticipo"
+          value={inputData?.deposit}
+          onChange={HandleInputData}
+        />
+        <input
+          type="text"
+          className="w-36 mr-8 h-10"
+          name="with_delivery"
+          placeholder="Con entrega"
+          value={inputData?.with_delivery}
+          onChange={HandleInputData}
+        />
         <button className="px-4 mr-8 button-2" onClick={HandlePrintPreview}>
           Preview
         </button>
-        <button className="px-4 " onClick={HandlePrintQuote}>
-          Imprimir
+        <button className="px-4" onClick={HandlePrintQuote}>
+          Registrar
         </button>
       </section>
     </section>

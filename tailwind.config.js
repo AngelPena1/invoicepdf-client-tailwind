@@ -24,7 +24,9 @@ module.exports = {
         "4xl": "60rem",
       },
       colors: {
-        "primary": "#27415a"
+        "primary": "#0069af",
+        "primary-2": "#10a9f0",
+        "primary-dark": "#27415a",
       },
       animation: {
         show_up_container: "show_up_container .1s  forwards",

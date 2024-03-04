@@ -1,0 +1,71 @@
+import { GenerarPDF } from "../../Home/quotePDF/Index";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import useAuth from "../../../hooks/useAuth";
+import { useState } from "react";
+
+const useHistoryQuote = ({
+  historyData,
+  HandleSearchHistory,
+}) => {
+  
+  const [selectedQuote, setSelectedQuote] = useState(null)
+  const axiosPrivate = useAxiosPrivate();
+  const { auth } = useAuth();
+
+  const companyId = auth?.company?.id;
+
+  async function HandlePrintQuote(quoteId) {
+    const quoteData = historyData.filter((data) => {
+      return data?.id === quoteId
+    })[0]
+    const clientData = quoteData?.client;
+    const selectedProducts = JSON.parse(quoteData?.selected_products_json);
+    const productsId = selectedProducts.map((product) => product?.id);
+    const imagesData = await axiosPrivate.post("/product/images-array", {
+      array_products_id: productsId,
+    });
+    const companyData = await axiosPrivate.get(`/company/get/${companyId}`, {
+      array_products_id: productsId,
+    });
+    const companyImgData = await axiosPrivate.get(
+      `/company/get/${companyId}/image`,
+      {
+        array_products_id: productsId,
+      }
+    );
+    GenerarPDF({
+      name: quoteData?.name,
+      selectedProducts,
+      companyData: companyData.data,
+      imagesData: imagesData.data,
+      clientData,
+      companyImgData: companyImgData?.data,
+      discount: quoteData?.discount,
+      with_delivery: quoteData?.with_delivery,
+      deposit: quoteData?.deposit,
+      cost: parseFloat(quoteData?.cost),
+      itbis: parseFloat(quoteData?.itbis),
+      price: parseFloat(quoteData?.subtotal),
+      withITBIS: parseFloat(quoteData?.total),
+      isAlreadyCreated: true,
+      hasItbis: quoteData?.has_itbis,
+      hasCode: quoteData?.has_code,
+      hasCost: quoteData?.has_cost,
+    });
+  }
+
+  async function HandleDisableQuote() {
+    await axiosPrivate.put("quote/disable", {
+      quote_id: selectedQuote?.id,
+    });
+    return HandleSearchHistory();
+  }
+
+  function HandleSelectedQuote(quoteData) {
+    return setSelectedQuote(quoteData)
+  }
+
+  return { selectedQuote, HandlePrintQuote, HandleDisableQuote, HandleSelectedQuote };
+};
+
+export default useHistoryQuote;

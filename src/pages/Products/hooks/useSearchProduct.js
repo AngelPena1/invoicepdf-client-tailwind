@@ -7,10 +7,10 @@ const useSearchProduct = ({ dataArray, searchInput }) => {
   function HandleSearch() {
     const localArray = [];
     dataArray.forEach((data) => {
-      const name = data?.name?.toUpperCase();
+      const description = data?.description?.toUpperCase();
       const code = data?.code;
       if (!searchInput) return;
-      if (name?.includes(searchInput.toUpperCase()))
+      if (description?.includes(searchInput.toUpperCase()))
         return localArray.push(data);
       if (code?.includes(searchInput)) return localArray.push(data);
     });

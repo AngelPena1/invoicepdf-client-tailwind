@@ -16,12 +16,12 @@ const BusinessForm = ({
     <>
       <div
         id="background"
-        className="w-screen h-screen bg-slate-500 opacity-40 fixed z-20 inset-0 flex litems-center justify-center"
+        className="w-screen h-screen bg-slate-500 opacity-40 fixed z-40 inset-0 flex litems-center justify-center"
         onClick={() => {
           toggleCompanyInfo(false);
         }}
       ></div>
-      <form className="w-xl md:w-2xl lg:w-4xl h-fit rounded-lg bg-white fixed left-0 right-0 top-0 bottom-0 m-auto z-30 p-5">
+      <form className="w-xl md:w-2xl lg:w-4xl h-fit rounded-lg bg-white fixed left-0 right-0 top-0 bottom-0 m-auto z-40 p-5">
         <section className="w-60 h-44 mx-auto mb-20 relative">
           {!noImageFound && !loading_image && (
             <>

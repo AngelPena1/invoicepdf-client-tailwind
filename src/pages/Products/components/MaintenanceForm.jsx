@@ -5,9 +5,13 @@ import Select from "../../../components/Select/Index";
 function MaintenanceForm({
   inputData,
   loadingImg,
+  onlyNamesBranch,
+  HandleFinishesSelect,
   onlyNamesCategories,
+  onlyNamesFinishes,
   onlyNamesSubcategories,
   HandleInputData,
+  HandleBrandSelect,
   HandleCategorySelect,
   HandleSubcategorySelect,
   HandleImageChange,
@@ -15,28 +19,44 @@ function MaintenanceForm({
   HandleUpdateProduct,
 }) {
   return (
-    <section className="grid grid-cols-3 gap-20">
+    <section className="grid xl:grid-cols-3 lg:grid-cols-2 xl:gap-24 lg:gap-10 bg-white p-12 rounded-lg shadow-lg">
       <section className="">
         <div className="mb-10">
           <label htmlFor="" className="text-base">
-            Nombre del producto
+            Descripción del producto
           </label>
-          <input
+          <textarea
             type="text"
-            placeholder="Escriba el nombre del producto..."
-            value={inputData?.name}
+            placeholder="Escriba una breve descripción del producto..."
+            className="w-full"
+            value={inputData?.description}
             onChange={(e) => {
-              HandleInputData({ ...inputData, name: e.target.value });
+              HandleInputData({
+                ...inputData,
+                description: e.target.value,
+              });
             }}
           />
         </div>
         <div className="grid grid-cols-2 gap-8 mb-10">
           <div>
             <label htmlFor="" className="text-base">
+              Marca
+            </label>
+            <Select
+              value={inputData?.brand_id}
+              value_id={true}
+              onClick={HandleBrandSelect}
+              elements={onlyNamesBranch}
+            />
+          </div>
+          <div>
+            <label htmlFor="" className="text-base">
               Categoría
             </label>
             <Select
               value={inputData?.category_id}
+              value_id={true}
               onClick={HandleCategorySelect}
               elements={onlyNamesCategories}
             />
@@ -47,55 +67,25 @@ function MaintenanceForm({
             </label>
             <Select
               value={inputData?.subcategory_id}
+              value_id={true}
               onClick={HandleSubcategorySelect}
               elements={onlyNamesSubcategories}
             />
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-8 mb-10">
-          <div className="">
-            <label htmlFor="" className="text-base">
-              Costo
-            </label>
-            <input
-              type="text"
-              placeholder="Inserte el costo..."
-              value={inputData?.cost}
-              onChange={(e) => {
-                HandleInputData({ ...inputData, cost: e.target.value });
-              }}
-            />
-          </div>
-          <div className="">
-            <label htmlFor="" className="text-base">
-              Precio
-            </label>
-            <input
-              type="text"
-              placeholder="Inserte el precio..."
-              value={inputData?.price}
-              onChange={(e) => {
-                HandleInputData({ ...inputData, price: e.target.value });
-              }}
-            />
-          </div>
-        </div>
-        <div>
+        <div className="grid">
           <label htmlFor="" className="text-base">
-            Descripción del producto
+            Acabados
           </label>
-          <textarea
-            type="text"
-            placeholder="Escriba una breve descripción del producto..."
-            className="w-full h-60"
-            value={inputData?.description}
-            onChange={(e) => {
-              HandleInputData({
-                ...inputData,
-                description: e.target.value,
-              });
-            }}
-          />
+          <div className="grid grid-cols-2 gap-6">
+            <input type="text" className="h-11" placeholder="Código del acabado..." />
+            <Select
+              value={inputData?.finishes_id}
+              value_id={true}
+              onClick={HandleFinishesSelect}
+              elements={onlyNamesFinishes}
+            />
+          </div>
         </div>
       </section>
       <section className="grid">
@@ -203,6 +193,36 @@ function MaintenanceForm({
             </button>
           </div>
         </div>
+      </section>
+      <section>
+        <div className="grid grid-cols-2 gap-8 mb-10">
+          <div className="">
+            <label htmlFor="" className="text-base">
+              Costo
+            </label>
+            <input
+              type="text"
+              placeholder="Inserte el costo..."
+              value={inputData?.cost}
+              onChange={(e) => {
+                HandleInputData({ ...inputData, cost: e.target.value });
+              }}
+            />
+          </div>
+          <div className="">
+            <label htmlFor="" className="text-base">
+              Precio
+            </label>
+            <input
+              type="text"
+              placeholder="Inserte el precio..."
+              value={inputData?.price}
+              onChange={(e) => {
+                HandleInputData({ ...inputData, price: e.target.value });
+              }}
+            />
+          </div>
+        </div>
         <div className="grid grid-cols-2 gap-8">
           <div className="mb-10">
             <label htmlFor="" className="text-base">
@@ -243,8 +263,6 @@ function MaintenanceForm({
             </label>
           </div>
         </div>
-      </section>
-      <section>
         <div className="grid p-8">
           <button
             type="submit"

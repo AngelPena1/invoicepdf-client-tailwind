@@ -2,13 +2,13 @@ import useGetData from "../../../hooks/useGetData";
 import useAuth from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
 
-const useGetCategories = () => {
+const useGetBrandWithDivisions = () => {
   const { auth } = useAuth();
   const [search, setSearch] = useState(true);
 
   const companyId = auth?.company?.id;
 
-  const endpoint = `/category/company/${companyId}/getall/subcategory`;
+  const endpoint = `/brand/company/${companyId}/getall/subdivision`;
 
   const { data, loading } = useGetData({
     url: endpoint,
@@ -34,4 +34,4 @@ const useGetCategories = () => {
   return { data, loading, getOnlyNames, HandleSearch };
 };
 
-export default useGetCategories;
+export default useGetBrandWithDivisions;

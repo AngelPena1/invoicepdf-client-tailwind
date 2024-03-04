@@ -13,17 +13,20 @@ const ProductsForm = ({
   const resultHasValues = result?.length > 0;
   const searchInputHasValue = searchInput?.length > 0;
   return (
-    <section>
+    <section className="shadow-lg">
       {!searchInputHasValue || resultHasValues ? (
         <div className="relative overflow-x-auto overflow-y-auto max-h-xl">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <thead className="text-xs text-gray-700 uppercase bg-slate-300">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Nombre
+                  Descripción
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Código
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Marca
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Categoría
@@ -51,9 +54,10 @@ const ProductsForm = ({
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                       >
-                        {product?.name}
+                        {product?.description}
                       </th>
                       <td className="px-6 py-4">{product?.code}</td>
+                      <td className="px-6 py-4">{product?.brand?.name}</td>
                       <td className="px-6 py-4">{product?.category?.name}</td>
                       <td className="px-6 py-4">{product?.subcategory?.name}</td>
                       <td className="px-6 py-4">{product?.price}</td>
@@ -64,7 +68,7 @@ const ProductsForm = ({
                           icon={faEdit}
                           className="text-xl cursor-pointer hover:text-primary"
                           onClick={() => {
-                            HandleSearchImg({ productId: product?.id });
+                            HandleSearchImg(product?.id);
                             HandleEditProduct(product);
                             HandleChangeTab("create");
                           }}
@@ -76,14 +80,15 @@ const ProductsForm = ({
               {resultHasValues &&
                 result?.map((product, index) => {
                   return (
-                    <tr key={index} className="bg-white border-b">
+                    <tr className="bg-white border-b" key={index}>
                       <th
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                       >
-                        {product?.name}
+                        {product?.description}
                       </th>
                       <td className="px-6 py-4">{product?.code}</td>
+                      <td className="px-6 py-4">{product?.brand?.name}</td>
                       <td className="px-6 py-4">{product?.category?.name}</td>
                       <td className="px-6 py-4">{product?.subcategory?.name}</td>
                       <td className="px-6 py-4">{product?.price}</td>
@@ -94,7 +99,7 @@ const ProductsForm = ({
                           icon={faEdit}
                           className="text-xl cursor-pointer hover:text-primary"
                           onClick={() => {
-                            HandleSearchImg({ productId: product?.id });
+                            HandleSearchImg(product?.id);
                             HandleEditProduct(product);
                             HandleChangeTab("create");
                           }}

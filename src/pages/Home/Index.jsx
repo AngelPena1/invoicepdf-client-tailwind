@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ProductsForm from "./components/ProductsForm";
 import useInputData from "./hooks/useInputData";
-import { GenerarPDF } from "../../utils/CreateQuotePDF";
+import { GenerarPDF } from "./quotePDF/Index";
 import useGetClients from "../../hooks/useGetClients";
 import useGetCompanyInfo from "../../components/Modals/Business/hooks/useGetCompanyInfo";
 import useGetProducts from "../../hooks/useGetProducts";
@@ -11,6 +11,7 @@ import useGetCompanyImage from "../../hooks/useGetCompanyImage";
 import useSelectedProducts from "./hooks/useSelectedProducts";
 import useToggles from "./hooks/useToggles";
 import useGetTotal from "./hooks/useGetTotal";
+import usePostQuotes from "./hooks/usePostQuotes";
 
 const Index = () => {
   const { data: clientsData, HandleSearch: HandleSearchClient } =
@@ -29,7 +30,7 @@ const Index = () => {
     inputData,
     clientInputData,
     clearSearchInput,
-    HandleSearchInput,
+    HandleInputData,
     HandleDataClient,
   } = useInputData({ clientsData, companyData });
 
@@ -50,14 +51,26 @@ const Index = () => {
     HandleAlreadyFetch,
   } = useGetImgProduct({ selectedProducts });
 
-  const { totals } = useGetTotal({ selectedProducts });
+  const { totals } = useGetTotal({
+    selectedProducts,
+    discount: inputData?.discount,
+  });
 
   const { result } = useSearchProduct({
     dataArray: productsData,
     searchInput: inputData?.search,
   });
 
-  const { toggles, toggleCode, toggleCost, togglePreview } = useToggles();
+  const { toggles, togglePreview, HandleToggleChange } = useToggles();
+
+  const { HandleCreateQuote } = usePostQuotes({
+    companyData,
+    selectedProducts,
+    inputData,
+    clientInputData,
+    toggles,
+    results: totals,
+  });
 
   function HandlePrintQuote() {
     if (alreadyFetch) return null;
@@ -70,6 +83,7 @@ const Index = () => {
 
     return HandleImagesSearch(), togglePreview(true);
   }
+  
 
   useEffect(() => {
     if (
@@ -79,14 +93,28 @@ const Index = () => {
       !companyImgLoading
     ) {
       GenerarPDF({
-        companyData,
         selectedProducts,
+        companyData,
         imagesData,
-        clientInputData,
+        clientData: clientInputData,
         companyImgData,
-        isPreview: toggles?.preview
+        discount: inputData?.discount,
+        with_delivery: inputData?.with_delivery,
+        deposit: inputData?.deposit,
+        cost: totals?.cost,
+        itbis: totals?.itbis,
+        price: totals?.price,
+        withITBIS: totals?.withITBIS,
+        isPreview: toggles?.preview,
+        alreadyCreated: false,
+        hasItbis: toggles?.itbis,
+        hasCode: toggles?.code,
+        hasCost: toggles?.cost,
       });
-      clearSelectedProducts();
+      if (!toggles?.preview) {
+        HandleCreateQuote();
+        clearSelectedProducts();
+      }
       HandleAlreadyFetch(false);
       ResetImgArrayValue();
     }
@@ -100,25 +128,19 @@ const Index = () => {
 
   return (
     <>
-      {/* <HomeForm
-          clientsData={clientsData}
-          companyInputData={companyInputData}
-          clientInputData={clientInputData}
-          HandleInputData={HandleInputData}
-          HandleDataClient={HandleDataClient}
-          HandleChangeTab={HandleChangeTab}
-        /> */}
+      
       <ProductsForm
         result={result}
+        clientsData={clientsData}
+        clientInputData={clientInputData}
         inputData={inputData}
         selectedProducts={selectedProducts}
         imagesData={imagesData}
         clearSearchInput={clearSearchInput}
         totals={totals}
         toggles={toggles}
-        toggleCode={toggleCode}
-        toggleCost={toggleCost}
-        HandleSearchInput={HandleSearchInput}
+        HandleToggleChange={HandleToggleChange}
+        HandleInputData={HandleInputData}
         HandleDataClient={HandleDataClient}
         HandleSelectedProducts={HandleSelectedProducts}
         HandleImagesSearch={HandleImagesSearch}

@@ -1,4 +1,4 @@
-function calculate({ selectedProducts }) {
+function calculate({ selectedProducts, discount }) {
   let results = {
     subtotal: 0,
     itbis: 0,
@@ -15,6 +15,7 @@ function calculate({ selectedProducts }) {
     );
   });
 
+  results.subtotal = results.subtotal - discount
   results.itbis = results?.subtotal * 0.18;
   results.total = results?.subtotal + results?.itbis;
 

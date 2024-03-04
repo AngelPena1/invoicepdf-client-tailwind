@@ -22,12 +22,16 @@
 
 @layer components {
     .button-2 {
-        @apply bg-transparent hover:bg-primary border-2 text-primary hover:text-white duration-200;
+        @apply bg-transparent hover:bg-primary border-2 text-primary-dark hover:text-white duration-200;
     }
 }
 
 .skeleton {
     animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.shadow-style-2 {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
 @keyframes skeleton-loading {
@@ -38,6 +42,10 @@
     100% {
         background-color: hsl(200, 20%, 95%);
     }
+}
+
+.secundary {
+    background-color: #0069af;
 }
 
 html,
