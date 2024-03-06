@@ -5,6 +5,7 @@ import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal"
 import { fullDateFormat } from "../../../utils/dateFormat/dateFormat";
 
 const HistoryTable = ({
+  goToEdit,
   historyData,
   HandlePrintQuote,
   HandleSelectedQuote,
@@ -71,6 +72,10 @@ const HistoryTable = ({
                     <FontAwesomeIcon
                       icon={faEdit}
                       className="text-xl cursor-pointer hover:text-primary"
+                      onClick={() => {
+                        goToEdit(data?.id)
+                      }}
+                     
                     />
                   </td>
                   <td className="px-2 py-4 text-center">

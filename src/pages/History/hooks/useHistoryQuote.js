@@ -1,4 +1,4 @@
-import { GenerarPDF } from "../../Home/quotePDF/Index";
+import { GenerarPDF } from "../../ProductSelect/quotePDF/Index";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";

@@ -5,8 +5,11 @@ import useHistoryQuote from "./hooks/useHistoryQuote";
 import LoadingTable from "./components/LoadingTable";
 import Form from "../../components/Modals/Confirmation/Form";
 import useToggles from "./hooks/useToggles";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   const {
     data: historyData,
     loading: loadingHistory,
@@ -28,10 +31,14 @@ const Index = () => {
   const { toggles, showDeleteConfirmation, hideDeleteConfirmation } =
     useToggles();
 
+  function goToEdit(quote_id) {
+    return navigate("/edit/" + quote_id);
+  }
+
   useEffect(() => {
     HandleSearchHistory();
   }, []);
-  
+
   return (
     <>
       <section name="heading" className="text-center text-2xl font-bold">
@@ -41,9 +48,7 @@ const Index = () => {
         <Form
           title={"Cuidado!"}
           show={toggles.deleteConfirmation}
-          paragraph={
-            `Estas a punto de borrar la ${selectedQuote?.name}. Esta acción no puede deshacerse.`
-          }
+          paragraph={`Estas a punto de borrar la ${selectedQuote?.name}. Esta acción no puede deshacerse.`}
           btnLabel={"Borrar"}
           onHide={hideDeleteConfirmation}
           onClick={HandleDisableQuote}
@@ -51,6 +56,7 @@ const Index = () => {
       )}
       {!loadingHistory && (
         <HistoryTable
+          goToEdit={goToEdit}
           historyData={historyData}
           HandlePrintQuote={HandlePrintQuote}
           HandleSelectedQuote={HandleSelectedQuote}

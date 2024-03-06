@@ -2,15 +2,15 @@ import { useState } from "react";
 
 const useSelectedProducts = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [localId, setLocalId] = useState(1)
+  const [localId, setLocalId] = useState(1);
 
   function HandleLocalId() {
-    return setLocalId(localId + 1)
+    return setLocalId(localId + 1);
   }
 
   function HandleSelectedProducts(value) {
     const localArray = [...selectedProducts];
-    localArray.push({ ...value, quantity: 1, local_id:  localId});
+    localArray.push({ ...value, quantity: 1, local_id: localId });
     return setSelectedProducts(localArray), HandleLocalId();
   }
 
