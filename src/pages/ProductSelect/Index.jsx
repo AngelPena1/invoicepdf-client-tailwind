@@ -12,10 +12,9 @@ import useSelectedProducts from "./hooks/useSelectedProducts";
 import useToggles from "./hooks/useToggles";
 import useGetTotal from "./hooks/useGetTotal";
 import usePostQuotes from "./hooks/usePostQuotes";
-import { useParams } from "react-router-dom";
 
 const Index = () => {
-  const { quote_id } = useParams();
+  
   
   const { data: clientsData, HandleSearch: HandleSearchClient } =
     useGetClients();

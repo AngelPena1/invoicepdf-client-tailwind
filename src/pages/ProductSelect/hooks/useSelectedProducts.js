@@ -1,8 +1,19 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import useGetData from "../../../hooks/useGetData";
 
 const useSelectedProducts = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [localId, setLocalId] = useState(1);
+
+  const { quote_id } = useParams();
+  const endpoint = `/quote/get/${quote_id}`
+
+  const { data: quoteEdit, loading } = useGetData({
+    url: endpoint
+  })
+ 
 
   function HandleLocalId() {
     return setLocalId(localId + 1);
@@ -35,6 +46,14 @@ const useSelectedProducts = () => {
   function clearSelectedProducts() {
     return setSelectedProducts([]);
   }
+
+  useEffect(() => {
+    // console.log(quoteEdit);
+    // if(!quoteEdit?.length > 0) return
+    // const json_products = JSON.parse(quoteEdit[0]?.selected_products_json)
+    // console.log(json_products);
+    // setSelectedProducts()
+  }, [quoteEdit])
 
   return {
     selectedProducts,
