@@ -14,6 +14,7 @@ const ProductsForm = ({
   clearSearchInput,
   totals,
   toggles,
+  quoteHasData,
   HandleToggleChange,
   HandleInputData,
   HandleDataClient,
@@ -352,7 +353,7 @@ const ProductsForm = ({
           Preview
         </button>
         <button className="px-4" onClick={HandlePrintQuote}>
-          Registrar
+          {quoteHasData ? "Editar" : "Registrar"}
         </button>
       </section>
     </section>

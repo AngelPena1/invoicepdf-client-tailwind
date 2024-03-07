@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { isNumberOrDecimal } from "../../../utils/regex/isNumberOrDecimal";
 
-const useInputData = ({ clientsData }) => {
+const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
   const [clientInputData, setClientInputData] = useState({
     selected_client_id: null,
     name: null,
@@ -22,12 +22,12 @@ const useInputData = ({ clientsData }) => {
   function HandleInputData(event) {
     const { name, value } = event.target;
 
-    if(name === "search") {
+    if (name === "search") {
       return setInputData({ ...inputData, [name]: value });
     } else {
-      if ((isNumberOrDecimal(value))) {
+      if (isNumberOrDecimal(value)) {
         return setInputData({ ...inputData, [name]: value });
-      } 
+      }
     }
   }
 
@@ -52,6 +52,26 @@ const useInputData = ({ clientsData }) => {
       address: getClientSelected?.address ? getClientSelected?.address : "",
     });
   }
+
+  useEffect(() => {
+    if (!quoteHasData) return;
+    setInputData({
+      with_delivery: quoteData[0]?.with_delivery,
+      deposit: quoteData[0]?.deposit,
+      discount: quoteData[0]?.discount,
+    });
+
+    const client = quoteData[0]?.client
+    setClientInputData({
+      selected_client_id: client?.id,
+      name: client?.name,
+      razon_social: client?.razon_social,
+      rnc: client?.rnc,
+      phone_1: client?.phone_1,
+      phone_2: client?.phone_2,
+      address: client?.address,
+    });
+  }, [quoteHasData]);
 
   return {
     clientInputData,

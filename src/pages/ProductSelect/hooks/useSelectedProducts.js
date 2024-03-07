@@ -1,20 +1,9 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import useGetData from "../../../hooks/useGetData";
+import { useState, useEffect } from "react";
 
-const useSelectedProducts = () => {
+const useSelectedProducts = ({ quoteData, quoteHasData }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [localId, setLocalId] = useState(1);
-
-  const { quote_id } = useParams();
-  const endpoint = `/quote/get/${quote_id}`
-
-  const { data: quoteEdit, loading } = useGetData({
-    url: endpoint
-  })
- 
-
+  
   function HandleLocalId() {
     return setLocalId(localId + 1);
   }
@@ -48,12 +37,9 @@ const useSelectedProducts = () => {
   }
 
   useEffect(() => {
-    // console.log(quoteEdit);
-    // if(!quoteEdit?.length > 0) return
-    // const json_products = JSON.parse(quoteEdit[0]?.selected_products_json)
-    // console.log(json_products);
-    // setSelectedProducts()
-  }, [quoteEdit])
+    const getQuote = quoteHasData ? JSON.parse(quoteData[0]?.selected_products_json) : []
+    setSelectedProducts(getQuote)
+  }, [quoteHasData])
 
   return {
     selectedProducts,

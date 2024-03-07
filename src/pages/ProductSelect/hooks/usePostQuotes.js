@@ -3,42 +3,79 @@ import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { getQuoteCounter } from "../axios/getQuoteCounter";
+import { useParams } from "react-router-dom";
 
-const usePostQuotes = ({ selectedProducts, inputData, clientInputData, toggles, results, CheckForNotEmptyValues }) => {
+const usePostQuotes = ({
+  selectedProducts,
+  inputData,
+  clientInputData,
+  toggles,
+  results,
+  quoteHasData,
+}) => {
   const axiosPrivate = useAxiosPrivate();
   const [resfresh, setRefresh] = useState(false);
   const { auth } = useAuth();
+  const { quote_id } = useParams();
 
   async function HandleCreateQuote() {
-    const endpoint = "quote/create";
+    const create = "quote/create";
+    const update = "quote/update";
+    const endpoint = quoteHasData ? update : create;
 
-    // const quote_counter = companyData[0]?.quote_counter
+    const quote_counter = await getQuoteCounter(auth?.company?.id);
 
-    const quote_counter = await getQuoteCounter(auth?.company?.id)
-    
-    await axiosPrivate
-      .post(endpoint, {
-        company_id: auth?.company?.id,
-        client_id: clientInputData?.selected_client_id,
-        name: "Cotización RC-" + quote_counter,
-        has_itbis: toggles?.itbis,
-        has_code: toggles?.code,
-        has_cost: toggles?.cost,
-        discount: inputData?.discount,
-        subtotal: results?.price,
-        itbis: results?.itbis,
-        total: results?.withITBIS,
-        deposit: inputData?.deposit,
-        with_delivery: inputData?.with_delivery,
-        selected_products_json: JSON.stringify(selectedProducts),
-        createdBy: auth?.username
-      })
-      .then(() => {
-        toast.success("La cotización ha sido creada exitosamente.");
-      })
-      .catch(() => {
-        toast.error("Ha ocurrido un error.");
-      });
+    if (!quoteHasData) {
+      await axiosPrivate
+        .post(endpoint, {
+          company_id: auth?.company?.id,
+          client_id: clientInputData?.selected_client_id,
+          name: "Cotización RC-" + quote_counter,
+          has_itbis: toggles?.itbis,
+          has_code: toggles?.code,
+          has_cost: toggles?.cost,
+          discount: inputData?.discount,
+          subtotal: results?.price,
+          itbis: results?.itbis,
+          total: results?.withITBIS,
+          deposit: inputData?.deposit,
+          with_delivery: inputData?.with_delivery,
+          selected_products_json: JSON.stringify(selectedProducts),
+          quote_count: quote_counter,
+          createdBy: auth?.username,
+        })
+        .then(() => {
+          toast.success("La cotización ha sido creada exitosamente.");
+        })
+        .catch(() => {
+          toast.error("Ha ocurrido un error.");
+        });
+    } else {
+      await axiosPrivate
+        .put(endpoint, {
+          quote_id: quote_id,
+          company_id: auth?.company?.id,
+          client_id: clientInputData?.selected_client_id,
+          name: "Cotización RC-" + quote_id,
+          has_itbis: toggles?.itbis,
+          has_code: toggles?.code,
+          has_cost: toggles?.cost,
+          discount: inputData?.discount,
+          subtotal: results?.price,
+          itbis: results?.itbis,
+          total: results?.withITBIS,
+          deposit: inputData?.deposit,
+          with_delivery: inputData?.with_delivery,
+          selected_products_json: JSON.stringify(selectedProducts),
+          createdBy: auth?.username,
+        })
+        .then(() => {
+          toast.success("La cotización ha sido editada exitosamente.");
+        })
+        .catch(() => {
+          toast.error("Ha ocurrido un error.");
+        });
+    }
   }
 
   // async function HandleUpdateQuote(e) {
@@ -48,7 +85,7 @@ const usePostQuotes = ({ selectedProducts, inputData, clientInputData, toggles, 
   //     return toast.error("Por favor, llene todos los campos.");
 
   //   const endpoint = "product/update";
-    
+
   //   await axiosPrivate
   //     .put(endpoint, {
   //       product_id: data?.product_id,

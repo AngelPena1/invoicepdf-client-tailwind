@@ -6,16 +6,21 @@ import LoadingTable from "./components/LoadingTable";
 import Form from "../../components/Modals/Confirmation/Form";
 import useToggles from "./hooks/useToggles";
 import { useNavigate } from "react-router-dom";
+import useHistoryData from "./hooks/useHistoryData";
 
 const Index = () => {
   const navigate = useNavigate();
 
   const {
-    data: historyData,
+    data,
     loading: loadingHistory,
     ResetValue: ResetHistory,
     HandleSearch: HandleSearchHistory,
   } = useGetHistory();
+
+  const { historyData, OrderByDescription, OrderByClient } = useHistoryData({
+    data,
+  });
 
   const {
     selectedQuote,
@@ -61,6 +66,8 @@ const Index = () => {
           HandlePrintQuote={HandlePrintQuote}
           HandleSelectedQuote={HandleSelectedQuote}
           showDeleteConfirmation={showDeleteConfirmation}
+          OrderByDescription={OrderByDescription}
+          OrderByClient={OrderByClient}
         />
       )}
 

@@ -32,12 +32,12 @@ export function createHeading({
   companyData,
   clientData,
   companyImgData,
-  isAlreadyCreated
+  isAlreadyCreated,
+  quote_counter
 }) {
   //Company info
   const name = companyData[0]?.name;
   const rnc = companyData[0]?.rnc;
-  const quote_counter = companyData[0]?.quote_counter;
   const phone = companyData[0]?.phone_1;
   const address = companyData[0]?.address;
   

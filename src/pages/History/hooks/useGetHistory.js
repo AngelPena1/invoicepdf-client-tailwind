@@ -14,7 +14,7 @@ const useGetHistory = () => {
     url: endpoint,
     search
   });
-
+  
   function HandleSearch() {
     return setSearch(true);
   }

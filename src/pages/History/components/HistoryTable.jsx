@@ -1,5 +1,10 @@
 import React from "react";
-import { faEdit, faPrint, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faPrint,
+  faTrash,
+  faSort,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
 import { fullDateFormat } from "../../../utils/dateFormat/dateFormat";
@@ -10,6 +15,8 @@ const HistoryTable = ({
   HandlePrintQuote,
   HandleSelectedQuote,
   showDeleteConfirmation,
+  OrderByDescription,
+  OrderByClient
 }) => {
   return (
     <section>
@@ -22,9 +29,15 @@ const HistoryTable = ({
             <tr>
               <th scope="col" className="px-2 py-3">
                 Descripción
+                <FontAwesomeIcon icon={faSort} onClick={OrderByDescription} 
+                  className="ml-3 cursor-pointer hover:text-slate-400"
+                />
               </th>
               <th scope="col" className="px-2 py-3">
                 Cliente
+                <FontAwesomeIcon icon={faSort} onClick={OrderByClient} 
+                  className="ml-3 cursor-pointer hover:text-slate-400"
+                />
               </th>
               <th scope="col" className="px-2 py-3">
                 Fecha
@@ -65,7 +78,8 @@ const HistoryTable = ({
                       icon={faPrint}
                       className="text-xl cursor-pointer hover:text-primary z-0"
                       onClick={() => {
-                        HandlePrintQuote(data?.id)}}
+                        HandlePrintQuote(data?.id);
+                      }}
                     />
                   </td>
                   <td className="px-2 py-4 text-center">
@@ -73,9 +87,8 @@ const HistoryTable = ({
                       icon={faEdit}
                       className="text-xl cursor-pointer hover:text-primary"
                       onClick={() => {
-                        goToEdit(data?.id)
+                        goToEdit(data?.id);
                       }}
-                     
                     />
                   </td>
                   <td className="px-2 py-4 text-center">

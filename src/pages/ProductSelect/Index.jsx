@@ -12,10 +12,11 @@ import useSelectedProducts from "./hooks/useSelectedProducts";
 import useToggles from "./hooks/useToggles";
 import useGetTotal from "./hooks/useGetTotal";
 import usePostQuotes from "./hooks/usePostQuotes";
+import useGetQuoteById from "./hooks/useGetQuoteById";
 
 const Index = () => {
-  
-  
+  const { data: quoteData, quoteHasData } = useGetQuoteById();
+
   const { data: clientsData, HandleSearch: HandleSearchClient } =
     useGetClients();
 
@@ -34,7 +35,7 @@ const Index = () => {
     clearSearchInput,
     HandleInputData,
     HandleDataClient,
-  } = useInputData({ clientsData, companyData });
+  } = useInputData({ clientsData, quoteData, quoteHasData });
 
   const {
     selectedProducts,
@@ -42,7 +43,7 @@ const Index = () => {
     HandleQuantityProducts,
     HandleDeleteProduct,
     clearSelectedProducts,
-  } = useSelectedProducts();
+  } = useSelectedProducts({ quoteData, quoteHasData });
 
   const {
     data: imagesData,
@@ -63,7 +64,10 @@ const Index = () => {
     searchInput: inputData?.search,
   });
 
-  const { toggles, togglePreview, HandleToggleChange } = useToggles();
+  const { toggles, togglePreview, HandleToggleChange } = useToggles({
+    quoteData,
+    quoteHasData,
+  });
 
   const { HandleCreateQuote } = usePostQuotes({
     companyData,
@@ -72,6 +76,7 @@ const Index = () => {
     clientInputData,
     toggles,
     results: totals,
+    quoteHasData
   });
 
   function HandlePrintQuote() {
@@ -111,10 +116,15 @@ const Index = () => {
         hasItbis: toggles?.itbis,
         hasCode: toggles?.code,
         hasCost: toggles?.cost,
+        quoteId: quoteData[0]?.id,
+        quoteHasData
       });
       if (!toggles?.preview) {
         HandleCreateQuote();
-        clearSelectedProducts();
+
+        if (!quoteHasData) {
+          clearSelectedProducts();
+        }
       }
       HandleAlreadyFetch(false);
       ResetImgArrayValue();
@@ -137,6 +147,7 @@ const Index = () => {
         selectedProducts={selectedProducts}
         imagesData={imagesData}
         clearSearchInput={clearSearchInput}
+        quoteHasData={quoteHasData}
         totals={totals}
         toggles={toggles}
         HandleToggleChange={HandleToggleChange}

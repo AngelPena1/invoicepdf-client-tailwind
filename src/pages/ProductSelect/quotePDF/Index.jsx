@@ -42,6 +42,8 @@ export async function GenerarPDF({
   hasItbis,
   hasCode,
   hasCost,
+  quoteId,
+  quoteHasData
 }) {
   try {
     const pdf = new jsPDF({
@@ -49,6 +51,8 @@ export async function GenerarPDF({
     });
     let controlPixelHeight = 0;
     let newPage = false;
+    const quote_counter = !quoteHasData ? await getQuoteCounter(companyData[0]?.id) : quoteId
+    
     createHeading({
       quoteName: name,
       pdf,
@@ -56,7 +60,8 @@ export async function GenerarPDF({
       clientData,
       companyImgData,
       hasCost,
-      isAlreadyCreated
+      isAlreadyCreated,
+      quote_counter
     });
     createBody({
       pdf,
@@ -83,8 +88,6 @@ export async function GenerarPDF({
       itbis,
       withITBIS,
     });
-
-    const quote_counter = await getQuoteCounter(companyData[0]?.id);
 
     if (isPreview) {
       const pdfWithWatermark = addWaterMark(pdf);
