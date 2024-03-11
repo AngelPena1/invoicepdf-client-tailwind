@@ -42,7 +42,7 @@ const Catalog = (props) => {
             return (
               <div
                 key={index}
-                className="shadow-xl rounded-lg p-2 h-60 select-none cursor-pointer overflow-hidden duration-200 hover:bg-slate-200"
+                className="shadow-xl rounded-lg p-2 h-64 select-none cursor-pointer overflow-hidden duration-200 hover:bg-slate-200"
                 onClick={() => {
                   props.onClick(product)
                   props.onHide()
@@ -58,7 +58,7 @@ const Catalog = (props) => {
                 ) : (
                   <div className="skeleton h-44 rounded-lg"></div>
                 )}
-                <h3 className="text-sm mt-1">{product?.name}</h3>
+                <h3 className="text-sm mt-1">{product?.name.length < 72 ? product?.name : (product?.name.substring(0, 72) + '...')}</h3>
                 <h3 className="text-sm">{product?.price}</h3>
               </div>
             );

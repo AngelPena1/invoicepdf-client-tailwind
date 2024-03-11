@@ -6,7 +6,7 @@ import useGetImgProduct from "./hooks/useGetImgProductsArray";
 import useInputData from "./hooks/useInputData";
 
 const Index = ({ onHide, onClick }) => {
-  const limit = 5;
+  const limit = 50;
   const onClickCatalogHasFunction = onClick ? onClick : null;
 
   const {
