@@ -37,9 +37,9 @@ const ProductsForm = ({
                 <th scope="col" className="px-6 py-3">
                   Precio
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   Creado por
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3 text-center">
                   Editar
                 </th>
@@ -54,14 +54,14 @@ const ProductsForm = ({
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                       >
-                        {product?.description}
+                        {product?.description.length < 90 ? product?.description : product?.description.substring(0,90) + '...'}
                       </th>
                       <td className="px-6 py-4">{product?.code}</td>
                       <td className="px-6 py-4">{product?.brand?.name}</td>
                       <td className="px-6 py-4">{product?.category?.name}</td>
                       <td className="px-6 py-4">{product?.subcategory?.name}</td>
                       <td className="px-6 py-4">{product?.price}</td>
-                      <td className="px-6 py-4">{product?.createdBy}</td>
+                      {/* <td className="px-6 py-4">{product?.createdBy}</td> */}
                       <td className="px-6 py-4 text-center">
                         {/* {product?.isActive ? "Activo" : "Desactivado"} */}
                         <FontAwesomeIcon
@@ -85,14 +85,14 @@ const ProductsForm = ({
                         scope="row"
                         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                       >
-                        {product?.description}
+                        {product?.description.length < 90 ? product?.description : product?.description.substring(0,90) + '...'}
                       </th>
                       <td className="px-6 py-4">{product?.code}</td>
                       <td className="px-6 py-4">{product?.brand?.name}</td>
                       <td className="px-6 py-4">{product?.category?.name}</td>
                       <td className="px-6 py-4">{product?.subcategory?.name}</td>
                       <td className="px-6 py-4">{product?.price}</td>
-                      <td className="px-6 py-4">{product?.createdBy}</td>
+                      {/* <td className="px-6 py-4">{product?.createdBy}</td> */}
                       <td className="px-6 py-4 text-center">
                         {/* {product?.isActive ? "Activo" : "Desactivado"} */}
                         <FontAwesomeIcon
