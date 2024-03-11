@@ -1,3 +1,6 @@
+// import no_image from '../../../../assets/no-image.png'
+import no_image from '../../../../assets/no-image2.jpg'
+
 function capitalizarPrimeraLetra(palabra) {
   return palabra.charAt(0).toUpperCase() + palabra.slice(1);
 }
@@ -65,7 +68,7 @@ export function createHeading({
     didDrawCell: function (data) {
       if (data.column.index === 0 && data.cell.section === "body") {
         pdf.addImage(
-          companyImgData[0]?.image,
+          companyImgData[0]?.image ? companyImgData[0]?.image : no_image,
           15, // X
           22, // Y
           logoWidth, // X

@@ -1,4 +1,5 @@
 import { formatToDecimal } from "../../../../utils/formatToDecimal/formatToDecimal";
+import no_image from '../../../../assets/no-image2.jpg'
 
 function getSizePixel(value) {
   let pixel;
@@ -49,7 +50,7 @@ export function createBody({
       },
     });
     selectedProducts.forEach((product) => {
-      const sizeImg = getSizePixel(product?.size);
+      const sizeImg = getSizePixel(product?.size ? product?.size : "small");
       controlPixelHeight += sizeImg;
       const getImage = imagesData.filter((image) => {
         return product?.id === image?.id;
@@ -99,7 +100,7 @@ export function createBody({
         didDrawCell: function (data) {
           if (data.column.index === 3 && data.cell.section === "body") {
             pdf.addImage(
-              getImage,
+              getImage ? getImage : no_image,
               data?.table?.body[0]?.cells[2]?.x + 1,
               data?.table?.body[0]?.cells[2]?.y + 1,
               36.3 - 2, // X
@@ -131,7 +132,7 @@ export function createBody({
       },
     });
     selectedProducts.forEach((product) => {
-      const sizeImg = getSizePixel(product?.size);
+      const sizeImg = getSizePixel(product?.size ? product?.size : "small");
       controlPixelHeight += sizeImg;
       const getImage = imagesData.filter((image) => {
         return product?.id === image?.id;
@@ -177,7 +178,7 @@ export function createBody({
         didDrawCell: function (data) {
           if (data.column.index === 3 && data.cell.section === "body") {
             pdf.addImage(
-              getImage,
+              getImage ? getImage : no_image,
               data?.table?.body[0]?.cells[2]?.x + 1,
               data?.table?.body[0]?.cells[2]?.y + 1,
               36.3 - 2, // X

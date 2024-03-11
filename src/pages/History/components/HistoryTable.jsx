@@ -16,7 +16,9 @@ const HistoryTable = ({
   HandleSelectedQuote,
   showDeleteConfirmation,
   OrderByDescription,
-  OrderByClient
+  OrderByClient,
+  OrderByDate, 
+  OrderByTotal
 }) => {
   return (
     <section>
@@ -41,9 +43,15 @@ const HistoryTable = ({
               </th>
               <th scope="col" className="px-2 py-3">
                 Fecha
+                <FontAwesomeIcon icon={faSort} onClick={OrderByDate} 
+                  className="ml-3 cursor-pointer hover:text-slate-400"
+                />
               </th>
               <th scope="col" className="px-2 py-3">
                 Total
+                <FontAwesomeIcon icon={faSort} onClick={OrderByTotal} 
+                  className="ml-3 cursor-pointer hover:text-slate-400"
+                />
               </th>
               <th scope="col" className="px-2 py-3 text-center">
                 Imprimir

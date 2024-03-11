@@ -13,6 +13,7 @@ import useToggles from "./hooks/useToggles";
 import useGetTotal from "./hooks/useGetTotal";
 import usePostQuotes from "./hooks/usePostQuotes";
 import useGetQuoteById from "./hooks/useGetQuoteById";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const { data: quoteData, quoteHasData } = useGetQuoteById();
@@ -76,11 +77,15 @@ const Index = () => {
     clientInputData,
     toggles,
     results: totals,
-    quoteHasData
+    quoteHasData,
   });
 
   function HandlePrintQuote() {
     if (alreadyFetch) return null;
+
+    if (!clientInputData?.selected_client_id) {
+      return toast.error("Debes seleccionar un cliente.");
+    }
 
     return HandleImagesSearch(), togglePreview(false);
   }
@@ -117,7 +122,7 @@ const Index = () => {
         hasCode: toggles?.code,
         hasCost: toggles?.cost,
         quoteId: quoteData[0]?.id,
-        quoteHasData
+        quoteHasData,
       });
       if (!toggles?.preview) {
         HandleCreateQuote();

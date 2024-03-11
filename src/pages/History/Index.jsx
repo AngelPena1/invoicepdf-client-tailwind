@@ -18,7 +18,13 @@ const Index = () => {
     HandleSearch: HandleSearchHistory,
   } = useGetHistory();
 
-  const { historyData, OrderByDescription, OrderByClient } = useHistoryData({
+  const {
+    historyData,
+    OrderByDescription,
+    OrderByClient,
+    OrderByDate,
+    OrderByTotal,
+  } = useHistoryData({
     data,
   });
 
@@ -68,6 +74,8 @@ const Index = () => {
           showDeleteConfirmation={showDeleteConfirmation}
           OrderByDescription={OrderByDescription}
           OrderByClient={OrderByClient}
+          OrderByDate={OrderByDate}
+          OrderByTotal={OrderByTotal}
         />
       )}
 
