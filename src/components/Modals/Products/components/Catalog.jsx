@@ -2,9 +2,14 @@ import React from "react";
 import Filters from "../../../Filters/Index";
 import Pagination from "../../../Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEyeSlash,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Catalog = (props) => {
+  const hasData = props.data?.rows?.length > 0;
+
   return (
     <>
       <div
@@ -41,47 +46,59 @@ const Catalog = (props) => {
           ref={props.scrollbarRef}
           className="grid grid-cols-3 gap-4 overflow-auto h-xl px-2 pb-4 -z-10"
         >
-          {props.productsData.map((product, index) => {
-            return (
-              <div
-                key={index}
-                className="shadow-xl rounded-lg p-2 h-64 select-none cursor-pointer overflow-hidden duration-200 hover:bg-slate-200"
-                onClick={() => {
-                  props.onClick(product);
-                  props.onHide();
-                }}
-              >
-                {product?.image ? (
-                  <img
-                    src={product?.image}
-                    alt=""
-                    className="h-44 w-full  rounded-lg "
-                  />
-                ) : (
-                  <div className="skeleton h-44 rounded-lg"></div>
-                )}
-                <h3 className="text-sm mt-1">
-                  {product?.name.length < 72
-                    ? product?.name
-                    : product?.name.substring(0, 72) + "..."}
-                </h3>
-                <h3 className="text-sm">{product?.price}</h3>
+          {hasData &&
+            props.productsData.map((product, index) => {
+              return (
+                <div
+                  key={index}
+                  className="shadow-xl rounded-lg p-2 h-64 select-none cursor-pointer overflow-hidden duration-200 hover:bg-slate-200"
+                  onClick={() => {
+                    props.onClick(product);
+                    props.onHide();
+                  }}
+                >
+                  {product?.image ? (
+                    <img
+                      src={product?.image}
+                      alt=""
+                      className="h-44 w-full  rounded-lg "
+                    />
+                  ) : (
+                    <div className="skeleton h-44 rounded-lg"></div>
+                  )}
+                  <h3 className="text-sm mt-1">
+                    {product?.name.length < 72
+                      ? product?.name
+                      : product?.name.substring(0, 72) + "..."}
+                  </h3>
+                  <h3 className="text-sm">{product?.price}</h3>
+                </div>
+              );
+            })}
+          {!hasData && (
+            <div className="grid relative left-80 text-center place-content-center place-items-center">
+              <div>
+                <FontAwesomeIcon className="text-3xl mb-8" icon={faEyeSlash} />
+                <h4>Nada ha sido encontrado...</h4>
               </div>
-            );
-          })}
+            </div>
+          )}
         </section>
-        <section className="flex justify-center mt-3">
-          <Pagination
-            itemsCount={props.data?.count}
-            itemsPerPage={props.limit}
-            loading={props.loading}
-            hasData={true}
-            resetPage={() => {}}
-            disable={false}
-            HandlePage={props.HandlePage}
-            scrollbarRef={props.scrollbarRef}
-          />
-        </section>
+
+        {hasData && (
+          <section className="flex justify-center mt-3">
+            <Pagination
+              itemsCount={props.data?.count}
+              itemsPerPage={props.limit}
+              loading={props.loading}
+              hasData={true}
+              resetPage={() => {}}
+              disable={false}
+              HandlePage={props.HandlePage}
+              scrollbarRef={props.scrollbarRef}
+            />
+          </section>
+        )}
       </section>
     </>
   );

@@ -78,7 +78,13 @@ function MaintenanceForm({
             Acabados
           </label>
           <div className="grid grid-cols-2 gap-6">
-            <input type="text" className="h-11" placeholder="Código del acabado..." />
+            <input
+              type="text"
+              className="h-11"
+              placeholder="Código del acabado..."
+              value={inputData?.finishes_code}
+              disabled
+            />
             <Select
               value={inputData?.finishes_id}
               value_id={true}
@@ -248,6 +254,7 @@ function MaintenanceForm({
               <input
                 type="checkbox"
                 checked={inputData?.isActive}
+                onChange={() => {}}
                 onClick={() => {
                   HandleInputData({
                     ...inputData,

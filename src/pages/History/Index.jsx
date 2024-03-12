@@ -65,21 +65,18 @@ const Index = () => {
           onClick={HandleDisableQuote}
         />
       )}
-      {!loadingHistory && (
-        <HistoryTable
-          goToEdit={goToEdit}
-          historyData={historyData}
-          HandlePrintQuote={HandlePrintQuote}
-          HandleSelectedQuote={HandleSelectedQuote}
-          showDeleteConfirmation={showDeleteConfirmation}
-          OrderByDescription={OrderByDescription}
-          OrderByClient={OrderByClient}
-          OrderByDate={OrderByDate}
-          OrderByTotal={OrderByTotal}
-        />
-      )}
-
-      {loadingHistory && <LoadingTable />}
+      <HistoryTable
+        goToEdit={goToEdit}
+        loadingHistory={loadingHistory}
+        historyData={historyData}
+        HandlePrintQuote={HandlePrintQuote}
+        HandleSelectedQuote={HandleSelectedQuote}
+        showDeleteConfirmation={showDeleteConfirmation}
+        OrderByDescription={OrderByDescription}
+        OrderByClient={OrderByClient}
+        OrderByDate={OrderByDate}
+        OrderByTotal={OrderByTotal}
+      />
     </>
   );
 };

@@ -22,13 +22,13 @@ const BusinessForm = ({
         }}
       ></div>
       <form className="w-xl md:w-2xl lg:w-4xl h-fit rounded-lg bg-white fixed left-0 right-0 top-0 bottom-0 m-auto z-40 p-5">
-        <section className="w-60 h-44 mx-auto mb-20 relative">
+        <section className="w-72 h-44 mx-auto mb-20 relative">
           {!noImageFound && !loading_image && (
             <>
               <img
                 src={inputData?.image}
                 alt=""
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full rounded-lg"
               />
               <FontAwesomeIcon
                 icon={faX}

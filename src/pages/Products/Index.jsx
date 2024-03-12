@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Search from "../../components/SearchProducts";
 import MaintenanceForm from "./components/MaintenanceForm";
 import useInputData from "./hooks/useInputData";
@@ -6,12 +6,15 @@ import useTabNavigation from "./hooks/useTabNavigation";
 import NavigationBar from "./components/NavigationBar";
 import useGetBranchWithDivisions from "./hooks/useGetBranchWithDivisions";
 import usePostProduct from "./hooks/usePostProduct";
-import useGetProducts from "../../hooks/useGetProducts";
 import useGetImgProduct from "./hooks/useGetImgProduct";
 import ProductsForm from "./components/ProductsForm";
 import useSearchProduct from "./hooks/useSearchProduct";
+import useGetProductsLimit from "../../hooks/useGetProductLimit";
 
 const Index = () => {
+  const limit = 500;
+  const scrollbarRef = useRef(null);
+
   const {
     data: divisionsData,
     getOnlyNames,
@@ -48,7 +51,8 @@ const Index = () => {
     data: productsData,
     loading,
     HandleSearch: HandleSearchProducts,
-  } = useGetProducts();
+    HandlePage,
+  } = useGetProductsLimit({ limit, searchProduct: inputData?.search });
 
   const {
     data: imgData,
@@ -84,29 +88,25 @@ const Index = () => {
         onChange={HandleEventSearch}
         onClick={(value) => {
           HandleEditProduct(value);
+          HandleChangeTab("create");
           HandleSearchImg(value?.id);
           // HandleInputData({...inputData, search: ""})
         }}
         conditionToShowResults={currentTab !== "default"}
       />
-      {/* <section className="grid place-items-center">
-        <div
-          className="inline-block h-8 w-8  animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-          role="status"
-        >
-          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-            Loading...
-          </span>
-        </div>
-      </section> */}
       {currentTab === "default" && (
         <ProductsForm
-          productsData={productsData}
+          loading={loading}
+          limit={limit}
+          count={productsData?.count}
+          productsData={productsData?.rows}
           searchInput={inputData?.search}
           result={result}
+          scrollbarRef={scrollbarRef}
           HandleChangeTab={HandleChangeTab}
           HandleEditProduct={HandleEditProduct}
           HandleSearchImg={HandleSearchImg}
+          HandlePage={HandlePage}
         />
       )}
       {currentTab === "create" && !loading && (

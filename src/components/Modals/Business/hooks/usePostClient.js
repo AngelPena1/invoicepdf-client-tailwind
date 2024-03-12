@@ -1,7 +1,6 @@
 import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 import useAuth from "../../../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { useState } from "react";
 
 const useUpdateCompany = ({ data, CheckForNotEmptyValues }) => {
   const axiosPrivate = useAxiosPrivate();
@@ -21,7 +20,7 @@ const useUpdateCompany = ({ data, CheckForNotEmptyValues }) => {
         name: data?.name,
         rnc: data?.rnc,
         email: data?.email,
-        phone: data?.phone,
+        phone_1: data?.phone_1,
         phone_2: data?.phone_2,
         address: data?.address,
         image: data?.image,

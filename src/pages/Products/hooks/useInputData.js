@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useInputData = ({ divisionsData }) => {
   const [inputData, setInputData] = useState({
-    search: null,
+    search: "",
     description: null,
     brand_id: null,
     finishes_id: null,
@@ -117,6 +117,7 @@ const useInputData = ({ divisionsData }) => {
       name: data?.name,
       brand_id: data?.brand?.id,
       finishes_id: data?.finish?.id,
+      finishes_code: data?.finish?.code,
       finishes: getFinishes(data?.brand?.id),
       category_id: data?.category?.id,
       categories: getCategories(data?.brand?.id),

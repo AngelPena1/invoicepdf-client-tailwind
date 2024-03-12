@@ -39,18 +39,18 @@ export function createHeading({
   quote_counter
 }) {
   //Company info
-  const name = companyData[0]?.name;
-  const rnc = companyData[0]?.rnc;
-  const phone = companyData[0]?.phone_1;
-  const address = companyData[0]?.address;
+  const name = companyData[0]?.name ? companyData[0]?.name : "";
+  const rnc = companyData[0]?.rnc ? companyData[0]?.rnc : "";
+  const phone = companyData[0]?.phone_1 ? companyData[0]?.phone_1 : "";
+  const address = companyData[0]?.address ? companyData[0]?.address : "";
   
   const nameQuote = isAlreadyCreated ? quoteName : "Cotización # RC-" + quote_counter
 
   //Client info
-  const clientName = clientData?.name;
-  const clientCompName = clientData?.razon_social;
-  const clientRnc = clientData?.rnc;
-  const clientPhone_1 = clientData?.phone_1;
+  const clientName = clientData?.name ? clientData?.name : "";
+  const clientCompName = clientData?.razon_social ? clientData?.razon_social : "";
+  const clientRnc = clientData?.rnc ? clientData?.rnc : "";
+  const clientPhone_1 = clientData?.phone_1 ? clientData?.phone_1 : "";
 
   const logoWidth = 50;
   const logoHeight = 25;
@@ -79,15 +79,15 @@ export function createHeading({
         pdf.text(obtenerFechaActualFormateada(), 18, 62);
 
         //Company Info
-        const distanceCompany_X = 75;
+        const distanceCompany_X = 70;
         pdf.setFontSize(fontSizeTitle);
         pdf.setFont(fontStyleTitle);
         pdf.text("Información del Negocio: ", distanceCompany_X, 25);
         pdf.setFontSize(fontSize);
-        pdf.text("Razón Social: " + name, distanceCompany_X, 32);
-        pdf.text("RNC: " + rnc, distanceCompany_X, 37);
-        pdf.text("Teléfono: " + phone, distanceCompany_X, 42);
-        pdf.text("Dirección: " + address, distanceCompany_X, 47);
+        pdf.text("Razón Social: " + name?.substring(0, 30), distanceCompany_X, 32);
+        pdf.text("RNC: " + rnc?.substring(0, 30), distanceCompany_X, 37);
+        pdf.text("Teléfono: " + phone?.substring(0, 30), distanceCompany_X, 42);
+        pdf.text("Dirección: " + address?.substring(0, 30), distanceCompany_X, 47);
 
         //Client Info
         const distanceClient_X = 140;
@@ -95,10 +95,10 @@ export function createHeading({
         pdf.setFont(fontStyleTitle);
         pdf.text("Información del Cliente: ", distanceClient_X, 25);
         pdf.setFontSize(fontSize);
-        pdf.text("Nombre: " + clientName, distanceClient_X, 32);
-        pdf.text("Razón Social: " + clientCompName, distanceClient_X, 37);
-        pdf.text("RNC: " + clientRnc, distanceClient_X, 42);
-        pdf.text("Teléfono: " + clientPhone_1, distanceClient_X, 47);
+        pdf.text("Nombre: " + clientName?.substring(0, 30), distanceClient_X, 32);
+        pdf.text("Razón Social: " + clientCompName?.substring(0, 30), distanceClient_X, 37);
+        pdf.text("RNC: " + clientRnc?.substring(0, 30), distanceClient_X, 42);
+        pdf.text("Teléfono: " + clientPhone_1?.substring(0, 30), distanceClient_X, 47);
       }
     },
   });

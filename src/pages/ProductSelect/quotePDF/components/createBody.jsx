@@ -1,5 +1,5 @@
 import { formatToDecimal } from "../../../../utils/formatToDecimal/formatToDecimal";
-import no_image from '../../../../assets/no-image2.jpg'
+import no_image from '../../../../assets/white.jpg'
 
 function getSizePixel(value) {
   let pixel;

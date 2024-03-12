@@ -14,9 +14,9 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
 
   const [inputData, setInputData] = useState({
     search: "",
-    with_delivery: null,
-    deposit: null,
-    discount: null,
+    with_delivery: "",
+    deposit: "",
+    discount: "",
   });
 
   function HandleInputData(event) {

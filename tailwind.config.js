@@ -48,10 +48,12 @@ module.exports = {
           "0%": {
             position: "absolute",
             top: "4rem",
+            'z-index': '39'
           },
           "100%": {
             position: "absolute",
             top: "2.5rem",
+            'z-index': '39',
           },
         },
         wiggle: {
