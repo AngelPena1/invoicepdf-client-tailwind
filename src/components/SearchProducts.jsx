@@ -17,6 +17,7 @@ const Search = ({
   const resultHasValue = result?.length > 0;
   const onChangeHasFunction = onChange ? onChange : null;
   const onClickHasFunction = onClick ? onClick : null;
+  
   const [show, setShow] = useState(false);
 
   function toggleCatalog() {
@@ -32,7 +33,7 @@ const Search = ({
       {show && (
         <Catalog onHide={hideCatalog} onClick={onClick} />
       )}
-      <section className="h-10 w-full bg-primary-2 flex items-center p-6 relative mb-16 rounded-md">
+      <section className="h-10 w-full bg-primary-2 flex items-center p-6 relative mb-8 rounded-md">
         <div id="search" className="relative flex items-center">
           <FontAwesomeIcon
             className="absolute left-3 top-2"
@@ -45,7 +46,7 @@ const Search = ({
             value={value}
             name="search"
             onChange={onChangeHasFunction}
-            autocomplete="off"
+            autoComplete="off"
           />
         </div>
         <section className="relative flex items-center">
