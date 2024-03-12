@@ -14,6 +14,14 @@ const Pagination = ({
   const [totalButtons, setTotalButtons] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
+  const HandlePageProp = (e) => {
+    if(HandlePage) {
+      return HandlePage(e)
+    } else {
+      return null
+    }
+  }
+
   const pageCount = Math.ceil(itemsCount / itemsPerPage) - 1;
 
   const hasPreviousPage = currentPage <= 0;
@@ -118,7 +126,7 @@ const Pagination = ({
 
   useEffect(() => {
     ScrollToTop()
-    HandlePage(currentPage);
+    HandlePageProp(currentPage);
   }, [currentPage]);
 
   return (
