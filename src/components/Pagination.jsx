@@ -8,8 +8,8 @@ const Pagination = ({
   loading,
   hasData,
   disable,
-  resetPage,
   HandlePage,
+  scrollbarRef
 }) => {
   const [totalButtons, setTotalButtons] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -39,8 +39,11 @@ const Pagination = ({
     return setCurrentPage(nextPage);
   }
 
-  function ResetPage() {
-    return setCurrentPage(0);
+  function ScrollToTop() {
+    if(!scrollbarRef) return
+    if(scrollbarRef.current) {
+      scrollbarRef.current.scrollTop = 0
+    }
   }
 
   // useEffect(() => {
@@ -114,6 +117,7 @@ const Pagination = ({
   }, [currentPage, itemsCount]);
 
   useEffect(() => {
+    ScrollToTop()
     HandlePage(currentPage);
   }, [currentPage]);
 
@@ -131,7 +135,7 @@ const Pagination = ({
             if(typeof value !== "string") {
               return (
                 <button
-                  className={value === currentPage ? "px-3 bg-primary" : "px-3 bg-primary-2"}
+                  className={value === currentPage ? "px-3 bg-primary min-w-10" : "px-3 bg-primary-2 min-w-10"}
                   key={index}
                   value={value}
                   onClick={() => {
@@ -144,7 +148,7 @@ const Pagination = ({
             } else {
               return (
                 <button
-                  className=""
+                  className="min-w-10"
                   key={index}
                   disabled
                 >
@@ -156,7 +160,7 @@ const Pagination = ({
           })}
         </div>
         <button
-          className={!hasNextPage ? "px-3 bg-primary-2" : "px-3 bg-primary-2"}
+          className={!hasNextPage ? "px-3 bg-primary-2 min-w-10" : "px-3 bg-primary-2 min-w-10"}
           onClick={HandleNextPage}
         >
           <FontAwesomeIcon className="" icon={faArrowRight} />

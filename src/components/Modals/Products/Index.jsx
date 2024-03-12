@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Catalog from "./components/Catalog";
 import useGetProducts from "./hooks/useGetProducts";
 import useToggles from "./hooks/useToggles";
@@ -8,6 +8,8 @@ import useInputData from "./hooks/useInputData";
 const Index = ({ onHide, onClick }) => {
   const limit = 50;
   const onClickCatalogHasFunction = onClick ? onClick : null;
+
+  const scrollbarRef = useRef(null)
 
   const {
     inputData,
@@ -60,6 +62,7 @@ const Index = ({ onHide, onClick }) => {
       toggles={toggles}
       toggleFilters={toggleFilters}
       inputData={inputData}
+      scrollbarRef={scrollbarRef}
       onHide={onHide}
       onClick={onClickCatalogHasFunction}
       HandleKeyPress={HandleKeyPress}
