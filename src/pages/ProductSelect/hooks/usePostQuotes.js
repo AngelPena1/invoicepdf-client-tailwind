@@ -12,6 +12,7 @@ const usePostQuotes = ({
   toggles,
   results,
   quoteHasData,
+  quote_count
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const [resfresh, setRefresh] = useState(false);
@@ -56,7 +57,7 @@ const usePostQuotes = ({
           quote_id: quote_id,
           company_id: auth?.company?.id,
           client_id: clientInputData?.selected_client_id,
-          name: "Cotización RC-" + quote_id,
+          name: "Cotización RC-" + quote_count,
           has_itbis: toggles?.itbis,
           has_code: toggles?.code,
           has_cost: toggles?.cost,

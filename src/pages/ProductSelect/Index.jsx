@@ -78,6 +78,7 @@ const Index = () => {
     toggles,
     results: totals,
     quoteHasData,
+    quote_count: quoteData[0]?.quote_count
   });
 
   function HandlePrintQuote() {
@@ -95,7 +96,7 @@ const Index = () => {
 
     return HandleImagesSearch(), togglePreview(true);
   }
-
+  
   useEffect(() => {
     if (
       imagesData &&
@@ -121,7 +122,7 @@ const Index = () => {
         hasItbis: toggles?.itbis,
         hasCode: toggles?.code,
         hasCost: toggles?.cost,
-        quoteId: quoteData[0]?.id,
+        quoteId: quoteData[0]?.quote_count,
         quoteHasData,
       });
       if (!toggles?.preview) {
