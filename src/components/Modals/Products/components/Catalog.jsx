@@ -22,7 +22,7 @@ const Catalog = (props) => {
           <input
             type="text"
             className="h-10 text-base"
-            placeholder="Escriba aquí para buscar un producto"
+            placeholder="Inserte un código o nombre de producto..."
             name="search"
             value={props.inputData.search}
             onKeyDown={props.HandleKeyPress}
@@ -51,13 +51,13 @@ const Catalog = (props) => {
               return (
                 <div
                   key={index}
-                  className="shadow-xl rounded-lg p-2 h-64 select-none cursor-pointer overflow-hidden duration-200 hover:bg-slate-200"
+                  className="shadow-xl rounded-lg p-2 h-24 select-none cursor-pointer overflow-hidden duration-200 hover:bg-slate-200"
                   onClick={() => {
                     props.onClick(product);
                     props.onHide();
                   }}
                 >
-                  {product?.image ? (
+                  {/* {product?.image ? (
                     <img
                       src={product?.image}
                       alt=""
@@ -65,13 +65,16 @@ const Catalog = (props) => {
                     />
                   ) : (
                     <div className="skeleton h-44 rounded-lg"></div>
-                  )}
+                  )} */}
                   <h3 className="text-sm mt-1">
                     {product?.name.length < 72
                       ? product?.name
                       : product?.name.substring(0, 72) + "..."}
                   </h3>
-                  <h3 className="text-sm">{product?.price}</h3>
+                  <div className="flex justify-between mt-4">
+                    <h3 className="text-sm">{product?.price}</h3>
+                    <h3 className="text-sm">{product?.code}</h3>
+                  </div>
                 </div>
               );
             })}
@@ -84,7 +87,6 @@ const Catalog = (props) => {
             </div>
           )}
         </section>
-
         {hasData && (
           <section className="flex justify-center mt-3">
             <Pagination

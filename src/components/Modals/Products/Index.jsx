@@ -57,7 +57,7 @@ const Index = ({ onHide, onClick }) => {
       data={data}
       limit={limit}
       productsData={productsData}
-      productsImgData={productsImgData}
+      // productsImgData={productsImgData} //disabled
       loading={loading}
       toggles={toggles}
       toggleFilters={toggleFilters}
