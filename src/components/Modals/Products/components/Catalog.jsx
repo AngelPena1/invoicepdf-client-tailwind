@@ -44,42 +44,49 @@ const Catalog = (props) => {
         </div>
         <section
           ref={props.scrollbarRef}
-          className="grid grid-cols-3 gap-4 overflow-auto h-xl px-2 pb-4 -z-10"
+          className=" px-2 pb-4 -z-10 overflow-auto h-xl relative"
         >
-          {hasData &&
-            props.productsData.map((product, index) => {
-              return (
-                <div
-                  key={index}
-                  className="shadow-xl rounded-lg p-2 h-24 select-none cursor-pointer overflow-hidden duration-200 hover:bg-slate-200"
-                  onClick={() => {
-                    props.onClick(product);
-                    props.onHide();
-                  }}
-                >
-                  {/* {product?.image ? (
-                    <img
-                      src={product?.image}
-                      alt=""
-                      className="h-44 w-full  rounded-lg "
-                    />
-                  ) : (
-                    <div className="skeleton h-44 rounded-lg"></div>
-                  )} */}
-                  <h3 className="text-sm mt-1">
-                    {product?.name.length < 72
-                      ? product?.name
-                      : product?.name.substring(0, 72) + "..."}
-                  </h3>
-                  <div className="flex justify-between mt-4">
-                    <h3 className="text-sm">{product?.price}</h3>
-                    <h3 className="text-sm">{product?.code}</h3>
-                  </div>
-                </div>
-              );
-            })}
+          {hasData && (
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+              <thead className="text-xs text-gray-700 uppercase bg-slate-200 sticky top-0">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Descripción
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Código
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Precio
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {props.productsData?.map((product, index) => {
+                  return (
+                    <tr
+                      className="bg-white border-b hover:bg-slate-100 cursor-pointer"
+                      key={index}
+                      onClick={() => {
+                        props.onClick(product);
+                        props.onHide();
+                      }}
+                    >
+                      <td className="px-6 py-4">
+                        {product?.name.length < 72
+                          ? product?.name
+                          : product?.name.substring(0, 72) + "..."}
+                      </td>
+                      <td className="px-6 py-4">{product?.code}</td>
+                      <td className="px-6 py-4">{product?.price}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
           {!hasData && (
-            <div className="grid relative left-80 text-center place-content-center place-items-center">
+            <div className="flex place-content-center place-items-center text-center h-80 relative top-10">
               <div>
                 <FontAwesomeIcon className="text-3xl mb-8" icon={faEyeSlash} />
                 <h4>Nada ha sido encontrado...</h4>
