@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect } from "react";
 
 const Select = ({
   className,
@@ -11,6 +12,7 @@ const Select = ({
   elements,
 }) => {
   const [toggle, setToggle] = useState(false);
+  const comboBoxRef = useRef(null);
 
   const searchIdElement = () => {
     const result = elements.filter((element) => {
@@ -32,8 +34,23 @@ const Select = ({
     return setToggle(bool);
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (comboBoxRef.current && !comboBoxRef.current.contains(event.target)) {
+        setToggle(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    // Limpiar event listener en la limpieza del efecto
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={className ? className : "" + "relative"}>
+    <div ref={comboBoxRef} className={className ? className : "" + "relative"}>
       <button
         className="w-full bg-transparent border-2 text-primary-dark hover:bg-primary hover:text-white outline-none duration-200"
         onClick={() => {
