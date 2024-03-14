@@ -6,11 +6,15 @@ function getSizePixel(value) {
 
   switch (value) {
     case "small":
-      pixel = 25;
+      pixel = 18;
       break;
 
     case "medium":
-      pixel = 50;
+      pixel = 26;
+      break;
+
+    case "large":
+      pixel = 36;
       break;
     default:
       break;
@@ -41,12 +45,12 @@ export function createBody({
         minCellHeight: 10,
       },
       columnStyles: { //191.5 total
-        0: { cellWidth: 86.3 },
+        0: { cellWidth: 81.3 }, //-5
         1: { cellWidth: 11.3, halign: "center" },
-        2: { cellWidth: 36.3, halign: "center" },
+        2: { cellWidth: 44.3, halign: "center" }, //44.3
         3: { cellWidth: 18, halign: "right" }, // cost
         4: { cellWidth: 18.3, halign: "right" },
-        5: { cellWidth: 21.3, halign: "right" },
+        5: { cellWidth: 18.3, halign: "right" }, //21.3 - 3
       },
     });
     selectedProducts.forEach((product) => {
@@ -86,25 +90,43 @@ export function createBody({
         ],
         theme: "grid",
         bodyStyles: {
-          minCellHeight: sizeImg,
+          minCellHeight: sizeImg + 5,
           fontSize: 9,
         },
-        columnStyles: {
-          0: { cellWidth: 86.3 },
+        columnStyles: { //191.5 total
+          0: { cellWidth: 81.3 }, //-5
           1: { cellWidth: 11.3, halign: "center" },
-          2: { cellWidth: 36.3, halign: "center" },
+          2: { cellWidth: 44.3, halign: "center" }, //44.3
           3: { cellWidth: 18, halign: "right" }, // cost
           4: { cellWidth: 18.3, halign: "right" },
-          5: { cellWidth: 21.3, halign: "right" },
+          5: { cellWidth: 18.3, halign: "right" }, //21.3 - 3
         },
         didDrawCell: function (data) {
-          if (data.column.index === 3 && data.cell.section === "body") {
+          if (data.column.index === 3 && data.cell.section === "body" && product?.size === 'large') { //when is small
             pdf.addImage(
               getImage ? getImage : no_image,
-              data?.table?.body[0]?.cells[2]?.x + 1,
-              data?.table?.body[0]?.cells[2]?.y + 1,
-              36.3 - 2, // X
-              sizeImg - 2 // Y
+              data?.table?.body[0]?.cells[2]?.x + 4,
+              data?.table?.body[0]?.cells[2]?.y + 2,
+              sizeImg, // X //36.3
+              sizeImg // Y
+            );
+          }
+          else if (data.column.index === 3 && data.cell.section === "body" && product?.size === 'medium') { //when is small
+            pdf.addImage(
+              getImage ? getImage : no_image,
+              data?.table?.body[0]?.cells[2]?.x + 10,
+              data?.table?.body[0]?.cells[2]?.y + 2,
+              sizeImg, // X //36.3
+              sizeImg, // Y
+            );
+          }
+          else if(data.column.index === 3 && data.cell.section === "body") { //when is small
+            pdf.addImage(
+              getImage ? getImage : no_image,
+              data?.table?.body[0]?.cells[2]?.x + 13,
+              data?.table?.body[0]?.cells[2]?.y + 3,
+              sizeImg, // X //36.3
+              sizeImg // Y
             );
           }
         },
@@ -124,11 +146,11 @@ export function createBody({
         minCellHeight: 10,
       },
       columnStyles: {
-        0: { cellWidth: 90.3 },
-        1: { cellWidth: 13.3, halign: "center" },
-        2: { cellWidth: 36.3, halign: "center" },
-        3: { cellWidth: 24.3, halign: "right" },
-        4: { cellWidth: 27.3, halign: "right" },
+          0: { cellWidth: 88.3 }, //-5 + 3
+          1: { cellWidth: 13.3, halign: "center" },
+          2: { cellWidth: 44.3, halign: "center" }, // +5 
+          3: { cellWidth: 24.3, halign: "right" },
+          4: { cellWidth: 24.3, halign: "right" }, // -3
       },
     });
     selectedProducts.forEach((product) => {
@@ -164,25 +186,42 @@ export function createBody({
         ],
         theme: "grid",
         bodyStyles: {
-          minCellHeight: sizeImg,
+          minCellHeight: sizeImg + 5,
           fontSize: 9,
         },
         columnStyles: {
-          //+18
-          0: { cellWidth: 90.3 },
+          0: { cellWidth: 88.3 }, //-5 + 3
           1: { cellWidth: 13.3, halign: "center" },
-          2: { cellWidth: 36.3, halign: "center" },
+          2: { cellWidth: 44.3, halign: "center" }, // +5 
           3: { cellWidth: 24.3, halign: "right" },
-          4: { cellWidth: 27.3, halign: "right" },
-        },
+          4: { cellWidth: 24.3, halign: "right" }, // -3
+      },
         didDrawCell: function (data) {
-          if (data.column.index === 3 && data.cell.section === "body") {
+          if (data.column.index === 3 && data.cell.section === "body" && product?.size === 'large') { //when is small
             pdf.addImage(
               getImage ? getImage : no_image,
-              data?.table?.body[0]?.cells[2]?.x + 1,
-              data?.table?.body[0]?.cells[2]?.y + 1,
-              36.3 - 2, // X
-              sizeImg - 2 // Y
+              data?.table?.body[0]?.cells[2]?.x + 4,
+              data?.table?.body[0]?.cells[2]?.y + 2,
+              sizeImg, // X //36.3
+              sizeImg // Y
+            );
+          }
+          else if (data.column.index === 3 && data.cell.section === "body" && product?.size === 'medium') { //when is small
+            pdf.addImage(
+              getImage ? getImage : no_image,
+              data?.table?.body[0]?.cells[2]?.x + 10,
+              data?.table?.body[0]?.cells[2]?.y + 2,
+              sizeImg, // X //36.3
+              sizeImg, // Y
+            );
+          }
+          else if(data.column.index === 3 && data.cell.section === "body") { //when is small
+            pdf.addImage(
+              getImage ? getImage : no_image,
+              data?.table?.body[0]?.cells[2]?.x + 13,
+              data?.table?.body[0]?.cells[2]?.y + 3,
+              sizeImg, // X //36.3
+              sizeImg // Y
             );
           }
         },

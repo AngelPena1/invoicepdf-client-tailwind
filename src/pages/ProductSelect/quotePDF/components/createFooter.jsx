@@ -41,15 +41,15 @@ const bodyNoItbis = (props) => [
 ];
 
 const columnStyleItbis = {
-  0: { cellWidth: 139.9 },
+  0: { cellWidth: 145.9 },
   1: { cellWidth: 24.3, halign: "right" },
-  2: { cellWidth: 27.3, halign: "right" },
+  2: { cellWidth: 24.3, halign: "right" },
 };
 
 const columnStyleCost = {
-  0: { cellWidth: 151.9 },
+  0: { cellWidth: 154.9 },
   1: { cellWidth: 18.3, halign: "right" },
-  2: { cellWidth: 21.3, halign: "right" },
+  2: { cellWidth: 18.3, halign: "right" },
 };
 
 function getOptionsBody(props) {
