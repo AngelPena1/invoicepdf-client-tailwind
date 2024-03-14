@@ -19,7 +19,7 @@ function MaintenanceForm({
   HandleUpdateProduct,
 }) {
   return (
-    <section className="grid xl:grid-cols-3 lg:grid-cols-2 xl:gap-24 lg:gap-10 bg-white p-12 rounded-lg shadow-lg">
+    <section className="grid xl:grid-cols-3 lg:grid-cols-2 xl:gap-24 lg:gap-10 bg-white p-2 rounded-lg">
       <section className="">
         <div className="mb-10">
           <label htmlFor="" className="text-base">

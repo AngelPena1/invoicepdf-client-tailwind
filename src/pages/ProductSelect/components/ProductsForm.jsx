@@ -112,7 +112,7 @@ const ProductsForm = ({
             </label>
           </div>
         </section>
-        <div className="relative overflow-x-auto overflow-y-auto max-h-72">
+        <div className="relative overflow-x-auto overflow-y-auto h-72 max-h-72">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0 z-30">
               <tr>
@@ -188,7 +188,6 @@ const ProductsForm = ({
                     {toggles?.code && (
                       <td className="px-2 py-4 text-left">{product?.code}</td>
                     )}
-
                     <td className="px-2 py-4 text-left">
                       {product?.brand?.name?.substring(0, 15)}
                     </td>
@@ -204,7 +203,6 @@ const ProductsForm = ({
                     {toggles?.cost && (
                       <td className="px-2 py-4 text-right">{product?.cost}</td>
                     )}
-
                     <td className="px-2 py-4 text-right">{product?.price}</td>
                     <td className="px-2 py-4 text-center">
                       {/* {product?.isActive ? "Activo" : "Desactivado"} */}
@@ -221,7 +219,7 @@ const ProductsForm = ({
               })}
             </tbody>
             {toggles?.itbis ? (
-              <tfoot className="text-right">
+              <tfoot className="text-right ">
                 <tr className="">
                   <td className="px-2"></td>
                   <td className="px-2"></td>
@@ -230,11 +228,11 @@ const ProductsForm = ({
                   <td className="px-2"></td>
                   <td className="px-2"></td>
                   <th className="px-2 pt-4 text-red-400">DESCUENTO</th>
-                  {toggles?.cost && <th className="px-2 pt-4 text-right"></th>}
+                  {toggles?.cost && <th className="px-2 text-right"></th>}
                   <th className="px-2 pt-4 text-right text-red-400">
                     {formatToDecimal(parseFloat(inputData?.discount))}
                   </th>
-                  <td className=" px-2 "></td>
+                  <td className="px-2"></td>
                 </tr>
                 <tr className="">
                   <td className="px-2"></td>
@@ -255,7 +253,7 @@ const ProductsForm = ({
                   <td className=" px-2"></td>
                 </tr>
                 <tr>
-                  <td className="px-2 pb-10"></td>
+                  <td className="px-2 "></td>
                   <td className="px-2 "></td>
                   {toggles?.code && <td className=" px-2 "></td>}
                   <td className="px-2 "></td>
@@ -269,7 +267,7 @@ const ProductsForm = ({
                   <td className="px-2"></td>
                 </tr>
                 <tr>
-                  <td className="px-2 py-5"></td>
+                  <td className="px-2"></td>
                   <td className="px-2 "></td>
                   {toggles?.code && <td className=" px-2 "></td>}
                   <td className="px-2 "></td>
@@ -288,22 +286,22 @@ const ProductsForm = ({
             ) : (
               <tfoot className="text-right">
                 <tr className="">
-                  <td className="px-2 pb-10"></td>
+                  <td className="px-2"></td>
                   <td className="px-2"></td>
                   {toggles?.code && <td className=" px-2"></td>}
                   <td className="px-2"></td>
                   <td className="px-2"></td>
                   <td className="px-2"></td>
-                  <th className="px-2 pt-4 text-red-400">DESCUENTO</th>
-                  {toggles?.cost && <th className="px-2 pt-4 text-right"></th>}
-                  <th className="px-2 pt-4 text-right text-red-400">
+                  <th className="px-2 text-red-400">DESCUENTO</th>
+                  {toggles?.cost && <th className="px-2  text-right"></th>}
+                  <th className="px-2  text-right text-red-400">
                     {formatToDecimal(parseFloat(inputData?.discount))}
                   </th>
                   <td className=" px-2 "></td>
                 </tr>
                 {/* <hr className="border-t-2 border-indigo-500 grid place-items-end" /> */}
                 <tr className="">
-                  <td className="px-2 py-5"></td>
+                  <td className="px-2 "></td>
                   <td className="px-2"></td>
                   {toggles?.code && <td className=" px-2"></td>}
                   <td className="px-2"></td>
@@ -327,7 +325,7 @@ const ProductsForm = ({
           </table>
         </div>
       </section>
-      <section className="flex  justify-end mt-5">
+      <section className="flex justify-end mt-5">
         <input
           type="text"
           className="w-36 mr-8 h-10"
@@ -356,7 +354,7 @@ const ProductsForm = ({
           Preview
         </button>
         <button className="px-4" onClick={HandlePrintQuote}>
-          {quoteHasData ? "Editar" : "Registrar"}
+          {quoteHasData ? "Guardar cambios" : "Registrar"}
         </button>
       </section>
     </section>

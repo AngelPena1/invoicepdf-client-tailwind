@@ -27,7 +27,7 @@ const HistoryTable = ({
     <section>
       <section
         name="content"
-        className="mt-16 shadow-style-2 rounded-lg h-xl max-h-xl overflow-y-auto"
+        className="mt-16 rounded-lg h-xl max-h-xl overflow-y-auto"
       >
         {!loadingHistory && hasHistoryData && (
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -130,7 +130,7 @@ const HistoryTable = ({
           </table>
         )}
         {loadingHistory && <section className="h-xl skeleton"></section>}
-        {!hasHistoryData && (
+        {!hasHistoryData && !loadingHistory && (
           <div className="w-full h-xl grid place-content-center place-items-center">
             <FontAwesomeIcon className="text-3xl mb-8" icon={faEyeSlash} />
             <h4>Nada ha sido encontrado...</h4>

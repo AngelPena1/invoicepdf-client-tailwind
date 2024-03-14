@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import HistoryTable from "./components/HistoryTable";
 import useGetHistory from "./hooks/useGetHistory";
 import useHistoryQuote from "./hooks/useHistoryQuote";
-import LoadingTable from "./components/LoadingTable";
 import Form from "../../components/Modals/Confirmation/Form";
 import useToggles from "./hooks/useToggles";
 import { useNavigate } from "react-router-dom";
@@ -51,8 +50,8 @@ const Index = () => {
   }, []);
 
   return (
-    <>
-      <section name="heading" className="text-center text-2xl font-bold">
+    <section className="bg-white rounded-lg shadow-style-2">
+      <section name="heading" className="text-center text-2xl font-bold py-2 relative top-6">
         <h2>Historial de Cotizaciones</h2>
       </section>
       {toggles?.deleteConfirmation && (
@@ -77,7 +76,7 @@ const Index = () => {
         OrderByDate={OrderByDate}
         OrderByTotal={OrderByTotal}
       />
-    </>
+    </section>
   );
 };
 
