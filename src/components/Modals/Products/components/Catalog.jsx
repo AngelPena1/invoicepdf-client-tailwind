@@ -46,7 +46,7 @@ const Catalog = (props) => {
           ref={props.scrollbarRef}
           className=" px-2 pb-4 -z-10 overflow-auto h-xl relative"
         >
-          {hasData && (
+          {hasData && !props.loading && (
             <table className="w-full text-sm text-left rtl:text-right text-gray-500">
               <thead className="text-xs text-gray-700 uppercase bg-slate-200 sticky top-0">
                 <tr>
@@ -85,13 +85,16 @@ const Catalog = (props) => {
               </tbody>
             </table>
           )}
-          {!hasData && (
+          {!hasData && !props.loading && (
             <div className="flex place-content-center place-items-center text-center h-80 relative top-10">
               <div>
                 <FontAwesomeIcon className="text-3xl mb-8" icon={faEyeSlash} />
                 <h4>Nada ha sido encontrado...</h4>
               </div>
             </div>
+          )}
+          {props.loading && (
+            <div className="skeleton h-full rounded-lg" />
           )}
         </section>
         {hasData && (
