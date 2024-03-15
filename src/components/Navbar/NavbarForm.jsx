@@ -1,9 +1,11 @@
 import React from "react";
-import { faCaretDown, faFileInvoice } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faFileInvoice, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import useLogOut from "../../hooks/useLogout";
 
 const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
+  const logout = useLogOut()
   return (
     <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200 shadow-lg">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -14,15 +16,35 @@ const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
           </span>
         </div>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse ">
-          <button
+          <ul className="flex place-items-center">
+            <li>
+              <button
+                // type="button"
+                className="px-4 relative top-1"
+                onClick={() => {
+                  toggleCompanyInfo(true);
+                }}
+              >
+                Negocio
+              </button>
+            </li>
+            <li className="ml-10 hover:text-blue-700 duration-200" onClick={logout}>
+              <FontAwesomeIcon 
+                icon={faRightFromBracket}
+                className="mr-3 text-lg relative top-0.5" 
+              />
+              Cerrar sesión
+            </li>
+          </ul>
+          {/* <button
             // type="button"
             className="px-4 "
             onClick={() => {
               toggleCompanyInfo(true);
             }}
           >
-            Negocio
-          </button>
+            Cerrar sesion
+          </button> */}
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
@@ -49,7 +71,7 @@ const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
           </button>
         </div>
         <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 relative left-10"
           id="navbar-sticky"
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">

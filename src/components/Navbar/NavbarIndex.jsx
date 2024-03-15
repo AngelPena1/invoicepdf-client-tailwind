@@ -1,15 +1,11 @@
 import { useState } from "react";
 import NavbarForm from "./NavbarForm";
 import BusinessModal from "../Modals/Business/Index";
-import { useLocation, Link } from "react-router-dom";
-
 const NavbarIndex = () => {
   const [show, setShow] = useState({
     maintenance: false,
     company_info: false,
   });
-
-  const location = useLocation();
 
   function toggleMaintenance(bool) {
     setShow({ ...show, maintenance: bool });

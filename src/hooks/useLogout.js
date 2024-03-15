@@ -6,11 +6,9 @@ const useLogOut = () => {
 
   const logout = () => {
     setAuth(null);
-    Cookies.remove("auth-username");
-    Cookies.remove("auth-token");
-    Cookies.remove("auth-business");
-    Cookies.remove("auth-branches");
-    Cookies.remove("auth-isMultibusiness");
+    Cookies.remove("auth-invoice-username");
+    Cookies.remove("auth-invoice-company");
+    Cookies.remove("auth-invoice-accessToken");
   };
   return logout;
 };
