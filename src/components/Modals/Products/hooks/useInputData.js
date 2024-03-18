@@ -38,6 +38,16 @@ const useInputData = () => {
     return toggleRefresh()
   }
 
+  function clearInputs() {
+    return setInputData({
+      ...inputData,
+      brand_selected: "",
+      category_selected: "",
+      subcategory_selected: "",
+      finishes_selected: "",
+    });
+  }
+
   function clearSearchInput() {
     return setInputData({ ...inputData, search: "" });
   }
@@ -46,6 +56,7 @@ const useInputData = () => {
     inputData,
     forceRefresh,
     clearSearchInput,
+    clearInputs,
     HandleInputData,
     HandleKeyPress,
     HandleClickFilters,
