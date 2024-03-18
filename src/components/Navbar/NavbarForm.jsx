@@ -1,8 +1,9 @@
 import React from "react";
-import { faCaretDown, faFileInvoice, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import useLogOut from "../../hooks/useLogout";
+import Logo from '../../assets/logo_1.png'
 
 const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
   const logout = useLogOut()
@@ -10,7 +11,8 @@ const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
     <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200 shadow-lg">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
-          <FontAwesomeIcon icon={faFileInvoice} className="text-2xl" />
+          {/* <FontAwesomeIcon icon={faFileInvoice} className="text-2xl" /> */}
+          <img src={Logo} alt="" className="w-10 h-10 mr-4" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
             Cotizador
           </span>
