@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Catalog from "./components/Catalog";
 import useGetProducts from "./hooks/useGetProducts";
 import useToggles from "./hooks/useToggles";
-import useGetImgProduct from "./hooks/useGetImgProductsArray";
+// import useGetImgProduct from "./hooks/useGetImgProductsArray";
 import useInputData from "./hooks/useInputData";
 
 const Index = ({ onHide, onClick }) => {
@@ -14,6 +14,7 @@ const Index = ({ onHide, onClick }) => {
   const {
     inputData,
     forceRefresh,
+    clearInputs,
     HandleInputData,
     HandleKeyPress,
     HandleClickFilters,
@@ -22,7 +23,7 @@ const Index = ({ onHide, onClick }) => {
   const {
     data,
     page,
-    setProductsData,
+    // setProductsData,
     loading,
     productsData,
     HandlePage,
@@ -33,24 +34,24 @@ const Index = ({ onHide, onClick }) => {
     inputData,
   });
 
-  const {
-    data: productsImgData,
-    alreadyFetch,
-    HandleSearch: HandleSearchImg,
-    HandleAlreadyFetch,
-  } = useGetImgProduct({ productsData, setProductsData });
+  // const {
+  //   data: productsImgData,
+  //   alreadyFetch,
+  //   HandleSearch: HandleSearchImg,
+  //   HandleAlreadyFetch,
+  // } = useGetImgProduct({ productsData, setProductsData });
 
   const { toggles, toggleFilters } = useToggles();
 
   useEffect(() => {
     HandleSearch();
-    HandleAlreadyFetch(false);
+    // HandleAlreadyFetch(false);
   }, [forceRefresh, page]);
 
-  useEffect(() => {
-    if (!productsData.length > 0 || alreadyFetch) return;
-    HandleSearchImg();
-  }, [productsData]);
+  // useEffect(() => {
+    // if (!productsData.length > 0 || alreadyFetch) return;
+    // HandleSearchImg();
+  // }, [productsData]);
 
   return (
     <Catalog
@@ -63,6 +64,7 @@ const Index = ({ onHide, onClick }) => {
       toggleFilters={toggleFilters}
       inputData={inputData}
       scrollbarRef={scrollbarRef}
+      clearInputs={clearInputs}
       onHide={onHide}
       onClick={onClickCatalogHasFunction}
       HandleKeyPress={HandleKeyPress}
@@ -70,7 +72,7 @@ const Index = ({ onHide, onClick }) => {
       HandleClickFilters={HandleClickFilters}
       HandleSearch={() => {
         HandleSearch();
-        HandleAlreadyFetch(false);
+        // HandleAlreadyFetch(false);
       }}
       HandlePage={(e) => {
         HandlePage(e);
