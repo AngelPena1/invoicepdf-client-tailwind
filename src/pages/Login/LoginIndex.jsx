@@ -43,10 +43,13 @@ const LoginIndex = () => {
         navigate("/", { replace: true });
       })
       .catch((error) => {
-        if (!error) {
+        if (error?.message === "Network Error") {
           setErrMsg("No server response");
         } else if (error?.response?.status === 401) {
-          setErrMsg("Email o contraseñas erroneas");
+          setErrMsg("Usuario o contraseña incorrecta");
+        } else {
+          console.error(error)
+          setErrMsg("Error inesperado");
         }
       });
   }
