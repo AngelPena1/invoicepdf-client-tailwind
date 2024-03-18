@@ -31,9 +31,18 @@ module.exports = {
       animation: {
         show_up_container: "show_up_container .1s  forwards",
         show_up_results: "show_up_results .2s  forwards",
+        show_up_error: "show_up_error .3s  forwards",
         wiggle: "wiggle 1s ease-in-out infinite",
       },
       keyframes: {
+        show_up_error: {
+          '0%': {
+            margin: '3rem 0 0 0'
+          },
+          '100%': {
+            margin: '0rem 0 0 0',
+          }
+        },
         show_up_container: {
           "0%": {
             position: "absolute",
