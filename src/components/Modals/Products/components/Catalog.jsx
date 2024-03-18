@@ -40,6 +40,7 @@ const Catalog = (props) => {
             show={props.toggles.filters}
             toggleShow={props.toggleFilters}
             onClick={props.HandleClickFilters}
+            clearInputs={props.clearInputs}
           />
         </div>
         <section
@@ -55,6 +56,15 @@ const Catalog = (props) => {
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Código
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Marca
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Categoría
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Subcategoría
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Precio
@@ -78,6 +88,9 @@ const Catalog = (props) => {
                           : product?.name.substring(0, 72) + "..."}
                       </td>
                       <td className="px-6 py-4">{product?.code}</td>
+                      <td className="px-6 py-4">{product?.brand?.name}</td>
+                      <td className="px-6 py-4">{product?.category?.name}</td>
+                      <td className="px-6 py-4">{product?.subcategory?.name}</td>
                       <td className="px-6 py-4">{product?.price}</td>
                     </tr>
                   );
