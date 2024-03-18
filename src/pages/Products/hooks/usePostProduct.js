@@ -34,7 +34,8 @@ const usePostProduct = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
       })
       .then(() => {
         toast.success("El producto ha sido creado con exito!");
-        return ResetInputValues(), HandleRefresh();
+        ResetInputValues()
+        return HandleRefresh();
       })
       .catch((error) => {
         if (error?.response?.status === 409)

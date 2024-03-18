@@ -51,6 +51,7 @@ const usePostData = ({ url, refresh, isNullValue, search, bodyData }) => {
     return () => {
       controller.abort();
     };
+    // eslint-disable-next-line
   }, [url, isNullValue, refresh, search]);
 
   return {

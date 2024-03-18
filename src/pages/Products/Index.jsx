@@ -68,11 +68,13 @@ const Index = () => {
   useEffect(() => {
     if (!imgData) return;
     HandleInputData({ ...inputData, image: imgData?.image });
+    // eslint-disable-next-line
   }, [imgData]);
 
   useEffect(() => {
     HandleSearchCategories();
     HandleSearchProducts();
+    // eslint-disable-next-line
   }, [resfresh]);
 
   return (

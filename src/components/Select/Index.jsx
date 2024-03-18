@@ -50,7 +50,7 @@ const Select = ({
   }, []);
 
   return (
-    <div ref={comboBoxRef} className={className ? className : "" + "relative"}>
+    <div ref={comboBoxRef} className={className ? className : "relative"}>
       <button
         className="w-full bg-transparent border-2 text-primary-dark hover:bg-primary hover:text-white outline-none duration-200"
         onClick={() => {

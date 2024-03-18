@@ -48,7 +48,6 @@ const Index = () => {
 
   const {
     data: imagesData,
-    loading: imagesLoading,
     alreadyFetch,
     ResetValue: ResetImgArrayValue,
     HandleSearch: HandleImagesSearch,
@@ -78,7 +77,7 @@ const Index = () => {
     toggles,
     results: totals,
     quoteHasData,
-    quote_count: quoteData[0]?.quote_count
+    quote_count: quoteData[0]?.quote_count,
   });
 
   function HandlePrintQuote() {
@@ -88,15 +87,17 @@ const Index = () => {
       return toast.error("Debes seleccionar un cliente.");
     }
 
-    return HandleImagesSearch(), togglePreview(false);
+    HandleImagesSearch();
+    return togglePreview(false);
   }
 
   function HandlePrintPreview() {
     if (alreadyFetch) return null;
 
-    return HandleImagesSearch(), togglePreview(true);
+    HandleImagesSearch()
+    return togglePreview(true);
   }
-  
+
   useEffect(() => {
     if (
       imagesData &&
@@ -135,12 +136,14 @@ const Index = () => {
       HandleAlreadyFetch(false);
       ResetImgArrayValue();
     }
+    // eslint-disable-next-line
   }, [imagesData]);
 
   useEffect(() => {
     HandleSearchClient();
     HandleCompanySearch();
     HandleProductSearch();
+    // eslint-disable-next-line
   }, []);
 
   return (

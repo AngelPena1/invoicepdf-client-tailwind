@@ -47,6 +47,7 @@ const Index = () => {
 
   useEffect(() => {
     HandleSearchHistory();
+    // eslint-disable-next-line
   }, []);
 
   return (

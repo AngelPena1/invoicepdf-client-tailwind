@@ -21,7 +21,8 @@ const useGetProductsLimit = ({ limit, searchProduct }) => {
   });
 
   function HandlePage(page) {
-    return setPage(page), setSearch(true);
+    setPage(page) 
+    return setSearch(true);
   }
 
   function HandleSearch() {
@@ -30,12 +31,14 @@ const useGetProductsLimit = ({ limit, searchProduct }) => {
 
   useEffect(() => {
     HandleSearch()
+    // eslint-disable-next-line
   }, [searchProduct])
 
   useEffect(() => {
     setSearch(false);
     if (!data?.rows?.length > 0) return;
     setProductsData(data?.rows);
+    // eslint-disable-next-line
   }, [data]);
 
   return {

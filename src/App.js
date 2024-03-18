@@ -15,6 +15,7 @@ function App() {
       <img
         className="bg-cover bg-center w-screen h-screen object-cover fixed -z-20 top-0 left-0 bottom-0 right-0 m-auto"
         src="https://i0.wp.com/backgroundabstract.com/wp-content/uploads/edd/2022/02/5594016-e1656071131636.jpg?resize=150150&ssl=1"
+        alt="background"
       />
       
       <Routes>

@@ -11,7 +11,8 @@ const useSelectedProducts = ({ quoteData, quoteHasData }) => {
   function HandleSelectedProducts(value) {
     const localArray = [...selectedProducts];
     localArray.push({ ...value, quantity: 1, local_id: localId });
-    return setSelectedProducts(localArray), HandleLocalId();
+    setSelectedProducts(localArray)
+    return HandleLocalId();
   }
 
   function HandleQuantityProducts({ local_id, bool }) {
@@ -27,7 +28,10 @@ const useSelectedProducts = ({ quoteData, quoteHasData }) => {
 
   function HandleDeleteProduct({ local_id }) {
     const newArray = selectedProducts.filter((product) => {
-      if (!(product?.local_id === local_id)) return product;
+      if (!(product?.local_id === local_id)) {
+        return product;
+      }
+      return null
     });
     return setSelectedProducts(newArray);
   }
@@ -39,6 +43,7 @@ const useSelectedProducts = ({ quoteData, quoteHasData }) => {
   useEffect(() => {
     const getQuote = quoteHasData ? JSON.parse(quoteData[0]?.selected_products_json) : []
     setSelectedProducts(getQuote)
+    // eslint-disable-next-line
   }, [quoteHasData])
 
   return {

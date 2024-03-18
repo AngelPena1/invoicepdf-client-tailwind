@@ -29,7 +29,8 @@ const usePostClient = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
       })
       .then(() => {
         toast.success("El cliente ha sido creado con exito!");
-        return ResetInputValues(), HandleRefresh();
+        ResetInputValues() 
+        return HandleRefresh();
       })
       .catch(() => {
         return toast.error("Ha ocurrido un error.");

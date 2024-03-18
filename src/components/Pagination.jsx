@@ -122,11 +122,13 @@ const Pagination = ({
     ClearTotalButtons();
 
     setTotalButtons([...new Set(localButtons)]);
+    // eslint-disable-next-line
   }, [currentPage, itemsCount]);
 
   useEffect(() => {
     ScrollToTop()
     HandlePageProp(currentPage);
+    // eslint-disable-next-line
   }, [currentPage]);
 
   return (

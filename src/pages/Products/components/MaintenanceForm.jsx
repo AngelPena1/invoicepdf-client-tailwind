@@ -97,13 +97,13 @@ function MaintenanceForm({
       <section className="grid">
         <div className="mb-8 relative">
           <label htmlFor="" className="text-base">
-            Seleccione la imagen
+            Imagen del producto
           </label>
           {!inputData?.image && !loadingImg && (
-            <div>
+            <div className="grid place-content-center text-center">
               <label
                 htmlFor="input-img"
-                className="w-full h-52 bg-transparent border-2 border-dashed border-slate-300 rounded-lg grid place-content-center place-items-center cursor-pointer"
+                className="w-60 h-60 bg-transparent border-2 border-dashed border-slate-300 rounded-lg grid place-content-center place-items-center cursor-pointer"
                 accept=".jpg, .png"
               >
                 <FontAwesomeIcon icon={faImage} className="text-3xl mb-4" />
@@ -120,14 +120,14 @@ function MaintenanceForm({
           {loadingImg && (
             <div
               id="img-skeleton"
-              className="w-full h-52 rounded-lg skeleton"
+              className="w-60 h-60 rounded-lg skeleton m-auto"
             />
           )}
           {inputData?.image && (
-            <div>
+            <div className="grid place-content-center">
               <FontAwesomeIcon
                 icon={faX}
-                className="absolute -right-5 top-10 cursor-pointer"
+                className="absolute right-5 top-10 cursor-pointer"
                 onClick={() => {
                   HandleInputData({
                     ...inputData,
@@ -138,7 +138,7 @@ function MaintenanceForm({
               <img
                 src={inputData?.image}
                 alt=""
-                className="w-full h-52 bg-cover bg-center rounded-lg grid place-content-center place-items-center cursor-pointer"
+                className="w-60 h-60 object-cover bg-center rounded-lg grid place-content-center place-items-center cursor-pointer"
               />
             </div>
           )}

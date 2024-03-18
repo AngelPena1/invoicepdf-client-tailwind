@@ -21,7 +21,8 @@ const useGetProducts = ({ limit, searchProduct, inputData }) => {
   });
 
   function HandlePage(page) {
-    return setPage(page), setSearch(true);
+    setPage(page) 
+    return setSearch(true);
   }
 
   function HandleSearch() {
@@ -32,6 +33,7 @@ const useGetProducts = ({ limit, searchProduct, inputData }) => {
     setSearch(false);
     if (!data?.rows?.length > 0) return;
     setProductsData(data?.rows);
+    // eslint-disable-next-line
   }, [data]);
 
   return {

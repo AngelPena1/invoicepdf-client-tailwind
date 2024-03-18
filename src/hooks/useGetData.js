@@ -45,6 +45,7 @@ const useGetData = ({url, refresh, isNullValue, search}) => {
     return () => {
       controller.abort();
     };
+    // eslint-disable-next-line
   }, [url, isNullValue, refresh, search]);
 
   return {

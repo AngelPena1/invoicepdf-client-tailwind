@@ -1,5 +1,5 @@
 import React from "react";
-import { faEdit, faImages, faX } from "@fortawesome/free-solid-svg-icons";
+import { faImages, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const BusinessForm = ({

@@ -39,6 +39,7 @@ const Index = () => {
 
   useEffect(() => {
     HandleSearchClients();
+    // eslint-disable-next-line
   }, [resfresh]);
 
   return (

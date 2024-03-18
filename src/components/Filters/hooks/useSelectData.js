@@ -102,6 +102,7 @@ const useSelectData = ({ divisionData }) => {
 
   useEffect(() => {
     getBrandOnly();
+    // eslint-disable-next-line
   }, [divisionData]);
 
   return {

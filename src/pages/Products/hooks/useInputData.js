@@ -3,19 +3,20 @@ import { useState } from "react";
 const useInputData = ({ divisionsData }) => {
   const [inputData, setInputData] = useState({
     search: "",
-    description: null,
-    brand_id: null,
-    finishes_id: null,
-    finishes: null,
-    category_id: null,
-    categories: null,
-    subcategory_id: null,
-    subcategories: null,
-    price: null,
-    cost: null,
-    image: null,
-    image_size: null,
-    product_code: null,
+    name: "",
+    description: "",
+    brand_id: "",
+    finishes_id: "",
+    finishes: "",
+    category_id: "",
+    categories: "",
+    subcategory_id: "",
+    subcategories: "",
+    price: "",
+    cost: "",
+    image: "",
+    image_size: "",
+    product_code: "",
     isActive: true,
   });
 
@@ -112,7 +113,7 @@ const useInputData = ({ divisionsData }) => {
 
   function HandleEditProduct(data) {
     return setInputData({
-      search: null,
+      search: "",
       product_id: data?.id,
       name: data?.name,
       brand_id: data?.brand?.id,
@@ -157,20 +158,20 @@ const useInputData = ({ divisionsData }) => {
 
   function ResetInputValues() {
     return setInputData({
-      search: null,
+      search: "",
       name: "",
       brand_id: "default",
       category_id: "default",
-      category: null,
+      category: "",
       subcategory_id: "default",
-      subcategories: null,
+      subcategories: "",
       finishes_id: "default",
-      finishes: null,
+      finishes: "",
       price: "",
       cost: "",
       description: "",
       image: "",
-      image_size: null,
+      image_size: "",
       product_code: "",
       isActive: true,
     });

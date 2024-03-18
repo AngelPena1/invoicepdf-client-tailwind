@@ -46,6 +46,7 @@ const Index = ({ onHide, onClick }) => {
   useEffect(() => {
     HandleSearch();
     // HandleAlreadyFetch(false);
+    // eslint-disable-next-line
   }, [forceRefresh, page]);
 
   // useEffect(() => {

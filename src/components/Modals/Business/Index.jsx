@@ -27,10 +27,12 @@ const Index = ({ toggleCompanyInfo }) => {
   useEffect(() => {
     if (!companyImage) return;
     HandleInputData({ ...inputData, image: companyImage[0]?.image });
+    // eslint-disable-next-line
   }, [companyImage]);
 
   useEffect(() => {
     HandleSearch();
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -12,7 +12,7 @@ const LoginIndex = () => {
 
   const [errMsg, setErrMsg] = useState(null);
 
-  const { auth, setAuth } = useAuth();
+  const { setAuth } = useAuth();
 
   async function HandleLogin(e) {
     e.preventDefault();
@@ -84,10 +84,7 @@ const LoginIndex = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
-
-  useEffect(() => {
-    if (!auth) return;
+    // eslint-disable-next-line
   }, []);
 
   return (

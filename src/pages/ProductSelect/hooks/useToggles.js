@@ -26,6 +26,7 @@ const useToggles = ({ quoteData, quoteHasData }) => {
       cost: quoteData[0]?.has_cost,
       itbis: quoteData[0]?.has_itbis,
     });
+    // eslint-disable-next-line
   }, [quoteHasData]);
 
   return { toggles, togglePreview, HandleToggleChange };

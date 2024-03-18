@@ -20,6 +20,7 @@ const useSearchProduct = ({ dataArray, searchInput }) => {
 
   useEffect(() => {
     HandleSearch();
+    // eslint-disable-next-line
   }, [searchInput]);
 
   return { result };

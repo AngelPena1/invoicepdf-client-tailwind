@@ -22,6 +22,7 @@ const useGetTotal = ({ selectedProducts, discount }) => {
 
   useEffect(() => {
     HandleTotals();
+    // eslint-disable-next-line
   }, [selectedProducts, discount]);
 
   return { totals };

@@ -71,6 +71,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
       phone_2: client?.phone_2,
       address: client?.address,
     });
+    // eslint-disable-next-line
   }, [quoteHasData]);
 
   return {
