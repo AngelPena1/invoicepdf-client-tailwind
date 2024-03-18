@@ -81,6 +81,8 @@ export function createFooter(props) {
     bodyStyles: {
       minCellHeight: 8,
       fontSize: 9,
+      textColor: props.style_pdf?.textColorBody,
+      lineColor: props.style_pdf?.lineColor,
     },
     columnStyles: getColumnsOptions(props),
   });

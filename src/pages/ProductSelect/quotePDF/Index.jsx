@@ -23,6 +23,38 @@ function addWaterMark(pdf) {
   return pdf;
 }
 
+
+function stylesPDF(type) {
+  let styles = {}
+
+  switch (type) {
+    case 1:
+      styles = {
+        fillColorFirstColumn: "#0082bf",
+        fillColor: "#0082bf",
+        textColorHeading: [255, 255, 255],
+        textColorBody: [0, 0, 0],
+        lineColor: "#cdcdcd",
+      }
+      break;
+
+    case 2:
+      styles = {
+        fillColorFirstColumn: "#f1dbda",
+        fillColor: [255, 255, 255],
+        textColorHeading: "#0b0992",
+        textColorBody: "#0b0992",
+        lineColor: [0, 0, 0],
+      }
+      break;
+  
+    default:
+      break;
+  }
+
+  return styles
+}
+
 export async function GenerarPDF({
   name,
   companyData,
@@ -52,7 +84,9 @@ export async function GenerarPDF({
     let controlPixelHeight = 0;
     let newPage = false;
     const quote_counter = !quoteHasData ? await getQuoteCounter(companyData[0]?.id) : quoteId
-    
+
+    const style_pdf = stylesPDF(companyData[0]?.style_pdf)
+
     createHeading({
       quoteName: name,
       pdf,
@@ -61,7 +95,8 @@ export async function GenerarPDF({
       companyImgData,
       hasCost,
       isAlreadyCreated,
-      quote_counter
+      quote_counter,
+      style_pdf
     });
     createBody({
       pdf,
@@ -72,6 +107,7 @@ export async function GenerarPDF({
       maxHeight,
       hasCode,
       hasCost,
+      style_pdf
     });
     createFooter({
       pdf,
@@ -87,6 +123,7 @@ export async function GenerarPDF({
       price,
       itbis,
       withITBIS,
+      style_pdf
     });
 
     if (isPreview) {

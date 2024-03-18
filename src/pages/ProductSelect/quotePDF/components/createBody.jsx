@@ -19,7 +19,6 @@ function getSizePixel(value) {
     default:
       break;
   }
-
   return pixel;
 }
 
@@ -32,25 +31,26 @@ export function createBody({
   maxHeight,
   hasCode,
   hasCost,
+  style_pdf
 }) {
   if (hasCost) {
     pdf.autoTable({
-      body: [["Descripción", "Cant", "Imagen", "P. Lista", "Precio", "Total"]],
+      body: [["Descripción del producto", "Cant", "Imagen", "P. Lista", "Precio", "Total"]],
       theme: "grid",
       bodyStyles: {
-        fillColor: "#0082bf",
-        textColor: [255, 255, 255],
+        // fillColor: style_pdf?.fillColor,
+        textColor: style_pdf?.textColor,
         fontSize: 10,
         fontStyle: "bold",
         minCellHeight: 10,
       },
       columnStyles: { //191.5 total
-        0: { cellWidth: 81.3 }, //-5
-        1: { cellWidth: 11.3, halign: "center" },
-        2: { cellWidth: 44.3, halign: "center" }, //44.3
-        3: { cellWidth: 18, halign: "right" }, // cost
-        4: { cellWidth: 18.3, halign: "right" },
-        5: { cellWidth: 18.3, halign: "right" }, //21.3 - 3
+        0: { cellWidth: 81.3, fillColor: style_pdf?.fillColorFirstColumn }, //-5
+        1: { cellWidth: 11.3, halign: "center", fillColor: style_pdf?.fillColor },
+        2: { cellWidth: 44.3, halign: "center", fillColor: style_pdf?.fillColor }, //44.3
+        3: { cellWidth: 18, halign: "right", fillColor: style_pdf?.fillColor }, // cost
+        4: { cellWidth: 18.3, halign: "right", fillColor: style_pdf?.fillColor },
+        5: { cellWidth: 18.3, halign: "right", fillColor: style_pdf?.fillColor }, //21.3 - 3
       },
     });
     selectedProducts.forEach((product) => {
@@ -136,21 +136,22 @@ export function createBody({
     });
   } else {
     pdf.autoTable({
-      body: [["Descripción", "Cant", "Imagen", "Precio", "Total"]],
+      body: [["Descripción del producto", "Cant", "Imagen", "Precio", "Total"]],
       theme: "grid",
       bodyStyles: {
-        fillColor: "#0082bf",
-        textColor: [255, 255, 255],
+        // fillColor: style_pdf?.fillColor,
+        textColor: style_pdf?.textColorHeading,
         fontSize: 10,
         fontStyle: "bold",
         minCellHeight: 10,
+        lineColor: style_pdf?.lineColor
       },
       columnStyles: {
-          0: { cellWidth: 88.3 }, //-5 + 3
-          1: { cellWidth: 13.3, halign: "center" },
-          2: { cellWidth: 44.3, halign: "center" }, // +5 
-          3: { cellWidth: 24.3, halign: "right" },
-          4: { cellWidth: 24.3, halign: "right" }, // -3
+          0: { cellWidth: 88.3, fillColor: style_pdf?.fillColorFirstColumn}, //-5 + 3
+          1: { cellWidth: 13.3, halign: "center", fillColor: style_pdf?.fillColor },
+          2: { cellWidth: 44.3, halign: "center", fillColor: style_pdf?.fillColor }, // +5 
+          3: { cellWidth: 24.3, halign: "right", fillColor: style_pdf?.fillColor },
+          4: { cellWidth: 24.3, halign: "right", fillColor: style_pdf?.fillColor }, // -3
       },
     });
     selectedProducts.forEach((product) => {
@@ -188,6 +189,8 @@ export function createBody({
         bodyStyles: {
           minCellHeight: sizeImg + 5,
           fontSize: 9,
+          lineColor: style_pdf?.lineColor,
+          textColor: style_pdf?.textColorBody,
         },
         columnStyles: {
           0: { cellWidth: 88.3 }, //-5 + 3

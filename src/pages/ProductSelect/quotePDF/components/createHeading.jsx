@@ -36,7 +36,8 @@ export function createHeading({
   clientData,
   companyImgData,
   isAlreadyCreated,
-  quote_counter
+  quote_counter,
+  style_pdf
 }) {
   //Company info
   const name = companyData[0]?.name ? companyData[0]?.name : "";
@@ -52,7 +53,7 @@ export function createHeading({
   const clientRnc = clientData?.rnc ? clientData?.rnc : "";
   const clientPhone_1 = clientData?.phone_1 ? clientData?.phone_1 : "";
 
-  const logoWidth = 50;
+  const logoWidth = 45;
   const logoHeight = 25;
   const fontSizeTitle = 12;
   const fontSize = 10;
@@ -63,8 +64,10 @@ export function createHeading({
     theme: "grid",
     bodyStyles: {
       minCellHeight: 50,
+      textColor: style_pdf?.textColorBody,
+      lineColor: style_pdf?.lineColor
     },
-    tableWidth: 191.5,
+    tableWidth: 194.5,
     didDrawCell: function (data) {
       if (data.column.index === 0 && data.cell.section === "body") {
         pdf.addImage(
