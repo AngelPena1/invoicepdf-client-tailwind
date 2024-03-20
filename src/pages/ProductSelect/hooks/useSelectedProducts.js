@@ -1,8 +1,19 @@
 import { useState, useEffect } from "react";
+import { isNumberOrDecimal } from "../../../utils/regex/isNumberOrDecimal";
 
 const useSelectedProducts = ({ quoteData, quoteHasData }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [refreshPrice, setRefreshPrice] = useState(false)
   const [localId, setLocalId] = useState(1);
+
+  function HandlePriceChange(event, index) {
+    const {value} = event?.target
+    if(!isNumberOrDecimal(value)) return null
+    let localArray = selectedProducts
+    localArray[index] = {...selectedProducts[index], price: value}
+    setSelectedProducts(localArray)
+    return setRefreshPrice(!refreshPrice)
+  }
   
   function HandleLocalId() {
     return setLocalId(localId + 1);
@@ -48,7 +59,9 @@ const useSelectedProducts = ({ quoteData, quoteHasData }) => {
 
   return {
     selectedProducts,
+    refreshPrice,
     clearSelectedProducts,
+    HandlePriceChange,
     HandleSelectedProducts,
     HandleQuantityProducts,
     HandleDeleteProduct,

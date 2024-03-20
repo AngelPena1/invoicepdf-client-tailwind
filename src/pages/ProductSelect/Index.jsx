@@ -40,6 +40,8 @@ const Index = () => {
 
   const {
     selectedProducts,
+    refreshPrice,
+    HandlePriceChange,
     HandleSelectedProducts,
     HandleQuantityProducts,
     HandleDeleteProduct,
@@ -56,6 +58,7 @@ const Index = () => {
 
   const { totals } = useGetTotal({
     selectedProducts,
+    refreshPrice,
     discount: inputData?.discount,
   });
 
@@ -94,7 +97,7 @@ const Index = () => {
   function HandlePrintPreview() {
     if (alreadyFetch) return null;
 
-    HandleImagesSearch()
+    HandleImagesSearch();
     return togglePreview(true);
   }
 
@@ -145,7 +148,7 @@ const Index = () => {
     HandleProductSearch();
     // eslint-disable-next-line
   }, []);
-
+  
   return (
     <>
       <ProductsForm
@@ -159,6 +162,7 @@ const Index = () => {
         quoteHasData={quoteHasData}
         totals={totals}
         toggles={toggles}
+        HandlePriceChange={HandlePriceChange}
         HandleToggleChange={HandleToggleChange}
         HandleInputData={HandleInputData}
         HandleDataClient={HandleDataClient}
