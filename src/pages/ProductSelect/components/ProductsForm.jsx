@@ -15,6 +15,7 @@ const ProductsForm = ({
   totals,
   toggles,
   quoteHasData,
+  HandlePriceChange,
   HandleToggleChange,
   HandleInputData,
   HandleDataClient,
@@ -119,6 +120,9 @@ const ProductsForm = ({
                 <th scope="col" className="px-2 py-3">
                   Descripción
                 </th>
+                <th scope="col" className="px-2 py-3 text-center">
+                  Nota
+                </th>
                 <th scope="col" className="px-2 py-3 text-center ">
                   Cantidad
                 </th>
@@ -155,66 +159,101 @@ const ProductsForm = ({
             <tbody>
               {selectedProducts?.map((product, index) => {
                 return (
-                  <tr className="bg-white border-b" key={index}>
-                    <th
-                      scope="row"
-                      className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap"
+                  <>
+                    <tr
+                      className={false ? "bg-white border-b" : ""}
+                      key={index}
                     >
-                      {product?.description.substring(0, 42)}
-                    </th>
-                    <td className="px-2 py-4 text-center">
-                      <FontAwesomeIcon
-                        className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 right-2 cursor-pointer"
-                        icon={faMinus}
-                        onClick={() => {
-                          HandleQuantityProducts({
-                            productId: product?.id,
-                            bool: false,
-                          });
-                        }}
-                      />
-                      {product?.quantity}
-                      <FontAwesomeIcon
-                        className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 -right-2 cursor-pointer"
-                        icon={faPlus}
-                        onClick={() => {
-                          HandleQuantityProducts({
-                            local_id: product?.local_id,
-                            bool: true,
-                          });
-                        }}
-                      />
-                    </td>
-                    {toggles?.code && (
-                      <td className="px-2 py-4 text-left">{product?.code}</td>
-                    )}
-                    <td className="px-2 py-4 text-left">
-                      {product?.brand?.name?.substring(0, 15)}
-                    </td>
-                    <td className="px-2 py-4 text-left">
-                      {product?.category?.name}
-                    </td>
-                    <td className="px-2 py-4 text-left ">
-                      {product?.subcategory?.name}
-                    </td>
-                    <td className="px-2 py-4 text-left">
-                      {product?.finish?.name}
-                    </td>
-                    {toggles?.cost && (
-                      <td className="px-2 py-4 text-right">{product?.cost}</td>
-                    )}
-                    <td className="px-2 py-4 text-right">{product?.price}</td>
-                    <td className="px-2 py-4 text-center">
-                      {/* {product?.isActive ? "Activo" : "Desactivado"} */}
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        className="text-xl cursor-pointer hover:text-primary"
-                        onClick={() => {
-                          HandleDeleteProduct({ local_id: product?.local_id });
-                        }}
-                      />
-                    </td>
-                  </tr>
+                      <th
+                        scope="row"
+                        className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap"
+                      >
+                        {product?.description?.substring(0, 42)}
+                      </th>
+                      <td className="px-2 py-4 text-center relative">
+                        <FontAwesomeIcon
+                          className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 cursor-pointer"
+                          icon={faPlus}
+                        />
+                      </td>
+                      <td className="px-2 py-4 text-center">
+                        <FontAwesomeIcon
+                          className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 right-2 cursor-pointer"
+                          icon={faMinus}
+                          onClick={() => {
+                            HandleQuantityProducts({
+                              productId: product?.id,
+                              bool: false,
+                            });
+                          }}
+                        />
+                        {product?.quantity}
+                        <FontAwesomeIcon
+                          className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 -right-2 cursor-pointer"
+                          icon={faPlus}
+                          onClick={() => {
+                            HandleQuantityProducts({
+                              local_id: product?.local_id,
+                              bool: true,
+                            });
+                          }}
+                        />
+                      </td>
+                      {toggles?.code && (
+                        <td className="px-2 py-4 text-left">{product?.code}</td>
+                      )}
+                      <td className="px-2 py-4 text-left">
+                        {product?.brand?.name?.substring(0, 15)}
+                      </td>
+                      <td className="px-2 py-4 text-left">
+                        {product?.category?.name}
+                      </td>
+                      <td className="px-2 py-4 text-left ">
+                        {product?.subcategory?.name}
+                      </td>
+                      <td className="px-2 py-4 text-left">
+                        {product?.finish?.name}
+                      </td>
+                      {toggles?.cost && (
+                        <td className="px-2 py-4 text-right">
+                          {product?.cost}
+                        </td>
+                      )}
+                      <td className="px-2 py-4 grid place-content-end">
+                        <input
+                          name="input-price"
+                          className="w-20 text-right p-0 border-0"
+                          type="text"
+                          value={product?.price}
+                          onChange={(e) => {
+                            HandlePriceChange(e, index);
+                          }}
+                        />
+                      </td>
+                      <td className="px-2 py-4 text-center">
+                        {/* {product?.isActive ? "Activo" : "Desactivado"} */}
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          className="text-xl cursor-pointer hover:text-primary"
+                          onClick={() => {
+                            HandleDeleteProduct({
+                              local_id: product?.local_id,
+                            });
+                          }}
+                        />
+                      </td>
+                    </tr>
+                    <tr className="bg-white border-b">
+                      <td className="relative left-10">
+                        <input 
+                          type="text"
+                          className="py-0 border-0 bg-transparent"
+                          value={"Prueba prueba"}
+                          onChange={() => {}}
+                        />
+                      </td>
+                    </tr>
+                  </>
                 );
               })}
             </tbody>
