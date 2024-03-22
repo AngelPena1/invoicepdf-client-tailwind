@@ -14,6 +14,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
 
   const [inputData, setInputData] = useState({
     search: "",
+    note: "",
     with_delivery: "",
     deposit: "",
     discount: "",
@@ -22,13 +23,17 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
   function HandleInputData(event) {
     const { name, value } = event.target;
 
-    if (name === "search") {
+    if (name === "search" || name === "note") {
       return setInputData({ ...inputData, [name]: value });
     } else {
       if (isNumberOrDecimal(value)) {
         return setInputData({ ...inputData, [name]: value });
       }
     }
+  }
+
+  function resetInputNote() {
+    return setInputData({ ...inputData, note: "" });
   }
 
   function clearSearchInput() {
@@ -61,7 +66,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
       discount: quoteData[0]?.discount,
     });
 
-    const client = quoteData[0]?.client
+    const client = quoteData[0]?.client;
     setClientInputData({
       selected_client_id: client?.id,
       name: client?.name,
@@ -77,6 +82,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
   return {
     clientInputData,
     inputData,
+    resetInputNote,
     clearSearchInput,
     HandleInputData,
     HandleDataClient,

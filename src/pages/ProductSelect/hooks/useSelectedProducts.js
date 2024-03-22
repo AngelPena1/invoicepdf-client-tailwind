@@ -1,30 +1,60 @@
 import { useState, useEffect } from "react";
 import { isNumberOrDecimal } from "../../../utils/regex/isNumberOrDecimal";
 
-const useSelectedProducts = ({ quoteData, quoteHasData }) => {
+const useSelectedProducts = ({ quoteData, quoteHasData, resetInputNote }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [refreshPrice, setRefreshPrice] = useState(false)
+  const [refreshPrice, setRefreshPrice] = useState(false);
   const [localId, setLocalId] = useState(1);
 
-  function HandlePriceChange(event, index) {
-    const {value} = event?.target
-    if(!isNumberOrDecimal(value)) return null
+  function showInputNote(index, bool) {
     let localArray = selectedProducts
-    localArray[index] = {...selectedProducts[index], price: value}
-    setSelectedProducts(localArray)
-    return setRefreshPrice(!refreshPrice)
+    localArray[index].show_note = bool 
+    setSelectedProducts(localArray);
+    return setRefreshPrice(!refreshPrice);
   }
-  
+
+  function addNotesToProduct(index, value) {
+    let localArray = selectedProducts;
+    let addNoteToArray = localArray[index]?.notes;
+    addNoteToArray.push(`**${value}`);
+    showInputNote(index, false)
+    resetInputNote()
+    return setRefreshPrice(!refreshPrice);
+  }
+
+  function removeNoteToProduct(indexProduct, indexNote) {
+    let localArray = selectedProducts
+    localArray[indexProduct]?.notes.splice(indexNote, 1)
+    return setRefreshPrice(!refreshPrice);
+  }
+
+  function HandlePriceChange(event, index) {
+    const { value } = event?.target;
+    if (!isNumberOrDecimal(value)) return null;
+    let localArray = selectedProducts;
+    localArray[index] = { ...selectedProducts[index], price: value };
+    // setSelectedProducts(localArray);
+    return setRefreshPrice(!refreshPrice);
+  }
+
   function HandleLocalId() {
     return setLocalId(localId + 1);
   }
 
   function HandleSelectedProducts(value) {
     const localArray = [...selectedProducts];
-    localArray.push({ ...value, quantity: 1, local_id: localId });
-    setSelectedProducts(localArray)
+    localArray.push({
+      ...value,
+      quantity: 1,
+      local_id: localId,
+      notes: [],
+      show_note: false,
+    });
+    setSelectedProducts(localArray);
     return HandleLocalId();
   }
+
+ 
 
   function HandleQuantityProducts({ local_id, bool }) {
     const newArray = selectedProducts.map((product) => {
@@ -42,7 +72,7 @@ const useSelectedProducts = ({ quoteData, quoteHasData }) => {
       if (!(product?.local_id === local_id)) {
         return product;
       }
-      return null
+      return null;
     });
     return setSelectedProducts(newArray);
   }
@@ -52,15 +82,20 @@ const useSelectedProducts = ({ quoteData, quoteHasData }) => {
   }
 
   useEffect(() => {
-    const getQuote = quoteHasData ? JSON.parse(quoteData[0]?.selected_products_json) : []
-    setSelectedProducts(getQuote)
+    const getQuote = quoteHasData
+      ? JSON.parse(quoteData[0]?.selected_products_json)
+      : [];
+    setSelectedProducts(getQuote);
     // eslint-disable-next-line
-  }, [quoteHasData])
+  }, [quoteHasData]);
 
   return {
     selectedProducts,
     refreshPrice,
+    addNotesToProduct,
+    removeNoteToProduct,
     clearSelectedProducts,
+    showInputNote,
     HandlePriceChange,
     HandleSelectedProducts,
     HandleQuantityProducts,

@@ -1,6 +1,6 @@
 import React from "react";
 import Search from "../../../components/SearchProducts";
-import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faTrash, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
 import Select from "../../../components/Select/Index";
@@ -15,6 +15,9 @@ const ProductsForm = ({
   totals,
   toggles,
   quoteHasData,
+  addNotesToProduct,
+  removeNoteToProduct,
+  showInputNote,
   HandlePriceChange,
   HandleToggleChange,
   HandleInputData,
@@ -117,41 +120,38 @@ const ProductsForm = ({
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0 z-30">
               <tr>
-                <th scope="col" className="px-2 py-3">
+                <th scope="col" className="px-2 py-2">
                   Descripción
                 </th>
-                <th scope="col" className="px-2 py-3 text-center">
-                  Nota
-                </th>
-                <th scope="col" className="px-2 py-3 text-center ">
+                <th scope="col" className="px-2 py-2 text-center ">
                   Cantidad
                 </th>
                 {toggles?.code && (
-                  <th scope="col" className="px-2 py-3 text-left ">
+                  <th scope="col" className="px-2 py-2 text-left ">
                     Código
                   </th>
                 )}
-                <th scope="col" className="px-2 py-3 text-left ">
+                <th scope="col" className="px-2 py-2 text-left ">
                   Marca
                 </th>
-                <th scope="col" className="px-2 py-3 text-left ">
+                <th scope="col" className="px-2 py-2 text-left ">
                   Categoría
                 </th>
-                <th scope="col" className="px-2 py-3 text-left ">
+                <th scope="col" className="px-2 py-2 text-left ">
                   Subcategoría
                 </th>
-                <th scope="col" className="px-2 py-3 text-left ">
+                <th scope="col" className="px-2 py-2 text-left ">
                   Acabado
                 </th>
                 {toggles?.cost && (
-                  <th scope="col" className="px-2 py-3 text-right">
+                  <th scope="col" className="px-2 py-2 text-right">
                     Precio lista
                   </th>
                 )}
-                <th scope="col" className="px-2 py-3 text-right">
+                <th scope="col" className="px-2 py-2 text-right">
                   Precio
                 </th>
-                <th scope="col" className="px-2 py-3 text-center">
+                <th scope="col" className="px-2 py-2 text-center">
                   Eliminar
                 </th>
               </tr>
@@ -166,17 +166,11 @@ const ProductsForm = ({
                     >
                       <th
                         scope="row"
-                        className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap"
+                        className="px-2 py-2 font-medium text-gray-900 whitespace-nowrap"
                       >
                         {product?.description?.substring(0, 42)}
                       </th>
-                      <td className="px-2 py-4 text-center relative">
-                        <FontAwesomeIcon
-                          className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 cursor-pointer"
-                          icon={faPlus}
-                        />
-                      </td>
-                      <td className="px-2 py-4 text-center">
+                      <td className="px-2 py-2 text-center">
                         <FontAwesomeIcon
                           className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 right-2 cursor-pointer"
                           icon={faMinus}
@@ -200,26 +194,26 @@ const ProductsForm = ({
                         />
                       </td>
                       {toggles?.code && (
-                        <td className="px-2 py-4 text-left">{product?.code}</td>
+                        <td className="px-2 py-2 text-left">{product?.code}</td>
                       )}
-                      <td className="px-2 py-4 text-left">
+                      <td className="px-2 py-2 text-left">
                         {product?.brand?.name?.substring(0, 15)}
                       </td>
-                      <td className="px-2 py-4 text-left">
+                      <td className="px-2 py-2 text-left">
                         {product?.category?.name}
                       </td>
-                      <td className="px-2 py-4 text-left ">
+                      <td className="px-2 py-2 text-left ">
                         {product?.subcategory?.name}
                       </td>
-                      <td className="px-2 py-4 text-left">
+                      <td className="px-2 py-2 text-left">
                         {product?.finish?.name}
                       </td>
                       {toggles?.cost && (
-                        <td className="px-2 py-4 text-right">
+                        <td className="px-2 py-2 text-right">
                           {product?.cost}
                         </td>
                       )}
-                      <td className="px-2 py-4 grid place-content-end">
+                      <td className="px-2 py-2 grid place-content-end">
                         <input
                           name="input-price"
                           className="w-20 text-right p-0 border-0"
@@ -230,7 +224,7 @@ const ProductsForm = ({
                           }}
                         />
                       </td>
-                      <td className="px-2 py-4 text-center">
+                      <td className="px-2 py-2 text-center">
                         {/* {product?.isActive ? "Activo" : "Desactivado"} */}
                         <FontAwesomeIcon
                           icon={faTrash}
@@ -243,16 +237,66 @@ const ProductsForm = ({
                         />
                       </td>
                     </tr>
-                    <tr className="bg-white border-b">
-                      <td className="relative left-10">
-                        <input 
+                    {product?.notes &&
+                      product?.notes.map((note, indexNote) => {
+                        return (
+                          <tr className="" key={indexNote}>
+                            <td className="relative left-10 flex cursor-pointer">
+                              <FontAwesomeIcon 
+                                icon={faX} 
+                                className="relative top-1 text-xs hover:text-slate-400"
+                                onClick={() => {
+                                  removeNoteToProduct(index, indexNote)
+                                }}
+                              />
+                              <input
+                                type="text"
+                                className="py-0 border-0 bg-transparent outline-none italic text-slate-600"
+                                value={note}
+                                onChange={() => {}}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    {product?.show_note ? (
+                      <div className="flex relative left-10 mt-2 w-80">
+                        <button
+                          className="h-8 py-0 px-3 bg-red-500 hover:bg-red-400"
+                          onClick={() => {
+                            showInputNote(index, false);
+                          }}
+                        >
+                          Cancelar
+                        </button>
+                        <input
+                          name="note"
                           type="text"
-                          className="py-0 border-0 bg-transparent"
-                          value={"Prueba prueba"}
-                          onChange={() => {}}
+                          className="h-8 mr-4 outline-none"
+                          value={inputData?.note}
+                          onChange={HandleInputData}
                         />
-                      </td>
-                    </tr>
+                        <button
+                          className="h-8 py-0 px-3"
+                          onClick={() => {
+                            addNotesToProduct(index, inputData?.note);
+                          }}
+                        >
+                          Aceptar
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="text-center mt-2">
+                        <FontAwesomeIcon
+                          className="bg-slate-100 hover:bg-slate-200 p-1 rounded-full relative -top-1 cursor-pointer"
+                          icon={faPlus}
+                          onClick={() => {
+                            showInputNote(index, true);
+                          }}
+                        />
+                      </div>
+                    )}
+                    <tr className="border-b" />
                   </>
                 );
               })}

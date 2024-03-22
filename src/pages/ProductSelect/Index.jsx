@@ -30,23 +30,27 @@ const Index = () => {
   const { data: productsData, HandleSearch: HandleProductSearch } =
     useGetProducts();
 
-  const {
-    inputData,
-    clientInputData,
-    clearSearchInput,
-    HandleInputData,
-    HandleDataClient,
-  } = useInputData({ clientsData, quoteData, quoteHasData });
+    const {
+      inputData,
+      clientInputData,
+      resetInputNote,
+      clearSearchInput,
+      HandleInputData,
+      HandleDataClient,
+    } = useInputData({ clientsData, quoteData, quoteHasData });
 
-  const {
-    selectedProducts,
-    refreshPrice,
-    HandlePriceChange,
-    HandleSelectedProducts,
-    HandleQuantityProducts,
-    HandleDeleteProduct,
-    clearSelectedProducts,
-  } = useSelectedProducts({ quoteData, quoteHasData });
+    const {
+      selectedProducts,
+      refreshPrice,
+      addNotesToProduct,
+      removeNoteToProduct,
+      showInputNote,
+      HandlePriceChange,
+      HandleSelectedProducts,
+      HandleQuantityProducts,
+      HandleDeleteProduct,
+      clearSelectedProducts,
+    } = useSelectedProducts({ quoteData, quoteHasData, resetInputNote });  
 
   const {
     data: imagesData,
@@ -162,6 +166,9 @@ const Index = () => {
         quoteHasData={quoteHasData}
         totals={totals}
         toggles={toggles}
+        showInputNote={showInputNote}
+        addNotesToProduct={addNotesToProduct}
+        removeNoteToProduct={removeNoteToProduct}
         HandlePriceChange={HandlePriceChange}
         HandleToggleChange={HandleToggleChange}
         HandleInputData={HandleInputData}
