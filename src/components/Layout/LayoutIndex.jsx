@@ -17,8 +17,8 @@ const LayoutIndex = () => {
 
   return (
     <main className="App">
-      <div className={auth !== null ? "main-container" : null}>
-        {auth !== null ? <Navbar />: <></>}
+      <div className={auth !== "" ? "main-container" : null}>
+        {auth !== "" ? <Navbar />: <></>}
         <Outlet />
         {/* <Footer /> */}
       </div>

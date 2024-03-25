@@ -5,7 +5,7 @@ const useLogOut = () => {
   const { setAuth } = useAuth();
 
   const logout = () => {
-    setAuth(null);
+    setAuth("");
     Cookies.remove("auth-invoice-username");
     Cookies.remove("auth-invoice-company");
     Cookies.remove("auth-invoice-accessToken");

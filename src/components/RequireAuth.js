@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 const RequireAuth = () => {
   const { auth } = useAuth();
 
-  return auth !== null ? (
+  return auth !== "" ? (
     <Outlet />
   ) : (
     <Navigate to="/login"  />
