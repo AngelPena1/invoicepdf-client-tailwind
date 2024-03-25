@@ -4,6 +4,9 @@ import BusinessForm from "./components/BusinessForm";
 import useInputData from "./hooks/useInputData";
 import useUpdateCompany from "./hooks/usePostClient";
 import useGetCompanyImage from "./hooks/useGetCompanyImage";
+import PanelForm from "./components/PanelForm";
+import useToggles from "./hooks/useToggles";
+import PdfForm from "./components/PdfForm";
 
 const Index = ({ toggleCompanyInfo }) => {
   const { data, HandleSearch } = useGetCompany();
@@ -24,6 +27,8 @@ const Index = ({ toggleCompanyInfo }) => {
 
   const { data: companyImage, loading: loading_image } = useGetCompanyImage();
 
+  const { toggles, HandleToggles } = useToggles();
+
   useEffect(() => {
     if (!companyImage) return;
     HandleInputData({ ...inputData, image: companyImage[0]?.image });
@@ -36,14 +41,38 @@ const Index = ({ toggleCompanyInfo }) => {
   }, []);
 
   return (
-    <BusinessForm
-      inputData={inputData}
-      loading_image={loading_image}
-      HandleInputData={HandleInputData}
-      HandleImageChange={HandleImageChange}
-      HandleUpdateClient={HandleUpdateClient}
-      toggleCompanyInfo={toggleCompanyInfo}
-    />
+    <>
+      <div
+        id="background"
+        className="w-screen h-screen bg-slate-500 opacity-40 fixed z-40 inset-0 flex litems-center justify-center"
+        onClick={() => {
+          toggleCompanyInfo(false);
+        }}
+      ></div>
+      <section className="w-2xl md:w-3xl lg:w-4xl h-2xl bg-white fixed left-0 right-0 top-0 bottom-0 m-auto z-40 p-5 flex rounded-lg ">
+        <PanelForm toggles={toggles} HandleToggles={HandleToggles} />
+        {toggles?.business && (
+          <BusinessForm
+            inputData={inputData}
+            loading_image={loading_image}
+            HandleInputData={HandleInputData}
+            HandleImageChange={HandleImageChange}
+            HandleUpdateClient={HandleUpdateClient}
+            toggleCompanyInfo={toggleCompanyInfo}
+          />
+        )}
+        {toggles?.pdf && (
+          <PdfForm
+            inputData={inputData}
+            loading_image={loading_image}
+            HandleInputData={HandleInputData}
+            HandleImageChange={HandleImageChange}
+            HandleUpdateClient={HandleUpdateClient}
+            toggleCompanyInfo={toggleCompanyInfo}
+          />
+        )}
+      </section>
+    </>
   );
 };
 

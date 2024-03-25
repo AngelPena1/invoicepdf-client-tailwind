@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 
 const useInputData = ({ dataArray }) => {
   const [inputData, setInputData] = useState({
-    name: null,
-    email: null,
-    rnc: null,
-    phone_1: null,
-    phone_2: null,
-    address: null,
-    image: null,
+    name: "",
+    email: "",
+    rnc: "",
+    phone_1: "",
+    phone_2: "",
+    address: "",
+    image: "",
   });
 
   function HandleInputData(data) {
@@ -22,12 +22,12 @@ const useInputData = ({ dataArray }) => {
 
   function ResetInputValues() {
     return setInputData({
-      name: null,
-      email: null,
-      rnc: null,
-      phone_1: null,
-      phone_2: null,
-      image: null,
+      name: "",
+      email: "",
+      rnc: "",
+      phone_1: "",
+      phone_2: "",
+      image: "",
     });
   }
 
