@@ -118,24 +118,6 @@ const BusinessForm = ({
           />
         </div>
       </section>
-      <section className="flex justify-end mt-14">
-        <button
-          type="button"
-          className="px-2 button-2"
-          onClick={() => {
-            toggleCompanyInfo(false);
-          }}
-        >
-          Descartar Cambios
-        </button>
-        <button
-          type="submit"
-          className="px-2 ml-4 bg-primary"
-          onClick={HandleUpdateClient}
-        >
-          Guardar Cambios
-        </button>
-      </section>
     </form>
   );
 };

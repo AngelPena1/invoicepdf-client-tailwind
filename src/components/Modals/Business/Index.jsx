@@ -49,7 +49,7 @@ const Index = ({ toggleCompanyInfo }) => {
           toggleCompanyInfo(false);
         }}
       ></div>
-      <section className="w-2xl md:w-3xl lg:w-4xl h-2xl bg-white fixed left-0 right-0 top-0 bottom-0 m-auto z-40 p-5 flex rounded-lg ">
+      <section className="w-2xl md:w-3xl lg:w-4xl h-2xl bg-white select-none fixed left-0 right-0 top-0 bottom-0 m-auto z-40  flex rounded-lg ">
         <PanelForm toggles={toggles} HandleToggles={HandleToggles} />
         {toggles?.business && (
           <BusinessForm
@@ -71,6 +71,26 @@ const Index = ({ toggleCompanyInfo }) => {
             toggleCompanyInfo={toggleCompanyInfo}
           />
         )}
+        <section className="absolute right-4 bottom-4 place-content-end">
+          <div>
+            <button
+              type="button"
+              className="px-2 button-2"
+              onClick={() => {
+                // toggleCompanyInfo(false);
+              }}
+            >
+              Descartar Cambios
+            </button>
+            <button
+              type="submit"
+              className="px-2 ml-4 bg-primary"
+              //   onClick={HandleUpdateClient}
+            >
+              Guardar Cambios
+            </button>
+          </div>
+        </section>
       </section>
     </>
   );
