@@ -2,22 +2,32 @@ import React, { useEffect } from "react";
 import useGetCompany from "./hooks/useGetCompanyInfo";
 import BusinessForm from "./components/BusinessForm";
 import useInputData from "./hooks/useInputData";
-import useUpdateCompany from "./hooks/usePostClient";
+import useUpdateCompany from "./hooks/useUpdateCompany";
 import useGetCompanyImage from "./hooks/useGetCompanyImage";
 import PanelForm from "./components/PanelForm";
 import useToggles from "./hooks/useToggles";
 import PdfForm from "./components/PdfForm";
+import useQuoteConfig from "./hooks/useQuoteConfig";
 
 const Index = ({ toggleCompanyInfo }) => {
   const { data, HandleSearch } = useGetCompany();
 
   const {
     inputData,
+    quoteInput,
+    AsignQuoteData,
     CheckForNotEmptyValues,
+    ResetCompanyValues,
     HandleInputData,
+    HandleQuoteInput,
     HandleImageChange,
   } = useInputData({
-    dataArray: data[0],
+    companyData: data[0],
+  });
+
+  const { resetQuoteValue, HandleUpdateConfig } = useQuoteConfig({
+    quoteInput,
+    AsignQuoteData,
   });
 
   const { HandleUpdateClient } = useUpdateCompany({
@@ -55,42 +65,20 @@ const Index = ({ toggleCompanyInfo }) => {
           <BusinessForm
             inputData={inputData}
             loading_image={loading_image}
+            ResetCompanyValues={ResetCompanyValues}
             HandleInputData={HandleInputData}
             HandleImageChange={HandleImageChange}
             HandleUpdateClient={HandleUpdateClient}
-            toggleCompanyInfo={toggleCompanyInfo}
           />
         )}
         {toggles?.pdf && (
           <PdfForm
-            inputData={inputData}
-            loading_image={loading_image}
-            HandleInputData={HandleInputData}
-            HandleImageChange={HandleImageChange}
-            HandleUpdateClient={HandleUpdateClient}
-            toggleCompanyInfo={toggleCompanyInfo}
+            quoteInput={quoteInput}
+            resetQuoteValue={resetQuoteValue}
+            HandleUpdateConfig={HandleUpdateConfig}
+            HandleQuoteInput={HandleQuoteInput}
           />
         )}
-        <section className="absolute right-4 bottom-4 place-content-end">
-          <div>
-            <button
-              type="button"
-              className="px-2 button-2"
-              onClick={() => {
-                // toggleCompanyInfo(false);
-              }}
-            >
-              Descartar Cambios
-            </button>
-            <button
-              type="submit"
-              className="px-2 ml-4 bg-primary"
-              //   onClick={HandleUpdateClient}
-            >
-              Guardar Cambios
-            </button>
-          </div>
-        </section>
       </section>
     </>
   );

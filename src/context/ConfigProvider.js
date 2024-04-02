@@ -22,6 +22,7 @@ export const ConfigProvider = ({ children }) => {
           quote: res.data,
         });
       });
+      // eslint-disable-next-line
   }, [auth, refetchQuote]);
 
   return (

@@ -8,7 +8,7 @@ const BusinessForm = ({
   HandleInputData,
   HandleImageChange,
   HandleUpdateClient,
-  toggleCompanyInfo,
+  ResetCompanyValues,
 }) => {
   const noImageFound =
     inputData?.image === "" || inputData?.image === null || !inputData?.image;
@@ -116,6 +116,24 @@ const BusinessForm = ({
               HandleInputData({ ...inputData, address: e.target.value });
             }}
           />
+        </div>
+      </section>
+      <section className="absolute right-4 bottom-4 place-content-end">
+        <div>
+          <button
+            type="button"
+            className="px-2 button-2"
+            onClick={ResetCompanyValues}
+          >
+            Descartar Cambios
+          </button>
+          <button
+            type="submit"
+            className="px-2 ml-4 bg-primary"
+            onClick={HandleUpdateClient}
+          >
+            Guardar Cambios
+          </button>
         </div>
       </section>
     </form>

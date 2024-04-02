@@ -1,15 +1,25 @@
 import { useState, useEffect } from "react";
 
-const useInputData = ({ dataArray }) => {
-  const [inputData, setInputData] = useState({
-    name: "",
-    email: "",
-    rnc: "",
-    phone_1: "",
-    phone_2: "",
-    address: "",
-    image: "",
+const useInputData = ({ companyData }) => {
+  const [inputData, setInputData] = useState({});
+
+  const [quoteInput, setQuoteInput] = useState({
+    has_images: false,
   });
+
+  function AsignQuoteData(config) {
+    return setQuoteInput(config);
+  }
+
+  function ResetCompanyValues() {
+    return setInputData(companyData);
+  }
+
+  function HandleQuoteInput(event) {
+    const {name, value} = event?.target
+    const getBool = value === 'true' ? true : false
+    return setQuoteInput({...quoteInput, [name]:  !getBool});
+  }
 
   function HandleInputData(data) {
     return setInputData(data);
@@ -18,17 +28,6 @@ const useInputData = ({ dataArray }) => {
   function CheckForNotEmptyValues() {
     if (inputData?.name.trim() === "" || inputData?.name === null) return true;
     return false;
-  }
-
-  function ResetInputValues() {
-    return setInputData({
-      name: "",
-      email: "",
-      rnc: "",
-      phone_1: "",
-      phone_2: "",
-      image: "",
-    });
   }
 
   async function HandleImageChange(e) {
@@ -46,22 +45,20 @@ const useInputData = ({ dataArray }) => {
   }
 
   useEffect(() => {
-    setInputData({
-      name: dataArray?.name,
-      email: dataArray?.email,
-      rnc: dataArray?.rnc,
-      phone_1: dataArray?.phone_1,
-      phone_2: dataArray?.phone_2,
-      address: dataArray?.address,
-    });
-  }, [dataArray]);
+    if(!companyData) return
+    ResetCompanyValues(companyData)
+    // eslint-disable-next-line
+  }, [companyData]);
 
   return {
     inputData,
-    ResetInputValues,
+    quoteInput,
     CheckForNotEmptyValues,
+    AsignQuoteData,
+    ResetCompanyValues,
     HandleInputData,
-    HandleImageChange
+    HandleQuoteInput,
+    HandleImageChange,
   };
 };
 

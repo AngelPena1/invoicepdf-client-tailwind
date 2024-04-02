@@ -1,6 +1,6 @@
 import React from "react";
 
-const PdfForm = () => {
+const PdfForm = (props) => {
   return (
     <section className="p-8">
       <section className="mb-10">
@@ -12,10 +12,10 @@ const PdfForm = () => {
             <label className="relative inline-flex items-center cursor-pointer outline-none">
               <input
                 type="checkbox"
-                // checked={toggles?.itbis}
-                // value={toggles?.itbis}
-                name="has-image"
-                // onClick={HandleToggleChange}
+                checked={props.quoteInput?.has_images}
+                value={props.quoteInput?.has_images}
+                name="has_images"
+                onClick={props.HandleQuoteInput}
                 onChange={() => {}}
                 className="sr-only peer outline-none"
               />
@@ -26,6 +26,24 @@ const PdfForm = () => {
             </label>
           </li>
         </ul>
+      </section>
+      <section className="absolute right-4 bottom-4 place-content-end">
+        <div>
+          <button
+            type="button"
+            className="px-2 button-2"
+            onClick={props.resetQuoteValue}
+          >
+            Descartar Cambios
+          </button>
+          <button
+            type="submit"
+            className="px-2 ml-4 bg-primary"
+            onClick={props.HandleUpdateConfig}
+          >
+            Guardar Cambios
+          </button>
+        </div>
       </section>
     </section>
   );
