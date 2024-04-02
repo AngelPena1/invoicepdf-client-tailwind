@@ -3,8 +3,8 @@ import useAuth from "../../../../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const useUpdateCompany = ({ data, CheckForNotEmptyValues }) => {
-  const axiosPrivate = useAxiosPrivate();
-  const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate()
+  const { auth } = useAuth()
 
   async function HandleUpdateClient(e) {
     e.preventDefault();
@@ -26,9 +26,8 @@ const useUpdateCompany = ({ data, CheckForNotEmptyValues }) => {
         image: data?.image,
         updatedBy: auth?.username,
       })
-      .then((res) => {
-        console.log(res.data);
-        toast.success("La información del negocio ha sido actualizado con éxito!");
+      .then(() => {
+        toast.success("Se han aplicado los cambios con éxito.");
       })
       .catch(() => {
         return toast.error("Ha ocurrido un error.");
