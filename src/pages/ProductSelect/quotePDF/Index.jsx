@@ -99,6 +99,7 @@ export async function GenerarPDF({
       quote_counter,
       style_pdf
     });
+    
     CreateBody({
       pdf,
       newPage,
@@ -108,6 +109,7 @@ export async function GenerarPDF({
       maxHeight,
       hasCode,
       hasCost,
+      hasItbis,
       style_pdf,
       quoteConfig,
       discount,
@@ -118,23 +120,6 @@ export async function GenerarPDF({
       itbis,
       withITBIS,
     });
-    // CreateFooter({
-    //   pdf,
-    //   newPage,
-    //   maxHeight,
-    //   controlPixelHeight,
-    //   hasItbis,
-    //   hasCost,
-    //   discount,
-    //   with_delivery,
-    //   deposit,
-    //   cost,
-    //   price,
-    //   itbis,
-    //   withITBIS,
-    //   style_pdf,
-    //   quoteConfig
-    // });
 
     if (isPreview) {
       const pdfWithWatermark = addWaterMark(pdf);

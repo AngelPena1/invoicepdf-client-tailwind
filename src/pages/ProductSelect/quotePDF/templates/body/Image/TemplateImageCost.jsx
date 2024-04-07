@@ -1,19 +1,29 @@
-import { formatToDecimal } from "../../../../../utils/formatToDecimal/formatToDecimal";
-import { getSizePixel } from "../../../utils/getSizePixel";
-import no_image from "../../../../../assets/white.jpg";
+import { FooterWithItbis, FooterNoItbis } from "../../Footer/Index";
+import { formatToDecimal } from "../../../../../../utils/formatToDecimal/formatToDecimal";
+import { getSizePixel } from "../../../../utils/getSizePixel";
+import no_image from "../../../../../../assets/white.jpg";
 
 //The quote has cost and img
 
-const template_image_cost = ({
+const TemplateImageCost = ({
   pdf,
   selectedProducts,
   controlPixelHeight,
   style_pdf,
   imagesData,
   hasCode,
+  hasItbis,
   newPage,
-  maxHeight
+  maxHeight,
+  discount,
+  with_delivery,
+  deposit,
+  price,
+  itbis,
+  withITBIS,
 }) => {
+
+  //194.5 max
   pdf.autoTable({
     body: [
       [
@@ -48,12 +58,12 @@ const template_image_cost = ({
       }, //44.3
       3: { cellWidth: 18, halign: "right", fillColor: style_pdf?.fillColor }, // cost
       4: {
-        cellWidth: 18.3,
+        cellWidth: 19.8,
         halign: "right",
         fillColor: style_pdf?.fillColor,
       },
       5: {
-        cellWidth: 18.3,
+        cellWidth: 19.8,
         halign: "right",
         fillColor: style_pdf?.fillColor,
       }, //21.3 - 3
@@ -114,8 +124,8 @@ const template_image_cost = ({
         1: { cellWidth: 11.3, halign: "center" },
         2: { cellWidth: 44.3, halign: "center" }, //44.3
         3: { cellWidth: 18, halign: "right" }, // cost
-        4: { cellWidth: 18.3, halign: "right" },
-        5: { cellWidth: 18.3, halign: "right" }, //21.3 - 3
+        4: { cellWidth: 19.8, halign: "right" },
+        5: { cellWidth: 19.8, halign: "right" }, //21.3 - 3
       },
       didDrawCell: function (data) {
         if (
@@ -159,6 +169,39 @@ const template_image_cost = ({
 
     newPage = false;
   });
+
+  //Footer
+  controlPixelHeight += 45;
+  if (controlPixelHeight > maxHeight) {
+    controlPixelHeight = 0;
+    newPage = true;
+    pdf.addPage();
+  }
+
+  pdf.autoTable({
+    startY: !newPage ? pdf.lastAutoTable.finalY + 5 : 10,
+    body: hasItbis
+      ? FooterWithItbis({
+          discount,
+          with_delivery,
+          deposit,
+          price,
+          itbis,
+          withITBIS,
+        })
+      : FooterNoItbis({ discount, with_delivery, deposit, price }),
+    theme: "grid",
+    bodyStyles: {
+      fontSize: 9,
+      textColor: style_pdf?.textColorBody,
+      lineColor: style_pdf?.lineColor,
+    },
+    columnStyles: {
+      0: { cellWidth: 154.9 },
+      1: { cellWidth: 19.8, halign: "right" },
+      2: { cellWidth: 19.8, halign: "right" },
+    },
+  });
 };
 
-export default template_image_cost;
+export default TemplateImageCost;

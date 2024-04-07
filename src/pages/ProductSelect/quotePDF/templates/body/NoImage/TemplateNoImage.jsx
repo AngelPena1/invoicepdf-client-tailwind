@@ -1,13 +1,14 @@
-import { formatToDecimal } from "../../../../utils/formatToDecimal/formatToDecimal";
-
+import { formatToDecimal } from "../../../../../../utils/formatToDecimal/formatToDecimal";
+import { FooterWithItbis, FooterNoItbis } from "../../Footer/Index";
 //The quote has cost and no img
 
-const TemplateItbisCost = ({
+const TemplateNoImage = ({
   pdf,
   selectedProducts,
   controlPixelHeight,
   style_pdf,
   hasCode,
+  hasItbis,
   newPage,
   maxHeight,
   discount,
@@ -15,13 +16,13 @@ const TemplateItbisCost = ({
   deposit,
   price,
   itbis,
-  withITBIS
+  withITBIS,
 }) => {
   //194.5
   //body
   pdf.autoTable({
     body: [
-      ["Descripción del producto", "Cant", "P. de Lista", "Precio", "Total"],
+      ["Descripción del producto", "Cant", "Precio", "Total"],
     ],
     theme: "grid",
     bodyStyles: {
@@ -31,23 +32,22 @@ const TemplateItbisCost = ({
       fontStyle: "bold",
     },
     columnStyles: {
-      0: { cellWidth: 108.6, fillColor: style_pdf?.fillColorFirstColumn }, //-5
+      0: { cellWidth: 116.55, fillColor: style_pdf?.fillColorFirstColumn }, //-5
       1: {
         cellWidth: 14.3,
         halign: "center",
         fillColor: style_pdf?.fillColor,
       },
-      2: { cellWidth: 23.86, halign: "right", fillColor: style_pdf?.fillColor }, // cost
-      3: {
-        cellWidth: 23.86,
+      2: {
+        cellWidth: 31.81,
         halign: "right",
         fillColor: style_pdf?.fillColor,
       },
-      4: {
-        cellWidth: 23.86,
+      3: {
+        cellWidth: 31.81,
         halign: "right",
         fillColor: style_pdf?.fillColor,
-      }, //21.3 - 3
+      }, 
     },
   });
   selectedProducts.forEach((product) => {
@@ -67,7 +67,6 @@ const TemplateItbisCost = ({
       ? `${description} \n\nCódigo: ${productCode}`
       : `${description}`;
     const quantity = parseFloat(product?.quantity);
-    const cost = parseFloat(product?.cost);
     const price = parseFloat(product?.price);
     const total = quantity * price;
 
@@ -84,7 +83,6 @@ const TemplateItbisCost = ({
         [
           descriptionSwitch,
           quantity,
-          formatToDecimal(cost),
           formatToDecimal(price),
           formatToDecimal(total),
         ],
@@ -95,17 +93,17 @@ const TemplateItbisCost = ({
       },
       columnStyles: {
         //194.5 total
-        0: { cellWidth: 108.6 }, //-5
+        0: { cellWidth: 116.55 }, //-5
         1: { cellWidth: 14.3, halign: "center" },
-        2: { cellWidth: 23.86, halign: "right" }, // cost
-        3: { cellWidth: 23.86, halign: "right" },
-        4: { cellWidth: 23.86, halign: "right" }, //21.3 - 3
+        2: { cellWidth: 31.81, halign: "right" },
+        3: { cellWidth: 31.81, halign: "right" }, 
       },
     });
 
     newPage = false;
   });
 
+  //Footer
   controlPixelHeight += 45;
   if (controlPixelHeight > maxHeight) {
     controlPixelHeight = 0;
@@ -115,22 +113,16 @@ const TemplateItbisCost = ({
 
   pdf.autoTable({
     startY: !newPage ? pdf.lastAutoTable.finalY + 5 : 10,
-    body: [
-      [
-        "1. Tiempo de Entrega: 5-7 semanas una vez confirmado el pedido con anticipo.",
-        "Descuento",
-        formatToDecimal(parseFloat(discount)),
-      ],
-      [
-        "2. Forma de pago: 70% de anticipo. Saldo contra entrega.",
-        "Subtotal",
-        formatToDecimal(price),
-      ],
-      ["", "ITBIS", formatToDecimal(itbis)],
-      ["", "Total", formatToDecimal(withITBIS)],
-      ["", "Anticipo", formatToDecimal(parseFloat(deposit))],
-      ["", "Con Entrega", formatToDecimal(parseFloat(with_delivery))],
-    ],
+    body: hasItbis
+      ? FooterWithItbis({
+          discount,
+          with_delivery,
+          deposit,
+          price,
+          itbis,
+          withITBIS,
+        })
+      : FooterNoItbis({ discount, with_delivery, deposit, price }),
     theme: "grid",
     bodyStyles: {
       fontSize: 9,
@@ -138,12 +130,12 @@ const TemplateItbisCost = ({
       lineColor: style_pdf?.lineColor,
     },
     columnStyles: {
-      0: { cellWidth: 146.78 },
-      1: { cellWidth: 23.86, halign: "right" },
-      2: { cellWidth: 23.86, halign: "right" },
+      0: { cellWidth: 130.85 },
+      1: { cellWidth: 31.81, halign: "right" },
+      2: { cellWidth: 31.81, halign: "right" },
     },
   });
   //footer
 };
 
-export default TemplateItbisCost;
+export default TemplateNoImage;
