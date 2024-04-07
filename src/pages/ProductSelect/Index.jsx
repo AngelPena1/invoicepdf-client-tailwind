@@ -14,8 +14,11 @@ import useGetTotal from "./hooks/useGetTotal";
 import usePostQuotes from "./hooks/usePostQuotes";
 import useGetQuoteById from "./hooks/useGetQuoteById";
 import toast from "react-hot-toast";
+import useConfig from "../../hooks/useConfig";
 
 const Index = () => {
+  const { config } = useConfig();
+
   const { data: quoteData, quoteHasData } = useGetQuoteById();
 
   const { data: clientsData, HandleSearch: HandleSearchClient } =
@@ -30,27 +33,27 @@ const Index = () => {
   const { data: productsData, HandleSearch: HandleProductSearch } =
     useGetProducts();
 
-    const {
-      inputData,
-      clientInputData,
-      resetInputNote,
-      clearSearchInput,
-      HandleInputData,
-      HandleDataClient,
-    } = useInputData({ clientsData, quoteData, quoteHasData });
+  const {
+    inputData,
+    clientInputData,
+    resetInputNote,
+    clearSearchInput,
+    HandleInputData,
+    HandleDataClient,
+  } = useInputData({ clientsData, quoteData, quoteHasData });
 
-    const {
-      selectedProducts,
-      refreshPrice,
-      addNotesToProduct,
-      removeNoteToProduct,
-      showInputNote,
-      HandlePriceChange,
-      HandleSelectedProducts,
-      HandleQuantityProducts,
-      HandleDeleteProduct,
-      clearSelectedProducts,
-    } = useSelectedProducts({ quoteData, quoteHasData, resetInputNote });  
+  const {
+    selectedProducts,
+    refreshPrice,
+    addNotesToProduct,
+    removeNoteToProduct,
+    showInputNote,
+    HandlePriceChange,
+    HandleSelectedProducts,
+    HandleQuantityProducts,
+    HandleDeleteProduct,
+    clearSelectedProducts,
+  } = useSelectedProducts({ quoteData, quoteHasData, resetInputNote });
 
   const {
     data: imagesData,
@@ -132,6 +135,7 @@ const Index = () => {
         hasCost: toggles?.cost,
         quoteId: quoteData[0]?.quote_count,
         quoteHasData,
+        quoteConfig: config?.quote[0]
       });
       if (!toggles?.preview) {
         HandleCreateQuote();
@@ -152,7 +156,7 @@ const Index = () => {
     HandleProductSearch();
     // eslint-disable-next-line
   }, []);
-  
+
   return (
     <>
       <ProductsForm

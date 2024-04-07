@@ -1,4 +1,5 @@
 import { formatToDecimal } from "../../../../utils/formatToDecimal/formatToDecimal";
+import t_foot_itbis_cost from "../templates/footer/t_foot_itbis_cost.jsx";
 
 const bodyHasItbis = (props) => [
   [
@@ -14,11 +15,7 @@ const bodyHasItbis = (props) => [
   ["", "ITBIS", formatToDecimal(props?.itbis)],
   ["", "Total", formatToDecimal(props?.withITBIS)],
   ["", "Anticipo", formatToDecimal(parseFloat(props?.deposit))],
-  [
-    "",
-    "Con Entrega",
-    formatToDecimal(parseFloat(props?.with_delivery)),
-  ],
+  ["", "Con Entrega", formatToDecimal(parseFloat(props?.with_delivery))],
 ];
 
 const bodyNoItbis = (props) => [
@@ -40,50 +37,56 @@ const bodyNoItbis = (props) => [
   ["", "Con Entrega", formatToDecimal(parseFloat(props?.with_delivery))],
 ];
 
-const columnStyleItbis = {
-  0: { cellWidth: 145.9 },
-  1: { cellWidth: 24.3, halign: "right" },
-  2: { cellWidth: 24.3, halign: "right" },
-};
-
-const columnStyleCost = {
-  0: { cellWidth: 154.9 },
-  1: { cellWidth: 18.3, halign: "right" },
-  2: { cellWidth: 18.3, halign: "right" },
-};
-
-function getOptionsBody(props) {
-  if (props?.hasItbis) {
-    return bodyHasItbis(props);
+export function CreateFooter({
+  pdf,
+  newPage,
+  maxHeight,
+  controlPixelHeight,
+  hasItbis,
+  hasCost,
+  discount,
+  with_delivery,
+  deposit,
+  cost,
+  price,
+  itbis,
+  withITBIS,
+  style_pdf,
+  quoteConfig,
+}) {
+  const hasImages = quoteConfig?.hasImages;
+  
+  if (!hasCost && !hasImages && hasItbis) {
+    return t_foot_itbis_cost({
+      pdf,
+      newPage,
+      maxHeight,
+      controlPixelHeight,
+      discount,
+      with_delivery,
+      deposit,
+      cost,
+      price,
+      itbis,
+      withITBIS,
+      style_pdf,
+    });
   }
-  return bodyNoItbis(props);
-}
 
-function getColumnsOptions(props) {
-  if (props?.hasCost) {
-    return columnStyleCost;
+  if (!hasCost && !hasImages && !hasItbis) {
+    return t_foot_itbis_cost({
+      pdf,
+      newPage,
+      maxHeight,
+      controlPixelHeight,
+      discount,
+      with_delivery,
+      deposit,
+      cost,
+      price,
+      itbis,
+      withITBIS,
+      style_pdf,
+    });
   }
-  return columnStyleItbis;
-}
-
-export function createFooter(props) {
-  props.controlPixelHeight += 40;
-  if (props?.controlPixelHeight > props?.maxHeight) {
-    props.controlPixelHeight = 0;
-    props.newPage = true;
-    props.pdf.addPage();
-  }
-
-  props.pdf.autoTable({
-    startY: !props?.newPage ? props?.pdf.lastAutoTable.finalY : 10,
-    body: getOptionsBody(props),
-    theme: "grid",
-    bodyStyles: {
-      minCellHeight: 8,
-      fontSize: 9,
-      textColor: props.style_pdf?.textColorBody,
-      lineColor: props.style_pdf?.lineColor,
-    },
-    columnStyles: getColumnsOptions(props),
-  });
 }

@@ -29,7 +29,7 @@ function obtenerFechaActualFormateada() {
   return fechaCapitalizada;
 }
 
-export function createHeading({
+export function CreateHeading({
   quoteName,
   pdf,
   companyData,

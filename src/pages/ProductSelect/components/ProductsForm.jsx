@@ -1,6 +1,11 @@
 import React from "react";
 import Search from "../../../components/SearchProducts";
-import { faMinus, faPlus, faTrash, faX } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMinus,
+  faPlus,
+  faTrash,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
 import Select from "../../../components/Select/Index";
@@ -242,11 +247,11 @@ const ProductsForm = ({
                         return (
                           <tr className="" key={indexNote}>
                             <td className="relative left-10 flex cursor-pointer">
-                              <FontAwesomeIcon 
-                                icon={faX} 
+                              <FontAwesomeIcon
+                                icon={faX}
                                 className="relative top-1 text-xs hover:text-slate-400"
                                 onClick={() => {
-                                  removeNoteToProduct(index, indexNote)
+                                  removeNoteToProduct(index, indexNote);
                                 }}
                               />
                               <input

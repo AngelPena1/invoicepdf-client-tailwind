@@ -1,9 +1,9 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import toast from "react-hot-toast";
-import { createHeading } from "./components/createHeading";
-import { createBody } from "./components/createBody";
-import { createFooter } from "./components/createFooter";
+import { CreateHeading } from "./components/CreateHeading";
+import { CreateBody } from "./components/CreateBody";
+// import { CreateFooter } from "./components/CreateFooter";
 import { getQuoteCounter } from "../axios/getQuoteCounter";
 
 const maxHeight = 170;
@@ -75,7 +75,8 @@ export async function GenerarPDF({
   hasCode,
   hasCost,
   quoteId,
-  quoteHasData
+  quoteHasData,
+  quoteConfig
 }) {
   try {
     const pdf = new jsPDF({
@@ -87,7 +88,7 @@ export async function GenerarPDF({
 
     const style_pdf = stylesPDF(companyData[0]?.style_pdf)
 
-    createHeading({
+    CreateHeading({
       quoteName: name,
       pdf,
       companyData,
@@ -98,7 +99,7 @@ export async function GenerarPDF({
       quote_counter,
       style_pdf
     });
-    createBody({
+    CreateBody({
       pdf,
       newPage,
       controlPixelHeight,
@@ -107,15 +108,8 @@ export async function GenerarPDF({
       maxHeight,
       hasCode,
       hasCost,
-      style_pdf
-    });
-    createFooter({
-      pdf,
-      newPage,
-      maxHeight,
-      controlPixelHeight,
-      hasItbis,
-      hasCost,
+      style_pdf,
+      quoteConfig,
       discount,
       with_delivery,
       deposit,
@@ -123,8 +117,24 @@ export async function GenerarPDF({
       price,
       itbis,
       withITBIS,
-      style_pdf
     });
+    // CreateFooter({
+    //   pdf,
+    //   newPage,
+    //   maxHeight,
+    //   controlPixelHeight,
+    //   hasItbis,
+    //   hasCost,
+    //   discount,
+    //   with_delivery,
+    //   deposit,
+    //   cost,
+    //   price,
+    //   itbis,
+    //   withITBIS,
+    //   style_pdf,
+    //   quoteConfig
+    // });
 
     if (isPreview) {
       const pdfWithWatermark = addWaterMark(pdf);
