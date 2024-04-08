@@ -34,7 +34,7 @@ const ProductsForm = ({
   HandlePrintPreview,
 }) => {
   return (
-    <section className="bg-white p-8 rounded-lg shadow-style-2 h-2xl">
+    <section className="bg-white p-8 rounded-lg shadow-style-2 h-fit">
       <div className="grid grid-cols-2">
         <section
           name="heading"
@@ -306,7 +306,7 @@ const ProductsForm = ({
                 );
               })}
             </tbody>
-            {toggles?.itbis ? (
+            {/* {toggles?.itbis ? (
               <tfoot className="text-right ">
                 <tr className="">
                   <td className="px-2"></td>
@@ -387,7 +387,6 @@ const ProductsForm = ({
                   </th>
                   <td className=" px-2 "></td>
                 </tr>
-                {/* <hr className="border-t-2 border-indigo-500 grid place-items-end" /> */}
                 <tr className="">
                   <td className="px-2 "></td>
                   <td className="px-2"></td>
@@ -409,39 +408,67 @@ const ProductsForm = ({
                   <td className="px-2 "></td>
                 </tr>
               </tfoot>
-            )}
+            )} */}
           </table>
         </div>
       </section>
-      <section className="flex justify-end mt-5">
-        <input
-          type="text"
-          className="w-36 mr-8 h-10"
-          name="discount"
-          placeholder="Descuento"
-          value={inputData?.discount}
-          onChange={HandleInputData}
-        />
-        <input
-          type="text"
-          className="w-36 mr-8 h-10"
-          name="deposit"
-          placeholder="Anticipo"
-          value={inputData?.deposit}
-          onChange={HandleInputData}
-        />
-        <input
-          type="text"
-          className="w-36 mr-8 h-10"
-          name="with_delivery"
-          placeholder="Con entrega"
-          value={inputData?.with_delivery}
-          onChange={HandleInputData}
-        />
-        <button className="px-4 mr-8 button-2" onClick={HandlePrintPreview}>
+      <section className="mt-5 grid grid-cols-2 ">
+        <section className="grid grid-cols-2 w-80">
+          <input
+            type="text"
+            className="w-36 mr-8 mb-2 h-8"
+            name="discount"
+            placeholder="Descuento"
+            value={inputData?.discount}
+            onChange={HandleInputData}
+            autoComplete="off"
+          />
+
+          <input
+            type="text"
+            className="w-36 mr-8 h-8"
+            name="deposit"
+            placeholder="Anticipo"
+            value={inputData?.deposit}
+            onChange={HandleInputData}
+            autoComplete="off"
+          />
+          <input
+            type="text"
+            className="w-36 mr-8 h-8"
+            name="with_delivery"
+            placeholder="Con entrega"
+            value={inputData?.with_delivery}
+            onChange={HandleInputData}
+            autoComplete="off"
+          />
+        </section>
+        <section className="flex justify-end">
+          <ul className="w-96 text-right border-t-2 border-blue-300">
+            <li className="grid grid-cols-2">
+              <p>Descuento</p>
+              <p className="text-right">1000.00</p>
+            </li>
+            <li className="grid grid-cols-2">
+              <p>Subtotal</p>
+              <p className="text-right">1000.00</p>
+            </li>
+            <li className="grid grid-cols-2">
+              <p>Itbis</p>
+              <p className="text-right">1000.00</p>
+            </li>
+            <li className="grid grid-cols-2">
+              <p>Total</p>
+              <p className="text-right">1000.00</p>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section className="grid grid-cols-2 relative top-4">
+        <button className="button-2" onClick={HandlePrintPreview}>
           Preview
         </button>
-        <button className="px-4" onClick={HandlePrintQuote}>
+        <button className="" onClick={HandlePrintQuote}>
           {quoteHasData ? "Guardar cambios" : "Registrar"}
         </button>
       </section>
