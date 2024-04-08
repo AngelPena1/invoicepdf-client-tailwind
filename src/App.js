@@ -6,18 +6,17 @@ import ProductSelect from "./pages/ProductSelect/Index";
 import Products from "./pages/Products/Index";
 import Client from "./pages/Clients/Index";
 import Login from "./pages/Login/LoginIndex";
-import History from './pages/History/Index'
+import History from "./pages/History/Index";
 
 function App() {
-
   return (
-    <div className="lg:pb-28 md:pt-32 xl:px-40 lg:px-24 md:px-20 px-10">
+    <div className=" md:pt-32 xl:px-40 lg:px-24 md:px-20 px-10">
       <img
         className="bg-cover bg-center w-screen h-screen object-cover fixed -z-20 top-0 left-0 bottom-0 right-0 m-auto"
         src="https://i0.wp.com/backgroundabstract.com/wp-content/uploads/edd/2022/02/5594016-e1656071131636.jpg?resize=150150&ssl=1"
         alt="background"
       />
-      
+
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="login" element={<Login />} />
