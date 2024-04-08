@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NavbarForm from "./NavbarForm";
 import BusinessModal from "../Modals/Business/Index";
+
 const NavbarIndex = () => {
   const [show, setShow] = useState({
     maintenance: false,
@@ -10,7 +11,7 @@ const NavbarIndex = () => {
   function toggleMaintenance(bool) {
     setShow({ ...show, maintenance: bool });
   }
-
+  
   function toggleCompanyInfo(bool) {
     setShow({ ...show, company_info: bool });
   }

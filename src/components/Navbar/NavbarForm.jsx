@@ -19,17 +19,6 @@ const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
         </div>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse ">
           <ul className="flex place-items-center">
-            <li>
-              <button
-                // type="button"
-                className="px-4 relative top-1"
-                onClick={() => {
-                  toggleCompanyInfo(true);
-                }}
-              >
-                Negocio
-              </button>
-            </li>
             <li className="ml-10 hover:text-blue-700 duration-200" onClick={logout}>
               <FontAwesomeIcon 
                 icon={faRightFromBracket}
@@ -38,15 +27,6 @@ const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
               Cerrar sesión
             </li>
           </ul>
-          {/* <button
-            // type="button"
-            className="px-4 "
-            onClick={() => {
-              toggleCompanyInfo(true);
-            }}
-          >
-            Cerrar sesion
-          </button> */}
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"

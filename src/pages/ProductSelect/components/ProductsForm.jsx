@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
 import Select from "../../../components/Select/Index";
+import Config from "../../../components/Config";
 
 const ProductsForm = ({
   result,
@@ -346,8 +347,7 @@ const ProductsForm = ({
               <p className="text-right">
                 {inputData?.discount.includes("%")
                   ? `(%) ${formatToDecimal(parseFloat(inputData?.discount))}`
-                  : formatToDecimal(parseFloat(inputData?.discount))
-                }
+                  : formatToDecimal(parseFloat(inputData?.discount))}
               </p>
             </li>
             <li className="grid grid-cols-2">
@@ -373,6 +373,7 @@ const ProductsForm = ({
           {quoteHasData ? "Guardar cambios" : "Registrar"}
         </button>
       </section>
+      <Config />
     </section>
   );
 };
