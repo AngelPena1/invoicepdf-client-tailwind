@@ -306,109 +306,6 @@ const ProductsForm = ({
                 );
               })}
             </tbody>
-            {/* {toggles?.itbis ? (
-              <tfoot className="text-right ">
-                <tr className="">
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  {toggles?.code && <td className=" px-2"></td>}
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  <th className="px-2 pt-4 text-red-400">DESCUENTO</th>
-                  {toggles?.cost && <th className="px-2 text-right"></th>}
-                  <th className="px-2 pt-4 text-right text-red-400">
-                    {formatToDecimal(parseFloat(inputData?.discount))}
-                  </th>
-                  <td className="px-2"></td>
-                </tr>
-                <tr className="">
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  {toggles?.code && <td className=" px-2"></td>}
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  <th className="px-2">SUBTOTAL</th>
-                  {toggles?.cost && (
-                    <th className="px-2 text-right">
-                      {formatToDecimal(totals?.cost)}
-                    </th>
-                  )}
-                  <th className="px-2 text-right">
-                    {formatToDecimal(totals?.price)}
-                  </th>
-                  <td className=" px-2"></td>
-                </tr>
-                <tr>
-                  <td className="px-2 "></td>
-                  <td className="px-2 "></td>
-                  {toggles?.code && <td className=" px-2 "></td>}
-                  <td className="px-2 "></td>
-                  <td className=" px-2 "></td>
-                  <td className=" px-2 "></td>
-                  <th className="px-2 ">ITBIS</th>
-                  {toggles?.cost && <th className="px-2  text-right"></th>}
-                  <th className=" px-2  text-right">
-                    {formatToDecimal(totals?.itbis)}
-                  </th>
-                  <td className="px-2"></td>
-                </tr>
-                <tr>
-                  <td className="px-2"></td>
-                  <td className="px-2 "></td>
-                  {toggles?.code && <td className=" px-2 "></td>}
-                  <td className="px-2 "></td>
-                  <td className=" px-2 "></td>
-                  <td className=" px-2 "></td>
-                  <th className="px-2 border-t-2 border-gray-500">TOTAL</th>
-                  {toggles?.cost && (
-                    <th className="px-2  text-right border-t-2 border-gray-500"></th>
-                  )}
-                  <th className=" px-2 text-right border-t-2 border-gray-500">
-                    {formatToDecimal(totals?.withITBIS)}
-                  </th>
-                  <td className="px-2"></td>
-                </tr>
-              </tfoot>
-            ) : (
-              <tfoot className="text-right">
-                <tr className="">
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  {toggles?.code && <td className=" px-2"></td>}
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  <th className="px-2 text-red-400">DESCUENTO</th>
-                  {toggles?.cost && <th className="px-2  text-right"></th>}
-                  <th className="px-2  text-right text-red-400">
-                    {formatToDecimal(parseFloat(inputData?.discount))}
-                  </th>
-                  <td className=" px-2 "></td>
-                </tr>
-                <tr className="">
-                  <td className="px-2 "></td>
-                  <td className="px-2"></td>
-                  {toggles?.code && <td className=" px-2"></td>}
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  <td className="px-2"></td>
-                  <th className="px-2 border-t-2 border-gray-500 font-bold">
-                    TOTAL
-                  </th>
-                  {toggles?.cost && (
-                    <th className="px-2 text-right border-t-2 border-gray-500">
-                      {formatToDecimal(totals?.cost)}
-                    </th>
-                  )}
-                  <th className="px-2 text-right border-t-2 border-gray-500">
-                    {formatToDecimal(totals?.price)}
-                  </th>
-                  <td className="px-2 "></td>
-                </tr>
-              </tfoot>
-            )} */}
           </table>
         </div>
       </section>
@@ -416,17 +313,16 @@ const ProductsForm = ({
         <section className="grid grid-cols-2 w-80">
           <input
             type="text"
-            className="w-36 mr-8 mb-2 h-8"
+            className="w-36 mr-8 mb-2 h-8 outline-none"
             name="discount"
             placeholder="Descuento"
             value={inputData?.discount}
             onChange={HandleInputData}
             autoComplete="off"
           />
-
           <input
             type="text"
-            className="w-36 mr-8 h-8"
+            className="w-36 mr-8 h-8 outline-none"
             name="deposit"
             placeholder="Anticipo"
             value={inputData?.deposit}
@@ -435,7 +331,7 @@ const ProductsForm = ({
           />
           <input
             type="text"
-            className="w-36 mr-8 h-8"
+            className="w-36 mr-8 h-8 outline-none"
             name="with_delivery"
             placeholder="Con entrega"
             value={inputData?.with_delivery}
@@ -443,23 +339,28 @@ const ProductsForm = ({
             autoComplete="off"
           />
         </section>
-        <section className="flex justify-end">
+        <section className="flex justify-end relative right-3">
           <ul className="w-96 text-right border-t-2 border-blue-300">
             <li className="grid grid-cols-2">
               <p>Descuento</p>
-              <p className="text-right">1000.00</p>
+              <p className="text-right">
+                {inputData?.discount.includes("%")
+                  ? `(%) ${formatToDecimal(parseFloat(inputData?.discount))}`
+                  : formatToDecimal(parseFloat(inputData?.discount))
+                }
+              </p>
             </li>
             <li className="grid grid-cols-2">
               <p>Subtotal</p>
-              <p className="text-right">1000.00</p>
+              <p className="text-right">{formatToDecimal(totals?.price)}</p>
             </li>
             <li className="grid grid-cols-2">
               <p>Itbis</p>
-              <p className="text-right">1000.00</p>
+              <p className="text-right">{formatToDecimal(totals?.itbis)}</p>
             </li>
             <li className="grid grid-cols-2">
               <p>Total</p>
-              <p className="text-right">1000.00</p>
+              <p className="text-right">{formatToDecimal(totals?.withITBIS)}</p>
             </li>
           </ul>
         </section>

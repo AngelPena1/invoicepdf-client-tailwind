@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { isNumberOrDecimal } from "../../../utils/regex/isNumberOrDecimal";
+import { isDecimalOrPorcentage, isNumberOrDecimal } from "../../../utils/regex/isNumberOrDecimal";
 
 const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
   const [clientInputData, setClientInputData] = useState({
@@ -25,10 +25,14 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
 
     if (name === "search" || name === "note") {
       return setInputData({ ...inputData, [name]: value });
-    } else {
-      if (isNumberOrDecimal(value)) {
+    }
+    else if (name === "discount") {
+      if(isDecimalOrPorcentage(value)) {
         return setInputData({ ...inputData, [name]: value });
       }
+    }
+    else if (isNumberOrDecimal(value)) {
+      return setInputData({ ...inputData, [name]: value });
     }
   }
 

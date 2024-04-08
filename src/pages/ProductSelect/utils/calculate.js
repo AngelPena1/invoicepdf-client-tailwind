@@ -5,6 +5,7 @@ function calculate({ selectedProducts, discount }) {
     total: 0,
     cost: 0
   };
+  let localDiscount = discount
 
   selectedProducts.forEach((product) => {
     results.subtotal += parseFloat(
@@ -15,7 +16,14 @@ function calculate({ selectedProducts, discount }) {
     );
   });
 
-  results.subtotal = results.subtotal - discount
+
+  if (localDiscount?.includes('%')) {
+    localDiscount = localDiscount?.split('%')[0]
+    localDiscount = localDiscount / 100
+    localDiscount = results?.subtotal * localDiscount
+  }
+  
+  results.subtotal = results.subtotal - localDiscount
   results.itbis = results?.subtotal * 0.18;
   results.total = results?.subtotal + results?.itbis;
 
