@@ -5,7 +5,9 @@ export const FooterWithItbis = (props) => {
     [
       "1. Tiempo de Entrega: 5-7 semanas una vez confirmado el pedido con anticipo.",
       "Descuento",
-      formatToDecimal(parseFloat(props?.discount)),
+      props.discountIsPorcentage
+        ? `(%) ${formatToDecimal(parseFloat(props?.discount))}`
+        : formatToDecimal(parseFloat(props?.discount)),
     ],
     [
       "2. Forma de pago: 70% de anticipo. Saldo contra entrega.",
@@ -16,7 +18,7 @@ export const FooterWithItbis = (props) => {
     ["", "Total", formatToDecimal(props?.withITBIS)],
     ["", "Anticipo", formatToDecimal(parseFloat(props?.deposit))],
     ["", "Con Entrega", formatToDecimal(parseFloat(props?.with_delivery))],
-  ]
+  ];
 };
 
 export const FooterNoItbis = (props) => {
@@ -24,7 +26,9 @@ export const FooterNoItbis = (props) => {
     [
       "1. Tiempo de Entrega: 5-7 semanas una vez confirmado el pedido con anticipo.",
       "Descuento",
-      formatToDecimal(parseFloat(props?.discount)),
+      props.discountIsPorcentage
+        ? `(%) ${formatToDecimal(parseFloat(props?.discount))}`
+        : formatToDecimal(parseFloat(props?.discount)),
     ],
     [
       "2. Forma de pago: 70% de anticipo. Saldo contra entrega.",
@@ -37,5 +41,5 @@ export const FooterNoItbis = (props) => {
       formatToDecimal(parseFloat(props?.deposit)),
     ],
     ["", "Con Entrega", formatToDecimal(parseFloat(props?.with_delivery))],
-  ]
+  ];
 };

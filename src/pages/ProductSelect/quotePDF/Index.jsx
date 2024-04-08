@@ -62,6 +62,7 @@ export async function GenerarPDF({
   imagesData,
   clientData,
   companyImgData,
+  discountIsPorcentage,
   discount,
   with_delivery,
   deposit,
@@ -99,7 +100,6 @@ export async function GenerarPDF({
       quote_counter,
       style_pdf
     });
-    
     CreateBody({
       pdf,
       newPage,
@@ -112,6 +112,7 @@ export async function GenerarPDF({
       hasItbis,
       style_pdf,
       quoteConfig,
+      discountIsPorcentage,
       discount,
       with_delivery,
       deposit,

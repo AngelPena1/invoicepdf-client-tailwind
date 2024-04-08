@@ -11,6 +11,7 @@ const TemplateNoImageCost = ({
   hasItbis,
   newPage,
   maxHeight,
+  discountIsPorcentage,
   discount,
   with_delivery,
   deposit,
@@ -120,13 +121,20 @@ const TemplateNoImageCost = ({
     body: hasItbis
       ? FooterWithItbis({
           discount,
+          discountIsPorcentage,
           with_delivery,
           deposit,
           price,
           itbis,
           withITBIS,
         })
-      : FooterNoItbis({ discount, with_delivery, deposit, price }),
+      : FooterNoItbis({
+          discount,
+          discountIsPorcentage,
+          with_delivery,
+          deposit,
+          price,
+        }),
     theme: "grid",
     bodyStyles: {
       fontSize: 9,

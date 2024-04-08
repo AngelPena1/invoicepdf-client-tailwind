@@ -121,6 +121,7 @@ const Index = () => {
         imagesData,
         clientData: clientInputData,
         companyImgData,
+        discountIsPorcentage: inputData?.discount.includes('%'),
         discount: inputData?.discount,
         with_delivery: inputData?.with_delivery,
         deposit: inputData?.deposit,

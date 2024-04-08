@@ -12,6 +12,7 @@ const TemplateNoImage = ({
   newPage,
   maxHeight,
   discount,
+  discountIsPorcentage,
   with_delivery,
   deposit,
   price,
@@ -21,9 +22,7 @@ const TemplateNoImage = ({
   //194.5
   //body
   pdf.autoTable({
-    body: [
-      ["Descripción del producto", "Cant", "Precio", "Total"],
-    ],
+    body: [["Descripción del producto", "Cant", "Precio", "Total"]],
     theme: "grid",
     bodyStyles: {
       // fillColor: style_pdf?.fillColor,
@@ -47,7 +46,7 @@ const TemplateNoImage = ({
         cellWidth: 31.81,
         halign: "right",
         fillColor: style_pdf?.fillColor,
-      }, 
+      },
     },
   });
   selectedProducts.forEach((product) => {
@@ -96,7 +95,7 @@ const TemplateNoImage = ({
         0: { cellWidth: 116.55 }, //-5
         1: { cellWidth: 14.3, halign: "center" },
         2: { cellWidth: 31.81, halign: "right" },
-        3: { cellWidth: 31.81, halign: "right" }, 
+        3: { cellWidth: 31.81, halign: "right" },
       },
     });
 
@@ -116,13 +115,20 @@ const TemplateNoImage = ({
     body: hasItbis
       ? FooterWithItbis({
           discount,
+          discountIsPorcentage,
           with_delivery,
           deposit,
           price,
           itbis,
           withITBIS,
         })
-      : FooterNoItbis({ discount, with_delivery, deposit, price }),
+      : FooterNoItbis({
+          discount,
+          discountIsPorcentage,
+          with_delivery,
+          deposit,
+          price,
+        }),
     theme: "grid",
     bodyStyles: {
       fontSize: 9,
