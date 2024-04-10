@@ -11,7 +11,7 @@ const usePostQuotes = ({
   toggles,
   results,
   quoteHasData,
-  quote_count
+  quote_count,
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuth();
@@ -33,18 +33,22 @@ const usePostQuotes = ({
           has_itbis: toggles?.itbis,
           has_code: toggles?.code,
           has_cost: toggles?.cost,
-          discount: inputData?.discount,
           subtotal: results?.price,
           itbis: results?.itbis,
           total: results?.withITBIS,
-          deposit: inputData?.deposit,
-          with_delivery: inputData?.with_delivery,
+          discount: results?.discount,
+          deposit: inputData?.deposit === '' ? 0 : parseFloat(inputData?.deposit),
+          with_delivery: inputData?.with_delivery === '' ? 0 : parseFloat(inputData?.with_delivery),
           selected_products_json: JSON.stringify(selectedProducts),
           quote_count: quote_counter,
           createdBy: auth?.username,
         })
-        .then(() => {
-          toast.success("La cotización ha sido creada exitosamente.");
+        .then((res) => {
+          if (res?.status === 201) {
+            toast.success("La cotización ha sido creada exitosamente.");
+          } else {
+            toast.error("Ha ocurrido un error inesperado.");
+          }
         })
         .catch(() => {
           toast.error("Ha ocurrido un error.");
@@ -59,12 +63,12 @@ const usePostQuotes = ({
           has_itbis: toggles?.itbis,
           has_code: toggles?.code,
           has_cost: toggles?.cost,
-          discount: inputData?.discount,
           subtotal: results?.price,
           itbis: results?.itbis,
           total: results?.withITBIS,
-          deposit: inputData?.deposit,
-          with_delivery: inputData?.with_delivery,
+          discount: results?.discount,
+          deposit: inputData?.deposit === '' ? 0 : parseFloat(inputData?.deposit),
+          with_delivery: inputData?.with_delivery === '' ? 0 : parseFloat(inputData?.with_delivery),
           selected_products_json: JSON.stringify(selectedProducts),
           createdBy: auth?.username,
         })
