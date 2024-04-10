@@ -187,7 +187,7 @@ const ProductsForm = ({
                         />
                       </td>
                       {toggles?.code && (
-                        <td className="px-2 py-2 border-r-2 text-cente">{product?.code}</td>
+                        <td className="px-2 py-2 border-r-2 text-center">{product?.code}</td>
                       )}
                       {toggles?.cost && (
                         <td className="px-2 py-2 text-right border-r-2">
@@ -321,7 +321,7 @@ const ProductsForm = ({
               <p>Descuento</p>
               <p className="text-right">
                 {inputData?.discount.includes("%")
-                  ? `(%) ${formatToDecimal(parseFloat(inputData?.discount))}`
+                  ? `(${inputData?.discount}) ${formatToDecimal(parseFloat(totals?.discount))}`
                   : formatToDecimal(parseFloat(inputData?.discount))}
               </p>
             </li>

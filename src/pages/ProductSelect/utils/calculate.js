@@ -2,6 +2,7 @@ function calculate({ selectedProducts, discount }) {
   let results = {
     subtotal: 0,
     itbis: 0,
+    discount: 0,
     total: 0,
     cost: 0
   };
@@ -23,6 +24,7 @@ function calculate({ selectedProducts, discount }) {
     localDiscount = results?.subtotal * localDiscount
   }
   
+  results.discount = localDiscount
   results.subtotal = results.subtotal - localDiscount
   results.itbis = results?.subtotal * 0.18;
   results.total = results?.subtotal + results?.itbis;

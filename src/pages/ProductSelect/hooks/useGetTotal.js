@@ -13,6 +13,7 @@ const useGetTotal = ({ selectedProducts, discount, refreshPrice }) => {
     const result = calculate({ selectedProducts, discount });
 
     return setTotals({
+      discount: result?.discount,
       cost: result?.cost,
       price: result?.subtotal,
       itbis: result?.subtotal * 0.18,
