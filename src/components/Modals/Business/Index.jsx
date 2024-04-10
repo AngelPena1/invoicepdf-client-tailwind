@@ -65,6 +65,7 @@ const Index = ({ toggleCompanyInfo }) => {
           <BusinessForm
             inputData={inputData}
             loading_image={loading_image}
+            toggleCompanyInfo={toggleCompanyInfo}
             ResetCompanyValues={ResetCompanyValues}
             HandleInputData={HandleInputData}
             HandleImageChange={HandleImageChange}
@@ -75,6 +76,7 @@ const Index = ({ toggleCompanyInfo }) => {
           <PdfForm
             quoteInput={quoteInput}
             resetQuoteValue={resetQuoteValue}
+            toggleCompanyInfo={toggleCompanyInfo}
             HandleUpdateConfig={HandleUpdateConfig}
             HandleQuoteInput={HandleQuoteInput}
           />

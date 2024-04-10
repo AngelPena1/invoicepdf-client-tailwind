@@ -32,7 +32,10 @@ const PdfForm = (props) => {
           <button
             type="button"
             className="px-2 button-2"
-            onClick={props.resetQuoteValue}
+            onClick={() => {
+              props.resetQuoteValue()
+              props.toggleCompanyInfo(false)
+            }}
           >
             Descartar Cambios
           </button>
