@@ -71,7 +71,7 @@ const LoginIndex = () => {
       const usernameCookie = Cookies.get("auth-invoice-username");
       const companyCookie = Cookies.get("auth-invoice-company");
       const tokenCookie = Cookies.get("auth-invoice-accessToken");
-
+      
       if (!usernameCookie || !tokenCookie || !companyCookie) return;
 
       setAuth({

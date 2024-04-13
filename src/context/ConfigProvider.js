@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
-import { axiosPrivate } from "../api/axios";
 import useAuth from "../hooks/useAuth";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+
 const ConfigContext = createContext({});
 
 export const ConfigProvider = ({ children }) => {
   const [config, setConfig] = useState("");
   const [refetchQuote, setRefetchQuote] = useState(false)
   const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate()
 
   function HandleRefetchQuote() {
     return setRefetchQuote(!refetchQuote)
@@ -14,7 +16,8 @@ export const ConfigProvider = ({ children }) => {
 
   useEffect(() => {
     if(auth === "") return
-    axiosPrivate
+    try {
+      axiosPrivate
       .get(`quote/config/company/${auth?.company?.id}/getall`)
       .then((res) => {
         setConfig({
@@ -22,6 +25,9 @@ export const ConfigProvider = ({ children }) => {
           quote: res.data,
         });
       });
+    } catch (error) {
+      console.error(error?.message);
+    }
       // eslint-disable-next-line
   }, [auth, refetchQuote]);
 

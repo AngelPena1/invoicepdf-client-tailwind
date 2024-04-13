@@ -9,6 +9,8 @@ const useRefreshToken = () => {
       withCredentials: true, //this settings allows us to send cookies with our request
     });
 
+    console.log(response);
+
     // Cookies.set('social-media-auth', [auth.username, auth.roles, response.data.accessToken], { expires: 7, path: '/' })
 
     setAuth((prev) => {
