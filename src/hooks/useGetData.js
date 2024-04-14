@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "./useAxiosPrivate";
-import useAuth from "./useAuth";
 
 const useGetData = ({url, refresh, isNullValue, search}) => {
   const [data, setData] = useState([]);
@@ -37,7 +36,6 @@ const useGetData = ({url, refresh, isNullValue, search}) => {
         .catch((err) => {
           if (!err?.message === "canceled") {
             setLoading(false);
-            console.error(err);
           }
         });
     };

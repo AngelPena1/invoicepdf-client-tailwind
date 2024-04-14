@@ -9,6 +9,7 @@ const useLogOut = () => {
     Cookies.remove("auth-invoice-username");
     Cookies.remove("auth-invoice-company");
     Cookies.remove("auth-invoice-accessToken");
+    Cookies.remove("jwt");
   };
   return logout;
 };

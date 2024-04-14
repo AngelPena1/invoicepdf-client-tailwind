@@ -1,45 +1,66 @@
-import { axiosPrivate } from "../api/axios"
-import { useEffect } from "react"
-import useRefreshToken from './useRefreshToken'
-import useAuth from "./useAuth"
+import { axiosPrivate } from "../api/axios";
+import { useEffect } from "react";
+import useRefreshToken from "./useRefreshToken";
+import useAuth from "./useAuth";
+import useLogOut from "./useLogout";
 
 const useAxiosPrivate = () => {
-    const refresh = useRefreshToken()
-    const {auth} = useAuth()
+  const logout = useLogOut();
+  const refresh = useRefreshToken();
+  const { auth } = useAuth();
 
-    useEffect(() => {
-      const requestIntercept = axiosPrivate.interceptors.request.use(
-        config => {
-          if(!config.headers['Authorization']) { //If it doesn't exists, its means that is the first attempt
-            config.headers['Authorization'] = `Bearer ${auth?.accessToken}`
+  useEffect(() => {
+    let requestInterceptor;
+    let responseInterceptor;
+
+    const setupInterceptors = () => {
+      requestInterceptor = axiosPrivate.interceptors.request.use(
+        (config) => {
+          if (!config.headers["Authorization"]) {
+            config.headers["Authorization"] = `Bearer ${auth?.accessToken}`;
           }
-          return config
-        }, (error) => Promise.reject(error)  
+          return config;
+        },
+        (error) => Promise.reject(error)
       );
 
-      const responseIntercept = axiosPrivate.interceptors.response.use(
-        response => response,
+      responseInterceptor = axiosPrivate.interceptors.response.use(
+        (response) => response,
         async (error) => {
-          const prevRequest = error?.config
-          if(error?.response?.status === 403 && !prevRequest?.sent) {
-            prevRequest.sent = true
-            const newAccessToken = await refresh()
-            console.log(newAccessToken);
-            prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
-            axiosPrivate(prevRequest)
+          const originalRequest = error.config;
+          if (error.response && [404].includes(error.response.status)) {
+            return logout();
           }
-          return Promise.reject(error)
+          if (
+            error.response &&
+            [401, 403].includes(error.response.status) &&
+            !originalRequest._retry
+          ) {
+            originalRequest._retry = true;
+            try {
+              const newAccessToken = await refresh();
+              originalRequest.headers[
+                "Authorization"
+              ] = `Bearer ${newAccessToken}`;
+              return axiosPrivate(originalRequest);
+            } catch (refreshError) {
+              return Promise.reject(refreshError);
+            }
+          }
+          return Promise.reject(error);
         }
-        
       );
+    };
 
-      return () => {
-        axiosPrivate.interceptors.request.eject(requestIntercept)
-        axiosPrivate.interceptors.response.eject(responseIntercept)
-      }
-    }, [auth, refresh])
+    setupInterceptors();
 
-  return axiosPrivate
-}
+    return () => {
+      axiosPrivate.interceptors.request.eject(requestInterceptor);
+      axiosPrivate.interceptors.response.eject(responseInterceptor);
+    };
+  }, [auth, refresh]);
 
-export default useAxiosPrivate
+  return axiosPrivate;
+};
+
+export default useAxiosPrivate;

@@ -31,14 +31,18 @@ const LoginIndex = () => {
         setAuth({
           username: usernameRef?.current?.value,
           company: res.data?.company,
+          roles: res.data?.roles,
           accessToken: res.data?.accessToken,
         });
 
         HandleSetCookie({
           username: usernameRef?.current?.value,
           company: res.data?.company,
+          roles: res.data?.roles,
           accessToken: res.data?.accessToken,
         });
+
+        setJwtCookie(res.data?.refreshToken);
 
         navigate("/", { replace: true });
       })
@@ -48,19 +52,32 @@ const LoginIndex = () => {
         } else if (error?.response?.status === 401) {
           setErrMsg("Usuario o contraseña incorrecta");
         } else {
-          console.error(error)
+          console.error(error);
           setErrMsg("Error inesperado");
         }
       });
   }
 
-  function HandleSetCookie({ username, company, accessToken }) {
+  function setJwtCookie(refreshToken) {
+    return Cookies.set("jwt", `${refreshToken}`, {
+      expires: 7
+    });
+  }
+
+  function HandleSetCookie({ username, roles, company, accessToken }) {
     Cookies.set("auth-invoice-username", `${username}`, {
       expires: 1,
     });
-    Cookies.set("auth-invoice-company", `${JSON.stringify({id: company?.id, name: company?.name})}`, {
+    Cookies.set("auth-invoice-roles", `${JSON.stringify({ roles })}`, {
       expires: 1,
     });
+    Cookies.set(
+      "auth-invoice-company",
+      `${JSON.stringify({ id: company?.id, name: company?.name })}`,
+      {
+        expires: 1,
+      }
+    );
     Cookies.set("auth-invoice-accessToken", `${accessToken}`, {
       expires: 1,
     });
@@ -71,11 +88,12 @@ const LoginIndex = () => {
       const usernameCookie = Cookies.get("auth-invoice-username");
       const companyCookie = Cookies.get("auth-invoice-company");
       const tokenCookie = Cookies.get("auth-invoice-accessToken");
-      
+
       if (!usernameCookie || !tokenCookie || !companyCookie) return;
 
       setAuth({
         username: usernameCookie,
+        // roles:
         company: JSON.parse(companyCookie),
         accessToken: tokenCookie,
       });
