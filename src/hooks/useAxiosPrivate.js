@@ -58,6 +58,7 @@ const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestInterceptor);
       axiosPrivate.interceptors.response.eject(responseInterceptor);
     };
+    // eslint-disable-next-line
   }, [auth, refresh]);
 
   return axiosPrivate;
