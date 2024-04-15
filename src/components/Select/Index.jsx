@@ -4,13 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 
 const Select = ({
-  className,
-  onClick,
-  value,
+  className, //To add styles to the container select
+  onClick, //Whats happen when a item is selected
+  value, //The current value to show, when is null, shows the default value
   value_id,
-  placeHolder,
-  elements,
+  placeHolder, //Placeholder shows in the select
+  elements, //The elements array that contains the select
 }) => {
+  //basic structure expected in the array
+  // {id: integer, name: value}
+
   const [toggle, setToggle] = useState(false);
   const comboBoxRef = useRef(null);
 
@@ -41,18 +44,18 @@ const Select = ({
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
 
     // Limpiar event listener en la limpieza del efecto
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
   return (
     <div ref={comboBoxRef} className={className ? className : "relative"}>
       <button
-        className="w-full bg-transparent border-2 text-primary-dark hover:bg-primary hover:text-white outline-none duration-200"
+        className="w-full h-8 p-0 border-2 bg-transparent text-primary-dark hover:bg-primary hover:text-white outline-none duration-200"
         onClick={() => {
           HandleToggle(!toggle);
         }}
@@ -75,7 +78,7 @@ const Select = ({
                     HandleToggle(false);
                   }}
                   key={index}
-                  className="p-2 border-b last-of-type:border-none hover:bg-slate-100"
+                  className="pl-2 py-1 border-b last-of-type:border-none hover:bg-slate-100"
                 >
                   {element?.name}
                 </li>

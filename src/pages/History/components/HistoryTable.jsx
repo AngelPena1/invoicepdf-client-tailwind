@@ -24,10 +24,10 @@ const HistoryTable = ({
 }) => {
   const hasHistoryData = historyData?.length > 0;
   return (
-    <section>
+    <section className="w-full border-l shadow-lg rounded-lg bg-white">
       <section
         name="content"
-        className="mt-16 rounded-lg h-xl max-h-xl overflow-y-auto"
+        className="h-xl max-h-xl overflow-y-auto"
       >
         {!loadingHistory && hasHistoryData && (
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">

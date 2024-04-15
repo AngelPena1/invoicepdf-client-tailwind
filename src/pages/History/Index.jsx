@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import HistoryTable from "./components/HistoryTable";
 import useGetHistory from "./hooks/useGetHistory";
 import useHistoryQuote from "./hooks/useHistoryQuote";
-import Form from "../../components/Modals/Confirmation/Form";
+import ConfirmationDelete from "../../components/Modals/Confirmation/Index";
 import useToggles from "./hooks/useToggles";
 import { useNavigate } from "react-router-dom";
 import useHistoryData from "./hooks/useHistoryData";
+import Filters from "./components/Filters/Index";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -51,32 +52,32 @@ const Index = () => {
   }, []);
 
   return (
-    <section className="bg-white rounded-lg shadow-style-2">
-      <section name="heading" className="text-center text-2xl font-bold py-2 relative top-6">
-        <h2>Historial de Cotizaciones</h2>
-      </section>
-      {toggles?.deleteConfirmation && (
-        <Form
-          title={"Cuidado!"}
-          show={toggles.deleteConfirmation}
-          paragraph={`Estas a punto de borrar la ${selectedQuote?.name}. Esta acción no puede deshacerse.`}
-          btnLabel={"Borrar"}
-          onHide={hideDeleteConfirmation}
-          onClick={HandleDisableQuote}
+    <section className="rounded-lg">
+      <section className="flex">
+        <Filters />
+        {toggles?.deleteConfirmation && (
+          <ConfirmationDelete
+            title={"Cuidado!"}
+            show={toggles.deleteConfirmation}
+            paragraph={`Estas a punto de borrar la ${selectedQuote?.name}. Esta acción no puede deshacerse.`}
+            btnLabel={"Borrar"}
+            onHide={hideDeleteConfirmation}
+            onClick={HandleDisableQuote}
+          />
+        )}
+        <HistoryTable
+          goToEdit={goToEdit}
+          loadingHistory={loadingHistory}
+          historyData={historyData}
+          HandlePrintQuote={HandlePrintQuote}
+          HandleSelectedQuote={HandleSelectedQuote}
+          showDeleteConfirmation={showDeleteConfirmation}
+          OrderByDescription={OrderByDescription}
+          OrderByClient={OrderByClient}
+          OrderByDate={OrderByDate}
+          OrderByTotal={OrderByTotal}
         />
-      )}
-      <HistoryTable
-        goToEdit={goToEdit}
-        loadingHistory={loadingHistory}
-        historyData={historyData}
-        HandlePrintQuote={HandlePrintQuote}
-        HandleSelectedQuote={HandleSelectedQuote}
-        showDeleteConfirmation={showDeleteConfirmation}
-        OrderByDescription={OrderByDescription}
-        OrderByClient={OrderByClient}
-        OrderByDate={OrderByDate}
-        OrderByTotal={OrderByTotal}
-      />
+      </section>
     </section>
   );
 };
