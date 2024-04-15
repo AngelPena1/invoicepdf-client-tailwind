@@ -2,15 +2,26 @@ import React from "react";
 import Date from "./Date";
 import Client from "./Client";
 import SelectedFilters from "./SelectedFilters";
+import useDateFilter from "../../../../hooks/useDateFilter";
+import useSelectedFilters from "./hooks/useSelectedFilters";
 
 const Index = () => {
+  const { date, HandleDateChange, clearSpecificDate } = useDateFilter("", "", true)
+  const { filters, RemoveFilter } = useSelectedFilters({ date, clearSpecificDate })
+
   return (
-    <section className="w-80 mr-10">
-      <div className="mb-5">
-        <SelectedFilters />
+    <section className="w-80 mr-10 select-none">
+      <div className="mb-5 duration-200">
+        <SelectedFilters
+          filters={filters}
+          RemoveFilter={RemoveFilter}
+        />
       </div>
-      <div className="mb-5">
-        <Date />
+      <div className="mb-5 duration-200">
+        <Date
+          date={date}
+          HandleDateChange={HandleDateChange}
+        />
       </div>
       <div className="mb-5">
         <Client />
