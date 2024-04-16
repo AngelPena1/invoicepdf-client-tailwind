@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "../../../../components/Select/Index";
 
-const Client = () => {
+const Client = (props) => {
   return (
     <section className="w-full p-4  bg-white shadow-style-2 rounded-lg">
       <h4 className="mb-3 font-bold">Filtrar por cliente: </h4>
@@ -11,12 +11,7 @@ const Client = () => {
         </label>
         <Select
           className=""
-          elements={[
-            {
-              id: 1,
-              name: "Juan",
-            },
-          ]}
+          elements={props.ClientData}
           // value_id={true}
         />
       </div>
