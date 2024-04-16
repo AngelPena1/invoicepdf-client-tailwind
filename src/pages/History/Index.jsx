@@ -14,6 +14,7 @@ const Index = () => {
   const {
     data,
     loading: loadingHistory,
+    getFiltersFromComponent,
     ResetValue: ResetHistory,
     HandleSearch: HandleSearchHistory,
   } = useGetHistory();
@@ -54,7 +55,9 @@ const Index = () => {
   return (
     <section className="rounded-lg">
       <section className="flex">
-        <Filters />
+        <Filters
+          getFiltersFromComponent={getFiltersFromComponent}
+        />
         {toggles?.deleteConfirmation && (
           <ConfirmationDelete
             title={"Cuidado!"}

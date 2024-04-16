@@ -12,7 +12,9 @@ const Client = (props) => {
         <Select
           className=""
           elements={props.ClientData}
-          // value_id={true}
+          onClick={props.HandleSelectClient}
+          value={props.filters?.client?.id}
+          value_id={true}
         />
       </div>
     </section>

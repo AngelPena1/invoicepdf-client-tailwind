@@ -1,13 +1,26 @@
 import { useEffect, useState } from 'react'
 import { fullDateFormat } from '../../../../../utils/dateFormat/dateFormat'
 
-const useSelectedFilters = ({ date, clearSpecificDate }) => {
+const useSelectedFilters = ({ date, ClientData, clearSpecificDate }) => {
     const [filters, setFilters] = useState({
         from: "",
         to: "",
         from_to: "",
         client: ""
     })
+
+    function HandleSelectClient(provide_client) {
+        ClientData.forEach(client => {
+            if (client?.id === provide_client) {
+                return setFilters({
+                    ...filters, client: {
+                        id: client?.id,
+                        name: client?.name
+                    }
+                })
+            }
+        });
+    }
 
     function HandleDateFilters() {
         const dateFromHasValue = date?.from !== ""
@@ -20,10 +33,10 @@ const useSelectedFilters = ({ date, clearSpecificDate }) => {
             from_to: dateFromToHasValue ? fullDateFormat(date?.from_to, "spanish") : "",
         })
     }
-    
+
     function RemoveFilter(name) {
         clearSpecificDate(name)
-        setFilters({...filters, [name]: ""})
+        setFilters({ ...filters, [name]: "" })
         return null
     }
 
@@ -32,7 +45,7 @@ const useSelectedFilters = ({ date, clearSpecificDate }) => {
         // eslint-disable-next-line
     }, [date])
 
-    return { filters, RemoveFilter }
+    return { filters, HandleSelectClient, RemoveFilter }
 }
 
 export default useSelectedFilters
