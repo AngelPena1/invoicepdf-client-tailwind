@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const useSelectedFilters = ({ date, ClientData, clearSpecificDate, HandleSearchHistory }) => {
+const useSelectedFilters = ({ date, ClientData, clearSpecificDate, clearDateState, HandleSearchHistory }) => {
     const [filters, setFilters] = useState({
         from: "",
         to: "",
@@ -30,7 +30,7 @@ const useSelectedFilters = ({ date, ClientData, clearSpecificDate, HandleSearchH
         return setFilters({
             ...filters,
             from: dateFromHasValue ? date?.from : "",
-            to: dateToHasValue ?  date?.to: "",
+            to: dateToHasValue ? date?.to : "",
             from_to: dateFromToHasValue ? date?.from_to : "",
         })
     }
@@ -42,12 +42,25 @@ const useSelectedFilters = ({ date, ClientData, clearSpecificDate, HandleSearchH
         return null
     }
 
+
+    function clearAllFilters() {
+        setFilters({
+            from: "",
+            to: "",
+            from_to: "",
+            client: ""
+        })
+        clearDateState()
+        return HandleSearchHistory()
+    }
+
+
     useEffect(() => {
         HandleDateFilters(date)
         // eslint-disable-next-line
     }, [date])
 
-    return { filters, HandleSelectClient, RemoveFilter }
+    return { filters, HandleSelectClient, clearAllFilters, RemoveFilter }
 }
 
 export default useSelectedFilters

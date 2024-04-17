@@ -6,20 +6,23 @@ import useDateFilter from "../../../../hooks/useDateFilter";
 import useSelectedFilters from "./hooks/useSelectedFilters";
 import useGetClients from "../../../../hooks/useGetClients";
 import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Index = ({ getFiltersFromComponent, HandleSearchHistory }) => {
   const { data: ClientData, HandleSearch } = useGetClients();
 
-  const { date, HandleDateChange, clearSpecificDate } = useDateFilter(
+  const { date, HandleDateChange, clearSpecificDate, clearDateState } = useDateFilter(
     "",
     "",
     true
   );
 
-  const { filters, HandleSelectClient, RemoveFilter } = useSelectedFilters({
+  const { filters, HandleSelectClient, clearAllFilters, RemoveFilter } = useSelectedFilters({
     date,
     ClientData,
     clearSpecificDate,
+    clearDateState,
     HandleSearchHistory
   });
 
@@ -48,7 +51,13 @@ const Index = ({ getFiltersFromComponent, HandleSearchHistory }) => {
           HandleSelectClient={HandleSelectClient}
         />
       </div>
-      <div className="">
+      <div className="flex">
+        <button 
+          className="w-1/3 bg-red-500 hover:bg-red-400 duration-200"
+          onClick={clearAllFilters}
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
         <button 
           className="w-full"
           onClick={HandleSearchHistory}
