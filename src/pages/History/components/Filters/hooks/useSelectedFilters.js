@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { fullDateFormat } from '../../../../../utils/dateFormat/dateFormat'
 
-const useSelectedFilters = ({ date, ClientData, clearSpecificDate }) => {
+const useSelectedFilters = ({ date, ClientData, clearSpecificDate, HandleSearchHistory }) => {
     const [filters, setFilters] = useState({
         from: "",
         to: "",
@@ -22,20 +21,23 @@ const useSelectedFilters = ({ date, ClientData, clearSpecificDate }) => {
         });
     }
 
+    //`Hasta: ${fullDateFormat(date?.to, "spanish")}`
+
     function HandleDateFilters() {
         const dateFromHasValue = date?.from !== ""
         const dateToHasValue = date?.to !== ""
         const dateFromToHasValue = date?.from_to !== ""
         return setFilters({
             ...filters,
-            from: dateFromHasValue ? `Desde: ${fullDateFormat(date?.from, "spanish")}` : "",
-            to: dateToHasValue ? `Hasta: ${fullDateFormat(date?.to, "spanish")}` : "",
-            from_to: dateFromToHasValue ? fullDateFormat(date?.from_to, "spanish") : "",
+            from: dateFromHasValue ? date?.from : "",
+            to: dateToHasValue ?  date?.to: "",
+            from_to: dateFromToHasValue ? date?.from_to : "",
         })
     }
 
     function RemoveFilter(name) {
         clearSpecificDate(name)
+        HandleSearchHistory()
         setFilters({ ...filters, [name]: "" })
         return null
     }

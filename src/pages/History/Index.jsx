@@ -57,6 +57,7 @@ const Index = () => {
       <section className="flex">
         <Filters
           getFiltersFromComponent={getFiltersFromComponent}
+          HandleSearchHistory={HandleSearchHistory}
         />
         {toggles?.deleteConfirmation && (
           <ConfirmationDelete

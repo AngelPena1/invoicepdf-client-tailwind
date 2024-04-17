@@ -7,7 +7,7 @@ import useSelectedFilters from "./hooks/useSelectedFilters";
 import useGetClients from "../../../../hooks/useGetClients";
 import { useEffect } from "react";
 
-const Index = ({getFiltersFromComponent}) => {
+const Index = ({ getFiltersFromComponent, HandleSearchHistory }) => {
   const { data: ClientData, HandleSearch } = useGetClients();
 
   const { date, HandleDateChange, clearSpecificDate } = useDateFilter(
@@ -20,21 +20,21 @@ const Index = ({getFiltersFromComponent}) => {
     date,
     ClientData,
     clearSpecificDate,
+    HandleSearchHistory
   });
 
+  useEffect(() => {
+    getFiltersFromComponent(filters);
+    // eslint-disable-next-line
+  }, [filters]);
 
   useEffect(() => {
-    getFiltersFromComponent(filters)
+    HandleSearch();
     // eslint-disable-next-line
-  }, [filters])
-
-  useEffect(() => {
-    HandleSearch()
-    // eslint-disable-next-line
-  }, [])
+  }, []);
 
   return (
-    <section className="w-80 mr-10 select-none">
+    <section className="w-80 mr-10 select-none duration-200">
       <div className="mb-5 duration-200">
         <SelectedFilters filters={filters} RemoveFilter={RemoveFilter} />
       </div>
@@ -49,7 +49,10 @@ const Index = ({getFiltersFromComponent}) => {
         />
       </div>
       <div className="">
-        <button className="w-full">Aplicar</button>
+        <button 
+          className="w-full"
+          onClick={HandleSearchHistory}
+        >Aplicar</button>
       </div>
     </section>
   );
