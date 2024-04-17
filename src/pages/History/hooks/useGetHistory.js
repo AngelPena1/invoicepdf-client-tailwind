@@ -41,8 +41,6 @@ const useGetHistory = () => {
     setEndpoint(endpoint_local)
   }
 
-  console.log(endpoint);
-
   const { data, loading, ResetValue } = useGetData({
     url: endpoint,
     search
@@ -58,6 +56,7 @@ const useGetHistory = () => {
 
   useEffect(() => {
     conditionsInEnpoint()
+    //eslint-disable-next-line
   }, [filters])
 
   useEffect(() => {
