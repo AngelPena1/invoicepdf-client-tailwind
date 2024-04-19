@@ -69,10 +69,10 @@ const Index = () => {
             onClick={HandleDisableQuote}
           />
         )}
-        <section className="w-full">
+        <section className="w-full shadow-lg">
           <div
             name="heading"
-            className="text-2xl font-bold px-2 py-3 rounded-t-lg justify-start bg-white shadow-lg"
+            className="text-2xl font-bold px-2 py-3 rounded-t-lg justify-start bg-white"
           >
             Historial de Cotizaciones
           </div>
