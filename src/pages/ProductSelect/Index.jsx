@@ -16,11 +16,13 @@ import useGetQuoteById from "./hooks/useGetQuoteById";
 import toast from "react-hot-toast";
 import useConfig from "../../hooks/useConfig";
 import Config from "../../components/Config";
+import { useParams } from "react-router-dom";
 
 const Index = () => {
   const { config } = useConfig();
+  const { quote_id } = useParams();
 
-  const { data: quoteData, quoteHasData } = useGetQuoteById();
+  const { data: quoteData, quoteHasData } = useGetQuoteById(quote_id);
 
   const { data: clientsData, HandleSearch: HandleSearchClient } =
     useGetClients();
@@ -38,6 +40,7 @@ const Index = () => {
     inputData,
     clientInputData,
     resetInputNote,
+    clearAllInputs,
     clearSearchInput,
     HandleInputData,
     HandleDataClient,
@@ -150,6 +153,11 @@ const Index = () => {
     }
     // eslint-disable-next-line
   }, [imagesData]);
+
+  useEffect(() => {
+    if(!quote_id) return clearAllInputs()
+    // eslint-disable-next-line
+  }, [quote_id])
 
   useEffect(() => {
     HandleSearchClient();

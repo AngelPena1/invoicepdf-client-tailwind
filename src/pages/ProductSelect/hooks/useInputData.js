@@ -3,13 +3,13 @@ import { isDecimalOrPorcentage, isNumberOrDecimal } from "../../../utils/regex/i
 
 const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
   const [clientInputData, setClientInputData] = useState({
-    selected_client_id: null,
-    name: null,
-    razon_social: null,
-    rnc: null,
-    phone_1: null,
-    phone_2: null,
-    address: null,
+    selected_client_id: "",
+    name: "",
+    razon_social: "",
+    rnc: "",
+    phone_1: "",
+    phone_2: "",
+    address: "",
   });
 
   const [inputData, setInputData] = useState({
@@ -27,7 +27,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
       return setInputData({ ...inputData, [name]: value });
     }
     else if (name === "discount") {
-      if(isDecimalOrPorcentage(value)) {
+      if (isDecimalOrPorcentage(value)) {
         return setInputData({ ...inputData, [name]: value });
       }
     }
@@ -42,6 +42,16 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
 
   function clearSearchInput() {
     return setInputData({ ...inputData, search: "" });
+  }
+
+  function clearAllInputs() {
+    return setInputData({
+      search: "",
+      note: "",
+      with_delivery: "",
+      deposit: "",
+      discount: "",
+    })
   }
 
   function HandleDataClient(client_id) {
@@ -88,6 +98,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
     inputData,
     resetInputNote,
     clearSearchInput,
+    clearAllInputs,
     HandleInputData,
     HandleDataClient,
   };
