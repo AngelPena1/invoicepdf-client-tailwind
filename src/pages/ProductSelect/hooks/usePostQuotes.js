@@ -36,7 +36,7 @@ const usePostQuotes = ({
           subtotal: results?.price,
           itbis: results?.itbis,
           total: results?.withITBIS,
-          discount: results?.discount,
+          discount: results?.discount === '' ?  0 : parseFloat(inputData?.discount),
           deposit: inputData?.deposit === '' ? 0 : parseFloat(inputData?.deposit),
           with_delivery: inputData?.with_delivery === '' ? 0 : parseFloat(inputData?.with_delivery),
           selected_products_json: JSON.stringify(selectedProducts),
@@ -47,7 +47,7 @@ const usePostQuotes = ({
           if (res?.status === 201) {
             toast.success("La cotización ha sido creada exitosamente.");
           } else {
-            toast.error("Ha ocurrido un error inesperado.");
+            toast.error("Ha ocurrido un error inesperado al momento de crear la cotización.");
           }
         })
         .catch(() => {
