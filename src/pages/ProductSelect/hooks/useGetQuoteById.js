@@ -1,8 +1,6 @@
-import { useParams } from "react-router-dom";
 import useGetData from "../../../hooks/useGetData";
 
-const useGetQuoteById = () => {
-  const { quote_id } = useParams();
+const useGetQuoteById = (quote_id) => {
 
   const endpoint = `/quote/get/${quote_id}`;
 
