@@ -20,6 +20,7 @@ const ProductsForm = ({
   totals,
   toggles,
   quoteHasData,
+  quoteName,
   addNotesToProduct,
   removeNoteToProduct,
   showInputNote,
@@ -40,7 +41,8 @@ const ProductsForm = ({
           name="heading"
           className="text-2xl font-bold mb-8 justify-start"
         >
-          <h2>Cotización de Productos</h2>
+          {quoteHasData ? <h2>Edición de {quoteName}</h2> : <h2>Crear Cotización</h2>}
+
         </section>
         <section className="mb-8 h-10 flex justify-end">
           <div className="w-80">
@@ -77,7 +79,7 @@ const ProductsForm = ({
                 value={toggles?.itbis}
                 name="itbis"
                 onClick={HandleToggleChange}
-                onChange={() => {}}
+                onChange={() => { }}
                 className="sr-only peer outline-none"
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -94,7 +96,7 @@ const ProductsForm = ({
                 value={toggles?.code}
                 name="code"
                 onClick={HandleToggleChange}
-                onChange={() => {}}
+                onChange={() => { }}
                 className="sr-only peer outline-none"
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -111,7 +113,7 @@ const ProductsForm = ({
                 value={toggles?.cost}
                 name="cost"
                 onClick={HandleToggleChange}
-                onChange={() => {}}
+                onChange={() => { }}
                 className="sr-only peer outline-none"
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -234,7 +236,7 @@ const ProductsForm = ({
                                 type="text"
                                 className="py-0 border-0 bg-transparent outline-none italic text-slate-600"
                                 value={note}
-                                onChange={() => {}}
+                                onChange={() => { }}
                               />
                             </td>
                           </tr>

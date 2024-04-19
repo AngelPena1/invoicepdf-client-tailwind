@@ -176,6 +176,7 @@ const Index = () => {
         selectedProducts={selectedProducts}
         imagesData={imagesData}
         clearSearchInput={clearSearchInput}
+        quoteName={quoteData[0]?.name}
         quoteHasData={quoteHasData}
         totals={totals}
         toggles={toggles}

@@ -69,18 +69,26 @@ const Index = () => {
             onClick={HandleDisableQuote}
           />
         )}
-        <HistoryTable
-          goToEdit={goToEdit}
-          loadingHistory={loadingHistory}
-          historyData={historyData}
-          HandlePrintQuote={HandlePrintQuote}
-          HandleSelectedQuote={HandleSelectedQuote}
-          showDeleteConfirmation={showDeleteConfirmation}
-          OrderByDescription={OrderByDescription}
-          OrderByClient={OrderByClient}
-          OrderByDate={OrderByDate}
-          OrderByTotal={OrderByTotal}
-        />
+        <section className="w-full">
+          <div
+            name="heading"
+            className="text-2xl font-bold px-2 py-3 rounded-t-lg justify-start bg-white shadow-lg"
+          >
+            Historial de Cotizaciones
+          </div>
+          <HistoryTable
+            goToEdit={goToEdit}
+            loadingHistory={loadingHistory}
+            historyData={historyData}
+            HandlePrintQuote={HandlePrintQuote}
+            HandleSelectedQuote={HandleSelectedQuote}
+            showDeleteConfirmation={showDeleteConfirmation}
+            OrderByDescription={OrderByDescription}
+            OrderByClient={OrderByClient}
+            OrderByDate={OrderByDate}
+            OrderByTotal={OrderByTotal}
+          />
+        </section>
       </section>
     </section>
   );

@@ -24,7 +24,7 @@ const HistoryTable = ({
 }) => {
   const hasHistoryData = historyData?.length > 0;
   return (
-    <section className="w-full border-l shadow-lg rounded-lg bg-white">
+    <section className="w-full border-l rounded-lg bg-white">
       <section
         name="content"
         className="h-xl max-h-xl overflow-y-auto"
