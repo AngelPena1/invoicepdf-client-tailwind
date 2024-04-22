@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useLogOut from "../../hooks/useLogout";
 import Logo from '../../assets/logo_1.png'
 
-const NavbarForm = ({ show, toggleMaintenance, toggleCompanyInfo }) => {
+const NavbarForm = ({ show, toggleMaintenance }) => {
   const logout = useLogOut()
   return (
     <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200 shadow-lg">
