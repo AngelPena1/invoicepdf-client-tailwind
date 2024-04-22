@@ -29,7 +29,9 @@ const useAxiosPrivate = () => {
         async (error) => {
           const originalRequest = error.config;
           if (error.response && [404].includes(error.response.status)) {
-            return logout();
+            if(error?.response?.data === "Refresh not found") {
+              return logout();
+            }
           }
           if (
             error.response &&
