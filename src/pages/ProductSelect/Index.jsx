@@ -15,7 +15,6 @@ import usePostQuotes from "./hooks/usePostQuotes";
 import useGetQuoteById from "./hooks/useGetQuoteById";
 import toast from "react-hot-toast";
 import useConfig from "../../hooks/useConfig";
-import Config from "../../components/Config";
 import { useParams } from "react-router-dom";
 
 const Index = () => {
@@ -194,7 +193,6 @@ const Index = () => {
         HandleDeleteProduct={HandleDeleteProduct}
         HandlePrintPreview={HandlePrintPreview}
       />
-      <Config />
     </>
   );
 };
