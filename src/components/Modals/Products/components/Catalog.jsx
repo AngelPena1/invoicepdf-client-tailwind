@@ -83,9 +83,9 @@ const Catalog = (props) => {
                       }}
                     >
                       <td className="px-6 py-4">
-                        {product?.name.length < 72
-                          ? product?.name
-                          : product?.name.substring(0, 72) + "..."}
+                        {product?.description.length < 72
+                          ? product?.description
+                          : product?.description.substring(0, 72) + "..."}
                       </td>
                       <td className="px-6 py-4">{product?.code}</td>
                       <td className="px-6 py-4">{product?.brand?.name}</td>
