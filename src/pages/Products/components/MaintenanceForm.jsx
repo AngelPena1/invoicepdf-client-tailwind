@@ -29,6 +29,7 @@ function MaintenanceForm({
             type="text"
             placeholder="Escriba una breve descripción del producto..."
             className="w-full"
+            autoComplete="off"
             value={inputData?.description}
             onChange={(e) => {
               HandleInputData({
