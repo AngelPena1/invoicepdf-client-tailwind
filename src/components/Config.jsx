@@ -16,7 +16,7 @@ const Config = () => {
         onClick={toggleGear}
         className="fixed left-6 bottom-6 text-4xl text-slate-400 hover:text-slate-500 duration-200 cursor-pointer"
       >
-        <FontAwesomeIcon icon={faGear} cla6ssName="" />
+        <FontAwesomeIcon icon={faGear} className="" />
       </section>
       {show && <BusinessModal toggleCompanyInfo={toggleGear} />}
     </>
