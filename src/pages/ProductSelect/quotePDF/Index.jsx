@@ -83,7 +83,7 @@ export async function GenerarPDF({
     const pdf = new jsPDF({
       format: "letter",
     });
-    let controlPixelHeight = 0;
+    // let controlPixelHeight = 0;
     let newPage = false;
     const quote_counter = !quoteHasData ? await getQuoteCounter(companyData[0]?.id) : quoteId
 
@@ -103,7 +103,7 @@ export async function GenerarPDF({
     CreateBody({
       pdf,
       newPage,
-      controlPixelHeight,
+      // controlPixelHeight,
       selectedProducts,
       imagesData,
       maxHeight,
