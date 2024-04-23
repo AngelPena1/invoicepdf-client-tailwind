@@ -18,21 +18,20 @@ const usePostProduct = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
     await axiosPrivate
       .post(endpoint, {
         company_id: auth?.company?.id,
-        brand_id: data?.brand_id,
-        finishes_id: data?.finishes_id,
-        category_id: data?.category_id,
-        subcategory_id: data?.subcategory_id,
-        name: data?.name,
-        code: data?.product_code,
+        brand_id: data?.brand_id ? data?.brand_id : null,
+        finishes_id: data?.finishes_id ? data?.finishes_id : null,
+        category_id: data?.category_id ? data?.category_id : null,
+        subcategory_id: data?.subcategory_id ? data?.subcategory_id : null,
         description: data?.description,
+        code: data?.product_code,
         size: data?.image_size,
         price: data?.price,
-        cost: data?.cost,
+        cost: data?.cost ? data?.cost : null,
         createdBy: auth?.username,
         image: data?.image,
         isActive: true,
       })
-      .then(() => {
+      .then((res) => {
         toast.success("El producto ha sido creado con exito!");
         ResetInputValues()
         return HandleRefresh();
