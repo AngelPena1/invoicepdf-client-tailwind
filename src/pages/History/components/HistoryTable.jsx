@@ -5,6 +5,7 @@ import {
   faTrash,
   faSort,
   faEyeSlash,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
@@ -66,6 +67,9 @@ const HistoryTable = ({
                   />
                 </th>
                 <th scope="col" className="px-2 py-3 text-center">
+                  Factura
+                </th>
+                <th scope="col" className="px-2 py-3 text-center">
                   Imprimir
                 </th>
                 <th scope="col" className="px-2 py-3 text-center">
@@ -94,6 +98,15 @@ const HistoryTable = ({
                     </td>
                     <td className="px-2 py-4 text-left">
                       {formatToDecimal(parseFloat(data?.total))}
+                    </td>
+                    <td className="px-2 py-4 text-center">
+                      <FontAwesomeIcon
+                        icon={faPlus}
+                        className="text-xl cursor-pointer hover:text-primary z-0"
+                        onClick={() => {
+                          // HandlePrintQuote(data?.id);
+                        }}
+                      />
                     </td>
                     <td className="px-2 py-4 text-center">
                       <FontAwesomeIcon

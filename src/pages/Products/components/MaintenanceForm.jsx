@@ -98,7 +98,7 @@ function MaintenanceForm({
       <section className="grid">
         <div className="mb-8 relative">
           <label htmlFor="" className="text-base">
-            Imagen del producto
+            Imagen del producto (opcional)
           </label>
           {!inputData?.image && !loadingImg && (
             <div className="grid place-content-center text-center">
@@ -145,7 +145,7 @@ function MaintenanceForm({
           )}
         </div>
         <div className="mb-10">
-          <label className="text-base mb-6">Seleccione el tamaño</label>
+          <label className="text-base mb-6">Seleccione el tamaño (opcional)</label>
           <div className="grid grid-cols-3">
             <button
               className={
