@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const useInputData = ({ divisionsData }) => {
   const [inputData, setInputData] = useState({
@@ -134,38 +135,44 @@ const useInputData = ({ divisionsData }) => {
   }
 
   function CheckForNotEmptyValues() {
-    if (inputData?.description === "" || inputData?.description === null)
-      return true;
-    if (
-      inputData?.category?.name.trim() === "" ||
-      inputData?.category?.name === null ||
-      inputData?.category?.name === "default"
-    )
-      return true;
-    if (inputData?.price.trim() === "" || inputData?.price === null)
-      return true;
+    try {
+      if (inputData?.description === "" || inputData?.description === null)
+        return true;
+      // if (
+      //   inputData?.category?.name.trim() === "" ||
+      //   inputData?.category?.name === null ||
+      //   inputData?.category?.name === "default"
+      // )
+      //   return true;
+      if (inputData?.price.trim() === "" || inputData?.price === null)
+        return true;
 
-    // if (inputData?.image === "" || inputData?.image === null) return true;
-    if (inputData?.image_size === "" || inputData?.image_size === null)
-      return true;
-    if (
-      inputData?.product_code.trim() === "" ||
-      inputData?.product_code === null
-    )
-      return true;
-    return false;
+      // if (inputData?.image === "" || inputData?.image === null) return true;
+      // if (inputData?.image_size === "" || inputData?.image_size === null)
+      //   return true;
+      // if (
+      //   inputData?.product_code.trim() === "" ||
+      //   inputData?.product_code === null
+      // )
+      //   return true;
+      return false;
+    } catch (error) {
+      toast.error("Error al comprobar campos.");
+      console.error(error);
+    }
+
   }
 
   function ResetInputValues() {
     return setInputData({
       search: "",
       name: "",
-      brand_id: "default",
-      category_id: "default",
+      brand_id: "",
+      category_id: "",
       category: "",
-      subcategory_id: "default",
+      subcategory_id: "",
       subcategories: "",
-      finishes_id: "default",
+      finishes_id: "",
       finishes: "",
       price: "",
       cost: "",
