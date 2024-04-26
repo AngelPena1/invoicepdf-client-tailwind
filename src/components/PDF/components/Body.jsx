@@ -89,7 +89,7 @@ export const PricesSection = ({ pdf, marginX, coordinateYprices, fontText, }) =>
     }
 
     function CreateChart() {
-        const rectWith = 75
+        const rectWith = 77
         const rectHeight = 35
         pdf.rect(marginX - 40, coordinateYprices - 4, rectWith, rectHeight)
     }
@@ -123,8 +123,13 @@ export const CommentsSection = ({ pdf, coordinateYcomments, rgbStyleColor, rgbBa
 
 
     function ContentComments() {
-        pdf.setFillColor(rgbBackground?.r, rgbBackground?.g, rgbBackground?.b)
-        pdf.rect(marginX, localY, marginXend, rectHeight * 10, 'F');
+        const withLine = 98.4
+        const heightLine = localY + 30
+        pdf.setLineWidth(0.2); 
+        // pdf.line(marginX, localY, withLine, localY);
+        pdf.line(marginX + 0.1, localY - 1.5, marginX, heightLine);
+        pdf.line(marginX + 0.1, localY + 30, withLine, heightLine);
+        pdf.line(withLine, localY - 1.5, withLine, heightLine);
     }
 
     HeaderComments()
