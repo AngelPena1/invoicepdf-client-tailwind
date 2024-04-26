@@ -17,7 +17,7 @@ export const Table = ({ pdf, coordinateYtable, rgbStyleColor, rgbBackground, mar
     function HeaderTable() {
         pdf.setFillColor(rgbStyleColor?.r, rgbStyleColor?.g, rgbStyleColor?.b)
         pdf.rect(marginX, localY - 3.5, marginXend, rectHeight, 'F');
-        pdf.setTextColor(255, 255, 255);
+        pdf.setTextColor(0, 0, 0);
         pdf.text("Unidades", unitsColumn, localY, "center")
         pdf.text("Descripción", descriptionColumn, localY)
         pdf.text("Precio Unitario", unitPriceColumn, localY, "right")
@@ -88,6 +88,13 @@ export const PricesSection = ({ pdf, marginX, coordinateYprices, fontText, }) =>
         space(6)
     }
 
+    function CreateChart() {
+        const rectWith = 75
+        const rectHeight = 35
+        pdf.rect(marginX - 40, coordinateYprices - 4, rectWith, rectHeight)
+    }
+
+    CreateChart()
     Prices("Subtotal: ", "99999.00")
     Prices("Descuento: ", "999.00")
     Prices("Subtotal con Descuento: ", "999.00")
@@ -108,7 +115,7 @@ export const CommentsSection = ({ pdf, coordinateYcomments, rgbStyleColor, rgbBa
     function HeaderComments() {
         pdf.setFillColor(rgbStyleColor?.r, rgbStyleColor?.g, rgbStyleColor?.b)
         pdf.rect(marginX, localY - 3.5, marginXend, rectHeight, 'F');
-        pdf.setTextColor(255, 255, 255);
+        pdf.setTextColor(0, 0, 0);
         pdf.text("Comentarios: ", descriptionColumn, localY)
         space(3)
     }

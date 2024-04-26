@@ -34,9 +34,18 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
     function TitleInvoiceDetails(marginXlocal, titleMarginY) {
         pdf.setTextColor(rgbGreen?.r, rgbGreen?.g, rgbGreen?.b);
         pdf.setFontSize(fontDetailsInvoiceTitle);
+        pdf.setFont(undefined, 'bold')
         pdf.text("Detalles Factura ", marginXlocal, titleMarginY)
     }
 
+
+    function InvoiceTypeTitle(value, marginXlocal, titleMarginY) {
+        pdf.setTextColor(rgbGreen?.r, rgbGreen?.g, rgbGreen?.b);
+        pdf.setFontSize(fontDetailsInvoiceTitle);
+        pdf.setFont(undefined, 'bold')
+        pdf.text(value, marginXlocal, titleMarginY)
+        space(9)
+    }
 
     function InvoiceDetails(field, value) {
         pdf.setFontSize(fontText);
@@ -55,7 +64,7 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
     function TitleClientDetails() {
         pdf.setFillColor(rgbGreen?.r, rgbGreen?.g, rgbGreen?.b)
         pdf.rect(marginX, coordinateY - 3.5, rectWith, rectHeight, 'F');
-        pdf.setTextColor(255, 255, 255);
+        pdf.setTextColor(0, 0, 0);
         pdf.text("Facturar a: ", marginX + 1, coordinateY)
         space(9)
     }
@@ -87,7 +96,10 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
     TitleInvoiceDetails(marginXforSecondColumn, 15)
     InvoiceDetails("Fecha de factura: ", "DD/MM/YYYY")
     InvoiceDetails("No. factura: ", "#00001")
-    InvoiceDetails("Tipo de comprobante: ", "Fiscal")
+
+    space(10)
+
+    InvoiceTypeTitle("Consumidor Final", marginXforSecondColumn, coordinateY)
     InvoiceDetails("Num. del comprobante: ", "0000001")
     InvoiceDetails("Fecha vencimiento: ", "DD/MM/YYYY")
 
