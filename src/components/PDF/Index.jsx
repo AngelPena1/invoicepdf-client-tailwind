@@ -29,12 +29,7 @@ const Index = () => {
     g: 198,
     b: 198
   }
-
-  // const rgbBackground = {
-  //   r: 203,
-  //   g: 213,
-  //   b: 225
-  // }
+  
   const marginX = 15
   const marginXend = 187
 

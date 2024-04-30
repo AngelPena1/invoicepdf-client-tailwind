@@ -7,6 +7,7 @@ import useToggles from "./hooks/useToggles";
 import { useNavigate } from "react-router-dom";
 import useHistoryData from "./hooks/useHistoryData";
 import Filters from "./components/Filters/Index";
+import InvoicePDF from "../../components/Modals/InvoicePDF/Index";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ const Index = () => {
 
   return (
     <section className="rounded-lg">
+      {/* {toggles?.invoiceForm && <InvoicePDF />} */}
       <section className="flex">
         <Filters
           getFiltersFromComponent={getFiltersFromComponent}

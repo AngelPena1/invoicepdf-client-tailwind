@@ -3,6 +3,7 @@ import { useState } from "react";
 const useToggles = () => {
   const [toggles, setToggles] = useState({
     deleteConfirmation: false,
+    invoiceForm: true
   });
 
   function showDeleteConfirmation() {
