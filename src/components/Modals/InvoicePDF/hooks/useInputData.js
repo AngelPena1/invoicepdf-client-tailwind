@@ -1,20 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fullDateFormat } from "../../../../utils/dateFormat/dateFormat";
 
-const useInputData = () => {
+const useInputData = ({ selectedQuote, countbookData}) => {
   const [inputData, setInputData] = useState({
-    invoice_type: "",
-  });
+    invoice_type: "default",
+    quote_name: "",
+    client: "",
+    date: "",
+  })
 
   function HandleInputData(event) {
     const { name, value } = event?.target;
     return setInputData({ ...inputData, [name]: value });
   }
 
-  function onClickSelect(value) {
-    
+  function onClickSelect(data_id) {
+    const getCountbook = countbookData?.filter(countbook => {
+      if(countbook?.id === data_id) return countbook
+    })
+    return setInputData({ ...inputData, invoice_type: getCountbook[0]?.name })
   }
 
-  return { inputData, HandleInputData, onClickSelect };
+  useEffect(() => {
+    if (!selectedQuote) return
+
+    setInputData({
+      ...inputData,
+      client: selectedQuote?.client?.name,
+      rnc: selectedQuote?.client?.rnc,
+      date: fullDateFormat(new Date())
+    })
+  }, [selectedQuote])
+
+  return { inputData, onClickSelect, HandleInputData };
 };
 
 export default useInputData;

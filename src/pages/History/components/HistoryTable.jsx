@@ -12,6 +12,7 @@ import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal"
 import { fullDateFormat } from "../../../utils/dateFormat/dateFormat";
 
 const HistoryTable = ({
+  toggleCreateInvoice,
   goToEdit,
   historyData,
   loadingHistory,
@@ -83,7 +84,7 @@ const HistoryTable = ({
             <tbody className="">
               {historyData?.map((data, index) => {
                 return (
-                  <tr className="bg-white border-b" key={index}>
+                  <tr onClick={() => HandleSelectedQuote(data)} className="bg-white border-b" key={index}>
                     <th
                       scope="row"
                       className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap"
@@ -104,7 +105,7 @@ const HistoryTable = ({
                         icon={faPlus}
                         className="text-xl cursor-pointer hover:text-primary z-0"
                         onClick={() => {
-                          // HandlePrintQuote(data?.id);
+                          toggleCreateInvoice(true)
                         }}
                       />
                     </td>

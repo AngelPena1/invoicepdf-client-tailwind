@@ -10,7 +10,7 @@ import Filters from "./components/Filters/Index";
 import InvoicePDF from "../../components/Modals/InvoicePDF/Index";
 
 const Index = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const {
     data,
@@ -41,7 +41,7 @@ const Index = () => {
     HandleSearchHistory,
   });
 
-  const { toggles, showDeleteConfirmation, hideDeleteConfirmation } =
+  const { toggles, toggleCreateInvoice, showDeleteConfirmation, hideDeleteConfirmation } =
     useToggles();
 
   function goToEdit(quote_id) {
@@ -55,7 +55,7 @@ const Index = () => {
 
   return (
     <section className="rounded-lg">
-      {/* {toggles?.invoiceForm && <InvoicePDF />} */}
+      {toggles?.invoiceForm && <InvoicePDF selectedQuote={selectedQuote} toggleCreateInvoice={toggleCreateInvoice} />}
       <section className="flex">
         <Filters
           getFiltersFromComponent={getFiltersFromComponent}
@@ -79,6 +79,7 @@ const Index = () => {
             Historial de Cotizaciones
           </div>
           <HistoryTable
+            toggleCreateInvoice={toggleCreateInvoice}
             goToEdit={goToEdit}
             loadingHistory={loadingHistory}
             historyData={historyData}
