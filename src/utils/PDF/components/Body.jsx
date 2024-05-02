@@ -59,7 +59,7 @@ export const Table = ({ pdf, coordinateYtable, rgbStyleColor, rgbBackground, mar
     return null
 }
 
-export const PricesSection = ({ pdf, marginX, coordinateYprices, fontText, }) => {
+export const PricesSection = ({ pdf, PricesData, marginX, coordinateYprices, fontText, }) => {
 
     let localY = coordinateYprices
 
@@ -95,11 +95,11 @@ export const PricesSection = ({ pdf, marginX, coordinateYprices, fontText, }) =>
     }
 
     CreateChart()
-    Prices("Subtotal: ", "99999.00")
-    Prices("Descuento: ", "999.00")
-    Prices("Subtotal con Descuento: ", "999.00")
-    Prices("Itbis: ", "99999.00")
-    TotalPrice("Total: ", "99999.00")
+    Prices("Subtotal: ", PricesData?.subtotal)
+    Prices("Descuento: ", PricesData?.discount)
+    Prices("Subtotal con Descuento: ", PricesData?.subtotal_with_discount)
+    Prices("Itbis: ", PricesData?.itbis)
+    TotalPrice("Total: ", PricesData?.total)
 }
 
 export const CommentsSection = ({ pdf, coordinateYcomments, rgbStyleColor, rgbBackground, marginX, marginXend }) => {

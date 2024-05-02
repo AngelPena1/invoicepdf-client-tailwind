@@ -41,8 +41,7 @@ const Form = (props) => {
             id="confirm-delete-btn"
             className="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 rounded-lg font-semibold text-sm md:ml-2 md:order-2"
             onClick={() => {
-              // onClick();
-              // onHide();
+              props.onCreate()
             }}
           >
             Crear

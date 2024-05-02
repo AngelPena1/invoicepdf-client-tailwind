@@ -1,5 +1,10 @@
 
-export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => {
+export const Heading = ({ pdf, HeadingData, marginX, rgbGreen, rgbBackground, fontText }) => {
+    
+    const businessData = HeadingData?.business
+    const clientData = HeadingData?.client
+    const invoiceData = HeadingData?.invoice_detail
+
     const fontBusinessTitle = 18
     const fontDetailsInvoiceTitle = 13
     const rectWith = 70
@@ -7,6 +12,7 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
 
     let coordinateY = 26
     const marginXforSecondColumn = 115 + marginX
+    
 
 
     function space(gap) {
@@ -14,10 +20,11 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
     }
 
     function TitleBusinessDetails(value, titleMarginY) {
+        const currentValue = value ? value : ""
         pdf.setTextColor(rgbGreen?.r, rgbGreen?.g, rgbGreen?.b);
         pdf.setFont(undefined, 'bold')
         pdf.setFontSize(fontBusinessTitle)
-        pdf.text(value, marginX, titleMarginY)
+        pdf.text(currentValue, marginX, titleMarginY)
     }
 
     function BusinessDetails(text) {
@@ -40,14 +47,16 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
 
 
     function InvoiceTypeTitle(value, marginXlocal, titleMarginY) {
+        const currentValue = value ? value : "" 
         pdf.setTextColor(rgbGreen?.r, rgbGreen?.g, rgbGreen?.b);
         pdf.setFontSize(fontDetailsInvoiceTitle);
         pdf.setFont(undefined, 'bold')
-        pdf.text(value, marginXlocal, titleMarginY)
+        pdf.text(currentValue, marginXlocal, titleMarginY)
         space(9)
     }
 
     function InvoiceDetails(field, value) {
+        const currentValue = value ? value : "" 
         pdf.setFontSize(fontText);
         pdf.setTextColor(0, 0, 0);
         pdf.setFont(undefined, 'bold')
@@ -57,7 +66,7 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
         const adjustRectWithLocal = rectWith - 40
         pdf.rect(marginXforSecondColumn + 40, coordinateY - 3.5, adjustRectWithLocal, rectHeight, 'F');
         pdf.setFont(undefined, 'normal')
-        pdf.text(value, marginXforSecondColumn + 41, coordinateY)
+        pdf.text(currentValue, marginXforSecondColumn + 41, coordinateY)
         space(6)
     }
 
@@ -70,6 +79,7 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
     }
 
     function ClientDetails(field, value) {
+        const currentValue = value ? value : ""
         pdf.setTextColor(0, 0, 0);
 
         pdf.setFontSize(fontText);
@@ -79,36 +89,34 @@ export const Heading = ({ pdf, marginX, rgbGreen, rgbBackground, fontText }) => 
 
         pdf.setFillColor(rgbBackground?.r, rgbBackground?.g, rgbBackground?.b)
         pdf.setFont(undefined, 'normal')
-        pdf.text(value, marginX + 35, coordinateY)
+        pdf.text(currentValue, marginX + 35, coordinateY)
         space(4.5)
-        // pdf.text(field + ": " + value, marginX + 1, coordinateY)
-        // space(4.5)
     }
 
 
-    TitleBusinessDetails("Nombre de compañia", 15)
-    BusinessDetails("Rnc: 131000000")
-    BusinessDetails("Dirección: C/prueba #7")
-    BusinessDetails("Correo: blue@gmail.com")
-    BusinessDetails("Teléfono: 809-000-0000")
+    TitleBusinessDetails(businessData?.title, 15)
+    BusinessDetails("Rnc: " +  businessData?.rnc)
+    BusinessDetails("Dirección: " + businessData?.address)
+    BusinessDetails("Correo: " + businessData?.email)
+    BusinessDetails("Teléfono: " + businessData?.phone)
 
     coordinateY = 26
     TitleInvoiceDetails(marginXforSecondColumn, 15)
-    InvoiceDetails("Fecha de factura: ", "DD/MM/YYYY")
-    InvoiceDetails("No. factura: ", "#00001")
+    InvoiceDetails("Fecha de factura: ", invoiceData?.date)
+    InvoiceDetails("No. factura: ", invoiceData?.number)
 
     space(10)
 
-    InvoiceTypeTitle("Consumidor Final", marginXforSecondColumn, coordinateY)
-    InvoiceDetails("Num. del comprobante: ", "0000001")
-    InvoiceDetails("Fecha vencimiento: ", "DD/MM/YYYY")
+    InvoiceTypeTitle(invoiceData?.comprobant_type, marginXforSecondColumn, coordinateY)
+    InvoiceDetails("Num. del comprobante: ", invoiceData?.comprobant_number)
+    InvoiceDetails("Fecha vencimiento: ", invoiceData?.expire_date)
 
     coordinateY = 60
     TitleClientDetails()
-    ClientDetails("Nombre del cliente:", "Cliente Prueba")
-    ClientDetails("RNC:", "130000000")
-    ClientDetails("Dirección:", "C/prueba sector el millon")
-    ClientDetails("Teléfono:", "809-000-1111")
+    ClientDetails("Nombre del cliente:", clientData?.name)
+    ClientDetails("RNC:", clientData?.rnc)
+    ClientDetails("Dirección:", clientData?.address)
+    ClientDetails("Teléfono:", clientData?.phone)
 
     return null
 }
