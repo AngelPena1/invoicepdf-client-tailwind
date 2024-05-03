@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Navbar from "../Navbar/NavbarIndex";
 import Config from "../Config";
-import InvoiceTest from '../../utils/PDF/Index'
 
 const LayoutIndex = () => {
   const { auth } = useAuth();
