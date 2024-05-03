@@ -17,6 +17,7 @@ const useInputData = ({ selectedQuote, countbookData}) => {
   function onClickSelect(data_id) {
     const getCountbook = countbookData?.filter(countbook => {
       if(countbook?.id === data_id) return countbook
+      return null
     })
     return setInputData({ ...inputData, invoice_type: getCountbook[0]?.name })
   }
@@ -30,6 +31,8 @@ const useInputData = ({ selectedQuote, countbookData}) => {
       rnc: selectedQuote?.client?.rnc,
       date: fullDateFormat(new Date())
     })
+    
+    // eslint-disable-next-line
   }, [selectedQuote])
 
   return { inputData, onClickSelect, HandleInputData };
