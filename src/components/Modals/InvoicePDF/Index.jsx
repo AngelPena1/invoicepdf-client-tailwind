@@ -14,8 +14,6 @@ const Index = ({ selectedQuote, toggleCreateInvoice }) => {
 
   const { data: countbookData } = useGetCountbook();
 
-  console.log(selectedQuote);
-
   const { inputData, HandleInputData, onClickSelect } = useInputData({ selectedQuote, countbookData });
 
   const quoteName = selectedQuote?.name
