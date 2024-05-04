@@ -24,6 +24,7 @@ const ProductsForm = ({
   addNotesToProduct,
   removeNoteToProduct,
   showInputNote,
+  showNotes,
   HandlePriceChange,
   HandleToggleChange,
   HandleInputData,
@@ -287,7 +288,7 @@ const ProductsForm = ({
           </table>
         </div>
       </section>
-      <section className="mt-5 grid grid-cols-2 ">
+      <section className="mt-5 grid grid-cols-2">
         <section className="grid grid-cols-2 w-80">
           <input
             type="text"
@@ -316,6 +317,9 @@ const ProductsForm = ({
             onChange={HandleInputData}
             autoComplete="off"
           />
+          <button className="w-36 h-8 p-0" onClick={showNotes}>
+            Añadir notas
+          </button>
         </section>
         <section className="flex justify-end relative right-3">
           <ul className="w-96 text-right border-t-2 border-blue-300">

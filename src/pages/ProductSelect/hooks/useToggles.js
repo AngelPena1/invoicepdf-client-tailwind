@@ -6,6 +6,7 @@ const useToggles = ({ quoteData, quoteHasData }) => {
     cost: false,
     preview: false,
     itbis: true,
+    notes: false
   });
 
   function HandleToggleChange(event) {
@@ -16,6 +17,10 @@ const useToggles = ({ quoteData, quoteHasData }) => {
 
   function togglePreview(bool) {
     return setToggles({ ...toggles, preview: bool });
+  }
+
+  function toggleNotes(bool) {
+    return setToggles({ ...toggles, notes: bool });
   }
 
   useEffect(() => {
@@ -29,7 +34,7 @@ const useToggles = ({ quoteData, quoteHasData }) => {
     // eslint-disable-next-line
   }, [quoteHasData]);
 
-  return { toggles, togglePreview, HandleToggleChange };
+  return { toggles, togglePreview, toggleNotes, HandleToggleChange };
 };
 
 export default useToggles;

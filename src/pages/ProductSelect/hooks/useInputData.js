@@ -20,6 +20,8 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
     discount: "",
   });
 
+  const 
+
   function HandleInputData(event) {
     const { name, value } = event.target;
 

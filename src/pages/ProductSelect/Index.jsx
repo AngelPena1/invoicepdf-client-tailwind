@@ -16,6 +16,7 @@ import useGetQuoteById from "./hooks/useGetQuoteById";
 import toast from "react-hot-toast";
 import useConfig from "../../hooks/useConfig";
 import { useParams } from "react-router-dom";
+import Notes from "./components/Notes";
 
 const Index = () => {
   const { config } = useConfig();
@@ -77,7 +78,7 @@ const Index = () => {
     searchInput: inputData?.search,
   });
 
-  const { toggles, togglePreview, HandleToggleChange } = useToggles({
+  const { toggles, togglePreview, toggleNotes, HandleToggleChange } = useToggles({
     quoteData,
     quoteHasData,
   });
@@ -154,7 +155,7 @@ const Index = () => {
   }, [imagesData]);
 
   useEffect(() => {
-    if(!quote_id) return clearAllInputs()
+    if (!quote_id) return clearAllInputs()
     // eslint-disable-next-line
   }, [quote_id])
 
@@ -167,6 +168,10 @@ const Index = () => {
 
   return (
     <>
+      {toggles?.notes && <Notes
+        onHide={() => { toggleNotes(false) }}
+      />}
+
       <ProductsForm
         result={result}
         clientsData={clientsData}
@@ -180,6 +185,7 @@ const Index = () => {
         totals={totals}
         toggles={toggles}
         showInputNote={showInputNote}
+        showNotes={() => { toggleNotes(true) }}
         addNotesToProduct={addNotesToProduct}
         removeNoteToProduct={removeNoteToProduct}
         HandlePriceChange={HandlePriceChange}
