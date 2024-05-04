@@ -18,28 +18,31 @@ const ProductsForm = (props) => {
             {!props.loading && dataHasValue && (
               <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0">
                 <tr>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="px-3 py-3">
                     Descripción
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="px-3 py-3">
                     Código
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="px-3 py-3">
                     Marca
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="px-3 py-3">
                     Categoría
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="px-3 py-3">
                     Subcategoría
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    Precio
+                  <th scope="col" className="px-3 py-3">
+                    Precio 
                   </th>
-                  {/* <th scope="col" className="px-6 py-3">
+                  <th scope="col" className="px-3 py-3">
+                    Precio US
+                  </th>
+                  {/* <th scope="col" className="px-3 py-3">
                   Creado por
                 </th> */}
-                  <th scope="col" className="px-6 py-3 text-center bg-slate-300">
+                  <th scope="col" className="px-3 py-3 text-center bg-slate-300">
                     Editar
                   </th>
                 </tr>
@@ -51,19 +54,20 @@ const ProductsForm = (props) => {
                   <tr className="bg-white border-b" key={index}>
                     <th
                       scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                      className="px-3 py-4 font-medium text-gray-900 whitespace-nowrap"
                     >
                       {product?.description.length < 90
                         ? product?.description
                         : product?.description.substring(0, 90) + "..."}
                     </th>
-                    <td className="px-6 py-4">{product?.code}</td>
-                    <td className="px-6 py-4">{product?.brand?.name}</td>
-                    <td className="px-6 py-4">{product?.category?.name}</td>
-                    <td className="px-6 py-4">{product?.subcategory?.name}</td>
-                    <td className="px-6 py-4">{product?.price}</td>
-                    {/* <td className="px-6 py-4">{product?.createdBy}</td> */}
-                    <td className="px-6 py-4 text-center">
+                    <td className="px-3 py-4">{product?.code}</td>
+                    <td className="px-3 py-4">{product?.brand?.name}</td>
+                    <td className="px-3 py-4">{product?.category?.name}</td>
+                    <td className="px-3 py-4">{product?.subcategory?.name}</td>
+                    <td className="px-3 py-4">{product?.price}</td>
+                    <td className="px-3 py-4">{product?.price_us}</td>
+                    {/* <td className="px-3 py-4">{product?.createdBy}</td> */}
+                    <td className="px-3 py-4 text-center">
                       {/* {product?.isActive ? "Activo" : "Desactivado"} */}
                       <FontAwesomeIcon
                         icon={faEdit}

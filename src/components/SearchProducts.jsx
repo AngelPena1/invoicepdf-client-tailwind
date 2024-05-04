@@ -17,7 +17,7 @@ const Search = ({
   const resultHasValue = result?.length > 0;
   const onChangeHasFunction = onChange ? onChange : null;
   const onClickHasFunction = onClick ? onClick : null;
-  
+
   const [show, setShow] = useState(false);
 
   function toggleCatalog() {
@@ -65,13 +65,13 @@ const Search = ({
               return (
                 <ul
                   key={index}
-                  className="flex text-center rounded-lg text-sm hover:bg-slate-100 p-2 transition duration-200"
+                  className="flex text-left rounded-lg text-sm hover:bg-slate-100 p-2 transition duration-200"
                   onClick={() => {
                     onClickHasFunction(data);
                   }}
                 >
-                  <li className="mx-5">{data?.code}</li>
-                  <li>{data?.description}</li>
+                  <li className="w-28">{data?.code}</li>
+                  <li  className="w-full">{data?.description}</li>
                 </ul>
               );
             })}

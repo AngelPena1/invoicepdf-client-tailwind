@@ -112,7 +112,7 @@ const Index = () => {
           HandlePage={HandlePage}
         />
       )}
-      {currentTab === "create" && !loading && (
+      {currentTab === "create" && (
         <MaintenanceForm
           inputData={inputData}
           divisionsData={divisionsData}
