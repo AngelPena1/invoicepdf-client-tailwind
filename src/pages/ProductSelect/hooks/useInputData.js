@@ -19,9 +19,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
     deposit: "",
     discount: "",
   });
-
-  const 
-
+  
   function HandleInputData(event) {
     const { name, value } = event.target;
 
