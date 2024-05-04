@@ -1,5 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { isDecimalOrPorcentage } from "../../../utils/regex/isNumberOrDecimal";
 
 const useInputData = ({ divisionsData }) => {
   const [inputData, setInputData] = useState({
@@ -22,12 +23,24 @@ const useInputData = ({ divisionsData }) => {
     isActive: true,
   });
 
-  function HandleInputData(data) {
-    return setInputData(data);
+  function HandleInputData(event) {
+    const { value, name } = event?.target;
+
+    if (name === "cost" || name === "price" || name === "price_us") {
+      if (isDecimalOrPorcentage(value)) {
+        return setInputData({ ...inputData, [name]: value });
+      }
+    } else if (name === "isActive") {
+      return setInputData({ ...inputData, [name]: !inputData?.isActive });
+    } else return setInputData({ ...inputData, [name]: value });
   }
 
   function HandleEventSearch(event) {
     return setInputData({ ...inputData, search: event?.target?.value });
+  }
+
+  function ResetImage() {
+    return setInputData({ ...inputData, image: "" });
   }
 
   function getFinishes(brand_id) {
@@ -114,7 +127,6 @@ const useInputData = ({ divisionsData }) => {
   }
 
   function HandleEditProduct(data) {
-    console.log(data);
     return setInputData({
       search: "",
       product_id: data?.id,
@@ -163,7 +175,6 @@ const useInputData = ({ divisionsData }) => {
       toast.error("Error al comprobar campos.");
       console.error(error);
     }
-
   }
 
   function ResetInputValues() {
@@ -204,6 +215,7 @@ const useInputData = ({ divisionsData }) => {
   return {
     inputData,
     ResetInputValues,
+    ResetImage,
     CheckForNotEmptyValues,
     HandleInputData,
     HandleEventSearch,

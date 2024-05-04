@@ -24,6 +24,7 @@ const Index = () => {
   const {
     inputData,
     ResetInputValues,
+    ResetImage,
     CheckForNotEmptyValues,
     HandleInputData,
     HandleEventSearch,
@@ -67,7 +68,7 @@ const Index = () => {
 
   useEffect(() => {
     if (!imgData) return;
-    HandleInputData({ ...inputData, image: imgData?.image });
+    // HandleInputData({ ...inputData, image: imgData?.image });
     // eslint-disable-next-line
   }, [imgData]);
 
@@ -121,6 +122,7 @@ const Index = () => {
           onlyNamesCategories={getOnlyNames(inputData?.categories)}
           onlyNamesSubcategories={getOnlyNames(inputData?.subcategories)}
           getOnlyNames={getOnlyNames}
+          ResetImage={ResetImage}
           HandleInputData={HandleInputData}
           HandleBrandSelect={HandleBrandSelect}
           HandleFinishesSelect={HandleFinishesSelect}

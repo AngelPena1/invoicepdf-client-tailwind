@@ -10,6 +10,7 @@ function MaintenanceForm({
   onlyNamesCategories,
   onlyNamesFinishes,
   onlyNamesSubcategories,
+  ResetImage,
   HandleInputData,
   HandleBrandSelect,
   HandleCategorySelect,
@@ -27,16 +28,12 @@ function MaintenanceForm({
           </label>
           <textarea
             type="text"
+            name="description"
             placeholder="Escriba una breve descripción del producto..."
             className="w-full"
             autoComplete="off"
             value={inputData?.description}
-            onChange={(e) => {
-              HandleInputData({
-                ...inputData,
-                description: e.target.value,
-              });
-            }}
+            onChange={HandleInputData}
           />
         </div>
         <div className="grid grid-cols-2 gap-8 mb-10">
@@ -81,7 +78,7 @@ function MaintenanceForm({
           <div className="grid grid-cols-2 gap-6">
             <input
               type="text"
-              className="h-11"
+              className="h-8"
               placeholder="Código del acabado..."
               value={inputData?.finishes_code}
               disabled
@@ -129,12 +126,8 @@ function MaintenanceForm({
               <FontAwesomeIcon
                 icon={faX}
                 className="absolute right-5 top-10 cursor-pointer"
-                onClick={() => {
-                  HandleInputData({
-                    ...inputData,
-                    image: null,
-                  });
-                }}
+                name="image"
+                onClick={ResetImage}
               />
               <img
                 src={inputData?.image}
@@ -145,7 +138,9 @@ function MaintenanceForm({
           )}
         </div>
         <div className="mb-10">
-          <label className="text-base mb-6">Seleccione el tamaño (opcional)</label>
+          <label className="text-base mb-6">
+            Seleccione el tamaño (opcional)
+          </label>
           <div className="grid grid-cols-3">
             <button
               className={
@@ -154,13 +149,9 @@ function MaintenanceForm({
                   : "button-2"
               }
               type="button"
+              name="image_size"
               value={"small"}
-              onClick={(e) => {
-                HandleInputData({
-                  ...inputData,
-                  image_size: e.target.value,
-                });
-              }}
+              onClick={HandleInputData}
             >
               Pequeño
             </button>
@@ -171,13 +162,9 @@ function MaintenanceForm({
                   : "button-2"
               }
               type="button"
+              name="image_size"
               value={"medium"}
-              onClick={(e) => {
-                HandleInputData({
-                  ...inputData,
-                  image_size: e.target.value,
-                });
-              }}
+              onClick={HandleInputData}
             >
               Mediano
             </button>
@@ -188,13 +175,9 @@ function MaintenanceForm({
                   : "button-2"
               }
               type="button"
+              name="image_size"
               value={"large"}
-              onClick={(e) => {
-                HandleInputData({
-                  ...inputData,
-                  image_size: e.target.value,
-                });
-              }}
+              onClick={HandleInputData}
             >
               Grande
             </button>
@@ -210,10 +193,9 @@ function MaintenanceForm({
             <input
               type="text"
               placeholder="Inserte el costo..."
+              name={"cost"}
               value={inputData?.cost}
-              onChange={(e) => {
-                HandleInputData({ ...inputData, cost: e.target.value });
-              }}
+              onChange={HandleInputData}
             />
           </div>
           <div className="">
@@ -223,10 +205,9 @@ function MaintenanceForm({
             <input
               type="text"
               placeholder="Inserte el precio..."
+              name="price"
               value={inputData?.price}
-              onChange={(e) => {
-                HandleInputData({ ...inputData, price: e.target.value });
-              }}
+              onChange={HandleInputData}
             />
           </div>
           <div className="">
@@ -236,30 +217,25 @@ function MaintenanceForm({
             <input
               type="text"
               placeholder="Inserte el precio..."
+              name="price_us"
               value={inputData?.price_us}
-              onChange={(e) => {
-                HandleInputData({ ...inputData, price_us: e.target.value });
-              }}
+              onChange={HandleInputData}
             />
           </div>
-        </div>
-        <div className="grid grid-cols-2 gap-8">
-          <div className="mb-10">
+          <div className="">
             <label htmlFor="" className="text-base">
               Código del producto
             </label>
             <input
               type="text"
               placeholder="Escriba el código..."
+              name="product_code"
               value={inputData?.product_code}
-              onChange={(e) => {
-                HandleInputData({
-                  ...inputData,
-                  product_code: e.target.value,
-                });
-              }}
+              onChange={HandleInputData}
             />
           </div>
+        </div>
+        <div className="grid grid-cols-2 gap-8">
           <div className="mb-10">
             <label htmlFor="" className="text-base">
               Estado
@@ -269,12 +245,8 @@ function MaintenanceForm({
                 type="checkbox"
                 checked={inputData?.isActive}
                 onChange={() => {}}
-                onClick={() => {
-                  HandleInputData({
-                    ...inputData,
-                    isActive: !inputData?.isActive,
-                  });
-                }}
+                name="isActive"
+                onClick={HandleInputData}
                 className="sr-only peer outline-none"
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
