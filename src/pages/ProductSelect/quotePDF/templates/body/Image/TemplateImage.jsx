@@ -22,19 +22,11 @@ const TemplateImage = ({
   price,
   itbis,
   withITBIS,
+  notesInPdf,
 }) => {
-
   //194.5 max
   pdf.autoTable({
-    body: [
-      [
-        "Descripción del producto",
-        "Cant",
-        "Imagen",
-        "Precio",
-        "Total",
-      ],
-    ],
+    body: [["Descripción del producto", "Cant", "Imagen", "Precio", "Total"]],
     theme: "grid",
     bodyStyles: {
       // fillColor: style_pdf?.fillColor,
@@ -55,7 +47,7 @@ const TemplateImage = ({
         cellWidth: 44.3,
         halign: "center",
         fillColor: style_pdf?.fillColor,
-      }, 
+      },
       3: {
         cellWidth: 23.8,
         halign: "right",
@@ -185,8 +177,16 @@ const TemplateImage = ({
           price,
           itbis,
           withITBIS,
+          notesInPdf,
         })
-      : FooterNoItbis({ discount, discountIsPorcentage, with_delivery, deposit, price }),
+      : FooterNoItbis({
+          discount,
+          discountIsPorcentage,
+          with_delivery,
+          deposit,
+          price,
+          notesInPdf,
+        }),
     theme: "grid",
     bodyStyles: {
       fontSize: 9,

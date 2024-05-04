@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { isDecimalOrPorcentage, isNumberOrDecimal } from "../../../utils/regex/isNumberOrDecimal";
+import {
+  isDecimalOrPorcentage,
+  isNumberOrDecimal,
+} from "../../../utils/regex/isNumberOrDecimal";
 
 const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
   const [clientInputData, setClientInputData] = useState({
@@ -19,19 +22,40 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
     deposit: "",
     discount: "",
   });
-  
+
+  const [notesInPdf, setNotesInPdf] = useState({
+    note_1: "",
+    note_2: "",
+    note_3: "",
+    note_4: "",
+    note_5: "",
+  });
+
+  function resetNotesInPdf() {
+    return setNotesInPdf({
+      note_1: "",
+      note_2: "",
+      note_3: "",
+      note_4: "",
+      note_5: "",
+    });
+  }
+
+  function HandleNotesInPdfData(event) {
+    const { value, name } = event?.target;
+    return setNotesInPdf({ ...notesInPdf, [name]: value });
+  }
+
   function HandleInputData(event) {
     const { name, value } = event.target;
 
     if (name === "search" || name === "note") {
       return setInputData({ ...inputData, [name]: value });
-    }
-    else if (name === "discount") {
+    } else if (name === "discount") {
       if (isDecimalOrPorcentage(value)) {
         return setInputData({ ...inputData, [name]: value });
       }
-    }
-    else if (isNumberOrDecimal(value)) {
+    } else if (isNumberOrDecimal(value)) {
       return setInputData({ ...inputData, [name]: value });
     }
   }
@@ -51,7 +75,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
       with_delivery: "",
       deposit: "",
       discount: "",
-    })
+    });
   }
 
   function HandleDataClient(client_id) {
@@ -96,10 +120,13 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
   return {
     clientInputData,
     inputData,
+    notesInPdf,
     resetInputNote,
+    resetNotesInPdf,
     clearSearchInput,
     clearAllInputs,
     HandleInputData,
+    HandleNotesInPdfData,
     HandleDataClient,
   };
 };

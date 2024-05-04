@@ -17,7 +17,7 @@ const useGetProductsLimit = ({ limit, searchProduct }) => {
 
   const { data, loading } = useGetData({
     url: switchIfSearchHasValue,
-    search: search,
+    search: search
   });
 
   function HandlePage(page) {

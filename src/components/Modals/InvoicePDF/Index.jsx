@@ -57,6 +57,7 @@ const Index = ({ selectedQuote, toggleCreateInvoice }) => {
 
   useEffect(() => {
     HandleCompanySearch()
+     // eslint-disable-next-line
   }, [])
 
   return (

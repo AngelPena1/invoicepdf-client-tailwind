@@ -77,12 +77,14 @@ export async function GenerarPDF({
   hasCost,
   quoteId,
   quoteHasData,
+  notesInPdf,
   quoteConfig
 }) {
   try {
     const pdf = new jsPDF({
       format: "letter",
     });
+    
     // let controlPixelHeight = 0;
     let newPage = false;
     const quote_counter = !quoteHasData ? await getQuoteCounter(companyData[0]?.id) : quoteId
@@ -103,7 +105,6 @@ export async function GenerarPDF({
     CreateBody({
       pdf,
       newPage,
-      // controlPixelHeight,
       selectedProducts,
       imagesData,
       maxHeight,
@@ -120,8 +121,9 @@ export async function GenerarPDF({
       price,
       itbis,
       withITBIS,
+      notesInPdf
     });
-
+    
     if (isPreview) {
       const pdfWithWatermark = addWaterMark(pdf);
       return pdfWithWatermark.output(
@@ -129,7 +131,7 @@ export async function GenerarPDF({
         "PREVIEW RC-" + quote_counter
       );
     }
-
+    
     if (isAlreadyCreated) {
       return pdf.save(name);
     } 

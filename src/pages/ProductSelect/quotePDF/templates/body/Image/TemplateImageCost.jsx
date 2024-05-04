@@ -22,6 +22,7 @@ const TemplateImageCost = ({
   price,
   itbis,
   withITBIS,
+  notesInPdf
 }) => {
   //194.5 max
   pdf.autoTable({
@@ -189,6 +190,7 @@ const TemplateImageCost = ({
           price,
           itbis,
           withITBIS,
+          notesInPdf
         })
       : FooterNoItbis({
           discount,
@@ -196,6 +198,7 @@ const TemplateImageCost = ({
           with_delivery,
           deposit,
           price,
+          notesInPdf
         }),
     theme: "grid",
     bodyStyles: {

@@ -18,6 +18,7 @@ const TemplateNoImage = ({
   price,
   itbis,
   withITBIS,
+  notesInPdf
 }) => {
   //194.5
   //body
@@ -121,6 +122,7 @@ const TemplateNoImage = ({
           price,
           itbis,
           withITBIS,
+          notesInPdf
         })
       : FooterNoItbis({
           discount,
@@ -128,6 +130,7 @@ const TemplateNoImage = ({
           with_delivery,
           deposit,
           price,
+          notesInPdf
         }),
     theme: "grid",
     bodyStyles: {

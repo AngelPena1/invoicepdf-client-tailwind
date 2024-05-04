@@ -39,10 +39,12 @@ const Index = () => {
   const {
     inputData,
     clientInputData,
+    notesInPdf,
     resetInputNote,
     clearAllInputs,
     clearSearchInput,
     HandleInputData,
+    HandleNotesInPdfData,
     HandleDataClient,
   } = useInputData({ clientsData, quoteData, quoteHasData });
 
@@ -139,6 +141,7 @@ const Index = () => {
         hasCost: toggles?.cost,
         quoteId: quoteData[0]?.quote_count,
         quoteHasData,
+        notesInPdf,
         quoteConfig: config?.quote[0]
       });
       if (!toggles?.preview) {
@@ -169,6 +172,8 @@ const Index = () => {
   return (
     <>
       {toggles?.notes && <Notes
+        notesInPdf={notesInPdf}
+        onChange={HandleNotesInPdfData}
         onHide={() => { toggleNotes(false) }}
       />}
 
