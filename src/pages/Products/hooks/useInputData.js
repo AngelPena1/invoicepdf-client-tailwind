@@ -14,6 +14,7 @@ const useInputData = ({ divisionsData }) => {
     subcategory_id: "",
     subcategories: "",
     price: "",
+    price_us: "",
     cost: "",
     image: "",
     image_size: "",
@@ -113,6 +114,7 @@ const useInputData = ({ divisionsData }) => {
   }
 
   function HandleEditProduct(data) {
+    console.log(data);
     return setInputData({
       search: "",
       product_id: data?.id,
@@ -126,6 +128,7 @@ const useInputData = ({ divisionsData }) => {
       subcategory_id: data?.subcategory?.id,
       subcategories: getSubcategories(data?.category?.id),
       price: data?.price,
+      price_us: data?.price_us,
       cost: data?.cost,
       description: data?.description,
       image_size: data?.size,
@@ -175,6 +178,7 @@ const useInputData = ({ divisionsData }) => {
       finishes_id: "",
       finishes: "",
       price: "",
+      price_us: "",
       cost: "",
       description: "",
       image: "",

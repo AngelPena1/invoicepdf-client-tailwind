@@ -218,7 +218,7 @@ function MaintenanceForm({
           </div>
           <div className="">
             <label htmlFor="" className="text-base">
-              Precio
+              Precio RD
             </label>
             <input
               type="text"
@@ -226,6 +226,19 @@ function MaintenanceForm({
               value={inputData?.price}
               onChange={(e) => {
                 HandleInputData({ ...inputData, price: e.target.value });
+              }}
+            />
+          </div>
+          <div className="">
+            <label htmlFor="" className="text-base">
+              Precio US
+            </label>
+            <input
+              type="text"
+              placeholder="Inserte el precio..."
+              value={inputData?.price_us}
+              onChange={(e) => {
+                HandleInputData({ ...inputData, price_us: e.target.value });
               }}
             />
           </div>
