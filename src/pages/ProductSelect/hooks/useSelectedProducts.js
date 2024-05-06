@@ -29,11 +29,31 @@ const useSelectedProducts = ({ quoteData, quoteHasData, resetInputNote }) => {
   }
 
   function HandlePriceChange(event, index) {
-    const { value } = event?.target;
+    const { name, value } = event?.target;
     if (!isNumberOrDecimal(value)) return null;
     let localArray = selectedProducts;
-    localArray[index] = { ...selectedProducts[index], price: value };
-    // setSelectedProducts(localArray);
+
+    if(name === "input-price") {
+      localArray[index] = { ...selectedProducts[index], price: value };
+    } else {
+      localArray[index] = { ...selectedProducts[index], price_us: value };
+    }
+
+    return setRefreshPrice(!refreshPrice);
+  }
+
+  function DefaultValueOnPriceChange(event, index) {
+    const { name, value } = event?.target;
+    let localArray = selectedProducts;
+
+    if(value==="") {
+      if(name === "input-price") {
+        localArray[index] = { ...selectedProducts[index], price: '0.00' };
+      } else {
+        localArray[index] = { ...selectedProducts[index], price_us: '0.00' };
+      }
+    }
+
     return setRefreshPrice(!refreshPrice);
   }
 
@@ -96,6 +116,7 @@ const useSelectedProducts = ({ quoteData, quoteHasData, resetInputNote }) => {
     removeNoteToProduct,
     clearSelectedProducts,
     showInputNote,
+    DefaultValueOnPriceChange,
     HandlePriceChange,
     HandleSelectedProducts,
     HandleQuantityProducts,

@@ -54,6 +54,7 @@ const Index = () => {
     addNotesToProduct,
     removeNoteToProduct,
     showInputNote,
+    DefaultValueOnPriceChange,
     HandlePriceChange,
     HandleSelectedProducts,
     HandleQuantityProducts,
@@ -196,6 +197,7 @@ const Index = () => {
         showNotes={() => { toggleNotes(true) }}
         addNotesToProduct={addNotesToProduct}
         removeNoteToProduct={removeNoteToProduct}
+        DefaultValueOnPriceChange={DefaultValueOnPriceChange}
         HandlePriceChange={HandlePriceChange}
         HandleToggleChange={HandleToggleChange}
         HandleInputData={HandleInputData}

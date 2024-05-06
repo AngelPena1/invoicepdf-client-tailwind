@@ -25,6 +25,7 @@ const ProductsForm = ({
   removeNoteToProduct,
   showInputNote,
   showNotes,
+  DefaultValueOnPriceChange,
   HandlePriceChange,
   HandleToggleChange,
   HandleInputData,
@@ -217,12 +218,18 @@ const ProductsForm = ({
                       <td className="px-2 py-2 flex justify-end border-r-2">
                         <p className="mr-4">{!toggles?.dollar ? "RD$" : "US$"}</p>
                         <input
-                          name="input-price"
-                          className="w-20 text-right p-0 border-0"
+                          name={!toggles?.dollar ? "input-price" : "input-price-us"}
+                          className="w-20 text-right p-0 border-0 px-1"
                           type="text"
                           value={toggles?.dollar ? product?.price_us : product?.price}
                           onChange={(e) => {
                             HandlePriceChange(e, index);
+                          }}
+                          onClick={(e) => {
+                            e.target.select(); 
+                          }}
+                          onBlur={(e) => {
+                            DefaultValueOnPriceChange(e, index)
                           }}
                         />
                       </td>
