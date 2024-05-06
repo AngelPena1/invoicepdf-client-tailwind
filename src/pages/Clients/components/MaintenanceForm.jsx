@@ -7,7 +7,7 @@ const MaintenanceForm = ({
   HandleUpdateClient,
 }) => {
   return (
-    <form className="grid grid-cols-3 gap-10">
+    <form className="grid h-xl grid-cols-3 gap-10">
       <section>
         <div className="mb-16">
           <label htmlFor="">Nombre *</label>

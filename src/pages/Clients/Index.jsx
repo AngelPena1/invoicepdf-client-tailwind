@@ -23,7 +23,7 @@ const Index = () => {
     ResetInputValues,
   });
 
-  const { data: clientsData, HandleSearch: HandleSearchClients } =
+  const { data: clientsData, loading: clientLoading, HandleSearch: HandleSearchClients } =
     useGetClients();
 
   const { result } = useSearchClient({
@@ -43,7 +43,7 @@ const Index = () => {
   }, [resfresh]);
 
   return (
-    <section className="bg-white min-h-xl p-4 rounded-lg">
+    <section className="bg-white min-h-xl p-4 rounded-lg shadow-style-2">
       <NavigationBar
         currentTab={currentTab}
         ResetInputValues={ResetInputValues}
@@ -61,6 +61,7 @@ const Index = () => {
       {currentTab === "default" && (
         <ClientsForm
           clientsData={clientsData}
+          clientLoading={clientLoading}
           searchInput={inputData?.search}
           result={result}
           HandleChangeTab={HandleChangeTab}

@@ -11,9 +11,9 @@ const ProductsForm = (props) => {
   const productDataHasValue = props.productsData?.length > 0 ? true : false;
 
   return (
-    <section className="rounded-lg">
-      {true && (
-        <div className="relative overflow-x-auto overflow-y-auto max-h-xl">
+    <section className="rounded-lg h-xl">
+      {dataHasValue && (
+        <div className="relative overflow-x-auto overflow-y-auto h-96">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             {!props.loading && dataHasValue && (
               <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0">
