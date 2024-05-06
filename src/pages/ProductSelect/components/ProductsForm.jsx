@@ -93,6 +93,23 @@ const ProductsForm = ({
             <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
               <input
                 type="checkbox"
+                checked={toggles?.dollar}
+                value={toggles?.dollar}
+                name="dollar"
+                onClick={HandleToggleChange}
+                onChange={() => { }}
+                className="sr-only peer outline-none"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
+                Cambio a Dólar
+              </span>
+            </label>
+          </div>
+          <div className="mr-10">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+              <input
+                type="checkbox"
                 checked={toggles?.code}
                 value={toggles?.code}
                 name="code"
@@ -197,12 +214,13 @@ const ProductsForm = ({
                           {product?.cost}
                         </td>
                       )}
-                      <td className="px-2 py-2 grid justify-end border-r-2">
+                      <td className="px-2 py-2 flex justify-end border-r-2">
+                        <p className="mr-4">{!toggles?.dollar ? "RD$" : "US$"}</p>
                         <input
                           name="input-price"
                           className="w-20 text-right p-0 border-0"
                           type="text"
-                          value={product?.price}
+                          value={toggles?.dollar ? product?.price_us : product?.price}
                           onChange={(e) => {
                             HandlePriceChange(e, index);
                           }}

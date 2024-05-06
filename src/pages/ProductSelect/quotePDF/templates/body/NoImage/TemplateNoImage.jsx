@@ -18,7 +18,8 @@ const TemplateNoImage = ({
   price,
   itbis,
   withITBIS,
-  notesInPdf
+  notesInPdf,
+  isDollar
 }) => {
   //194.5
   //body
@@ -67,7 +68,7 @@ const TemplateNoImage = ({
       ? `${description} \n\nCódigo: ${productCode}`
       : `${description}`;
     const quantity = parseFloat(product?.quantity);
-    const price = parseFloat(product?.price);
+    const price = isDollar ? parseFloat(product?.price_us) : parseFloat(product?.price);
     const total = quantity * price;
 
     if (controlPixelHeight > maxHeight) {

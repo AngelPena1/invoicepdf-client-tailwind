@@ -12,6 +12,7 @@ const usePostQuotes = ({
   results,
   quoteHasData,
   quote_count,
+  notesInPdf
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuth();
@@ -33,6 +34,7 @@ const usePostQuotes = ({
           has_itbis: toggles?.itbis,
           has_code: toggles?.code,
           has_cost: toggles?.cost,
+          isDollar: toggles?.dollar,
           subtotal: results?.price,
           itbis: results?.itbis,
           total: results?.withITBIS,
@@ -40,6 +42,7 @@ const usePostQuotes = ({
           deposit: inputData?.deposit === '' ? 0 : parseFloat(inputData?.deposit),
           with_delivery: inputData?.with_delivery === '' ? 0 : parseFloat(inputData?.with_delivery),
           selected_products_json: JSON.stringify(selectedProducts),
+          notes: JSON.stringify(notesInPdf),
           quote_count: quote_counter,
           createdBy: auth?.username,
         })
@@ -60,6 +63,7 @@ const usePostQuotes = ({
           company_id: auth?.company?.id,
           client_id: clientInputData?.selected_client_id,
           name: "Cotización RC-" + quote_count,
+          isDollar: toggles?.dollar,
           has_itbis: toggles?.itbis,
           has_code: toggles?.code,
           has_cost: toggles?.cost,
@@ -70,7 +74,8 @@ const usePostQuotes = ({
           deposit: inputData?.deposit === '' ? 0 : parseFloat(inputData?.deposit),
           with_delivery: inputData?.with_delivery === '' ? 0 : parseFloat(inputData?.with_delivery),
           selected_products_json: JSON.stringify(selectedProducts),
-          createdBy: auth?.username,
+          notes: JSON.stringify(notesInPdf),
+          updatedBy: auth?.username,
         })
         .then(() => {
           toast.success("La cotización ha sido editada exitosamente.");

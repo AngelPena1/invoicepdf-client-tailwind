@@ -6,6 +6,7 @@ const useToggles = ({ quoteData, quoteHasData }) => {
     cost: false,
     preview: false,
     itbis: true,
+    dollar: false,
     notes: false
   });
 
@@ -27,6 +28,7 @@ const useToggles = ({ quoteData, quoteHasData }) => {
     if (!quoteHasData) return;
     setToggles({
       ...toggles,
+      dollar: quoteData[0]?.isDollar,
       code: quoteData[0]?.has_code,
       cost: quoteData[0]?.has_cost,
       itbis: quoteData[0]?.has_itbis,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import calculate from "../utils/calculate";
 
-const useGetTotal = ({ selectedProducts, discount, refreshPrice }) => {
+const useGetTotal = ({ selectedProducts, isDollar, discount, refreshPrice }) => {
   const [totals, setTotals] = useState({
     price: 0,
     cost: 0,
@@ -10,7 +10,7 @@ const useGetTotal = ({ selectedProducts, discount, refreshPrice }) => {
   });
 
   function HandleTotals() {
-    const result = calculate({ selectedProducts, discount });
+    const result = calculate({ selectedProducts, isDollar, discount });
 
     return setTotals({
       discount: result?.discount,
@@ -24,7 +24,7 @@ const useGetTotal = ({ selectedProducts, discount, refreshPrice }) => {
   useEffect(() => {
     HandleTotals();
     // eslint-disable-next-line
-  }, [selectedProducts, discount, refreshPrice]);
+  }, [selectedProducts, isDollar, discount, refreshPrice]);
 
   return { totals };
 };

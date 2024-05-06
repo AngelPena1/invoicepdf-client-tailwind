@@ -23,7 +23,8 @@ export function CreateBody({
   price,
   itbis,
   withITBIS,
-  notesInPdf
+  notesInPdf,
+  isDollar
 }) {
   const hasImages = quoteConfig?.has_images;
 
@@ -47,7 +48,8 @@ export function CreateBody({
         price,
         itbis,
         withITBIS,
-        notesInPdf
+        notesInPdf,
+        isDollar
       });
     }
     else {
@@ -68,7 +70,8 @@ export function CreateBody({
         price,
         itbis,
         withITBIS,
-        notesInPdf
+        notesInPdf,
+        isDollar
       });
     }
   }
@@ -93,7 +96,8 @@ export function CreateBody({
         price,
         itbis,
         withITBIS,
-        notesInPdf
+        notesInPdf,
+        isDollar
       });
     }
     else {
@@ -113,7 +117,8 @@ export function CreateBody({
         price,
         itbis,
         withITBIS,
-        notesInPdf
+        notesInPdf,
+        isDollar
       });
     }
     

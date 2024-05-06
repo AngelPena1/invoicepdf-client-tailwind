@@ -78,6 +78,7 @@ export async function GenerarPDF({
   quoteId,
   quoteHasData,
   notesInPdf,
+  isDollar,
   quoteConfig
 }) {
   try {
@@ -121,7 +122,8 @@ export async function GenerarPDF({
       price,
       itbis,
       withITBIS,
-      notesInPdf
+      notesInPdf,
+      isDollar
     });
     
     if (isPreview) {

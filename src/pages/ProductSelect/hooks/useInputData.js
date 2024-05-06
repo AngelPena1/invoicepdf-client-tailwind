@@ -104,6 +104,16 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
       discount: quoteData[0]?.discount,
     });
 
+    const notes = JSON.parse(quoteData[0]?.notes)
+
+    setNotesInPdf({
+      note_1: notes?.note_1,
+      note_2: notes?.note_2,
+      note_3: notes?.note_3,
+      note_4: notes?.note_4,
+      note_5: notes?.note_5,
+    })
+
     const client = quoteData[0]?.client;
     setClientInputData({
       selected_client_id: client?.id,

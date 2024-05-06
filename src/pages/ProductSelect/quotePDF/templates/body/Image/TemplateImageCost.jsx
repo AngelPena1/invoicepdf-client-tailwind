@@ -22,7 +22,8 @@ const TemplateImageCost = ({
   price,
   itbis,
   withITBIS,
-  notesInPdf
+  notesInPdf,
+  isDollar
 }) => {
   //194.5 max
   pdf.autoTable({
@@ -92,7 +93,7 @@ const TemplateImageCost = ({
       : `${description}`;
     const quantity = parseFloat(product?.quantity);
     const cost = parseFloat(product?.cost);
-    const price = parseFloat(product?.price);
+    const price = isDollar ? parseFloat(product?.price_us) : parseFloat(product?.price);
     const total = quantity * price;
 
     if (controlPixelHeight > maxHeight) {

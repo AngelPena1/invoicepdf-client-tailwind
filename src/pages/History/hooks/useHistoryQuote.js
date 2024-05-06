@@ -23,6 +23,7 @@ const useHistoryQuote = ({
     })[0]
     const clientData = quoteData?.client;
     const selectedProducts = JSON.parse(quoteData?.selected_products_json);
+    const notes = JSON.parse(quoteData?.notes);
     const productsId = selectedProducts.map((product) => product?.id);
 
     const imagesData = config?.quote[0]?.has_images ? await axiosPrivate.post("/product/images-array", {
@@ -39,10 +40,11 @@ const useHistoryQuote = ({
         array_products_id: productsId,
       }
     );
-
+    
     GenerarPDF({
       name: quoteData?.name,
       selectedProducts,
+      notesInPdf: notes,
       companyData: companyData.data,
       imagesData: imagesData.data,
       clientData,
@@ -58,6 +60,7 @@ const useHistoryQuote = ({
       hasItbis: quoteData?.has_itbis,
       hasCode: quoteData?.has_code,
       hasCost: quoteData?.has_cost,
+      isDollar: quoteData?.isDollar,
       quoteConfig: config?.quote[0]
     });
   }

@@ -69,12 +69,6 @@ const Index = () => {
     HandleAlreadyFetch,
   } = useGetImgProduct({ selectedProducts });
 
-  const { totals } = useGetTotal({
-    selectedProducts,
-    refreshPrice,
-    discount: inputData?.discount,
-  });
-
   const { result } = useSearchProduct({
     dataArray: productsData,
     searchInput: inputData?.search,
@@ -83,6 +77,13 @@ const Index = () => {
   const { toggles, togglePreview, toggleNotes, HandleToggleChange } = useToggles({
     quoteData,
     quoteHasData,
+  });
+  
+  const { totals } = useGetTotal({
+    isDollar: toggles?.dollar,
+    selectedProducts,
+    refreshPrice,
+    discount: inputData?.discount,
   });
 
   const { HandleCreateQuote } = usePostQuotes({
@@ -94,6 +95,7 @@ const Index = () => {
     results: totals,
     quoteHasData,
     quote_count: quoteData[0]?.quote_count,
+    notesInPdf
   });
 
   function HandlePrintQuote() {
@@ -142,6 +144,7 @@ const Index = () => {
         quoteId: quoteData[0]?.quote_count,
         quoteHasData,
         notesInPdf,
+        isDollar: toggles?.dollar,
         quoteConfig: config?.quote[0]
       });
       if (!toggles?.preview) {
