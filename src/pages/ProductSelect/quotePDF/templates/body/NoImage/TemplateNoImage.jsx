@@ -1,5 +1,5 @@
 import { formatToDecimal } from "../../../../../../utils/formatToDecimal/formatToDecimal";
-import { FooterWithItbis, FooterNoItbis } from "../../Footer/Index";
+import { Footer } from "../../Footer/Index";
 //The quote has cost and no img
 
 const TemplateNoImage = ({
@@ -8,9 +8,10 @@ const TemplateNoImage = ({
   controlPixelHeight,
   style_pdf,
   hasCode,
-  hasItbis,
   newPage,
   maxHeight,
+  isDollar,
+  hasItbis,
   discount,
   discountIsPorcentage,
   with_delivery,
@@ -19,7 +20,7 @@ const TemplateNoImage = ({
   itbis,
   withITBIS,
   notesInPdf,
-  isDollar
+  hasTips
 }) => {
   //194.5
   //body
@@ -112,40 +113,28 @@ const TemplateNoImage = ({
     pdf.addPage();
   }
 
-  pdf.autoTable({
-    startY: !newPage ? pdf.lastAutoTable.finalY + 5 : 10,
-    body: hasItbis
-      ? FooterWithItbis({
-          discount,
-          discountIsPorcentage,
-          with_delivery,
-          deposit,
-          price,
-          itbis,
-          withITBIS,
-          notesInPdf
-        })
-      : FooterNoItbis({
-          discount,
-          discountIsPorcentage,
-          with_delivery,
-          deposit,
-          price,
-          notesInPdf
-        }),
-    theme: "grid",
-    bodyStyles: {
-      fontSize: 9,
-      textColor: style_pdf?.textColorBody,
-      lineColor: style_pdf?.lineColor,
-    },
-    columnStyles: {
-      0: { cellWidth: 130.85 },
-      1: { cellWidth: 31.81, halign: "right" },
-      2: { cellWidth: 31.81, halign: "right" },
-    },
-  });
-  //footer
+  let footerWith = {
+    column_with_1: 130.85,
+    column_with_2: 31.81,
+    column_with_3: 31.81,
+  }
+  
+  Footer({
+    pdf,
+    footerWith,
+    newPage,
+    style_pdf,
+    hasItbis,
+    discount,
+    discountIsPorcentage,
+    with_delivery,
+    deposit,
+    price,
+    itbis,
+    withITBIS,
+    notesInPdf,
+    hasTips
+  })
 };
 
 export default TemplateNoImage;

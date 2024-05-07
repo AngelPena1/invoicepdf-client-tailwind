@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import calculate from "../utils/calculate";
 
-const useGetTotal = ({ selectedProducts, isDollar, discount, refreshPrice }) => {
+const useGetTotal = ({ hasTips, selectedProducts, isDollar, discount, refreshPrice }) => {
   const [totals, setTotals] = useState({
     price: 0,
     cost: 0,
     itbis: 0,
+    tips: 0,
     withITBIS: 0,
   });
 
@@ -17,14 +18,15 @@ const useGetTotal = ({ selectedProducts, isDollar, discount, refreshPrice }) => 
       cost: result?.cost,
       price: result?.subtotal,
       itbis: result?.subtotal * 0.18,
-      withITBIS: result?.total,
+      tips: result?.subtotal * 0.10,
+      withITBIS: !hasTips ? result?.total : result?.total + result?.subtotal * 0.10,
     });
   }
 
   useEffect(() => {
     HandleTotals();
     // eslint-disable-next-line
-  }, [selectedProducts, isDollar, discount, refreshPrice]);
+  }, [selectedProducts, isDollar, discount, refreshPrice, hasTips]);
 
   return { totals };
 };

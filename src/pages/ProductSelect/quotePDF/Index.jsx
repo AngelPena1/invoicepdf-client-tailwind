@@ -47,7 +47,7 @@ function stylesPDF(type) {
         lineColor: [0, 0, 0],
       }
       break;
-  
+
     default:
       break;
   }
@@ -75,6 +75,7 @@ export async function GenerarPDF({
   hasItbis,
   hasCode,
   hasCost,
+  hasTips,
   quoteId,
   quoteHasData,
   notesInPdf,
@@ -85,9 +86,10 @@ export async function GenerarPDF({
     const pdf = new jsPDF({
       format: "letter",
     });
-    
+
     // let controlPixelHeight = 0;
     let newPage = false;
+    
     const quote_counter = !quoteHasData ? await getQuoteCounter(companyData[0]?.id) : quoteId
 
     const style_pdf = stylesPDF(companyData[0]?.style_pdf)
@@ -123,9 +125,12 @@ export async function GenerarPDF({
       itbis,
       withITBIS,
       notesInPdf,
-      isDollar
+      isDollar,
+      hasTips
     });
-    
+
+   
+
     if (isPreview) {
       const pdfWithWatermark = addWaterMark(pdf);
       return pdfWithWatermark.output(
@@ -133,10 +138,10 @@ export async function GenerarPDF({
         "PREVIEW RC-" + quote_counter
       );
     }
-    
+
     if (isAlreadyCreated) {
       return pdf.save(name);
-    } 
+    }
     return pdf.save("Cotización RC-" + quote_counter);
   } catch (error) {
     console.error(error);

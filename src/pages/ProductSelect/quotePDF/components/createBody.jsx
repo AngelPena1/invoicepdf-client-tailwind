@@ -12,19 +12,19 @@ export function CreateBody({
   maxHeight,
   hasCode,
   hasCost,
-  hasItbis,
   style_pdf,
   quoteConfig,
-  discountIsPorcentage,
+  isDollar,
+  hasItbis,
   discount,
+  discountIsPorcentage,
   with_delivery,
   deposit,
-  cost,
   price,
   itbis,
   withITBIS,
-  notesInPdf,
-  isDollar
+  hasTips,
+  notesInPdf
 }) {
   const hasImages = quoteConfig?.has_images;
 
@@ -39,21 +39,20 @@ export function CreateBody({
         selectedProducts,
         controlPixelHeight,
         style_pdf,
-        imagesData,
         hasCode,
-        hasItbis,
         newPage,
         maxHeight,
+        isDollar,
+        hasItbis,
+        hasTips,
         discountIsPorcentage,
         discount,
         with_delivery,
         deposit,
-        cost,
         price,
         itbis,
         withITBIS,
-        notesInPdf,
-        isDollar
+        notesInPdf
       });
     }
     else {
@@ -64,9 +63,10 @@ export function CreateBody({
         style_pdf,
         imagesData,
         hasCode,
-        hasItbis,
         newPage,
         maxHeight,
+        isDollar,
+        hasItbis,
         discountIsPorcentage,
         discount,
         with_delivery,
@@ -74,8 +74,7 @@ export function CreateBody({
         price,
         itbis,
         withITBIS,
-        notesInPdf,
-        isDollar
+        notesInPdf
       });
     }
   }
@@ -89,19 +88,19 @@ export function CreateBody({
         style_pdf,
         imagesData,
         hasCode,
-        hasItbis,
         newPage,
         maxHeight,
-        discount,
+        isDollar,
+        hasItbis,
         discountIsPorcentage,
+        discount,
         with_delivery,
         deposit,
-        cost,
         price,
         itbis,
         withITBIS,
         notesInPdf,
-        isDollar
+        hasTips
       });
     }
     else {
@@ -112,9 +111,11 @@ export function CreateBody({
         style_pdf,
         imagesData,
         hasCode,
-        hasItbis,
         newPage,
         maxHeight,
+        isDollar,
+        hasItbis,
+        discountIsPorcentage,
         discount,
         with_delivery,
         deposit,
@@ -122,7 +123,7 @@ export function CreateBody({
         itbis,
         withITBIS,
         notesInPdf,
-        isDollar
+        hasTips
       });
     }
     

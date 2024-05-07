@@ -94,6 +94,23 @@ const ProductsForm = ({
             <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
               <input
                 type="checkbox"
+                checked={toggles?.tips}
+                value={toggles?.tips}
+                name="tips"
+                onClick={HandleToggleChange}
+                onChange={() => { }}
+                className="sr-only peer outline-none"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
+                10% Legal
+              </span>
+            </label>
+          </div>
+          <div className="mr-10">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+              <input
+                type="checkbox"
                 checked={toggles?.dollar}
                 value={toggles?.dollar}
                 name="dollar"
@@ -226,7 +243,7 @@ const ProductsForm = ({
                             HandlePriceChange(e, index);
                           }}
                           onClick={(e) => {
-                            e.target.select(); 
+                            e.target.select();
                           }}
                           onBlur={(e) => {
                             DefaultValueOnPriceChange(e, index)
@@ -364,6 +381,10 @@ const ProductsForm = ({
               <p>Itbis</p>
               <p className="text-right">{formatToDecimal(totals?.itbis)}</p>
             </li>
+            {toggles?.tips && <li className="grid grid-cols-2">
+              <p>Tips</p>
+              <p className="text-right">{formatToDecimal(totals?.tips)}</p>
+            </li>}
             <li className="grid grid-cols-2">
               <p>Total</p>
               <p className="text-right">{formatToDecimal(totals?.withITBIS)}</p>

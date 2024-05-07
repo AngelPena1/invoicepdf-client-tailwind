@@ -82,6 +82,7 @@ const Index = () => {
   
   const { totals } = useGetTotal({
     isDollar: toggles?.dollar,
+    hasTips: toggles?.tips,
     selectedProducts,
     refreshPrice,
     discount: inputData?.discount,
@@ -142,6 +143,7 @@ const Index = () => {
         hasItbis: toggles?.itbis,
         hasCode: toggles?.code,
         hasCost: toggles?.cost,
+        hasTips: toggles?.tips,
         quoteId: quoteData[0]?.quote_count,
         quoteHasData,
         notesInPdf,
