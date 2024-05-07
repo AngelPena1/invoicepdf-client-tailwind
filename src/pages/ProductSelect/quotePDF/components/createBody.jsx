@@ -28,6 +28,10 @@ export function CreateBody({
 }) {
   const hasImages = quoteConfig?.has_images;
 
+  pdf.setFontSize(8);
+  pdf.text(isDollar ? "**Precios en US$**" : "**Precios en RD$**", 150, 70)
+  pdf.setFont('bold');
+
   if (!hasImages) { //ready
     if(hasCost) {
       return TemplateNoImageCost({
