@@ -3,6 +3,15 @@ import TemplateNoImageCost from "../templates/Body/NoImage/TemplateNoImageCost";
 import TemplateNoImage from "../templates/Body/NoImage/TemplateNoImage";
 import TemplateImage from "../templates/Body/Image/TemplateImage";
 
+const addPricingLabel = ({pdf, isDollar, hasImages}) => {
+  pdf.setFontSize(8);
+  hasImages ? 
+    pdf.text(isDollar ? "**Precios en US$**" : "**Precios en RD$**", 160, 70) :
+    pdf.text(isDollar ? "**Precios en US$**" : "**Precios en RD$**", 150, 70)
+  
+  pdf.setFont('bold');
+}
+
 export function CreateBody({
   pdf,
   controlPixelHeight,
@@ -28,12 +37,10 @@ export function CreateBody({
 }) {
   const hasImages = quoteConfig?.has_images;
 
-  pdf.setFontSize(8);
-  pdf.text(isDollar ? "**Precios en US$**" : "**Precios en RD$**", 150, 70)
-  pdf.setFont('bold');
+  addPricingLabel({pdf, isDollar, hasImages})
 
   if (!hasImages) { //ready
-    if(hasCost) {
+    if (hasCost) {
       return TemplateNoImageCost({
         pdf,
         selectedProducts,
@@ -80,7 +87,7 @@ export function CreateBody({
   }
 
   if (hasImages) {
-    if(hasCost) {
+    if (hasCost) {
       return TemplateImageCost({ //ready
         pdf,
         selectedProducts,
@@ -126,6 +133,6 @@ export function CreateBody({
         hasTips
       });
     }
-    
+
   }
 }
