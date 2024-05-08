@@ -1,11 +1,13 @@
-function calculate({ selectedProducts, isDollar, discount }) {
+function calculate({ selectedProducts, isDollar, discount, hasItbis, hasTips }) {
   let results = {
     subtotal: 0,
     itbis: 0,
     discount: 0,
+    tips: 0,
     total: 0,
     cost: 0,
   };
+
   let localDiscount = discount;
 
   selectedProducts.forEach((product) => {
@@ -24,8 +26,9 @@ function calculate({ selectedProducts, isDollar, discount }) {
 
   results.discount = localDiscount;
   results.subtotal = results.subtotal - localDiscount;
-  results.itbis = results?.subtotal * 0.18;
-  results.total = results?.subtotal + results?.itbis;
+  results.tips = hasTips ? results?.subtotal * 0.10 : 0
+  results.itbis = hasItbis ? results?.subtotal * 0.18 : 0;
+  results.total = results?.subtotal + results?.itbis + results?.tips;
 
   return results;
 }

@@ -25,7 +25,8 @@ const TemplateImage = ({
   withITBIS,
   notesInPdf,
   isDollar,
-  hasTips
+  hasTips,
+  tips
 }) => {
   //194.5 max
   pdf.autoTable({
@@ -189,7 +190,8 @@ const TemplateImage = ({
     itbis,
     withITBIS,
     notesInPdf,
-    hasTips
+    hasTips,
+    tips
   })
 
 };

@@ -18,6 +18,7 @@ const TemplateNoImageCost = ({
   deposit,
   price,
   itbis,
+  tips,
   withITBIS,
   notesInPdf,
   hasTips
@@ -137,6 +138,7 @@ const TemplateNoImageCost = ({
     deposit,
     price,
     itbis,
+    tips,
     withITBIS,
     notesInPdf,
     hasTips

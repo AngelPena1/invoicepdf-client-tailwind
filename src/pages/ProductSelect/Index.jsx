@@ -82,6 +82,7 @@ const Index = () => {
   
   const { totals } = useGetTotal({
     isDollar: toggles?.dollar,
+    hasItbis: toggles?.itbis,
     hasTips: toggles?.tips,
     selectedProducts,
     refreshPrice,
@@ -136,6 +137,7 @@ const Index = () => {
         deposit: inputData?.deposit,
         cost: totals?.cost,
         itbis: totals?.itbis,
+        tips: totals?.tips,
         price: totals?.price,
         withITBIS: totals?.withITBIS,
         isPreview: toggles?.preview,

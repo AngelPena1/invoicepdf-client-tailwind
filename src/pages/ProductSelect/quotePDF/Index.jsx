@@ -68,6 +68,7 @@ export async function GenerarPDF({
   deposit,
   cost,
   price,
+  tips,
   itbis,
   withITBIS,
   isPreview,
@@ -126,7 +127,8 @@ export async function GenerarPDF({
       withITBIS,
       notesInPdf,
       isDollar,
-      hasTips
+      hasTips,
+      tips
     });
 
    

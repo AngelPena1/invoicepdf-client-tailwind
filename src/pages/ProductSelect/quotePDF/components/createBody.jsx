@@ -30,10 +30,11 @@ export function CreateBody({
   with_delivery,
   deposit,
   price,
+  tips,
   itbis,
   withITBIS,
   hasTips,
-  notesInPdf
+  notesInPdf,
 }) {
   const hasImages = quoteConfig?.has_images;
 
@@ -58,6 +59,7 @@ export function CreateBody({
         deposit,
         price,
         itbis,
+        tips,
         withITBIS,
         notesInPdf
       });
@@ -80,8 +82,10 @@ export function CreateBody({
         deposit,
         price,
         itbis,
+        tips,
         withITBIS,
-        notesInPdf
+        notesInPdf,
+        hasTips
       });
     }
   }
@@ -105,6 +109,7 @@ export function CreateBody({
         deposit,
         price,
         itbis,
+        tips,
         withITBIS,
         notesInPdf,
         hasTips
@@ -130,7 +135,8 @@ export function CreateBody({
         itbis,
         withITBIS,
         notesInPdf,
-        hasTips
+        hasTips,
+        tips
       });
     }
 

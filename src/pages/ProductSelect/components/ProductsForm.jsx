@@ -373,21 +373,24 @@ const ProductsForm = ({
                   : formatToDecimal(parseFloat(inputData?.discount))}
               </p>
             </li>
-            <li className="grid grid-cols-2">
+            {toggles?.itbis && <li className="grid grid-cols-2">
               <p>Subtotal</p>
               <p className="text-right">{formatToDecimal(totals?.price)}</p>
-            </li>
-            <li className="grid grid-cols-2">
+            </li>}
+
+            {toggles?.itbis && <li className="grid grid-cols-2">
               <p>Itbis</p>
               <p className="text-right">{formatToDecimal(totals?.itbis)}</p>
-            </li>
+            </li>}
+
             {toggles?.tips && <li className="grid grid-cols-2">
               <p>Tips</p>
               <p className="text-right">{formatToDecimal(totals?.tips)}</p>
             </li>}
+
             <li className="grid grid-cols-2">
               <p>Total</p>
-              <p className="text-right">{formatToDecimal(totals?.withITBIS)}</p>
+              <p className="text-right">{ formatToDecimal(totals?.withITBIS)}</p>
             </li>
           </ul>
         </section>

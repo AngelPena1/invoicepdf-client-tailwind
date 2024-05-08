@@ -21,6 +21,7 @@ const TemplateImageCost = ({
   deposit,
   price,
   itbis,
+  tips,
   withITBIS,
   notesInPdf,
   isDollar,
@@ -201,7 +202,8 @@ const TemplateImageCost = ({
     itbis,
     withITBIS,
     notesInPdf,
-    hasTips
+    hasTips,
+    tips
   })
 };
 

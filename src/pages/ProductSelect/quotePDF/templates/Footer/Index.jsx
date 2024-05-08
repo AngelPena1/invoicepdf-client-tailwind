@@ -8,16 +8,18 @@ export const Footer = (props) => {
     ["", "Descuento", props.discountIsPorcentage
       ? `(%) ${formatToDecimal(parseFloat(props?.discount))}`
       : formatToDecimal(parseFloat(props?.discount))],
+    props.hasItbis ?   
     [
       "",
       "Subtotal",
       formatToDecimal(props?.price),
-    ],
+    ] : null,
+    props.hasItbis ? 
     [
       "",
       "ITBIS",
       formatToDecimal(props?.itbis),
-    ],
+    ] : null,
     props.hasTips ? [
       "",
       "10% Legal",

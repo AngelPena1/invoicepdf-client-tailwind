@@ -17,10 +17,11 @@ const TemplateNoImage = ({
   with_delivery,
   deposit,
   price,
+  tips,
   itbis,
   withITBIS,
   notesInPdf,
-  hasTips
+  hasTips,
 }) => {
   //194.5
   //body
@@ -133,7 +134,8 @@ const TemplateNoImage = ({
     itbis,
     withITBIS,
     notesInPdf,
-    hasTips
+    hasTips,
+    tips
   })
 };
 
