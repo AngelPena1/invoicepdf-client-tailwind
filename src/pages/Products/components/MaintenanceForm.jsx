@@ -5,16 +5,16 @@ import Select from "../../../components/Select/Index";
 function MaintenanceForm({
   inputData,
   loadingImg,
-  onlyNamesBranch,
-  HandleFinishesSelect,
+  onlyNamesGroup,
   onlyNamesCategories,
   onlyNamesFinishes,
   onlyNamesSubcategories,
   ResetImage,
   HandleInputData,
-  HandleBrandSelect,
+  HandleGroupSelect,
   HandleCategorySelect,
   HandleSubcategorySelect,
+  HandleFinishesSelect,
   HandleImageChange,
   HandleCreateProduct,
   HandleUpdateProduct,
@@ -39,13 +39,13 @@ function MaintenanceForm({
         <div className="grid grid-cols-2 gap-8 mb-10">
           <div>
             <label htmlFor="" className="text-base">
-              Marca
+              Grupo
             </label>
             <Select
-              value={inputData?.brand_id}
+              value={inputData?.group_id}
               value_id={true}
-              onClick={HandleBrandSelect}
-              elements={onlyNamesBranch}
+              onClick={HandleGroupSelect}
+              elements={onlyNamesGroup}
             />
           </div>
           <div>

@@ -7,7 +7,7 @@ const useInputData = ({ divisionsData }) => {
     search: "",
     name: "",
     description: "",
-    brand_id: "",
+    group_id: "",
     finishes_id: "",
     finishes: "",
     category_id: "",
@@ -43,25 +43,25 @@ const useInputData = ({ divisionsData }) => {
     return setInputData({ ...inputData, image: "" });
   }
 
-  function getFinishes(brand_id) {
+  function getFinishes(group_id) {
     let finishes = [];
 
-    divisionsData.forEach((brand) => {
-      if (brand?.id !== brand_id) return;
-      if (!(brand?.finishes?.length > 0)) return;
-      finishes = brand?.finishes;
+    divisionsData.forEach((group) => {
+      if (group?.id !== group_id) return;
+      if (!(group?.finishes?.length > 0)) return;
+      finishes = group?.finishes;
     });
 
     return finishes;
   }
 
-  function getCategories(brand_id) {
+  function getCategories(group_id) {
     let categories = [];
 
-    divisionsData.forEach((brand) => {
-      if (brand?.id !== brand_id) return;
-      if (!(brand?.categories?.length > 0)) return;
-      categories = brand?.categories;
+    divisionsData.forEach((group) => {
+      if (group?.id !== group_id) return;
+      if (!(group?.categories?.length > 0)) return;
+      categories = group?.categories;
     });
 
     return categories;
@@ -70,8 +70,8 @@ const useInputData = ({ divisionsData }) => {
   function getSubcategories(category_id) {
     let subcategories = [];
 
-    divisionsData.forEach((brand) => {
-      brand.categories.forEach((category) => {
+    divisionsData.forEach((group) => {
+      group.categories.forEach((category) => {
         if (category?.id !== category_id) return;
         if (!(category?.subcategories?.length > 0)) return;
         subcategories = category?.subcategories;
@@ -81,20 +81,20 @@ const useInputData = ({ divisionsData }) => {
     return subcategories;
   }
 
-  function HandleBrandSelect(brand_id) {
+  function HandleGroupSelect(group_id) {
     let categories = [];
     let finishes = [];
 
-    divisionsData.forEach((brand) => {
-      if (brand?.id !== brand_id) return;
-      if (!(brand?.categories?.length > 0)) return;
-      categories = brand?.categories;
-      finishes = brand?.finishes;
+    divisionsData.forEach((group) => {
+      if (group?.id !== group_id) return;
+      if (!(group?.categories?.length > 0)) return;
+      categories = group?.categories;
+      finishes = group?.finishes;
     });
 
     return setInputData({
       ...inputData,
-      brand_id: brand_id,
+      group_id: group_id,
       categories: categories,
       finishes: finishes,
     });
@@ -103,8 +103,8 @@ const useInputData = ({ divisionsData }) => {
   function HandleCategorySelect(category_id) {
     let subcategories = [];
 
-    divisionsData.forEach((brand) => {
-      brand.categories.forEach((category) => {
+    divisionsData.forEach((group) => {
+      group.categories.forEach((category) => {
         if (category?.id !== category_id) return;
         if (!(category?.subcategories?.length > 0)) return;
         subcategories = category?.subcategories;
@@ -131,12 +131,12 @@ const useInputData = ({ divisionsData }) => {
       search: "",
       product_id: data?.id,
       name: data?.name,
-      brand_id: data?.brand?.id,
+      group_id: data?.group?.id,
       finishes_id: data?.finish?.id,
       finishes_code: data?.finish?.code,
-      finishes: getFinishes(data?.brand?.id),
+      finishes: getFinishes(data?.group?.id),
       category_id: data?.category?.id,
-      categories: getCategories(data?.brand?.id),
+      categories: getCategories(data?.group?.id),
       subcategory_id: data?.subcategory?.id,
       subcategories: getSubcategories(data?.category?.id),
       price: data?.price,
@@ -181,7 +181,7 @@ const useInputData = ({ divisionsData }) => {
     return setInputData({
       search: "",
       name: "",
-      brand_id: "",
+      group_id: "",
       category_id: "",
       category: "",
       subcategory_id: "",
@@ -219,7 +219,7 @@ const useInputData = ({ divisionsData }) => {
     CheckForNotEmptyValues,
     HandleInputData,
     HandleEventSearch,
-    HandleBrandSelect,
+    HandleGroupSelect,
     HandleFinishesSelect,
     HandleCategorySelect,
     HandleSubcategorySelect,

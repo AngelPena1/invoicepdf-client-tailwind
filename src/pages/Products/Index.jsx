@@ -4,7 +4,7 @@ import MaintenanceForm from "./components/MaintenanceForm";
 import useInputData from "./hooks/useInputData";
 import useTabNavigation from "./hooks/useTabNavigation";
 import NavigationBar from "./components/NavigationBar";
-import useGetBranchWithDivisions from "./hooks/useGetBranchWithDivisions";
+import useGetGroupWithDivisions from "./hooks/useGetGroupWithDivisions";
 import usePostProduct from "./hooks/usePostProduct";
 import useGetImgProduct from "./hooks/useGetImgProduct";
 import ProductsForm from "./components/ProductsForm";
@@ -19,7 +19,7 @@ const Index = () => {
     data: divisionsData,
     getOnlyNames,
     HandleSearch: HandleSearchCategories,
-  } = useGetBranchWithDivisions();
+  } = useGetGroupWithDivisions();
 
   const {
     inputData,
@@ -28,7 +28,7 @@ const Index = () => {
     CheckForNotEmptyValues,
     HandleInputData,
     HandleEventSearch,
-    HandleBrandSelect,
+    HandleGroupSelect,
     HandleFinishesSelect,
     HandleCategorySelect,
     HandleSubcategorySelect,
@@ -117,14 +117,14 @@ const Index = () => {
           inputData={inputData}
           divisionsData={divisionsData}
           loadingImg={loadingImg}
-          onlyNamesBranch={getOnlyNames(divisionsData)}
+          onlyNamesGroup={getOnlyNames(divisionsData)}
           onlyNamesFinishes={getOnlyNames(inputData?.finishes)}
           onlyNamesCategories={getOnlyNames(inputData?.categories)}
           onlyNamesSubcategories={getOnlyNames(inputData?.subcategories)}
           getOnlyNames={getOnlyNames}
           ResetImage={ResetImage}
           HandleInputData={HandleInputData}
-          HandleBrandSelect={HandleBrandSelect}
+          HandleGroupSelect={HandleGroupSelect}
           HandleFinishesSelect={HandleFinishesSelect}
           HandleCategorySelect={HandleCategorySelect}
           HandleSubcategorySelect={HandleSubcategorySelect}
