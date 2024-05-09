@@ -27,10 +27,10 @@ const Form = (props) => {
             </label>
             <Select
               className="ml-4 w-56 relative"
-              elements={props.selectData?.brands}
+              elements={props.selectData?.groups}
               value_id={true}
-              onClick={props.HandleBrandSelect}
-              value={props.selectData.brand_selected}
+              onClick={props.HandleGroupSelect}
+              value={props.selectData.group_selected}
             />
           </div>
           <div className="flex items-center mb-4">

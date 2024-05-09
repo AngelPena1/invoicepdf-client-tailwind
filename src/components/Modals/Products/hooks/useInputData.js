@@ -3,7 +3,7 @@ import { useState } from "react";
 const useInputData = () => {
   const [inputData, setInputData] = useState({
     search: "",
-    brand_selected: null,
+    group_selected: null,
     category_selected: null,
     subcategory_selected: null,
     finishes_selected: null,
@@ -29,7 +29,7 @@ const useInputData = () => {
   function HandleClickFilters(selects) {
     setInputData({
       ...inputData,
-      brand_selected: selects?.brand_selected,
+      group_selected: selects?.group_selected,
       category_selected: selects?.category_selected,
       subcategory_selected: selects?.subcategory_selected,
       finishes_selected: selects?.finishes_selected,
@@ -41,7 +41,7 @@ const useInputData = () => {
   function clearInputs() {
     return setInputData({
       ...inputData,
-      brand_selected: "",
+      group_selected: "",
       category_selected: "",
       subcategory_selected: "",
       finishes_selected: "",

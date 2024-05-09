@@ -3,8 +3,8 @@ import { useState } from "react";
 
 const useSelectData = ({ divisionData }) => {
   const [selectData, setSelectData] = useState({
-    brands: [],
-    brand_selected: null,
+    groups: [],
+    group_selected: null,
     categories: [],
     category_selected: null,
     subcategories: [],
@@ -15,8 +15,8 @@ const useSelectData = ({ divisionData }) => {
 
   function cleanData() {
     return {
-      brands: [],
-      brand_selected: null,
+      groups: [],
+      group_selected: null,
       categories: [],
       category_selected: null,
       subcategories: [],
@@ -28,33 +28,33 @@ const useSelectData = ({ divisionData }) => {
 
   function ReturnDataFormat() {
     return {
-      brand_selected: selectData?.brand_selected,
+      group_selected: selectData?.group_selected,
       category_selected: selectData?.category_selected,
       subcategory_selected: selectData?.subcategory_selected,
       finishes_selected: selectData?.finishes_selected,
     };
   }
 
-  function getBrandOnly() {
+  function getGroupOnly() {
     let localArray = divisionData.map((data) => {
       return { id: data?.id, name: data?.name };
     });
-    return setSelectData({ ...selectData, brands: localArray });
+    return setSelectData({ ...selectData, groups: localArray });
   }
 
-  function getCategoriesOnly(brand_id) {
+  function getCategoriesOnly(group_id) {
     let localArray = [];
     divisionData.forEach((data) => {
-      if (data?.id !== brand_id) return;
+      if (data?.id !== group_id) return;
       localArray.push(...data?.categories);
     });
     return localArray;
   }
 
-  function getFinishesOnly(brand_id) {
+  function getFinishesOnly(group_id) {
     let localArray = [];
     divisionData.forEach((data) => {
-      if (data?.id !== brand_id) return;
+      if (data?.id !== group_id) return;
       localArray.push(...data?.finishes);
     });
     return localArray;
@@ -69,12 +69,12 @@ const useSelectData = ({ divisionData }) => {
     return localArray;
   }
 
-  function HandleBrandSelect(brand_id) {
+  function HandleGroupSelect(group_id) {
     return setSelectData({
       ...selectData,
-      brand_selected: brand_id,
-      categories: getCategoriesOnly(brand_id),
-      finishes: getFinishesOnly(brand_id),
+      group_selected: group_id,
+      categories: getCategoriesOnly(group_id),
+      finishes: getFinishesOnly(group_id),
     });
   }
 
@@ -101,7 +101,7 @@ const useSelectData = ({ divisionData }) => {
   }
 
   useEffect(() => {
-    getBrandOnly();
+    getGroupOnly();
     // eslint-disable-next-line
   }, [divisionData]);
 
@@ -109,7 +109,7 @@ const useSelectData = ({ divisionData }) => {
     selectData,
     cleanData,
     ReturnDataFormat,
-    HandleBrandSelect,
+    HandleGroupSelect,
     HandleCategorySelect,
     HandleSubcategorySelect,
     HandleFinishesSelected,

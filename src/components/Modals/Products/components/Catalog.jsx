@@ -58,7 +58,7 @@ const Catalog = (props) => {
                     Código
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Marca
+                    Grupo
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Categoría
@@ -88,7 +88,7 @@ const Catalog = (props) => {
                           : product?.description.substring(0, 72) + "..."}
                       </td>
                       <td className="px-6 py-4">{product?.code}</td>
-                      <td className="px-6 py-4">{product?.brand?.name}</td>
+                      <td className="px-6 py-4">{product?.group?.name}</td>
                       <td className="px-6 py-4">{product?.category?.name}</td>
                       <td className="px-6 py-4">{product?.subcategory?.name}</td>
                       <td className="px-6 py-4">{product?.price}</td>

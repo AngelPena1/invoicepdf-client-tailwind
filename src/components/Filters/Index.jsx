@@ -13,7 +13,7 @@ const Filters = ({ onClick }) => {
     selectData,
     cleanData,
     ReturnDataFormat,
-    HandleBrandSelect,
+    HandleGroupSelect,
     HandleCategorySelect,
     HandleSubcategorySelect,
     HandleFinishesSelected,
@@ -28,7 +28,7 @@ const Filters = ({ onClick }) => {
       HideWindow={HideWindow}
       cleanData={cleanData}
       ReturnDataFormat={ReturnDataFormat}
-      HandleBrandSelect={HandleBrandSelect}
+      HandleGroupSelect={HandleGroupSelect}
       HandleCategorySelect={HandleCategorySelect}
       HandleSubcategorySelect={HandleSubcategorySelect}
       HandleFinishesSelected={HandleFinishesSelected}

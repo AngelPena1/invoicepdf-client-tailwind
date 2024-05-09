@@ -6,7 +6,7 @@ const useGetDivisions = () => {
 
   const companyId = auth?.company?.id;
 
-  const endpoint = `/brand/company/${companyId}/getall/subdivision`;
+  const endpoint = `/group/company/${companyId}/getall/subdivision`;
 
   const { data, loading } = useGetData({
     url: endpoint,
