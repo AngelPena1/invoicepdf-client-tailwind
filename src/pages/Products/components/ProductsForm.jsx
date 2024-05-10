@@ -12,7 +12,7 @@ const ProductsForm = (props) => {
 
   return (
     <section className="rounded-lg h-xl">
-      {dataHasValue && (
+      {dataHasValue && !props.loading && (
         <div className="relative overflow-x-auto overflow-y-auto h-96">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             {!props.loading && dataHasValue && (
@@ -25,7 +25,7 @@ const ProductsForm = (props) => {
                     Código
                   </th>
                   <th scope="col" className="px-3 py-3">
-                    Marca
+                    Grupo
                   </th>
                   <th scope="col" className="px-3 py-3">
                     Categoría
@@ -61,7 +61,7 @@ const ProductsForm = (props) => {
                         : product?.description.substring(0, 90) + "..."}
                     </th>
                     <td className="px-3 py-4">{product?.code}</td>
-                    <td className="px-3 py-4">{product?.brand?.name}</td>
+                    <td className="px-3 py-4">{product?.group?.name}</td>
                     <td className="px-3 py-4">{product?.category?.name}</td>
                     <td className="px-3 py-4">{product?.subcategory?.name}</td>
                     <td className="px-3 py-4">{product?.price}</td>
@@ -93,7 +93,7 @@ const ProductsForm = (props) => {
         </div>
       )}
       {props.loading && <section className="h-xl skeleton"></section>}
-      {productDataHasValue && switchBetweenValues && (
+      {productDataHasValue && switchBetweenValues  && (
         <>
           <div className="grid place-content-center py-4 relative">
             <Pagination
@@ -107,9 +107,10 @@ const ProductsForm = (props) => {
               scrollbarRef={props.scrollbarRef}
             />
           </div>
-          <h4 className="grid place-content-end relative bottom-2 right-2">
+          {!props.loading && <h4 className="grid place-content-end relative bottom-2 right-2">
             Total de Registros: {props.count}
-          </h4>
+          </h4>}
+          
         </>
       )}
     </section>
