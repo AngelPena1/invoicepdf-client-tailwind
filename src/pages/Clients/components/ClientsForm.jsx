@@ -15,7 +15,7 @@ const ClientsForm = ({
 
   return (
     <section className="h-xl">
-      {((!searchInputHasValue || resultHasValues) && clientsData?.length > 0) && (
+      {((!searchInputHasValue || resultHasValues) && clientsData?.length > 0) && !clientLoading && (
         <div className="relative overflow-x-auto overflow-y-auto">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-slate-300">
