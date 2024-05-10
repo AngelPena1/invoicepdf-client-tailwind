@@ -1,5 +1,5 @@
 import React from "react";
-import Search from "../../../components/SearchProducts";
+import Search from "../../../components/Searchs/SearchProducts";
 import {
   faMinus,
   faPlus,

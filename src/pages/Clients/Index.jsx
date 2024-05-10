@@ -7,7 +7,7 @@ import useSearchClient from "./hooks/useSearchClient";
 import ClientsForm from "./components/ClientsForm";
 import MaintenanceForm from "./components/MaintenanceForm";
 import usePostClient from "./hooks/usePostClient";
-import Search from "../../components/SearchProducts";
+import Search from '../../components/Searchs/SearchClients'
 
 const Index = () => {
   const {
@@ -54,8 +54,11 @@ const Index = () => {
         result={result}
         value={inputData?.search}
         onChange={HandleSearchInput}
-        onClick={HandleEditClient}
-        conditionToShowResults={currentTab !== "default"}
+        onClick={(e) => {
+          HandleEditClient(e)
+          HandleChangeTab('maintenance')
+        }}
+        conditionToShowResults={true}
       />
 
       {currentTab === "default" && (
