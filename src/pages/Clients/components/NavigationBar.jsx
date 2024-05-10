@@ -31,7 +31,7 @@ const NavigationBar = ({ currentTab, HandleChangeTab, ResetInputValues }) => {
           }}
         >
           <FontAwesomeIcon icon={faPenToSquare} className="mr-2" />
-          Mantenimiento
+          Crear / Editar
         </li>
       </ul>
     </nav>
