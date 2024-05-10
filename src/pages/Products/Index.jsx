@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import Search from "../../components/SearchProducts";
+import Search from "../../components/Searchs/SearchProducts";
 import MaintenanceForm from "./components/MaintenanceForm";
 import useInputData from "./hooks/useInputData";
 import useTabNavigation from "./hooks/useTabNavigation";
