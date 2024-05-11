@@ -54,7 +54,7 @@ const Index = () => {
   }, []);
 
   return (
-    <section className="rounded-lg">
+    <section className="rounded-lg fade-in-bottom">
       {toggles?.invoiceForm && <InvoicePDF selectedQuote={selectedQuote} toggleCreateInvoice={toggleCreateInvoice} />}
       <section className="flex">
         <Filters

@@ -37,7 +37,7 @@ const ProductsForm = ({
   HandlePrintPreview,
 }) => {
   return (
-    <section className="bg-white p-8 rounded-lg shadow-style-2 h-fit">
+    <section className="bg-white p-8 rounded-lg shadow-style-2 h-fit fade-in-bottom">
       <div className="grid grid-cols-2">
         <section
           name="heading"
