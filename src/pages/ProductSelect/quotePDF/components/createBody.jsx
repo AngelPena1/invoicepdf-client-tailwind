@@ -1,7 +1,7 @@
-import TemplateImageCost from "../templates/Body/Image/TemplateImageCost";
-import TemplateNoImageCost from "../templates/Body/NoImage/TemplateNoImageCost";
-import TemplateNoImage from "../templates/Body/NoImage/TemplateNoImage";
-import TemplateImage from "../templates/Body/Image/TemplateImage";
+import TemplateImageCost from "../templates/body/Image/TemplateImageCost";
+import TemplateNoImageCost from "../templates/body/NoImage/TemplateNoImageCost";
+import TemplateNoImage from "../templates/body/NoImage/TemplateNoImage";
+import TemplateImage from "../templates/body/Image/TemplateImage";
 
 const addPricingLabel = ({pdf, isDollar, hasImages}) => {
   pdf.setFontSize(8);

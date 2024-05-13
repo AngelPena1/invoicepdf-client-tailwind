@@ -1,8 +1,8 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import toast from "react-hot-toast";
-import { CreateHeading } from "./components/CreateHeading";
-import { CreateBody } from "./components/CreateBody";
+import { CreateHeading } from "./components/createHeading";
+import { CreateBody } from "./components/createBody";
 // import { CreateFooter } from "./components/CreateFooter";
 import { getQuoteCounter } from "../axios/getQuoteCounter";
 
