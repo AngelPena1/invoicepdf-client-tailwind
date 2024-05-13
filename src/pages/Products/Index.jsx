@@ -79,7 +79,7 @@ const Index = () => {
   }, [resfresh]);
 
   return (
-    <section className="bg-white p-4 shadow-style-2 rounded-lg">
+    <section className="bg-white p-4 shadow-style-2 rounded-lg fade-in-bottom">
       <NavigationBar
         currentTab={currentTab}
         ResetInputValues={ResetInputValues}

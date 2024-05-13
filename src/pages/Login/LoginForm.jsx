@@ -5,7 +5,7 @@ const LoginForm = (props) => {
     <section className="grid justify-items-center items-center">
       <form
         onSubmit={props.HandleLogin}
-        className="w-96 h-30r bg-white rounded-lg relative top-12 shadow-style-2 overflow-hidden fade-in-bottom"
+        className="w-96 h-30r bg-white rounded-lg relative top-12 shadow-style-2 overflow-hidden"
       >
         <div className="p-8">
           <h4 className="text-center  font-bold text-2xl mb-16">
