@@ -13,24 +13,30 @@ const usePostProduct = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
 
     if (CheckForNotEmptyValues())
       return toast.error("Por favor, llene todos los campos.");
+
     const endpoint = "product/create";
 
     await axiosPrivate
       .post(endpoint, {
         company_id: auth?.company?.id,
-        category_id: data?.category_id,
-        name: data?.name,
-        code: data?.product_code,
+        group_id: data?.group_id ? data?.group_id : null,
+        finishes_id: data?.finishes_id ? data?.finishes_id : null,
+        category_id: data?.category_id ? data?.category_id : null,
+        subcategory_id: data?.subcategory_id ? data?.subcategory_id : null,
         description: data?.description,
+        code: data?.product_code,
         size: data?.image_size,
         price: data?.price,
+        price_us: data?.price_us ? data?.price_us : '0.00',
+        cost: data?.cost ? data?.cost : null,
         createdBy: auth?.username,
         image: data?.image,
         isActive: true,
       })
       .then(() => {
         toast.success("El producto ha sido creado con exito!");
-        return ResetInputValues(), HandleRefresh();
+        ResetInputValues()
+        return HandleRefresh();
       })
       .catch((error) => {
         if (error?.response?.status === 409)
@@ -48,21 +54,26 @@ const usePostProduct = ({ data, ResetInputValues, CheckForNotEmptyValues }) => {
       return toast.error("Por favor, llene todos los campos.");
 
     const endpoint = "product/update";
-
+    
     await axiosPrivate
       .put(endpoint, {
         product_id: data?.product_id,
+        group_id: data?.group_id,
+        finishes_id: data?.finishes_id,
         category_id: data?.category_id,
+        subcategory_id: data?.subcategory_id,
         name: data?.name,
         code: data?.product_code,
         description: data?.description,
         size: data?.image_size,
         price: data?.price,
+        price_us: data?.price_us ? data?.price_us : '0.00',
+        cost: data?.cost,
         image: data?.image,
         updatedBy: auth?.username,
         isActive: data?.isActive
       })
-      .then(() => {
+      .then((res) => {
         toast.success("El producto ha sido actualizado con éxito!");
         return HandleRefresh()
       })

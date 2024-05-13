@@ -4,14 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Search = ({
   result,
-  inputData,
-  currentTab,
-  HandleInputData,
-  HandleEditClient
+  value,
+  conditionToShowResults,
+  onChange,
+  onClick,
 }) => {
-  const inputIsNotEmpty = inputData?.search;
+  const inputIsNotEmpty = value;
   const resultHasValue = result?.length > 0;
-  const currentTabIsDefault = currentTab === "default";
+  const onChangeHasFunction = onChange ? onChange : null
+  const onClickHasFunction = onClick ? onClick : null
 
   return (
     <section className="h-10 w-full bg-slate-200 flex items-center p-6 relative mb-16">
@@ -24,30 +25,30 @@ const Search = ({
           type="text"
           className="bg-gray-50 border h-8 w-52 lg:w-xl border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-10 outline-none"
           placeholder="Busca un producto por su nombre o código"
-          value={inputData?.search}
-          onChange={(e) => {
-            HandleInputData({ ...inputData, search: e.target.value });
-          }}
+          value={value}
+          onChange={onChangeHasFunction}
         />
         <FontAwesomeIcon icon={faFilter} className="ml-5 cursor-pointer" />
       </div>
-      {resultHasValue && inputIsNotEmpty && !currentTabIsDefault && (
+      {resultHasValue && inputIsNotEmpty && conditionToShowResults && (
         <div
           id="results"
           className="absolute lg:w-xl max-h-28 bg-white animate-show_up_results rounded-lg overflow-auto"
         >
           {result?.map((data, index) => {
+            console.log(data);
             return (
               <ul
                 key={index}
                 className="grid grid-cols-4 text-center rounded-lg text-sm hover:bg-slate-100 p-2 transition duration-200"
+                value={"este es el valor"}
                 onClick={() => {
-                  HandleEditClient(data);
+                  onClickHasFunction(data)
                 }}
               >
                 <li>{data?.name}</li>
-                <li>{data?.rnc}</li>
                 <li>{data?.phone}</li>
+                <li>{data?.rnc}</li>
               </ul>
             );
           })}

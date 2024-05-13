@@ -1,0 +1,22 @@
+
+.fade-in-bottom {
+    animation: fade-in-bottom 0.2s linear;
+}
+
+@keyframes fade-in-bottom {
+    0% {
+        position: relative;
+        top: 2rem; 
+        opacity: 0.5;
+    }
+
+    90% {
+        position: relative;
+        top: 0rem; 
+        opacity: 1;
+    }
+
+    100% {
+        position: none;
+    }
+}

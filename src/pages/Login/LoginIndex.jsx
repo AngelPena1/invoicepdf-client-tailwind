@@ -12,7 +12,7 @@ const LoginIndex = () => {
 
   const [errMsg, setErrMsg] = useState(null);
 
-  const { auth, setAuth } = useAuth();
+  const { setAuth } = useAuth();
 
   async function HandleLogin(e) {
     e.preventDefault();
@@ -31,48 +31,69 @@ const LoginIndex = () => {
         setAuth({
           username: usernameRef?.current?.value,
           company: res.data?.company,
+          roles: res.data?.roles,
           accessToken: res.data?.accessToken,
         });
 
         HandleSetCookie({
           username: usernameRef?.current?.value,
           company: res.data?.company,
+          roles: res.data?.roles,
           accessToken: res.data?.accessToken,
         });
+
+        setJwtCookie(res.data?.refreshToken);
 
         navigate("/", { replace: true });
       })
       .catch((error) => {
-        if (!error) {
+        if (error?.message === "Network Error") {
           setErrMsg("No server response");
         } else if (error?.response?.status === 401) {
-          setErrMsg("Email o contraseñas erroneas");
+          setErrMsg("Usuario o contraseña incorrecta");
+        } else {
+          console.error(error);
+          setErrMsg("Error inesperado");
         }
       });
   }
 
-  function HandleSetCookie({ username, company, accessToken }) {
-    Cookies.set("auth-username", `${username}`, {
+  function setJwtCookie(refreshToken) {
+    return Cookies.set("jwt", `${refreshToken}`, {
+      expires: 7
+    });
+  }
+
+  function HandleSetCookie({ username, roles, company, accessToken }) {
+    Cookies.set("auth-invoice-username", `${username}`, {
       expires: 1,
     });
-    Cookies.set("auth-company", `${JSON.stringify(company)}`, {
+    Cookies.set("auth-invoice-roles", `${JSON.stringify({ roles })}`, {
       expires: 1,
     });
-    Cookies.set("auth-accessToken", `${accessToken}`, {
+    Cookies.set(
+      "auth-invoice-company",
+      `${JSON.stringify({ id: company?.id, name: company?.name })}`,
+      {
+        expires: 1,
+      }
+    );
+    Cookies.set("auth-invoice-accessToken", `${accessToken}`, {
       expires: 1,
     });
   }
 
   useEffect(() => {
     try {
-      const usernameCookie = Cookies.get("auth-username");
-      const companyCookie = Cookies.get("auth-company");
-      const tokenCookie = Cookies.get("auth-accessToken");
+      const usernameCookie = Cookies.get("auth-invoice-username");
+      const companyCookie = Cookies.get("auth-invoice-company");
+      const tokenCookie = Cookies.get("auth-invoice-accessToken");
 
       if (!usernameCookie || !tokenCookie || !companyCookie) return;
 
       setAuth({
         username: usernameCookie,
+        // roles:
         company: JSON.parse(companyCookie),
         accessToken: tokenCookie,
       });
@@ -81,10 +102,7 @@ const LoginIndex = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
-
-  useEffect(() => {
-    if (!auth) return;
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ClientsForm = ({
   clientsData,
+  clientLoading,
   result,
   searchInput,
   HandleChangeTab,
@@ -11,12 +12,13 @@ const ClientsForm = ({
 }) => {
   const resultHasValues = result?.length > 0;
   const searchInputHasValue = searchInput?.length > 0;
+
   return (
-    <section>
-      {!searchInputHasValue || resultHasValues ? (
-        <div className="relative overflow-x-auto">
+    <section className="h-xl">
+      {((!searchInputHasValue || resultHasValues) && clientsData?.length > 0) && !clientLoading && (
+        <div className="relative overflow-x-auto overflow-y-auto">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <thead className="text-xs text-gray-700 uppercase bg-slate-300">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Nombre
@@ -98,12 +100,14 @@ const ClientsForm = ({
             </tbody>
           </table>
         </div>
-      ) : (
-        <div className="w-full relative top-20 grid place-content-center place-items-center">
-          <FontAwesomeIcon className="text-3xl mb-8" icon={faEyeSlash} />
-          <h4>Nada ha sido encontrado</h4>
-        </div>
       )}
+
+      {clientLoading && <section className="h-xl skeleton"></section>}
+
+      {(!(clientsData?.length > 0) && !clientLoading) && <div className="w-full h-full grid place-content-center place-items-center">
+        <FontAwesomeIcon className="text-3xl mb-8" icon={faEyeSlash} />
+        <h4>Nada ha sido encontrado...</h4>
+      </div>}
     </section>
   );
 };

@@ -36,7 +36,6 @@ const useGetData = ({url, refresh, isNullValue, search}) => {
         .catch((err) => {
           if (!err?.message === "canceled") {
             setLoading(false);
-            console.error(err);
           }
         });
     };
@@ -45,6 +44,7 @@ const useGetData = ({url, refresh, isNullValue, search}) => {
     return () => {
       controller.abort();
     };
+    // eslint-disable-next-line
   }, [url, isNullValue, refresh, search]);
 
   return {

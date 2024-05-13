@@ -1,86 +1,107 @@
-import { faImage, faX, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select from "../../../components/Select/Index";
 
 function MaintenanceForm({
   inputData,
   loadingImg,
-  getOnlyNames,
+  onlyNamesGroup,
+  onlyNamesCategories,
+  onlyNamesFinishes,
+  onlyNamesSubcategories,
+  ResetImage,
   HandleInputData,
+  HandleGroupSelect,
   HandleCategorySelect,
+  HandleSubcategorySelect,
+  HandleFinishesSelect,
   HandleImageChange,
   HandleCreateProduct,
   HandleUpdateProduct,
 }) {
   return (
-    <section className="grid grid-cols-3 gap-20">
+    <section className="grid xl:grid-cols-3 lg:grid-cols-2 xl:gap-24 lg:gap-10 bg-white p-2 rounded-lg">
       <section className="">
         <div className="mb-10">
           <label htmlFor="" className="text-base">
-            Nombre del producto
+            Descripción del producto
           </label>
-          <input
+          <textarea
             type="text"
-            placeholder="Escriba el nombre del producto..."
-            value={inputData?.name}
-            onChange={(e) => {
-              HandleInputData({ ...inputData, name: e.target.value });
-            }}
+            name="description"
+            placeholder="Escriba una breve descripción del producto..."
+            className="w-full"
+            autoComplete="off"
+            value={inputData?.description}
+            onChange={HandleInputData}
           />
         </div>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-8 mb-10">
+          <div>
+            <label htmlFor="" className="text-base">
+              Grupo
+            </label>
+            <Select
+              value={inputData?.group_id}
+              value_id={true}
+              onClick={HandleGroupSelect}
+              elements={onlyNamesGroup}
+            />
+          </div>
           <div>
             <label htmlFor="" className="text-base">
               Categoría
             </label>
             <Select
               value={inputData?.category_id}
+              value_id={true}
               onClick={HandleCategorySelect}
-              elements={getOnlyNames()}
+              elements={onlyNamesCategories}
             />
           </div>
-          <div className="mb-10">
+          <div>
             <label htmlFor="" className="text-base">
-              Precio
+              Subcategoría
             </label>
-            <input
-              type="text"
-              placeholder="Inserte el precio..."
-              value={inputData?.price}
-              onChange={(e) => {
-                HandleInputData({ ...inputData, price: e.target.value });
-              }}
+            <Select
+              value={inputData?.subcategory_id}
+              value_id={true}
+              onClick={HandleSubcategorySelect}
+              elements={onlyNamesSubcategories}
             />
           </div>
         </div>
-        <div>
+        <div className="grid">
           <label htmlFor="" className="text-base">
-            Descripción del producto
+            Acabados
           </label>
-          <textarea
-            type="text"
-            placeholder="Escriba una breve descripción del producto..."
-            className="w-full h-60"
-            value={inputData?.description}
-            onChange={(e) => {
-              HandleInputData({
-                ...inputData,
-                description: e.target.value,
-              });
-            }}
-          />
+          <div className="grid grid-cols-2 gap-6">
+            <input
+              type="text"
+              className="h-8"
+              placeholder="Código del acabado..."
+              value={inputData?.finishes_code}
+              disabled
+            />
+            <Select
+              value={inputData?.finishes_id}
+              value_id={true}
+              onClick={HandleFinishesSelect}
+              elements={onlyNamesFinishes}
+            />
+          </div>
         </div>
       </section>
       <section className="grid">
         <div className="mb-8 relative">
           <label htmlFor="" className="text-base">
-            Seleccione la imagen
+            Imagen del producto (opcional)
           </label>
           {!inputData?.image && !loadingImg && (
-            <div>
+            <div className="grid place-content-center text-center">
               <label
                 htmlFor="input-img"
-                className="w-full h-52 bg-transparent border-2 border-dashed border-slate-300 rounded-lg grid place-content-center place-items-center cursor-pointer"
+                className="w-60 h-60 bg-transparent border-2 border-dashed border-slate-300 rounded-lg grid place-content-center place-items-center cursor-pointer"
                 accept=".jpg, .png"
               >
                 <FontAwesomeIcon icon={faImage} className="text-3xl mb-4" />
@@ -94,29 +115,32 @@ function MaintenanceForm({
               />
             </div>
           )}
-          {loadingImg && <div id="img-skeleton" className="w-full h-52 rounded-lg skeleton" />}
+          {loadingImg && (
+            <div
+              id="img-skeleton"
+              className="w-60 h-60 rounded-lg skeleton m-auto"
+            />
+          )}
           {inputData?.image && (
-            <div>
+            <div className="grid place-content-center">
               <FontAwesomeIcon
                 icon={faX}
-                className="absolute -right-5 top-10 cursor-pointer"
-                onClick={() => {
-                  HandleInputData({
-                    ...inputData,
-                    image: null,
-                  });
-                }}
+                className="absolute right-5 top-10 cursor-pointer"
+                name="image"
+                onClick={ResetImage}
               />
               <img
                 src={inputData?.image}
                 alt=""
-                className="w-full h-52 bg-cover bg-center rounded-lg grid place-content-center place-items-center cursor-pointer"
+                className="w-60 h-60 object-cover bg-center rounded-lg grid place-content-center place-items-center cursor-pointer"
               />
             </div>
           )}
         </div>
         <div className="mb-10">
-          <label className="text-base mb-6">Seleccione el tamaño</label>
+          <label className="text-base mb-6">
+            Seleccione el tamaño (opcional)
+          </label>
           <div className="grid grid-cols-3">
             <button
               className={
@@ -125,13 +149,9 @@ function MaintenanceForm({
                   : "button-2"
               }
               type="button"
+              name="image_size"
               value={"small"}
-              onClick={(e) => {
-                HandleInputData({
-                  ...inputData,
-                  image_size: e.target.value,
-                });
-              }}
+              onClick={HandleInputData}
             >
               Pequeño
             </button>
@@ -142,13 +162,9 @@ function MaintenanceForm({
                   : "button-2"
               }
               type="button"
+              name="image_size"
               value={"medium"}
-              onClick={(e) => {
-                HandleInputData({
-                  ...inputData,
-                  image_size: e.target.value,
-                });
-              }}
+              onClick={HandleInputData}
             >
               Mediano
             </button>
@@ -159,35 +175,67 @@ function MaintenanceForm({
                   : "button-2"
               }
               type="button"
+              name="image_size"
               value={"large"}
-              onClick={(e) => {
-                HandleInputData({
-                  ...inputData,
-                  image_size: e.target.value,
-                });
-              }}
+              onClick={HandleInputData}
             >
               Grande
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-8">
-          <div className="mb-10">
+      </section>
+      <section>
+        <div className="grid grid-cols-2 gap-8 mb-10">
+          <div className="">
+            <label htmlFor="" className="text-base">
+              Costo
+            </label>
+            <input
+              type="text"
+              placeholder="Inserte el costo..."
+              name={"cost"}
+              value={inputData?.cost}
+              onChange={HandleInputData}
+            />
+          </div>
+          <div className="">
+            <label htmlFor="" className="text-base">
+              Precio RD
+            </label>
+            <input
+              type="text"
+              placeholder="Inserte el precio..."
+              name="price"
+              value={inputData?.price}
+              onChange={HandleInputData}
+            />
+          </div>
+          <div className="">
+            <label htmlFor="" className="text-base">
+              Precio US
+            </label>
+            <input
+              type="text"
+              placeholder="Inserte el precio..."
+              name="price_us"
+              value={inputData?.price_us}
+              onChange={HandleInputData}
+            />
+          </div>
+          <div className="">
             <label htmlFor="" className="text-base">
               Código del producto
             </label>
             <input
               type="text"
               placeholder="Escriba el código..."
+              name="product_code"
               value={inputData?.product_code}
-              onChange={(e) => {
-                HandleInputData({
-                  ...inputData,
-                  product_code: e.target.value,
-                });
-              }}
+              onChange={HandleInputData}
             />
           </div>
+        </div>
+        <div className="grid grid-cols-2 gap-8">
           <div className="mb-10">
             <label htmlFor="" className="text-base">
               Estado
@@ -196,12 +244,9 @@ function MaintenanceForm({
               <input
                 type="checkbox"
                 checked={inputData?.isActive}
-                onClick={() => {
-                  HandleInputData({
-                    ...inputData,
-                    isActive: !inputData?.isActive,
-                  });
-                }}
+                onChange={() => {}}
+                name="isActive"
+                onClick={HandleInputData}
                 className="sr-only peer outline-none"
               />
               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -211,10 +256,12 @@ function MaintenanceForm({
             </label>
           </div>
         </div>
-      </section>
-      <section>
         <div className="grid p-8">
-          <button type="submit" className="bg-primary" onClick={HandleCreateProduct}>
+          <button
+            type="submit"
+            className="bg-primary"
+            onClick={HandleCreateProduct}
+          >
             Añadir producto
           </button>
           <button

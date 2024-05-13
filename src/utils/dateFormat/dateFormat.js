@@ -12,7 +12,7 @@ function dayAndMonthFormat(currentDate) {
   return `${day}/${month}`;
 }
 
-function fullDateFormat(date) {
+function fullDateFormat(date, version) {
   const currentDate = new Date(date);
 
   const day =
@@ -27,8 +27,13 @@ function fullDateFormat(date) {
 
   const year = currentDate.getFullYear();
 
+  if(version === 'spanish') {
+    return `${day}-${month}-${year}`;
+  }
   return `${year}-${month}-${day}`;
 }
+
+
 
 function getDateFromSelect(key) {
   let currentDate = new Date();

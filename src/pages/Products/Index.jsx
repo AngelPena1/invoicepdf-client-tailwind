@@ -1,36 +1,44 @@
-import { useEffect } from "react";
-import Search from "./components/Search";
+import { useEffect, useRef } from "react";
+import Search from "../../components/Searchs/SearchProducts";
 import MaintenanceForm from "./components/MaintenanceForm";
 import useInputData from "./hooks/useInputData";
 import useTabNavigation from "./hooks/useTabNavigation";
 import NavigationBar from "./components/NavigationBar";
-import useGetCategories from "./hooks/useGetCategories";
+import useGetGroupWithDivisions from "./hooks/useGetGroupWithDivisions";
 import usePostProduct from "./hooks/usePostProduct";
-import useGetProducts from "./hooks/useGetProducts";
 import useGetImgProduct from "./hooks/useGetImgProduct";
 import ProductsForm from "./components/ProductsForm";
 import useSearchProduct from "./hooks/useSearchProduct";
+import useGetProductsLimit from "../../hooks/useGetProductLimit";
 
 const Index = () => {
+  const limit = 500;
+  const scrollbarRef = useRef(null);
+
+  const {
+    data: divisionsData,
+    getOnlyNames,
+    HandleSearch: HandleSearchCategories,
+  } = useGetGroupWithDivisions();
+
   const {
     inputData,
     ResetInputValues,
+    ResetImage,
     CheckForNotEmptyValues,
     HandleInputData,
+    HandleEventSearch,
+    HandleGroupSelect,
+    HandleFinishesSelect,
     HandleCategorySelect,
+    HandleSubcategorySelect,
     HandleImageChange,
     HandleEditProduct,
-  } = useInputData();
+  } = useInputData({ divisionsData });
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation({
     ResetInputValues,
   });
-
-  const {
-    data: categoriesData,
-    getOnlyNames,
-    HandleSearch: HandleSearchCategories,
-  } = useGetCategories();
 
   const { resfresh, HandleCreateProduct, HandleUpdateProduct } = usePostProduct(
     {
@@ -40,8 +48,12 @@ const Index = () => {
     }
   );
 
-  const { data: productsData, HandleSearch: HandleSearchProducts } =
-    useGetProducts();
+  const {
+    data: productsData,
+    loading,
+    HandleSearch: HandleSearchProducts,
+    HandlePage,
+  } = useGetProductsLimit({ limit, searchProduct: inputData?.search });
 
   const {
     data: imgData,
@@ -56,16 +68,18 @@ const Index = () => {
 
   useEffect(() => {
     if (!imgData) return;
-    HandleInputData({ ...inputData, image: imgData?.image });
+    // HandleInputData({ ...inputData, image: imgData?.image });
+    // eslint-disable-next-line
   }, [imgData]);
 
   useEffect(() => {
     HandleSearchCategories();
     HandleSearchProducts();
+    // eslint-disable-next-line
   }, [resfresh]);
 
   return (
-    <section className="">
+    <section className="bg-white p-4 shadow-style-2 rounded-lg fade-in-bottom">
       <NavigationBar
         currentTab={currentTab}
         ResetInputValues={ResetInputValues}
@@ -73,31 +87,47 @@ const Index = () => {
       />
       <Search
         result={result}
-        inputData={inputData}
-        currentTab={currentTab}
-        ResetInputValues={ResetInputValues}
-        HandleInputData={HandleInputData}
-        HandleEditProduct={HandleEditProduct}
-        HandleSearchImg={HandleSearchImg}
+        value={inputData?.search}
+        onChange={HandleEventSearch}
+        onClick={(value) => {
+          HandleEditProduct(value);
+          HandleChangeTab("create");
+          HandleSearchImg(value?.id);
+          // HandleInputData({...inputData, search: ""})
+        }}
+        conditionToShowResults={currentTab !== "default"}
       />
       {currentTab === "default" && (
         <ProductsForm
-          productsData={productsData}
+          loading={loading}
+          limit={limit}
+          count={productsData?.count}
+          productsData={productsData?.rows}
           searchInput={inputData?.search}
           result={result}
+          scrollbarRef={scrollbarRef}
           HandleChangeTab={HandleChangeTab}
           HandleEditProduct={HandleEditProduct}
           HandleSearchImg={HandleSearchImg}
+          HandlePage={HandlePage}
         />
       )}
       {currentTab === "create" && (
         <MaintenanceForm
           inputData={inputData}
-          categoriesData={categoriesData}
+          divisionsData={divisionsData}
           loadingImg={loadingImg}
+          onlyNamesGroup={getOnlyNames(divisionsData)}
+          onlyNamesFinishes={getOnlyNames(inputData?.finishes)}
+          onlyNamesCategories={getOnlyNames(inputData?.categories)}
+          onlyNamesSubcategories={getOnlyNames(inputData?.subcategories)}
           getOnlyNames={getOnlyNames}
+          ResetImage={ResetImage}
           HandleInputData={HandleInputData}
+          HandleGroupSelect={HandleGroupSelect}
+          HandleFinishesSelect={HandleFinishesSelect}
           HandleCategorySelect={HandleCategorySelect}
+          HandleSubcategorySelect={HandleSubcategorySelect}
           HandleImageChange={HandleImageChange}
           HandleCreateProduct={HandleCreateProduct}
           HandleUpdateProduct={HandleUpdateProduct}

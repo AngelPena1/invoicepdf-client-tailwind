@@ -1,29 +1,32 @@
 import React from "react";
-import {
-  faCaretDown,
-  faUser,
-  faFileInvoice,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import useLogOut from "../../hooks/useLogout";
+import Logo from '../../assets/logo_1.png'
 
 const NavbarForm = ({ show, toggleMaintenance }) => {
+  const logout = useLogOut()
   return (
-    <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+    <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200 shadow-lg">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
-          <FontAwesomeIcon icon={faFileInvoice} className="text-2xl" />
+          {/* <FontAwesomeIcon icon={faFileInvoice} className="text-2xl" /> */}
+          <img src={Logo} alt="" className="w-10 h-10 mr-4" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
             Cotizador
           </span>
         </div>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
-          >
-            Negocio
-          </button>
+        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse ">
+          <ul className="flex place-items-center">
+            <li className="ml-10 hover:text-blue-700 duration-200" onClick={logout}>
+              <FontAwesomeIcon 
+                icon={faRightFromBracket}
+                className="mr-3 text-lg relative top-0.5" 
+              />
+              Cerrar sesión
+            </li>
+          </ul>
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
@@ -50,30 +53,28 @@ const NavbarForm = ({ show, toggleMaintenance }) => {
           </button>
         </div>
         <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 relative left-10"
           id="navbar-sticky"
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
             <li>
               <Link
                 to="/"
-                className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
+                className="block py-2 px-3 md:hover:bg-transparent md:hover:text-blue-700 rounded md:bg-transparent md:p-0"
                 aria-current="page"
               >
-                Home
+                Inicio
               </Link>
             </li>
             <li
-              className="relative"
+              className="relative "
               onMouseEnter={() => toggleMaintenance(true)}
               onMouseLeave={() => toggleMaintenance(false)}
             >
               Mantenimientos
               <FontAwesomeIcon icon={faCaretDown} className="ml-2" />
               {show?.maintenance && (
-                <div
-                  className="absolute w-full h-fit bg-white grid rounded-lg shadow-xl text-sm animate-show_up_container"
-                >
+                <div className="absolute w-full h-fit bg-white grid rounded-lg shadow-xl text-sm animate-show_up_container">
                   <Link
                     to="/products"
                     className="p-2 rounded-t-lg hover:bg-slate-200 duration-200"
@@ -91,8 +92,8 @@ const NavbarForm = ({ show, toggleMaintenance }) => {
             </li>
             <li>
               <Link
-                href="#"
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
+                to="/history"
+                className="block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
               >
                 Historial
               </Link>

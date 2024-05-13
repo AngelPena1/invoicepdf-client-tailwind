@@ -16,6 +16,10 @@ const useInputData = () => {
     return setInputData(data);
   }
 
+  function HandleSearchInput(event) {
+    return setInputData({...inputData, search: event?.target?.value});
+  }
+
   function HandleEditClient(data) {
     return setInputData({
       search: null,
@@ -54,6 +58,7 @@ const useInputData = () => {
     CheckForNotEmptyValues,
     HandleInputData,
     HandleEditClient,
+    HandleSearchInput
   };
 };
 
