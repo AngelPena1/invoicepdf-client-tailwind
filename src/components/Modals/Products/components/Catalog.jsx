@@ -17,7 +17,7 @@ const Catalog = (props) => {
         className="w-screen h-screen bg-slate-500 opacity-40 fixed z-40 inset-0 flex litems-center justify-center"
         onClick={props.onHide}
       ></div>
-      <section className="px-5 bg-white w-4xl h-2xl z-40 fixed top-0 select-none left-0 right-0 bottom-0 m-auto shadow-style-2 rounded-lg">
+      <section className="px-5 bg-white sm:w-xl  md:w-2xl lg:w-4xl h-2xl z-40 fixed top-0 select-none left-0 right-0 bottom-0 m-auto shadow-style-2 rounded-lg">
         <div className="my-4 py-2 sticky top-0 bg-white flex ">
           <input
             type="text"

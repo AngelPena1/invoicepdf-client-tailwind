@@ -18,8 +18,10 @@ const LayoutIndex = () => {
     <main className="App">
       <div className={auth !== "" ? "main-container" : null}>
         {auth !== "" ? <Navbar /> : <></>}
-        <Outlet />
-        {auth !== "" ? <Config /> : <></>}
+        <div className="p-8">
+          <Outlet />
+          {/* {auth !== "" ? <Config /> : <></>} */}
+        </div>
         {/* <Footer /> */}
       </div>
     </main>
