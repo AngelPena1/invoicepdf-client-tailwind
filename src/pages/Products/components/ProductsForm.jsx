@@ -7,11 +7,11 @@ const ProductsForm = (props) => {
   const switchBetweenValues =
     props.result?.length > 0 ? props.result : props.productsData;
 
-  const dataHasValue = switchBetweenValues?.length > 0 
+  const dataHasValue = switchBetweenValues?.length > 0
   const productDataHasValue = props.productsData?.length > 0 ? true : false;
 
   return (
-    <section className="rounded-lg h-xl">
+    <section className="rounded-lg">
       {dataHasValue && !props.loading && (
         <div className="relative overflow-x-auto overflow-y-auto h-96">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -34,7 +34,7 @@ const ProductsForm = (props) => {
                     Subcategoría
                   </th>
                   <th scope="col" className="px-3 py-3">
-                    Precio 
+                    Precio
                   </th>
                   <th scope="col" className="px-3 py-3">
                     Precio US
@@ -93,24 +93,25 @@ const ProductsForm = (props) => {
         </div>
       )}
       {props.loading && <section className="h-xl skeleton"></section>}
-      {productDataHasValue && switchBetweenValues  && (
+      {productDataHasValue && switchBetweenValues && (
         <>
+
+          {!props.loading && <h4 className="grid place-content-end mt-2">
+            Total de Registros: {props.count}
+          </h4>}
+
           <div className="grid place-content-center py-4 relative">
             <Pagination
               itemsCount={props.count}
               itemsPerPage={props.limit}
               loading={props.loading}
               hasData={true}
-              resetPage={() => {}}
+              resetPage={() => { }}
               disable={false}
               HandlePage={props.HandlePage}
               scrollbarRef={props.scrollbarRef}
             />
           </div>
-          {!props.loading && <h4 className="grid place-content-end relative bottom-2 right-2">
-            Total de Registros: {props.count}
-          </h4>}
-          
         </>
       )}
     </section>

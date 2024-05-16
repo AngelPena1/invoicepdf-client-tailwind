@@ -8,7 +8,7 @@ import Logo from '../../assets/logo_1.png'
 const NavbarForm = ({ show, toggleMaintenance }) => {
   const logout = useLogOut()
   return (
-    <nav className="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200 shadow-lg">
+    <nav className="bg-white w-full mb-4 z-20 top-0 start-0 border-b border-gray-200 shadow-lg">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
           {/* <FontAwesomeIcon icon={faFileInvoice} className="text-2xl" /> */}
