@@ -7,7 +7,7 @@ const useSearchProduct = ({ dataArray, searchInput }) => {
   function HandleSearch() {
     const localArray = [];
     dataArray.forEach((data) => {
-      const name = data?.name?.toUpperCase();
+      const name = data?.description?.toUpperCase();
       const code = data?.code;
       if (!searchInput) return;
       if (name?.includes(searchInput.toUpperCase()))
