@@ -7,7 +7,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons"
 
 export default function NavbarForm({ dropdownRef, notificationRef, username, toggleProfile, logout, toggleShows, toggleNotifications, showMenuDropdown, showNotifications, showProfileDropdown, currentNavigation, navigation, HandleCurrentNavigation }) {
     return (
-        <nav className="bg-white shadow-lg select-none">
+        <nav className="fixed top-0 rounded-b-lg w-full z-10 bg-white shadow-lg select-none">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

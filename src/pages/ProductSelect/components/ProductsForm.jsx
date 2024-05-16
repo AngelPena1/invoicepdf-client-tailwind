@@ -38,6 +38,8 @@ const ProductsForm = ({
 }) => {
   return (
     <section className="bg-white rounded-lg h-fit fade-in-bottom">
+
+      {/* Heading */}
       <div className="grid grid-cols-2">
         <section
           name="heading"
@@ -70,6 +72,8 @@ const ProductsForm = ({
           }}
         />
       </section>
+
+      {/* Config */}
       <section className="">
         <section className="grid justify-end relative bottom-5">
           <div>
@@ -160,6 +164,8 @@ const ProductsForm = ({
             </div>
           </div>
         </section>
+
+        {/* Table */}
         <div className="relative overflow-x-auto overflow-y-auto h-72 max-h-72 border">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0 z-30">
@@ -331,39 +337,44 @@ const ProductsForm = ({
           </table>
         </div>
       </section>
+
+      {/* Footer */}
       <section className="mt-10 grid md:grid-cols-2">
-        <section className="grid grid-cols-2 w-80">
-          <input
-            type="text"
-            className="w-36 mr-8 mb-2 h-8 outline-none"
-            name="discount"
-            placeholder="Descuento"
-            value={inputData?.discount}
-            onChange={HandleInputData}
-            autoComplete="off"
-          />
-          <input
-            type="text"
-            className="w-36 mr-8 h-8 outline-none"
-            name="deposit"
-            placeholder="Anticipo"
-            value={inputData?.deposit}
-            onChange={HandleInputData}
-            autoComplete="off"
-          />
-          <input
-            type="text"
-            className="w-36 mr-8 h-8 outline-none"
-            name="with_delivery"
-            placeholder="Con entrega"
-            value={inputData?.with_delivery}
-            onChange={HandleInputData}
-            autoComplete="off"
-          />
-          <button className="w-36 h-8 p-0" onClick={showNotes}>
-            Añadir notas
-          </button>
+        <section className="w-full mb-10 md:mb-0">
+          <div className="w-full">
+            <input
+              type="text"
+              className="w-36 mr-8  h-8 outline-none inline"
+              name="discount"
+              placeholder="Descuento"
+              value={inputData?.discount}
+              onChange={HandleInputData}
+              autoComplete="off"
+            />
+            <input
+              type="text"
+              className="w-36 mr-8 h-8 outline-none inline"
+              name="deposit"
+              placeholder="Anticipo"
+              value={inputData?.deposit}
+              onChange={HandleInputData}
+              autoComplete="off"
+            />
+            <input
+              type="text"
+              className="w-36 mr-8 h-8 outline-none inline"
+              name="with_delivery"
+              placeholder="Con entrega"
+              value={inputData?.with_delivery}
+              onChange={HandleInputData}
+              autoComplete="off"
+            />
+            <button className="w-36 h-8 p-0 inline" onClick={showNotes}>
+              Añadir notas
+            </button>
+          </div>
         </section>
+
         <section className="flex lg:justify-end relative right-3">
           <ul className="w-96 text-right border-t-2 border-blue-300">
             <li className="grid grid-cols-2">
@@ -395,6 +406,7 @@ const ProductsForm = ({
             </li>
           </ul>
         </section>
+
       </section>
       <section className="grid grid-cols-2 relative top-4">
         <button className="button-2" onClick={HandlePrintPreview}>
