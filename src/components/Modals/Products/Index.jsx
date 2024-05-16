@@ -10,6 +10,7 @@ const Index = ({ onHide, onClick }) => {
   const onClickCatalogHasFunction = onClick ? onClick : null;
 
   const scrollbarRef = useRef(null)
+  const searchRef = useRef(null)
 
   const {
     inputData,
@@ -44,6 +45,14 @@ const Index = ({ onHide, onClick }) => {
   const { toggles, toggleFilters } = useToggles();
 
   useEffect(() => {
+    searchRef.current.focus();
+  }, [])
+
+  useEffect(() => {
+    HandleSearch();
+  }, [inputData])
+
+  useEffect(() => {
     HandleSearch();
     // HandleAlreadyFetch(false);
     // eslint-disable-next-line
@@ -56,6 +65,7 @@ const Index = ({ onHide, onClick }) => {
 
   return (
     <Catalog
+      searchRef={searchRef}
       data={data}
       limit={limit}
       productsData={productsData}

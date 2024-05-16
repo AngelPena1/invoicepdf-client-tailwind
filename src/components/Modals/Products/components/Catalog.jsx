@@ -20,6 +20,7 @@ const Catalog = (props) => {
       <section className="px-5 bg-white sm:w-xl  md:w-2xl lg:w-4xl h-2xl z-40 fixed top-0 select-none left-0 right-0 bottom-0 m-auto shadow-style-2 rounded-lg">
         <div className="my-4 py-2 sticky top-0 bg-white flex ">
           <input
+            ref={props.searchRef}
             type="text"
             className="h-10 text-base"
             placeholder="Inserte un código o nombre de producto..."
