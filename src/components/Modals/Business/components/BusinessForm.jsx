@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const BusinessForm = ({
   inputData,
   loading_image,
-  toggleCompanyInfo,
+  onHide,
   HandleInputData,
   HandleImageChange,
   HandleUpdateClient,
@@ -126,7 +126,7 @@ const BusinessForm = ({
             className="px-2 button-2"
             onClick={() => {
               ResetCompanyValues()
-              toggleCompanyInfo(false)
+              onHide()
             }}
           >
             Descartar Cambios

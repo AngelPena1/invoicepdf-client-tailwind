@@ -9,7 +9,7 @@ import useToggles from "./hooks/useToggles";
 import PdfForm from "./components/PdfForm";
 import useQuoteConfig from "./hooks/useQuoteConfig";
 
-const Index = ({ toggleCompanyInfo }) => {
+const Index = ({ settingsRef, onHide }) => {
   const { data, HandleSearch } = useGetCompany();
 
   const {
@@ -55,17 +55,15 @@ const Index = ({ toggleCompanyInfo }) => {
       <div
         id="background"
         className="w-screen h-screen bg-slate-500 opacity-40 fixed z-40 inset-0 flex litems-center justify-center"
-        onClick={() => {
-          toggleCompanyInfo(false);
-        }}
+        onClick={onHide}
       ></div>
-      <section className="w-2xl md:w-3xl lg:w-4xl h-2xl bg-white select-none fixed left-0 right-0 top-0 bottom-0 m-auto z-40  flex rounded-lg ">
+      <section ref={settingsRef} className="w-2xl md:w-3xl fade-in-top lg:w-4xl h-2xl bg-white select-none fixed left-0 right-0 top-0 bottom-0 m-auto z-40  flex rounded-lg ">
         <PanelForm toggles={toggles} HandleToggles={HandleToggles} />
         {toggles?.business && (
           <BusinessForm
             inputData={inputData}
             loading_image={loading_image}
-            toggleCompanyInfo={toggleCompanyInfo}
+            onHide={onHide}
             ResetCompanyValues={ResetCompanyValues}
             HandleInputData={HandleInputData}
             HandleImageChange={HandleImageChange}
@@ -76,7 +74,7 @@ const Index = ({ toggleCompanyInfo }) => {
           <PdfForm
             quoteInput={quoteInput}
             resetQuoteValue={resetQuoteValue}
-            toggleCompanyInfo={toggleCompanyInfo}
+            onHide={onHide}
             HandleUpdateConfig={HandleUpdateConfig}
             HandleQuoteInput={HandleQuoteInput}
           />

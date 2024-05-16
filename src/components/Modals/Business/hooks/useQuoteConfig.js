@@ -38,6 +38,7 @@ const useQuoteConfig = ({ quoteInput, AsignQuoteData }) => {
   }
 
   useEffect(() => {
+    if(!config) return
     AsignQuoteData(config?.quote[0])
     // eslint-disable-next-line
   }, [config]);

@@ -1,3 +1,19 @@
+.fade-in-top {
+    animation: fade-in-top 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes fade-in-top {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 
 .fade-in-bottom {
     animation: fade-in-bottom 0.2s linear;
@@ -6,17 +22,34 @@
 @keyframes fade-in-bottom {
     0% {
         position: relative;
-        top: 2rem; 
+        top: 2rem;
         opacity: 0.5;
     }
 
     90% {
         position: relative;
-        top: 0rem; 
+        top: 0rem;
         opacity: 1;
     }
 
     100% {
         position: none;
+    }
+}
+
+
+.slide-in-top {
+    animation: slide-in-top 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-top {
+    0% {
+        transform: translateY(-1000px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
