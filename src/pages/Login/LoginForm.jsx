@@ -2,7 +2,7 @@ import React from "react";
 
 const LoginForm = (props) => {
   return (
-    <section className="grid justify-items-center items-center">
+    <section className="grid h-screen justify-items-center items-center">
       <form
         onSubmit={props.HandleLogin}
         className="w-96 h-30r bg-white rounded-lg relative top-12 shadow-style-2 overflow-hidden"

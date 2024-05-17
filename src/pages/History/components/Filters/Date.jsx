@@ -9,7 +9,7 @@ const Date = (props) => {
   }
 
   return (
-    <section className="w-full p-4 bg-white shadow-style-2 rounded-lg">
+    <section className="w-full p-4 bg-white rounded-lg">
       {/* <h4 className="mb-3 font-bold">Filtrar por fecha: </h4> */}
       <span className="mb-3 font-bold text-base relative bottom-1 mr-2">
         Tipo de Fecha:

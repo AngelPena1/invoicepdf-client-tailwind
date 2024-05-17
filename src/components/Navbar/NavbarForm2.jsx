@@ -52,7 +52,7 @@ export default function NavbarForm({ dropdownRef, notificationRef, username, tog
                                             key={item?.name}
                                             name={item?.href}
                                             to={item?.href}
-                                            className={item?.href === currentNavigation ? "bg-primary duration-200 text-white rounded-md px-3 py-2 text-sm font-medium" : "text-gray-300 duration-200 hover:bg-gray-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
+                                            className={item?.href === currentNavigation ? "bg-primary duration-200 text-white rounded-md px-3 py-2 text-sm font-medium" : "text-gray-500 duration-200 hover:bg-gray-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
                                             aria-current="page"
                                             onClick={HandleCurrentNavigation}
                                         >

@@ -71,7 +71,7 @@ const Index = () => {
             onClick={HandleDisableQuote}
           />
         )}
-        <section className="w-full shadow-lg">
+        <section className="w-full">
           <div
             name="heading"
             className="text-2xl font-bold px-2 py-3 rounded-t-lg justify-start bg-white"

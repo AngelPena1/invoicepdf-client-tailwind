@@ -3,7 +3,7 @@ import Select from "../../../../components/Select/Index";
 
 const Client = (props) => {
   return (
-    <section className="w-full p-4  bg-white shadow-style-2 rounded-lg">
+    <section className="w-full p-4  bg-white rounded-lg">
       <h4 className="mb-3 font-bold">Filtrar por cliente: </h4>
       <div className="mb-3">
         <label className="mr-4 mb-3 relative top-1 w-13 font-normal" htmlFor="">
