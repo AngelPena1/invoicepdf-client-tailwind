@@ -26,7 +26,7 @@ const RequireAuth = () => {
     } catch (error) {
       console.log(error);
     }
-  
+  // eslint-disable-next-line
   }, [auth])
 
   return <Outlet />

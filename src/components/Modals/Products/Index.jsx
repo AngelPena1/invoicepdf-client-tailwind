@@ -50,6 +50,7 @@ const Index = ({ onHide, onClick }) => {
 
   useEffect(() => {
     HandleSearch();
+    // eslint-disable-next-line
   }, [inputData])
 
   useEffect(() => {
