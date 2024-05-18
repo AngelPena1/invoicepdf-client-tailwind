@@ -4,7 +4,8 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Catalog from "../Modals/Products/Index";
+import ProductsCatalog from "../Modals/Products/Index";
+import ClientsCatalog from '../Modals/Clients/Index'
 
 const Search = ({
   result,
@@ -20,18 +21,18 @@ const Search = ({
 
   const [show, setShow] = useState(false);
 
-  function toggleCatalog() {
+  function toggleProductCatalog() {
     return setShow(!show);
   }
 
-  function hideCatalog() {
+  function hideProductCatalog() {
     return setShow(false);
   }
 
   return (
     <>
       {show && (
-        <Catalog onHide={hideCatalog} onClick={onClick} />
+        <ProductsCatalog onHide={hideProductCatalog} onClick={onClick} />
       )}
       <section className="h-10 w-full bg-primary-2 flex items-center p-6 relative mb-8 rounded-md">
         <div id="search" className="relative flex items-center">
@@ -52,7 +53,7 @@ const Search = ({
         <section className="relative flex items-center">
           <FontAwesomeIcon
             icon={faBars}
-            onClick={toggleCatalog}
+            onClick={toggleProductCatalog}
             className="py-2 px-3 rounded-lg bg-slate-300  hover:bg-slate-400 duration-200 ml-5 cursor-pointer"
           />
         </section>

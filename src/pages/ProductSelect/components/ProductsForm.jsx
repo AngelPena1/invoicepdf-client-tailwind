@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
 import Select from "../../../components/Select/Index";
+import ClientCatalog from '../../../components/Modals/Clients/Index'
 
 const ProductsForm = ({
   result,
@@ -47,7 +48,10 @@ const ProductsForm = ({
         >
           {quoteHasData ? <h2>Edición de {quoteName}</h2> : <h2>Crear Cotización</h2>}
         </section>
-        <section className="mb-8 h-10 flex justify-end">
+        <section className="mb-8 mr-5 h-10 flex justify-end">
+          <ClientCatalog />
+        </section>
+        {/* <section className="mb-8 h-10 flex justify-end">
           <div className="w-80">
             <Select
               className=""
@@ -56,9 +60,8 @@ const ProductsForm = ({
               onClick={HandleDataClient}
               placeHolder={"Seleccione el Cliente"}
             />
-            {/* <label htmlFor="">Seleccione el cliente</label> */}
           </div>
-        </section>
+        </section> */}
       </div>
       <section>
         <Search
@@ -72,7 +75,6 @@ const ProductsForm = ({
           }}
         />
       </section>
-
       {/* Config */}
       <section className="">
         <section className="grid justify-end relative bottom-5">
@@ -168,7 +170,7 @@ const ProductsForm = ({
         {/* Table */}
         <div className="relative overflow-x-auto overflow-y-auto h-72 max-h-72 border">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0 z-30">
+            <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0 z-10">
               <tr className="">
                 <th scope="col" className="px-2 py-2 w-1/5 text-center">
                   Descripción
