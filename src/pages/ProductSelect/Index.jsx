@@ -36,12 +36,15 @@ const Index = () => {
   const { data: productsData, HandleSearch: HandleProductSearch } =
     useGetProducts();
 
+
+
   const {
     inputData,
     clientInputData,
     notesInPdf,
     resetInputNote,
     clearAllInputs,
+    clearClientInput,
     clearSearchInput,
     HandleInputData,
     HandleNotesInPdfData,
@@ -193,6 +196,7 @@ const Index = () => {
         selectedProducts={selectedProducts}
         imagesData={imagesData}
         clearSearchInput={clearSearchInput}
+        clearClientInput={clearClientInput}
         quoteName={quoteData[0]?.name}
         quoteHasData={quoteHasData}
         totals={totals}

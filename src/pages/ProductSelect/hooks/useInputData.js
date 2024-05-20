@@ -68,6 +68,18 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
     return setInputData({ ...inputData, search: "" });
   }
 
+  function clearClientInput() {
+    return setClientInputData({
+      selected_client_id: "",
+      name: "",
+      razon_social: "",
+      rnc: "",
+      phone_1: "",
+      phone_2: "",
+      address: "",
+    })
+  }
+
   function clearAllInputs() {
     return setInputData({
       search: "",
@@ -78,9 +90,10 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
     });
   }
 
-  function HandleDataClient(client_id) {
+  function HandleDataClient(event) {
+    const client_id = event?.target?.value
     const getClientSelected = clientsData.filter((client) => {
-      return client?.id === client_id;
+      return client?.id === parseInt(client_id);
     })[0];
 
     return setClientInputData({
@@ -133,6 +146,7 @@ const useInputData = ({ clientsData, quoteData, quoteHasData }) => {
     notesInPdf,
     resetInputNote,
     resetNotesInPdf,
+    clearClientInput,
     clearSearchInput,
     clearAllInputs,
     HandleInputData,

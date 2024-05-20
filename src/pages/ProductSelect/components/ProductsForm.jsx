@@ -18,6 +18,7 @@ const ProductsForm = ({
   clientInputData,
   selectedProducts,
   clearSearchInput,
+  clearClientInput,
   totals,
   toggles,
   quoteHasData,
@@ -48,8 +49,38 @@ const ProductsForm = ({
         >
           {quoteHasData ? <h2>Edición de {quoteName}</h2> : <h2>Crear Cotización</h2>}
         </section>
-        <section className="mb-8 mr-5 h-10 flex justify-end">
-          <ClientCatalog />
+        <section className="mb-8 relative top-2 mr-10 h-10 flex justify-end">
+          {clientInputData?.selected_client_id !== "" ?
+            <div className="flex items-center">
+              <FontAwesomeIcon icon={faX} className="mr-10" onClick={clearClientInput}/>
+              <div className="inline-block">
+                <ul className="text-sm grid grid-cols-2">
+                  <li>
+                    <p className="inline font-bold">Nombre: </p>
+                    <p className="inline">{clientInputData?.name}</p>
+                  </li>
+                  <li>
+                    <p className="inline font-bold">Razón Social: </p>
+                    <p className="inline">{clientInputData?.razon_social}</p>
+                  </li>
+                  <li>
+                    <p className="inline font-bold">RNC: </p>
+                    <p className="inline">{clientInputData?.rnc}</p>
+                  </li>
+                  <li>
+                    <p className="inline font-bold">Teléfono: </p>
+                    <p className="inline">{clientInputData?.phone_1}</p>
+                  </li>
+                </ul>
+              </div>
+            </div> :
+            <div className="relative top-2 mr-10 ">
+              <ClientCatalog
+                onClick={HandleDataClient}
+              />
+            </div>
+          }
+
         </section>
         {/* <section className="mb-8 h-10 flex justify-end">
           <div className="w-80">

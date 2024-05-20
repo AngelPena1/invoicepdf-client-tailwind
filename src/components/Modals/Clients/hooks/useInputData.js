@@ -1,13 +1,7 @@
 import { useState } from "react";
 
 const useInputData = () => {
-  const [inputData, setInputData] = useState({
-    search: "",
-    group_selected: null,
-    category_selected: null,
-    subcategory_selected: null,
-    finishes_selected: null,
-  });
+  const [inputData, setInputData] = useState("");
 
   const [forceRefresh, setForceRefresh] = useState(false)
 
@@ -22,30 +16,12 @@ const useInputData = () => {
   }
 
   function HandleInputData(event) {
-    const { name, value } = event.target;
-    return setInputData({ ...inputData, [name]: value });
-  }
-  
-  function HandleClickFilters(selects) {
-    setInputData({
-      ...inputData,
-      group_selected: selects?.group_selected,
-      category_selected: selects?.category_selected,
-      subcategory_selected: selects?.subcategory_selected,
-      finishes_selected: selects?.finishes_selected,
-    });
-
-    return toggleRefresh()
+    const { value } = event.target;
+    return setInputData(value);
   }
 
   function clearInputs() {
-    return setInputData({
-      ...inputData,
-      group_selected: "",
-      category_selected: "",
-      subcategory_selected: "",
-      finishes_selected: "",
-    });
+    return setInputData("")
   }
 
   function clearSearchInput() {
@@ -59,7 +35,6 @@ const useInputData = () => {
     clearInputs,
     HandleInputData,
     HandleKeyPress,
-    HandleClickFilters,
   };
 };
 
