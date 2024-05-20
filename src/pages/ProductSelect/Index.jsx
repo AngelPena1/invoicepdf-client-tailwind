@@ -180,6 +180,21 @@ const Index = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    const onAnimationEnd = () => {
+      const container = document.getElementById('main-container');
+      container.style.overflow = 'auto';
+    };
+
+    const animationElement = document.getElementById('main-container');
+    animationElement.addEventListener('animationend', onAnimationEnd);
+
+    return () => {
+      animationElement.removeEventListener('animationend', onAnimationEnd);
+    };
+  }, []);
+
+
   return (
     <>
       {toggles?.notes && <Notes
