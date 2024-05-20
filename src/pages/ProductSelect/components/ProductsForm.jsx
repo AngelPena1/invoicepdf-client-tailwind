@@ -8,7 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
-import Select from "../../../components/Select/Index";
 import ClientCatalog from '../../../components/Modals/Clients/Index'
 
 const ProductsForm = ({
@@ -80,19 +79,7 @@ const ProductsForm = ({
               />
             </div>
           }
-
         </section>
-        {/* <section className="mb-8 h-10 flex justify-end">
-          <div className="w-80">
-            <Select
-              className=""
-              value={clientInputData?.name}
-              elements={clientsData}
-              onClick={HandleDataClient}
-              placeHolder={"Seleccione el Cliente"}
-            />
-          </div>
-        </section> */}
       </div>
       <section>
         <Search
@@ -439,10 +426,9 @@ const ProductsForm = ({
             </li>
           </ul>
         </section>
-
       </section>
-      <section className="grid grid-cols-2 relative top-4">
-        <button className="button-2" onClick={HandlePrintPreview}>
+      <section className="grid mt-7 w-full justify-end">
+        <button className="button-2 w-44" onClick={HandlePrintPreview}>
           Preview
         </button>
         <button className="" onClick={HandlePrintQuote}>
