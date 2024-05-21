@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ProductsForm from "./components/ProductsForm";
 import useInputData from "./hooks/useInputData";
 import { GenerarPDF } from "./quotePDF/Index";
@@ -19,6 +19,8 @@ import { useParams } from "react-router-dom";
 import Notes from "./components/Notes";
 
 const Index = () => {
+  const noteRef = useRef(null)
+
   const { config } = useConfig();
   const { quote_id } = useParams();
 
@@ -35,8 +37,6 @@ const Index = () => {
 
   const { data: productsData, HandleSearch: HandleProductSearch } =
     useGetProducts();
-
-
 
   const {
     inputData,
@@ -63,7 +63,7 @@ const Index = () => {
     HandleQuantityProducts,
     HandleDeleteProduct,
     clearSelectedProducts,
-  } = useSelectedProducts({ quoteData, quoteHasData, resetInputNote });
+  } = useSelectedProducts({ noteRef, quoteData, quoteHasData, resetInputNote });
 
   const {
     data: imagesData,
@@ -189,6 +189,7 @@ const Index = () => {
       />}
 
       <ProductsForm
+      noteRef={noteRef}
         result={result}
         clientsData={clientsData}
         clientInputData={clientInputData}

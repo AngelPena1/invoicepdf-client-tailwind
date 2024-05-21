@@ -1,6 +1,7 @@
 import React from "react";
 import Search from "../../../components/Searchs/SearchProducts";
 import {
+  faEdit,
   faMinus,
   faPlus,
   faTrash,
@@ -8,9 +9,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
-import ClientCatalog from '../../../components/Modals/Clients/Index'
+import ClientCatalog from "../../../components/Modals/Clients/Index";
 
 const ProductsForm = ({
+  noteRef,
   result,
   inputData,
   clientsData,
@@ -38,20 +40,30 @@ const ProductsForm = ({
   HandlePrintPreview,
 }) => {
   return (
-    <section id="main-container" className="bg-white rounded-lg h-fit fade-in-bottom">
-
+    <section
+      id="main-container"
+      className="bg-white rounded-lg h-fit fade-in-bottom"
+    >
       {/* Heading */}
       <div className="grid grid-cols-2">
         <section
           name="heading"
           className="text-2xl font-bold mb-8 justify-start"
         >
-          {quoteHasData ? <h2>Edición de {quoteName}</h2> : <h2>Crear Cotización</h2>}
+          {quoteHasData ? (
+            <h2>Edición de {quoteName}</h2>
+          ) : (
+            <h2>Crear Cotización</h2>
+          )}
         </section>
         <section className="mb-8 relative top-2 mr-10 h-10 flex justify-end">
-          {clientInputData?.selected_client_id !== "" ?
+          {clientInputData?.selected_client_id !== "" ? (
             <div className="flex items-center">
-              <FontAwesomeIcon icon={faX} className="mr-10" onClick={clearClientInput}/>
+              <FontAwesomeIcon
+                icon={faX}
+                className="mr-10"
+                onClick={clearClientInput}
+              />
               <div className="inline-block">
                 <ul className="text-sm grid grid-cols-2">
                   <li>
@@ -72,13 +84,12 @@ const ProductsForm = ({
                   </li>
                 </ul>
               </div>
-            </div> :
-            <div className="relative top-2 mr-10 ">
-              <ClientCatalog
-                onClick={HandleDataClient}
-              />
             </div>
-          }
+          ) : (
+            <div className="relative top-2 mr-10 ">
+              <ClientCatalog onClick={HandleDataClient} />
+            </div>
+          )}
         </section>
       </div>
       <section>
@@ -105,7 +116,7 @@ const ProductsForm = ({
                   value={toggles?.itbis}
                   name="itbis"
                   onClick={HandleToggleChange}
-                  onChange={() => { }}
+                  onChange={() => {}}
                   className="sr-only peer outline-none"
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -122,7 +133,7 @@ const ProductsForm = ({
                   value={toggles?.tips}
                   name="tips"
                   onClick={HandleToggleChange}
-                  onChange={() => { }}
+                  onChange={() => {}}
                   className="sr-only peer outline-none"
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -139,7 +150,7 @@ const ProductsForm = ({
                   value={toggles?.dollar}
                   name="dollar"
                   onClick={HandleToggleChange}
-                  onChange={() => { }}
+                  onChange={() => {}}
                   className="sr-only peer outline-none"
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -156,7 +167,7 @@ const ProductsForm = ({
                   value={toggles?.code}
                   name="code"
                   onClick={HandleToggleChange}
-                  onChange={() => { }}
+                  onChange={() => {}}
                   className="sr-only peer outline-none"
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -173,7 +184,7 @@ const ProductsForm = ({
                   value={toggles?.cost}
                   name="cost"
                   onClick={HandleToggleChange}
-                  onChange={() => { }}
+                  onChange={() => {}}
                   className="sr-only peer outline-none"
                 />
                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
@@ -192,6 +203,9 @@ const ProductsForm = ({
               <tr className="">
                 <th scope="col" className="px-2 py-2 w-1/5 text-center">
                   Descripción
+                </th>
+                <th scope="col" className="px-2 py-2 w-1/5 text-center">
+                  Notas
                 </th>
                 <th scope="col" className="px-2 py-2 w-1/5 text-center">
                   Cantidad
@@ -226,8 +240,26 @@ const ProductsForm = ({
                         scope="row"
                         className="px-2 py-2 font-medium text-gray-900 whitespace-nowrap border-r-2"
                       >
-                        {product?.description?.length > 50 ? `${product?.description.substring(0, 50)}...` : `${product?.description}`}
+                        {product?.description?.length > 50
+                          ? `${product?.description.substring(0, 50)}...`
+                          : `${product?.description}`}
                       </th>
+                      <td className="px-2 py-2 border-r-2 text-center">
+                        {product?.show_note ? <div className="flex">
+                          <button className="h-7 py-0 px-2 mr-0 bg-red-400 hover:bg-red-300 duration-200" onClick={() => {
+                            showInputNote(index, false);
+                          }}>Cancelar</button>
+                          <input ref={noteRef} className="h-7 mx-6" type="text" />
+                          <button className="h-7 py-0 px-2">Aceptar</button>
+                        </div> : <FontAwesomeIcon
+                          className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 cursor-pointer"
+                          icon={faEdit}
+                          onClick={() => {
+                            showInputNote(index, true);
+                          }}
+                        />}
+                        
+                      </td>
                       <td className="px-2 py-2 select-none text-center border-r-2">
                         <FontAwesomeIcon
                           className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 right-2 cursor-pointer"
@@ -252,7 +284,9 @@ const ProductsForm = ({
                         />
                       </td>
                       {toggles?.code && (
-                        <td className="px-2 py-2 border-r-2 text-center">{product?.code}</td>
+                        <td className="px-2 py-2 border-r-2 text-center">
+                          {product?.code}
+                        </td>
                       )}
                       {toggles?.cost && (
                         <td className="px-2 py-2 text-right border-r-2">
@@ -260,12 +294,18 @@ const ProductsForm = ({
                         </td>
                       )}
                       <td className="px-2 py-2 flex justify-end border-r-2">
-                        <p className="mr-4">{!toggles?.dollar ? "RD$" : "US$"}</p>
+                        <p className="mr-4">
+                          {!toggles?.dollar ? "RD$" : "US$"}
+                        </p>
                         <input
-                          name={!toggles?.dollar ? "input-price" : "input-price-us"}
+                          name={
+                            !toggles?.dollar ? "input-price" : "input-price-us"
+                          }
                           className="w-20 text-right p-0 border-0 px-1"
                           type="text"
-                          value={toggles?.dollar ? product?.price_us : product?.price}
+                          value={
+                            toggles?.dollar ? product?.price_us : product?.price
+                          }
                           onChange={(e) => {
                             HandlePriceChange(e, index);
                           }}
@@ -273,7 +313,7 @@ const ProductsForm = ({
                             e.target.select();
                           }}
                           onBlur={(e) => {
-                            DefaultValueOnPriceChange(e, index)
+                            DefaultValueOnPriceChange(e, index);
                           }}
                         />
                       </td>
@@ -290,7 +330,7 @@ const ProductsForm = ({
                         />
                       </td>
                     </tr>
-                    {product?.notes &&
+                    {/* {product?.notes &&
                       product?.notes.map((note, indexNote) => {
                         return (
                           <tr className="" key={indexNote}>
@@ -311,8 +351,8 @@ const ProductsForm = ({
                             </td>
                           </tr>
                         );
-                      })}
-                    {product?.show_note ? (
+                      })} */}
+                    {/* {product?.show_note ? (
                       <div className="flex relative left-10 mt-2 w-80">
                         <button
                           className="h-8 py-0 px-3 bg-red-500 hover:bg-red-400"
@@ -348,7 +388,7 @@ const ProductsForm = ({
                           }}
                         />
                       </div>
-                    )}
+                    )} */}
                     <tr className="border-b" />
                   </>
                 );
@@ -401,24 +441,32 @@ const ProductsForm = ({
               <p>Descuento</p>
               <p className="text-right">
                 {inputData?.discount.includes("%")
-                  ? `(${inputData?.discount}) ${formatToDecimal(parseFloat(totals?.discount))}`
+                  ? `(${inputData?.discount}) ${formatToDecimal(
+                      parseFloat(totals?.discount)
+                    )}`
                   : formatToDecimal(parseFloat(inputData?.discount))}
               </p>
             </li>
-            {toggles?.itbis && <li className="grid grid-cols-2">
-              <p>Subtotal</p>
-              <p className="text-right">{formatToDecimal(totals?.price)}</p>
-            </li>}
+            {toggles?.itbis && (
+              <li className="grid grid-cols-2">
+                <p>Subtotal</p>
+                <p className="text-right">{formatToDecimal(totals?.price)}</p>
+              </li>
+            )}
 
-            {toggles?.itbis && <li className="grid grid-cols-2">
-              <p>Itbis</p>
-              <p className="text-right">{formatToDecimal(totals?.itbis)}</p>
-            </li>}
+            {toggles?.itbis && (
+              <li className="grid grid-cols-2">
+                <p>Itbis</p>
+                <p className="text-right">{formatToDecimal(totals?.itbis)}</p>
+              </li>
+            )}
 
-            {toggles?.tips && <li className="grid grid-cols-2">
-              <p>Tips</p>
-              <p className="text-right">{formatToDecimal(totals?.tips)}</p>
-            </li>}
+            {toggles?.tips && (
+              <li className="grid grid-cols-2">
+                <p>Tips</p>
+                <p className="text-right">{formatToDecimal(totals?.tips)}</p>
+              </li>
+            )}
 
             <li className="grid grid-cols-2">
               <p>Total</p>
