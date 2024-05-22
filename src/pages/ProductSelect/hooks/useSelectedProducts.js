@@ -14,9 +14,10 @@ const useSelectedProducts = ({ quoteData, quoteHasData, resetInputNote }) => {
   }
 
   function addNotesToProduct(index, value) {
+    if (value.trim() === "") return
     let localArray = selectedProducts;
     let addNoteToArray = localArray[index]?.notes;
-    addNoteToArray.push(`**${value}`);
+    addNoteToArray.push(`${value}`);
     showInputNote(index, false)
     resetInputNote()
     return setRefreshPrice(!refreshPrice);

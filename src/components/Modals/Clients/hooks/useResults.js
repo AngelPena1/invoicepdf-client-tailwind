@@ -20,6 +20,7 @@ const useResults = ({ inputData, clientData }) => {
 
     useEffect(() => {
         FilterInput()
+        // eslint-disable-next-line
     }, [inputData])
 
     return { data }

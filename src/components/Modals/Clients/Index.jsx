@@ -5,7 +5,7 @@ import useToggles from "./hooks/useToggles";
 import useInputData from "./hooks/useInputData";
 import useResults from "./hooks/useResults";
 
-const Index = ({ onHide, onClick }) => {
+const Index = ({ onClick }) => {
 
   const onClickEvent = onClick ? onClick : null
 
@@ -27,6 +27,7 @@ const Index = ({ onHide, onClick }) => {
 
   useEffect(() => {
     HandleSearch()
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {

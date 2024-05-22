@@ -45,8 +45,8 @@ const ProductsForm = ({
       className="bg-white rounded-lg h-fit fade-in-bottom"
     >
       {/* Heading */}
-      <div className="grid grid-cols-2">
-        <section
+      <section className="grid grid-cols-1 md:grid-cols-2">
+        <div
           name="heading"
           className="text-2xl font-bold mb-8 justify-start"
         >
@@ -55,8 +55,8 @@ const ProductsForm = ({
           ) : (
             <h2>Crear Cotización</h2>
           )}
-        </section>
-        <section className="mb-8 relative top-2 mr-10 h-10 flex justify-end">
+        </div>
+        <div className="mb-8 relative top-2 mr-10 h-10 flex md:justify-end">
           {clientInputData?.selected_client_id !== "" ? (
             <div className="flex items-center">
               <FontAwesomeIcon
@@ -90,8 +90,8 @@ const ProductsForm = ({
               <ClientCatalog onClick={HandleDataClient} />
             </div>
           )}
-        </section>
-      </div>
+        </div>
+      </section>
       <section>
         <Search
           result={result}
@@ -106,96 +106,6 @@ const ProductsForm = ({
       </section>
       {/* Config */}
       <section className="">
-        <section className="grid justify-end relative bottom-5">
-          <div>
-            <div className="mr-10 inline">
-              <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
-                <input
-                  type="checkbox"
-                  checked={toggles?.itbis}
-                  value={toggles?.itbis}
-                  name="itbis"
-                  onClick={HandleToggleChange}
-                  onChange={() => {}}
-                  className="sr-only peer outline-none"
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
-                  Aplicar ITBIS
-                </span>
-              </label>
-            </div>
-            <div className="mr-10 inline">
-              <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
-                <input
-                  type="checkbox"
-                  checked={toggles?.tips}
-                  value={toggles?.tips}
-                  name="tips"
-                  onClick={HandleToggleChange}
-                  onChange={() => {}}
-                  className="sr-only peer outline-none"
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
-                  10% Legal
-                </span>
-              </label>
-            </div>
-            <div className="mr-10 inline">
-              <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
-                <input
-                  type="checkbox"
-                  checked={toggles?.dollar}
-                  value={toggles?.dollar}
-                  name="dollar"
-                  onClick={HandleToggleChange}
-                  onChange={() => {}}
-                  className="sr-only peer outline-none"
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
-                  Cambio a Dólar
-                </span>
-              </label>
-            </div>
-            <div className="mr-10 inline">
-              <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
-                <input
-                  type="checkbox"
-                  checked={toggles?.code}
-                  value={toggles?.code}
-                  name="code"
-                  onClick={HandleToggleChange}
-                  onChange={() => {}}
-                  className="sr-only peer outline-none"
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
-                  Mostrar Código
-                </span>
-              </label>
-            </div>
-            <div className="mr-10 inline">
-              <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
-                <input
-                  type="checkbox"
-                  checked={toggles?.cost}
-                  value={toggles?.cost}
-                  name="cost"
-                  onClick={HandleToggleChange}
-                  onChange={() => {}}
-                  className="sr-only peer outline-none"
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
-                  Mostrar Precio de Lista
-                </span>
-              </label>
-            </div>
-          </div>
-        </section>
-
         {/* Table */}
         <div className="relative overflow-x-auto overflow-y-auto h-72 max-h-72 border">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -204,7 +114,7 @@ const ProductsForm = ({
                 <th scope="col" className="px-2 py-2 w-1/5 text-center">
                   Descripción
                 </th>
-                <th scope="col" className="px-2 py-2 w-1/5 text-center">
+                <th scope="col" className="px-2 py-2 w-1/5 min-w-[100px] text-center">
                   Notas
                 </th>
                 <th scope="col" className="px-2 py-2 w-1/5 text-center">
@@ -245,12 +155,46 @@ const ProductsForm = ({
                           : `${product?.description}`}
                       </th>
                       <td className="px-2 py-2 border-r-2 text-center">
+                        {product?.notes &&
+                          product?.notes.map((note, indexNote) => {
+                            return (
+                              <tr className="" key={indexNote}>
+                                <td className="relative  flex cursor-pointer">
+                                  <FontAwesomeIcon
+                                    icon={faX}
+                                    className="relative top-1 text-xs hover:text-red-300 text-red-400"
+                                    onClick={() => {
+                                      removeNoteToProduct(index, indexNote);
+                                    }}
+                                  />
+                                  <input
+                                    type="text"
+                                    className="py-0 border-0 bg-transparent outline-none italic text-slate-600"
+                                    value={note}
+                                    onChange={() => { }}
+                                  />
+                                </td>
+                              </tr>
+                            );
+                          })}
                         {product?.show_note ? <div className="flex">
                           <button className="h-7 py-0 px-2 mr-0 bg-red-400 hover:bg-red-300 duration-200" onClick={() => {
                             showInputNote(index, false);
                           }}>Cancelar</button>
-                          <input ref={noteRef} className="h-7 mx-6" type="text" />
-                          <button className="h-7 py-0 px-2">Aceptar</button>
+                          <input
+                            ref={noteRef}
+                            className="h-7 mx-6"
+                            type="text"
+                            name="note"
+                            value={inputData?.note}
+                            onChange={HandleInputData}
+                          />
+                          <button
+                            className="h-7 py-0 px-2"
+                            onClick={() => {
+                              addNotesToProduct(index, inputData?.note);
+                            }}
+                          >Aceptar</button>
                         </div> : <FontAwesomeIcon
                           className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 cursor-pointer"
                           icon={faEdit}
@@ -258,7 +202,6 @@ const ProductsForm = ({
                             showInputNote(index, true);
                           }}
                         />}
-                        
                       </td>
                       <td className="px-2 py-2 select-none text-center border-r-2">
                         <FontAwesomeIcon
@@ -293,15 +236,15 @@ const ProductsForm = ({
                           {product?.cost}
                         </td>
                       )}
-                      <td className="px-2 py-2 flex justify-end border-r-2">
-                        <p className="mr-4">
+                      <td className="px-2 py-2 text-center border-r-2">
+                        <p className="mr-4 inline">
                           {!toggles?.dollar ? "RD$" : "US$"}
                         </p>
                         <input
                           name={
                             !toggles?.dollar ? "input-price" : "input-price-us"
                           }
-                          className="w-20 text-right p-0 border-0 px-1"
+                          className="w-20 text-right p-0 border-0 px-1 inline"
                           type="text"
                           value={
                             toggles?.dollar ? product?.price_us : product?.price
@@ -330,65 +273,6 @@ const ProductsForm = ({
                         />
                       </td>
                     </tr>
-                    {/* {product?.notes &&
-                      product?.notes.map((note, indexNote) => {
-                        return (
-                          <tr className="" key={indexNote}>
-                            <td className="relative left-10 flex cursor-pointer">
-                              <FontAwesomeIcon
-                                icon={faX}
-                                className="relative top-1 text-xs hover:text-slate-400"
-                                onClick={() => {
-                                  removeNoteToProduct(index, indexNote);
-                                }}
-                              />
-                              <input
-                                type="text"
-                                className="py-0 border-0 bg-transparent outline-none italic text-slate-600"
-                                value={note}
-                                onChange={() => { }}
-                              />
-                            </td>
-                          </tr>
-                        );
-                      })} */}
-                    {/* {product?.show_note ? (
-                      <div className="flex relative left-10 mt-2 w-80">
-                        <button
-                          className="h-8 py-0 px-3 bg-red-500 hover:bg-red-400"
-                          onClick={() => {
-                            showInputNote(index, false);
-                          }}
-                        >
-                          Cancelar
-                        </button>
-                        <input
-                          name="note"
-                          type="text"
-                          className="h-8 mr-4 outline-none"
-                          value={inputData?.note}
-                          onChange={HandleInputData}
-                        />
-                        <button
-                          className="h-8 py-0 px-3"
-                          onClick={() => {
-                            addNotesToProduct(index, inputData?.note);
-                          }}
-                        >
-                          Aceptar
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="text-center mt-2">
-                        <FontAwesomeIcon
-                          className="bg-slate-100 hover:bg-slate-200 p-1 rounded-full relative -top-1 cursor-pointer"
-                          icon={faPlus}
-                          onClick={() => {
-                            showInputNote(index, true);
-                          }}
-                        />
-                      </div>
-                    )} */}
                     <tr className="border-b" />
                   </>
                 );
@@ -399,51 +283,104 @@ const ProductsForm = ({
       </section>
 
       {/* Footer */}
+
       <section className="mt-10 grid md:grid-cols-2">
-        <section className="w-full mb-10 md:mb-0">
-          <div className="w-full">
-            <input
-              type="text"
-              className="w-36 mr-8  h-8 outline-none inline"
-              name="discount"
-              placeholder="Descuento"
-              value={inputData?.discount}
-              onChange={HandleInputData}
-              autoComplete="off"
-            />
-            <input
-              type="text"
-              className="w-36 mr-8 h-8 outline-none inline"
-              name="deposit"
-              placeholder="Anticipo"
-              value={inputData?.deposit}
-              onChange={HandleInputData}
-              autoComplete="off"
-            />
-            <input
-              type="text"
-              className="w-36 mr-8 h-8 outline-none inline"
-              name="with_delivery"
-              placeholder="Con entrega"
-              value={inputData?.with_delivery}
-              onChange={HandleInputData}
-              autoComplete="off"
-            />
-            <button className="w-36 h-8 p-0 inline" onClick={showNotes}>
-              Añadir notas
-            </button>
+        <section className="mb-10">
+          <div className="mr-10 inline">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+              <input
+                type="checkbox"
+                checked={toggles?.itbis}
+                value={toggles?.itbis}
+                name="itbis"
+                onClick={HandleToggleChange}
+                onChange={() => { }}
+                className="sr-only peer outline-none"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
+                Aplicar ITBIS
+              </span>
+            </label>
+          </div>
+          <div className="mr-10 inline">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+              <input
+                type="checkbox"
+                checked={toggles?.tips}
+                value={toggles?.tips}
+                name="tips"
+                onClick={HandleToggleChange}
+                onChange={() => { }}
+                className="sr-only peer outline-none"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
+                10% Legal
+              </span>
+            </label>
+          </div>
+          <div className="mr-10 inline">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+              <input
+                type="checkbox"
+                checked={toggles?.dollar}
+                value={toggles?.dollar}
+                name="dollar"
+                onClick={HandleToggleChange}
+                onChange={() => { }}
+                className="sr-only peer outline-none"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
+                Cambio a Dólar
+              </span>
+            </label>
+          </div>
+          <div className="mr-10 inline">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+              <input
+                type="checkbox"
+                checked={toggles?.code}
+                value={toggles?.code}
+                name="code"
+                onClick={HandleToggleChange}
+                onChange={() => { }}
+                className="sr-only peer outline-none"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
+                Mostrar Código
+              </span>
+            </label>
+          </div>
+          <div className="mr-10 inline">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+              <input
+                type="checkbox"
+                checked={toggles?.cost}
+                value={toggles?.cost}
+                name="cost"
+                onClick={HandleToggleChange}
+                onChange={() => { }}
+                className="sr-only peer outline-none"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
+                Mostrar Precio de Lista
+              </span>
+            </label>
           </div>
         </section>
-
-        <section className="flex lg:justify-end relative right-3">
-          <ul className="w-96 text-right border-t-2 border-blue-300">
+        <section className="mb-10  md:flex md:justify-end">
+          <ul className="w-full md:w-96 text-right border-t-2 border-blue-300">
             <li className="grid grid-cols-2">
               <p>Descuento</p>
               <p className="text-right">
                 {inputData?.discount.includes("%")
                   ? `(${inputData?.discount}) ${formatToDecimal(
-                      parseFloat(totals?.discount)
-                    )}`
+                    parseFloat(totals?.discount)
+                  )}`
                   : formatToDecimal(parseFloat(inputData?.discount))}
               </p>
             </li>
@@ -475,13 +412,49 @@ const ProductsForm = ({
           </ul>
         </section>
       </section>
-      <section className="grid mt-7 w-full justify-end">
-        <button className="button-2 w-44" onClick={HandlePrintPreview}>
-          Preview
-        </button>
-        <button className="" onClick={HandlePrintQuote}>
-          {quoteHasData ? "Guardar cambios" : "Registrar"}
-        </button>
+
+      <section className="grid md:grid-cols-2 md:gap-10">
+        <div className="w-full grid grid-cols-2 gap-2 mb-10 lg:w-80">
+          <input
+            type="text"
+            className="w-full h-8 outline-none inline"
+            name="discount"
+            placeholder="Descuento"
+            value={inputData?.discount}
+            onChange={HandleInputData}
+            autoComplete="off"
+          />
+          <input
+            type="text"
+            className="w-full h-8 outline-none inline"
+            name="deposit"
+            placeholder="Anticipo"
+            value={inputData?.deposit}
+            onChange={HandleInputData}
+            autoComplete="off"
+          />
+          <input
+            type="text"
+            className="w-full h-8 outline-none inline"
+            name="with_delivery"
+            placeholder="Con entrega"
+            value={inputData?.with_delivery}
+            onChange={HandleInputData}
+            autoComplete="off"
+          />
+          <button className="w-full h-8 p-0 inline" onClick={showNotes}>
+            Añadir notas
+          </button>
+        </div>
+        {/* Buttons */}
+        <section className="grid grid-cols-2 gap-4  md:grid-cols-1 md:justify-items-end  md:gap-0 ">
+          <button className="button-2 w-full h-10 py-0 md:w-80 lg:w-96 lg:mb-0 md:mr-0" onClick={HandlePrintPreview}>
+            Preview
+          </button>
+          <button className="w-full h-10 py-0 md:w-80 md:mr-0 lg:w-96" onClick={HandlePrintQuote}>
+            {quoteHasData ? "Guardar cambios" : "Registrar"}
+          </button>
+        </section>
       </section>
     </section>
   );

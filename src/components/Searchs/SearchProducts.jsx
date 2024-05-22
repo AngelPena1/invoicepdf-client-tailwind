@@ -5,7 +5,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProductsCatalog from "../Modals/Products/Index";
-import ClientsCatalog from '../Modals/Clients/Index'
 
 const Search = ({
   result,
