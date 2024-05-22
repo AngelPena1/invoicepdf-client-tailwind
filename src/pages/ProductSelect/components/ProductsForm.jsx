@@ -61,7 +61,7 @@ const ProductsForm = ({
             <div className="flex items-center">
               <FontAwesomeIcon
                 icon={faX}
-                className="mr-10"
+                className="mr-10 hover:text-red-300 text-red-400 cursor-pointer"
                 onClick={clearClientInput}
               />
               <div className="inline-block">
