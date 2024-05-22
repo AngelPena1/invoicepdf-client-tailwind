@@ -54,46 +54,50 @@ const Index = () => {
   }, []);
 
   return (
-    <section className="rounded-lg fade-in-bottom">
-      {toggles?.invoiceForm && <InvoicePDF selectedQuote={selectedQuote} toggleCreateInvoice={toggleCreateInvoice} />}
-      <section className="flex">
-        <Filters
-          getFiltersFromComponent={getFiltersFromComponent}
-          HandleSearchHistory={HandleSearchHistory}
+    <>
+      {toggles?.deleteConfirmation && (
+        <ConfirmationDelete
+          title={"Cuidado!"}
+          show={toggles.deleteConfirmation}
+          paragraph={`Estas a punto de borrar la ${selectedQuote?.name}. Esta acción no puede deshacerse.`}
+          btnLabel={"Borrar"}
+          onHide={hideDeleteConfirmation}
+          onClick={HandleDisableQuote}
         />
-        {toggles?.deleteConfirmation && (
-          <ConfirmationDelete
-            title={"Cuidado!"}
-            show={toggles.deleteConfirmation}
-            paragraph={`Estas a punto de borrar la ${selectedQuote?.name}. Esta acción no puede deshacerse.`}
-            btnLabel={"Borrar"}
-            onHide={hideDeleteConfirmation}
-            onClick={HandleDisableQuote}
+      )}
+      {toggles?.invoiceForm && <InvoicePDF selectedQuote={selectedQuote} toggleCreateInvoice={toggleCreateInvoice} />}
+
+      <section className="rounded-lg fade-in-bottom">
+        <div
+          name="heading"
+          className="text-2xl font-bold md:px-2 py-3 rounded-t-lg justify-start bg-white"
+        >
+          Historial de Cotizaciones
+        </div>
+        <section className="block px-0 md:flex">
+          <Filters
+            getFiltersFromComponent={getFiltersFromComponent}
+            HandleSearchHistory={HandleSearchHistory}
           />
-        )}
-        <section className="w-full">
-          <div
-            name="heading"
-            className="text-2xl font-bold px-2 py-3 rounded-t-lg justify-start bg-white"
-          >
-            Historial de Cotizaciones
-          </div>
-          <HistoryTable
-            toggleCreateInvoice={toggleCreateInvoice}
-            goToEdit={goToEdit}
-            loadingHistory={loadingHistory}
-            historyData={historyData}
-            HandlePrintQuote={HandlePrintQuote}
-            HandleSelectedQuote={HandleSelectedQuote}
-            showDeleteConfirmation={showDeleteConfirmation}
-            OrderByDescription={OrderByDescription}
-            OrderByClient={OrderByClient}
-            OrderByDate={OrderByDate}
-            OrderByTotal={OrderByTotal}
-          />
+          <section className="w-full">
+            <HistoryTable
+              toggleCreateInvoice={toggleCreateInvoice}
+              goToEdit={goToEdit}
+              loadingHistory={loadingHistory}
+              historyData={historyData}
+              HandlePrintQuote={HandlePrintQuote}
+              HandleSelectedQuote={HandleSelectedQuote}
+              showDeleteConfirmation={showDeleteConfirmation}
+              OrderByDescription={OrderByDescription}
+              OrderByClient={OrderByClient}
+              OrderByDate={OrderByDate}
+              OrderByTotal={OrderByTotal}
+            />
+          </section>
         </section>
       </section>
-    </section>
+
+    </>
   );
 };
 

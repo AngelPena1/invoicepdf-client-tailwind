@@ -37,21 +37,21 @@ const Index = ({ getFiltersFromComponent, HandleSearchHistory }) => {
   }, []);
 
   return (
-    <section className="w-80 mr-10 select-none duration-200">
-      <div className="mb-5 duration-200">
+    <section className="md:w-80 mr-10 select-none duration-200">
+      <div className="md:mb-5 mt-4 duration-200">
         <SelectedFilters filters={filters} RemoveFilter={RemoveFilter} />
       </div>
-      <div className="mb-5 duration-200">
+      <div className="md:mb-5 duration-200">
         <Date date={date} HandleDateChange={HandleDateChange} />
       </div>
-      <div className="mb-5">
+      <div className="md:mb-5">
         <Client
           filters={filters}
           ClientData={ClientData}
           HandleSelectClient={HandleSelectClient}
         />
       </div>
-      <div className="flex">
+      <div className="flex mb-10">
         <button 
           className="w-1/3 bg-red-500 hover:bg-red-400 duration-200"
           onClick={clearAllFilters}

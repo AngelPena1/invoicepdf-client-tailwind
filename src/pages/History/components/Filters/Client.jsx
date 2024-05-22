@@ -10,7 +10,7 @@ const Client = (props) => {
           Nombre del cliente
         </label>
         <Select
-          className=""
+          className="w-48"
           elements={props.ClientData}
           onClick={props.HandleSelectClient}
           value={props.filters?.client?.id}

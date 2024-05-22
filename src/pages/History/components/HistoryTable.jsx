@@ -35,7 +35,7 @@ const HistoryTable = ({
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0">
               <tr>
-                <th scope="col" className="px-2 py-3">
+                <th scope="col" className="px-2 py-3 ">
                   Descripción
                   <FontAwesomeIcon
                     icon={faSort}
@@ -43,7 +43,7 @@ const HistoryTable = ({
                     className="ml-3 cursor-pointer hover:text-slate-400"
                   />
                 </th>
-                <th scope="col" className="px-2 py-3">
+                <th scope="col" className="px-2 py-3 min-w-28">
                   Cliente
                   <FontAwesomeIcon
                     icon={faSort}
@@ -51,7 +51,7 @@ const HistoryTable = ({
                     className="ml-3 cursor-pointer hover:text-slate-400"
                   />
                 </th>
-                <th scope="col" className="px-2 py-3">
+                <th scope="col" className="px-2 py-3 min-w-28">
                   Fecha
                   <FontAwesomeIcon
                     icon={faSort}
@@ -59,7 +59,7 @@ const HistoryTable = ({
                     className="ml-3 cursor-pointer hover:text-slate-400"
                   />
                 </th>
-                <th scope="col" className="px-2 py-3">
+                <th scope="col" className="px-2 py-3 min-w-28">
                   Total
                   <FontAwesomeIcon
                     icon={faSort}
@@ -67,16 +67,16 @@ const HistoryTable = ({
                     className="ml-3 cursor-pointer hover:text-slate-400"
                   />
                 </th>
-                <th scope="col" className="px-2 py-3 text-center">
+                <th scope="col" className="px-2 py-3 text-center min-w-28">
                   Factura
                 </th>
-                <th scope="col" className="px-2 py-3 text-center">
+                <th scope="col" className="px-2 py-3 text-center min-w-28">
                   Imprimir
                 </th>
-                <th scope="col" className="px-2 py-3 text-center">
+                <th scope="col" className="px-2 py-3 text-center min-w-28">
                   Editar
                 </th>
-                <th scope="col" className="px-2 py-3 text-center">
+                <th scope="col" className="px-2 py-3 text-center min-w-28">
                   Eliminar
                 </th>
               </tr>
