@@ -73,9 +73,9 @@ const NavbarIndex = () => {
       toggleProfile(false)
     }
 
-    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-      toggleShows('menu_dropdown', false)
-    }
+    // if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+    //   toggleShows('menu_dropdown', false)
+    // }
 
     if(notificationRef.current && !notificationRef.current.contains(event.target)) {
       toggleNotifications(false)
