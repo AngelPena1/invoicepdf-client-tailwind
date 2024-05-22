@@ -19,11 +19,11 @@ const Catalog = (props) => {
 
     return (
         <section ref={props.dropdownRef} className='relative'>
-            <div onClick={ShowToggleCatalog}>
-                <label className='inline-block mr-3' htmlFor="">Selecciona un Cliente</label>
+            <div onClick={ShowToggleCatalog} className='cursor-pointer hover:text-slate-400 duration-200'>
+                <label className='inline-block mr-3 cursor-pointer' htmlFor="">Selecciona un Cliente</label>
                 <FontAwesomeIcon icon={faUser} />
             </div>
-            {showCatalog && <div className='absolute right-0 top-10 w-60 min-h-28 max-h-60 fade-in-top bg-white rounded-lg shadow-style-2 z-20 overflow-auto'>
+            {showCatalog && <div className='absolute top-10 w-60 min-h-28 max-h-60 fade-in-top bg-white rounded-lg shadow-style-2 z-20 overflow-auto'>
                 <div className='grid justify-center sticky top-0 pt-4 bg-white z-10'>
                     <div>
                         <input 
