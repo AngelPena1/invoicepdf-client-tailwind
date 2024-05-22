@@ -59,9 +59,9 @@ const TemplateNoImage = ({
     if (product?.notes) {
       product?.notes.forEach((note, index) => {
         if (index === 0) {
-          description = `${description}\n\n ${note}`;
+          description = `${description}\n\n **${note}`;
         } else {
-          description = `${description}\n ${note}`;
+          description = `${description}\n **${note}`;
         }
       });
     }
