@@ -19,6 +19,7 @@ const NavbarIndex = () => {
   const username = capitalizeFirstLetter(auth?.username)
 
   const dropdownRef = useRef(null)
+  const navbarRef = useRef(null)
   const notificationRef = useRef(null)
   const settingsRef = useRef(null)
 
@@ -72,9 +73,14 @@ const NavbarIndex = () => {
       toggleProfile(false)
     }
 
+    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+      toggleShows('menu_dropdown', false)
+    }
+
     if(notificationRef.current && !notificationRef.current.contains(event.target)) {
       toggleNotifications(false)
     }
+
   };
 
 
@@ -91,6 +97,7 @@ const NavbarIndex = () => {
     <>
       <NavbarForm2
         dropdownRef={dropdownRef}
+        navbarRef={navbarRef}
         notificationRef={notificationRef}
         username={username}
         showProfileDropdown={showProfile}

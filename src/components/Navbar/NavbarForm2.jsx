@@ -5,10 +5,10 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons"
 
 
 
-export default function NavbarForm({ dropdownRef, notificationRef, username, toggleProfile, logout, toggleShows, toggleNotifications, showMenuDropdown, showNotifications, showProfileDropdown, currentNavigation, navigation, HandleCurrentNavigation }) {
+export default function NavbarForm({ dropdownRef, navbarRef, notificationRef, username, toggleProfile, logout, toggleShows, toggleNotifications, showMenuDropdown, showNotifications, showProfileDropdown, currentNavigation, navigation, HandleCurrentNavigation }) {
     return (
-        <nav className="fixed top-0 rounded-b-lg w-full z-10 bg-white shadow-lg select-none">
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <nav ref={navbarRef} className={showMenuDropdown ? "fixed top-0 w-full z-20 bg-white shadow-lg select-none" : "fixed top-0 rounded-b-lg w-full z-10 bg-white shadow-lg select-none"}>
+            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 z-20 bg-white">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         {/* Mobile menu button*/}
@@ -117,8 +117,9 @@ export default function NavbarForm({ dropdownRef, notificationRef, username, tog
                     </div>
                 </div>
             </div>
+
             {/* Mobile menu, show/hide based on menu state. */}
-            {showMenuDropdown && <div className="sm:hidden slide-in-top" id="mobile-menu">
+            {showMenuDropdown && <div className="sm:hidden slide-in-top  -z-10 rounded-b-lg absolute w-full bg-white" id="mobile-menu">
                 {navigation.map((item) => {
                     return (
                         <Link
@@ -127,18 +128,16 @@ export default function NavbarForm({ dropdownRef, notificationRef, username, tog
                             to={item?.href}
                             className={item?.href === currentNavigation ? "bg-primary block text-white rounded-md px-3 py-2 text-sm font-medium" : "text-gray-300 block hover:bg-gray-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}
                             aria-current="page"
-                            onClick={HandleCurrentNavigation}
+                            onClick={(e) => {
+                                toggleShows('menu_dropdown', false)
+                                HandleCurrentNavigation(e)
+                            }
+                            }
                         >
                             {item?.name}
                         </Link>
                     )
                 })}
-                {/* <div className="space-y-1 px-2 pb-3 pt-2">
-                    <Link href='/' className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</Link>
-                    <Link href='/' className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
-                    <Link href='/' className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-                    <Link href='/' className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
-                </div> */}
             </div>}
 
         </nav>
