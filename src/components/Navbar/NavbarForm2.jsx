@@ -99,7 +99,7 @@ export default function NavbarForm({ dropdownRef, navbarRef, notificationRef, us
                             {showProfileDropdown && <div
                                 className="absolute fade-in-top right-0 z-10  w-48 origin-top-right rounded-md bg-white  shadow-style-2 ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
                                 <button
-                                    className="block w-full bg-white hover:bg-slate-100 px-4 py-2 text-sm text-gray-700 text-left"
+                                    className="hidden sm:block w-full bg-white hover:bg-slate-100 px-4 py-2 text-sm text-gray-700 text-left"
                                     role="menuitem"
                                     onClick={() => {
                                         toggleShows('settings', true)
