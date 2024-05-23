@@ -1,42 +1,43 @@
-import React, { useRef, useEffect, useState } from "react";
-import LoginForm from "./LoginForm";
+import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import LoginForm2 from "./LoginForm2";
+import useInputData from "./hooks/useInputData";
 
 const LoginIndex = () => {
-  const usernameRef = useRef();
-  const passwordRef = useRef();
   const navigate = useNavigate();
 
   const [errMsg, setErrMsg] = useState(null);
+
+  const { username, password, HandleChangeUsername, HandleChangePassword } = useInputData()
 
   const { setAuth } = useAuth();
 
   async function HandleLogin(e) {
     e.preventDefault();
     setErrMsg(null);
-    if (usernameRef.current.value === "" || passwordRef.current.value === "")
+    if (username === "" || password === "")
       return setErrMsg("Campos faltantes");
 
     await axios
       .post("user/auth", {
-        username: usernameRef.current.value.toUpperCase(),
-        password: passwordRef.current.value.toUpperCase(),
+        username: username.toUpperCase(),
+        password: password,
       })
       .then(async (res) => {
         if (!res?.data?.isActive) return setErrMsg("Cuenta desactivada");
 
         setAuth({
-          username: usernameRef?.current?.value,
+          username: username,
           company: res.data?.company,
           roles: res.data?.roles,
           accessToken: res.data?.accessToken,
         });
 
         HandleSetCookie({
-          username: usernameRef?.current?.value,
+          username: username,
           company: res.data?.company,
           roles: res.data?.roles,
           accessToken: res.data?.accessToken,
@@ -106,12 +107,23 @@ const LoginIndex = () => {
   }, []);
 
   return (
-    <LoginForm
-      usernameRef={usernameRef}
-      passwordRef={passwordRef}
-      errMsg={errMsg}
-      HandleLogin={HandleLogin}
-    />
+    <>
+      {/* <LoginForm
+        usernameRef={usernameRef}
+        passwordRef={passwordRef}
+        errMsg={errMsg}
+        HandleLogin={HandleLogin}
+      /> */}
+      <LoginForm2
+        HandleLogin={HandleLogin}
+        errMsg={errMsg}
+        username={username}
+        HandleChangeUsername={HandleChangeUsername}
+        password={password}
+        HandleChangePassword={HandleChangePassword}
+      />
+
+    </>
   );
 };
 
