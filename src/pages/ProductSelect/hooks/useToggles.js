@@ -30,7 +30,7 @@ const useToggles = ({ quoteData, quoteHasData }) => {
     setToggles({
       ...toggles,
       dollar: quoteData[0]?.isDollar,
-      tips: quoteData[0]?.tips,
+      tips: quoteData[0]?.has_tips,
       code: quoteData[0]?.has_code,
       cost: quoteData[0]?.has_cost,
       itbis: quoteData[0]?.has_itbis,
