@@ -66,7 +66,7 @@ const ProductsForm = ({
               />
               <div className="inline-block">
                 <ul className="text-sm grid grid-cols-2">
-                  <li>
+                  <li className="mr-2">
                     <p className="inline font-bold">Nombre: </p>
                     <p className="inline">{clientInputData?.name}</p>
                   </li>
