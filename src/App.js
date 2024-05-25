@@ -7,6 +7,7 @@ import Products from "./pages/Products/Index";
 import Client from "./pages/Clients/Index";
 import Login from "./pages/Login/LoginIndex";
 import History from "./pages/History/Index";
+import Sign from "./pages/Sign/Index";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/clients" element={<Client />} />
             <Route path="/history" element={<History />} />
+            <Route path="/sign" element={<Sign />} />
           </Route>
         </Route>
       </Routes>

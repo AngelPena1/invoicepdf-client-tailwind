@@ -3,7 +3,7 @@ import facturaLoginImg from '../../assets/logo_1.png'
 
 const LoginForm2 = ({ errMsg, username, password, HandleChangeUsername, HandleChangePassword, HandleLogin }) => {
     return (
-        <section className="h-screen w-screen grid justify-center relative">
+        <section className="  grid justify-center relative">
             {errMsg && <div className="h-14 rounded-lg slide-in-top bg-red-400 text-center grid place-content-center absolute top-0 left-0 w-full">
                 <p className="text-white">{errMsg}</p>
             </div>}

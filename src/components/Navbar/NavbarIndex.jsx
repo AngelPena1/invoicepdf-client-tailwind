@@ -10,6 +10,7 @@ const navigation = [
   { name: 'Productos', href: '/products' },
   { name: 'Clientes', href: '/clients' },
   { name: 'Historial', href: '/history' },
+  { name: 'Firmar', href: '/sign' },
 ]
 
 const NavbarIndex = () => {
