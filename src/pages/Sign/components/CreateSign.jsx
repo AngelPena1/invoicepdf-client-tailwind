@@ -3,7 +3,7 @@ import AriannySign from "../assets/Firma-Arianny.png";
 
 const CreateSign = (props) => {
   return (
-    <section className="grid place-content-center fade-in-bottom">
+    <section className="fade-in-bottom">
       <div className="h-44 w-72">
         <img className="w-full h-full object-cover" src={AriannySign} alt="" />
       </div>
