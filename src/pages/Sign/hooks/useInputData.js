@@ -5,6 +5,10 @@ const useInputData = ({HandleChangeTabs}) => {
     pdf_file: "",
   });
 
+  function clearSelectedPDF() {
+    return setInputData({...inputData, pdf_file: ""})
+  }
+
   async function HandlePdfChange(e) {
     const file = e.target.files[0];
     if (file) {
@@ -19,7 +23,7 @@ const useInputData = ({HandleChangeTabs}) => {
     }
   }
   
-  return { inputData,  HandlePdfChange };
+  return { inputData, clearSelectedPDF, HandlePdfChange };
 };
 
 export default useInputData;

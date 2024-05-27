@@ -6,8 +6,8 @@ import SignLogo from "../assets/Firma-Arianny.png";
 
 const useHandlePdf = ({ fileBase64 }) => {
   const [images, setImages] = useState([]);
-  
-  function HandleSignPdf(coordinateX, coordinateY) {
+
+  function HandleSignPdf({ signByPage, coordinates }) {
     var doc = new jsPDF({
       format: "letter",
     });
@@ -22,16 +22,17 @@ const useHandlePdf = ({ fileBase64 }) => {
         doc.internal.pageSize.height
       );
 
-      if(index < images.length - 1) {
-        doc.addPage()
+      if (signByPage[index]) {
+        const coordinateX = (coordinates[index].x / 178) * 100;
+        const coordinateY = (coordinates[index].y / 176) * 100;
+        doc.addImage(SignLogo, coordinateX, coordinateY, 55, 25);
       }
-    })
-    
-    const testX = ((coordinateX / 178) * 100) 
-    const testY = ((coordinateY / 169) * 100) 
-    doc.addImage(SignLogo, testX , testY , 55, 25)
 
-   
+      if (index < images.length - 1) {
+        doc.addPage();
+      }
+    });
+
     doc.save("documento.pdf");
   }
 
