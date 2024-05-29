@@ -14,12 +14,14 @@ const RequireAuth = () => {
       const usernameCookie = Cookies.get("auth-invoice-username");
       const companyCookie = Cookies.get("auth-invoice-company");
       const tokenCookie = Cookies.get("auth-invoice-accessToken");
+      const rolesCookie = Cookies.get("auth-invoice-roles");
   
-      if (!usernameCookie || !tokenCookie || !companyCookie) return navigate('/login')
+      if (!usernameCookie || !tokenCookie || !companyCookie || !rolesCookie) return navigate('/login')
       
       setAuth({
         username: usernameCookie,
         company: JSON.parse(companyCookie),
+        roles: JSON.parse(rolesCookie)?.roles,
         accessToken: tokenCookie,
       });
   

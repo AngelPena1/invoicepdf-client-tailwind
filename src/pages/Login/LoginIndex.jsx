@@ -89,12 +89,13 @@ const LoginIndex = () => {
       const usernameCookie = Cookies.get("auth-invoice-username");
       const companyCookie = Cookies.get("auth-invoice-company");
       const tokenCookie = Cookies.get("auth-invoice-accessToken");
+      const rolesCookie = Cookies.get("auth-invoice-roles");
 
-      if (!usernameCookie || !tokenCookie || !companyCookie) return;
+      if (!usernameCookie || !tokenCookie || !companyCookie || !rolesCookie) return;
 
       setAuth({
         username: usernameCookie,
-        // roles:
+        roles: JSON.parse(rolesCookie)?.roles,
         company: JSON.parse(companyCookie),
         accessToken: tokenCookie,
       });
