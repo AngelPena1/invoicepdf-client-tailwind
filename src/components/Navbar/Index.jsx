@@ -8,11 +8,11 @@ import useToggles from "./hooks/useToggles";
 import { capitalizeFirstLetter } from "../../utils/capitalize";
 
 const navigation = [
-  { name: "Inicio", href: "/", rolesAllowed: [7397, 5829] },
-  { name: "Productos", href: "/products", rolesAllowed: [7397, 5829] },
-  { name: "Clientes", href: "/clients", rolesAllowed: [7397] },
-  { name: "Historial", href: "/history", rolesAllowed: [7397, 5829] },
-  { name: "Firmar", href: "/sign", rolesAllowed: [] },
+  { name: "Inicio", href: "/", rolesAllowed: [7397, 5829], isAccessRequired: false },
+  { name: "Productos", href: "/products", rolesAllowed: [7397, 5829], isAccessRequired: false },
+  { name: "Clientes", href: "/clients", rolesAllowed: [7397], isAccessRequired: false },
+  { name: "Historial", href: "/history", rolesAllowed: [7397, 5829], isAccessRequired: false },
+  { name: "Firmar", href: "/sign", rolesAllowed: [7397, 5829], isAccessRequired: true, accessName: "sign"},
 ];
 
 const NavbarIndex = () => {
@@ -33,20 +33,8 @@ const NavbarIndex = () => {
   }
 
   const username = capitalizeFirstLetter(auth?.username);
-  const roles = auth?.roles;;
-
-  // function HasPermission() {
-  //   navigation.forEach((item) => {
-  //     const hasPermission = item?.rolesAllowed.some(allowed => roles.includes(allowed))
-  //     if(hasPermission) {
-  //       return console.log("User has permission to enter in " + item?.name);
-  //     } else {
-  //       return console.log("User doesn't has permission to enter in " + item?.name);
-  //     }
-  //   })
-  // }
-  // HasPermission()
-
+  const roles = auth?.roles;
+  
   const {
     show,
     showProfile,

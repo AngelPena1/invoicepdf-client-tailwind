@@ -3,9 +3,9 @@ import ProtectedTab from "../ProtectedTab";
 import Logo from "../../assets/logo_1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import AccessRequired from "../AccessRequired";
 
 export default function NavbarForm({
-  roles,
   dropdownRef,
   navbarRef,
   notificationRef,
@@ -96,7 +96,11 @@ export default function NavbarForm({
               <div className="flex space-x-4">
                 {navigation.map((item) => {
                   return (
-                    <ProtectedTab key={item?.name} permission={item?.rolesAllowed}>
+                    <AccessRequired
+                      key={item?.name}
+                      isAccessRequired={item?.isAccessRequired}
+                      accessName={item?.accessName}
+                    >
                       <Link
                         name={item?.href}
                         to={item?.href}
@@ -110,7 +114,7 @@ export default function NavbarForm({
                       >
                         {item?.name}
                       </Link>
-                    </ProtectedTab>
+                    </AccessRequired>
                   );
                 })}
               </div>
