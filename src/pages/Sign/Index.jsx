@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "./components/Navigation";
 import useNavigation from "./hooks/useNavigation";
-import CreateSign from "./components/CreateSign";
+import SelectSign from "./components/SelectSign";
 import UploadDocument from "./components/UploadDocument";
 import useInputData from "./hooks/useInputData";
 import SetSign from "./components/SetPDF/SetSign";
@@ -10,7 +10,7 @@ import useHandlePdf from "./hooks/useHandlePdf";
 const Index = () => {
   const { tabs, HandleChangeTabs } = useNavigation();
   const { inputData, clearSelectedPDF, HandlePdfChange } = useInputData({HandleChangeTabs});
-  const { images, HandleSignPdf } = useHandlePdf({
+  const { images, clearImagesArray, HandleSignPdf } = useHandlePdf({
     fileBase64: inputData?.pdf_file,
   });
 
@@ -21,7 +21,7 @@ const Index = () => {
       </div>
       <div className="">
         {tabs?.create_sign && (
-          <CreateSign HandleChangeTabs={HandleChangeTabs} />
+          <SelectSign HandleChangeTabs={HandleChangeTabs} />
         )}
         {tabs?.document && (
           <UploadDocument
@@ -34,6 +34,7 @@ const Index = () => {
           <SetSign
             images={images}
             clearSelectedPDF={clearSelectedPDF}
+            clearImagesArray={clearImagesArray}
             HandleChangeTabs={HandleChangeTabs}
             HandleSignPdf={HandleSignPdf}
           />

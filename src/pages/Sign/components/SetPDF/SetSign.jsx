@@ -12,7 +12,13 @@ import {
 import usePage from "./hooks/usePage";
 import useCoordinates from "./hooks/useCoordinates";
 
-const SetSign = ({ images, clearSelectedPDF, HandleChangeTabs, HandleSignPdf }) => {
+const SetSign = ({
+  images,
+  clearSelectedPDF,
+  clearImagesArray,
+  HandleChangeTabs,
+  HandleSignPdf,
+}) => {
   const contenedorRef = useRef(null);
   const elementoRef = useRef(null);
 
@@ -79,14 +85,16 @@ const SetSign = ({ images, clearSelectedPDF, HandleChangeTabs, HandleSignPdf }) 
           <button
             className="w-12 block"
             onClick={() => {
-              clearSelectedPDF()
-              HandleChangeTabs('document')
+              clearSelectedPDF();
+              clearImagesArray()
+              HandleChangeTabs("document");
             }}
           >
             <FontAwesomeIcon icon={faRotateLeft} />
           </button>
         </section>
         <div className="max-h-xl w-96 overflow-hidden mb-5 shadow-style-2 rounded-lg">
+          {!(images.length > 0) && <div className="skeleton h-xl w-full"></div>}
           {images?.map((image, index) => {
             if (page !== index) return null;
             return (
@@ -117,7 +125,7 @@ const SetSign = ({ images, clearSelectedPDF, HandleChangeTabs, HandleSignPdf }) 
         </div>
         <section name="button-right" className="ml-2">
           <button
-            className="w-12 block bg-green-500"
+            className={!signByPage[page] ? "w-12 block bg-green-500" : "w-12 block bg-green-200" }
             onClick={() => {
               HandleSetSignInPage(page, true);
             }}
@@ -125,7 +133,7 @@ const SetSign = ({ images, clearSelectedPDF, HandleChangeTabs, HandleSignPdf }) 
             <FontAwesomeIcon icon={faPlus} />
           </button>
           <button
-            className="w-12 block bg-red-500"
+            className={signByPage[page] ? "w-12 block bg-red-500" : "w-12 block bg-red-200" }
             onClick={() => {
               HandleSetSignInPage(page, false);
             }}
