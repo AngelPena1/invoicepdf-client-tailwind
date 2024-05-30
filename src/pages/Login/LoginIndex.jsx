@@ -33,6 +33,7 @@ const LoginIndex = () => {
           username: username,
           company: res.data?.company,
           roles: res.data?.roles,
+          access: res.data?.access,
           accessToken: res.data?.accessToken,
         });
 
@@ -40,6 +41,7 @@ const LoginIndex = () => {
           username: username,
           company: res.data?.company,
           roles: res.data?.roles,
+          access: res.data?.access,
           accessToken: res.data?.accessToken,
         });
 
@@ -65,12 +67,15 @@ const LoginIndex = () => {
     });
   }
 
-  function HandleSetCookie({ username, roles, company, accessToken }) {
+  function HandleSetCookie({ username, roles, access, company, accessToken }) {
     Cookies.set("auth-invoice-username", `${username}`, {
       expires: 1,
     });
     Cookies.set("auth-invoice-roles", `${JSON.stringify({ roles })}`, {
       expires: 1,
+    });
+    Cookies.set("auth-invoice-access", `${JSON.stringify({ access })}`, {
+      expires: 1
     });
     Cookies.set(
       "auth-invoice-company",
@@ -89,12 +94,13 @@ const LoginIndex = () => {
       const usernameCookie = Cookies.get("auth-invoice-username");
       const companyCookie = Cookies.get("auth-invoice-company");
       const tokenCookie = Cookies.get("auth-invoice-accessToken");
+      const rolesCookie = Cookies.get("auth-invoice-roles");
 
-      if (!usernameCookie || !tokenCookie || !companyCookie) return;
+      if (!usernameCookie || !tokenCookie || !companyCookie || !rolesCookie) return;
 
       setAuth({
         username: usernameCookie,
-        // roles:
+        roles: JSON.parse(rolesCookie)?.roles,
         company: JSON.parse(companyCookie),
         accessToken: tokenCookie,
       });

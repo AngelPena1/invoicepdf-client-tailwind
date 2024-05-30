@@ -10,6 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { formatToDecimal } from "../../../utils/formatToDecimal/formatToDecimal";
 import { fullDateFormat } from "../../../utils/dateFormat/dateFormat";
+import AccessRequired from "../../../components/AccessRequired";
 
 const HistoryTable = ({
   toggleCreateInvoice,
@@ -27,10 +28,7 @@ const HistoryTable = ({
   const hasHistoryData = historyData?.length > 0;
   return (
     <section className="w-full border-l rounded-lg bg-white">
-      <section
-        name="content"
-        className="h-xl max-h-xl overflow-y-auto"
-      >
+      <section name="content" className="h-xl max-h-xl overflow-y-auto">
         {!loadingHistory && hasHistoryData && (
           <table className="w-full text-sm text-left rtl:text-right text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0">
@@ -67,9 +65,11 @@ const HistoryTable = ({
                     className="ml-3 cursor-pointer hover:text-slate-400"
                   />
                 </th>
-                <th scope="col" className="px-2 py-3 text-center min-w-28">
-                  Factura
-                </th>
+                <AccessRequired isAccessRequired={true} accessName={"invoice"}>
+                  <th scope="col" className="px-2 py-3 text-center min-w-28">
+                    Factura
+                  </th>
+                </AccessRequired>
                 <th scope="col" className="px-2 py-3 text-center min-w-28">
                   Imprimir
                 </th>
@@ -84,7 +84,11 @@ const HistoryTable = ({
             <tbody className="">
               {historyData?.map((data, index) => {
                 return (
-                  <tr onClick={() => HandleSelectedQuote(data)} className="bg-white border-b" key={index}>
+                  <tr
+                    onClick={() => HandleSelectedQuote(data)}
+                    className="bg-white border-b"
+                    key={index}
+                  >
                     <th
                       scope="row"
                       className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap"
@@ -100,15 +104,20 @@ const HistoryTable = ({
                     <td className="px-2 py-4 text-left">
                       {formatToDecimal(parseFloat(data?.total))}
                     </td>
-                    <td className="px-2 py-4 text-center">
-                      <FontAwesomeIcon
-                        icon={faPlus}
-                        className="text-xl cursor-pointer hover:text-primary z-0"
-                        onClick={() => {
-                          toggleCreateInvoice(true)
-                        }}
-                      />
-                    </td>
+                    <AccessRequired
+                      isAccessRequired={true}
+                      accessName={"invoice"}
+                    >
+                      <td className="px-2 py-4 text-center">
+                        <FontAwesomeIcon
+                          icon={faPlus}
+                          className="text-xl cursor-pointer hover:text-primary z-0"
+                          onClick={() => {
+                            toggleCreateInvoice(true);
+                          }}
+                        />
+                      </td>
+                    </AccessRequired>
                     <td className="px-2 py-4 text-center">
                       <FontAwesomeIcon
                         icon={faPrint}

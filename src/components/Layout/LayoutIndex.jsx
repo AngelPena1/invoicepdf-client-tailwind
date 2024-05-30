@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import Navbar from "../Navbar/NavbarIndex";
+import Navbar from "../Navbar/Index";
 // import backgroundApp from '../../assets/background-app.jpg'
 // import Config from "../Config";
 

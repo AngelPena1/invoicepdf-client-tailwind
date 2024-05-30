@@ -1,14 +1,13 @@
 import React from "react";
 import AriannySign from "../assets/Firma-Arianny.png";
 
-const CreateSign = (props) => {
+const SelectSign = (props) => {
   return (
     <section className="fade-in-bottom">
       <div className="h-44 w-72">
         <img className="w-full h-full object-cover" src={AriannySign} alt="" />
       </div>
-      <div>
-        <button className="w-32 button-2 px-4">Usar otra</button>
+      <div className="grid justify-center">
         <button 
           className="w-fit px-4"
           onClick={() => props.HandleChangeTabs("document")}
@@ -18,4 +17,4 @@ const CreateSign = (props) => {
   );
 };
 
-export default CreateSign;
+export default SelectSign;

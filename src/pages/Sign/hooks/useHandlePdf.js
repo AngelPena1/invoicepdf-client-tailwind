@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { getDocument } from "pdfjs-dist/build/pdf";
-import "pdfjs-dist/build/pdf.worker.mjs";
+// import { getDocument } from "pdfjs-dist/build/pdf";
 import jsPDF from "jspdf";
 import SignLogo from "../assets/Firma-Arianny.png";
 
 const useHandlePdf = ({ fileBase64 }) => {
   const [images, setImages] = useState([]);
+
+  function clearImagesArray() {
+    return setImages([])
+  }
 
   function HandleSignPdf({ signByPage, coordinates }) {
     var doc = new jsPDF({
@@ -38,46 +41,50 @@ const useHandlePdf = ({ fileBase64 }) => {
 
   useEffect(() => {
     const convertToImages = async () => {
-      try {
-        // Extraer la parte base64 de la cadena si tiene el prefijo
-        const base64String = fileBase64.split(",")[1];
+      import("pdfjs-dist/build/pdf").then(({ getDocument }) => {
+        import("pdfjs-dist/build/pdf.worker.mjs").then(async () => {
+          try {
+            // Extraer la parte base64 de la cadena si tiene el prefijo
+            const base64String = fileBase64.split(",")[1];
 
-        // Decodificar la cadena base64
-        const pdfData = Uint8Array.from(atob(base64String), (c) =>
-          c.charCodeAt(0)
-        );
+            // Decodificar la cadena base64
+            const pdfData = Uint8Array.from(atob(base64String), (c) =>
+              c.charCodeAt(0)
+            );
 
-        const loadingTask = getDocument({ data: pdfData });
-        const pdf = await loadingTask.promise;
+            const loadingTask = getDocument({ data: pdfData });
+            const pdf = await loadingTask.promise;
 
-        const numPages = pdf.numPages;
-        const imageArray = [];
+            const numPages = pdf.numPages;
+            const imageArray = [];
 
-        for (let i = 1; i <= numPages; i++) {
-          const page = await pdf.getPage(i);
-          const viewport = page.getViewport({ scale: 1.5 });
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
+            for (let i = 1; i <= numPages; i++) {
+              const page = await pdf.getPage(i);
+              const viewport = page.getViewport({ scale: 1.5 });
+              const canvas = document.createElement("canvas");
+              const context = canvas.getContext("2d");
 
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
 
-          const renderContext = {
-            canvasContext: context,
-            viewport: viewport,
-          };
+              const renderContext = {
+                canvasContext: context,
+                viewport: viewport,
+              };
 
-          await page.render(renderContext).promise;
+              await page.render(renderContext).promise;
 
-          const imageDataUrl = canvas.toDataURL("image/png");
-          imageArray.push(imageDataUrl);
-        }
+              const imageDataUrl = canvas.toDataURL("image/png");
+              imageArray.push(imageDataUrl);
+            }
 
-        setImages(imageArray);
-      } catch (error) {
-        console.log(error?.message);
-        console.error("Error al convertir el PDF a imágenes:", error);
-      }
+            setImages(imageArray);
+          } catch (error) {
+            console.log(error?.message);
+            console.error("Error al convertir el PDF a imágenes:", error);
+          }
+        });
+      });
     };
 
     if (fileBase64) {
@@ -85,7 +92,7 @@ const useHandlePdf = ({ fileBase64 }) => {
     }
   }, [fileBase64]);
 
-  return { images, HandleSignPdf };
+  return { images, clearImagesArray, HandleSignPdf };
 };
 
 export default useHandlePdf;
