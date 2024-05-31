@@ -6,7 +6,6 @@ const useToggles = () => {
   })
 
   function HandleToggleCatalog(bool) {
-    console.log("hola");
     setToggles({ ...toggles, catalog: bool })
   }
   return { toggles, HandleToggleCatalog }
