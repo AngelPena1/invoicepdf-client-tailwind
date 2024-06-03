@@ -2,13 +2,13 @@ import { useState } from "react";
 
 const useInputData = () => {
   const [inputData, setInputData] = useState({
-    search: null,
-    name: null,
-    email: null,
-    razon_social: null,
-    rnc: null,
-    phone: null,
-    phone_2: null,
+    search: "",
+    name: "",
+    email: "",
+    razon_social: "",
+    rnc: "",
+    phone: "",
+    phone_2: "",
     isActive: true,
   });
 
@@ -22,7 +22,7 @@ const useInputData = () => {
 
   function HandleEditClient(data) {
     return setInputData({
-      search: null,
+      search: "",
       client_id: data?.id,
       company_id: data?.company_id,
       name: data?.name,
@@ -42,12 +42,12 @@ const useInputData = () => {
 
   function ResetInputValues() {
     return setInputData({
-      name: null,
-      email: null,
-      razon_social: null,
-      rnc: null,
-      phone: null,
-      phone_2: null,
+      name: "",
+      email: "",
+      razon_social: "",
+      rnc: "",
+      phone: "",
+      phone_2: "",
       isActive: true,
     });
   }
