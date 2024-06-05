@@ -112,7 +112,7 @@ const SetSign = ({
                 {signByPage[page] && (
                   <img
                     ref={elementoRef}
-                    className="absolute inset-0 w-24 cursor-default"
+                    className="absolute inset-0 w-44 h-32 cursor-default"
                     // style={{ position: "absolute", top: '0', bottom: '0', width: "100px", height: "75px", cursor: 'grabbing' }}
                     onMouseDown={handleMouseDown}
                     src={SignLogo}
