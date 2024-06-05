@@ -33,7 +33,7 @@ const Search = ({
       {show && (
         <ProductsCatalog onHide={hideProductCatalog} onClick={onClick} />
       )}
-      <section className="h-10 w-full bg-primary-2 flex items-center p-6 relative mb-8 rounded-md">
+      <section className="h-10 w-full flex items-center  relative mb-8 rounded-md">
         <div id="search" className="relative flex items-center">
           <FontAwesomeIcon
             className="absolute left-3 top-2"
@@ -41,7 +41,7 @@ const Search = ({
           />
           <input
             type="text"
-            className="bg-gray-50 border h-8 w-52 lg:w-xl border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-10 outline-none"
+            className="bg-new-blue-2 border h-8 w-52 lg:w-xl border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-10 outline-none"
             placeholder="Busca un producto por su descripción o código"
             value={value}
             name="search"

@@ -79,11 +79,11 @@ const Index = () => {
   }, [resfresh]);
 
   return (
-    <section className="bg-white rounded-lg fade-in-bottom">
+    <section className="rounded-lg fade-in-bottom">
       <section className="grid grid-cols-2">
         <div
           name="heading"
-          className="text-2xl font-bold mb-6 justify-start"
+          className="text-2xl font-bold mb-6 justify-start text-white"
         >
           Mantenimiento de Productos
         </div>

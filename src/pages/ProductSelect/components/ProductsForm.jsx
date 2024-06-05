@@ -40,23 +40,31 @@ const ProductsForm = ({
   HandlePrintPreview,
 }) => {
   return (
-    <section
-      id="main-container"
-      className="bg-white rounded-lg h-fit fade-in-bottom"
-    >
+    <section id="main-container" className=" rounded-lg h-fit fade-in-bottom">
       {/* Heading */}
-      <section className="grid grid-cols-1 md:grid-cols-2">
-        <div
-          name="heading"
-          className="text-2xl font-bold mb-8 justify-start"
-        >
+      <section className="grid grid-cols-1 md:grid-cols-2 text-white">
+        <div name="heading" className="text-2xl font-bold mb-8 justify-start">
           {quoteHasData ? (
             <h2>Edición de {quoteName}</h2>
           ) : (
             <h2>Crear Cotización</h2>
           )}
         </div>
-        <div className="mb-8 relative top-2 mr-10 h-10 flex md:justify-end">
+      </section>
+      <section className="grid md:grid-cols-2">
+        <div className="mt-10 md:mt-0 order-2 md:order-1">
+          <Search
+            result={result}
+            value={inputData?.search}
+            conditionToShowResults={true}
+            onChange={HandleInputData}
+            onClick={(e) => {
+              clearSearchInput();
+              HandleSelectedProducts(e);
+            }}
+          />
+        </div>
+        <div className="mr-0 md:mr-10 h-10 flex md:justify-end order-1 md:order-2">
           {clientInputData?.selected_client_id !== "" ? (
             <div className="flex items-center">
               <FontAwesomeIcon
@@ -65,8 +73,8 @@ const ProductsForm = ({
                 onClick={clearClientInput}
               />
               <div className="inline-block">
-                <ul className="text-sm grid grid-cols-2">
-                  <li className="mr-2">
+                <ul className="text-sm grid grid-cols-2 text-[#55707e]">
+                  <li className="mr-2 ">
                     <p className="inline font-bold">Nombre: </p>
                     <p className="inline">{clientInputData?.name}</p>
                   </li>
@@ -92,29 +100,20 @@ const ProductsForm = ({
           )}
         </div>
       </section>
-      <section>
-        <Search
-          result={result}
-          value={inputData?.search}
-          conditionToShowResults={true}
-          onChange={HandleInputData}
-          onClick={(e) => {
-            clearSearchInput();
-            HandleSelectedProducts(e);
-          }}
-        />
-      </section>
       {/* Config */}
       <section className="">
         {/* Table */}
-        <div className="relative overflow-x-auto overflow-y-auto h-72 max-h-72 border">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-slate-300 sticky top-0 z-10">
+        <div className="relative overflow-x-auto overflow-y-auto min-h-72 max-h-72 bg-white rounded-lg pb-4">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 pb-3 bg-white">
+            <thead className="text-xs uppercase bg-[#1597dd] text-white sticky top-0 z-10">
               <tr className="">
                 <th scope="col" className="px-2 py-2 w-1/5 text-center">
                   Descripción
                 </th>
-                <th scope="col" className="px-2 py-2 w-1/5 min-w-[100px] text-center">
+                <th
+                  scope="col"
+                  className="px-2 py-2 w-1/5 min-w-[100px] text-center"
+                >
                   Notas
                 </th>
                 <th scope="col" className="px-2 py-2 w-1/5 text-center">
@@ -138,12 +137,12 @@ const ProductsForm = ({
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="">
               {selectedProducts?.map((product, index) => {
                 return (
                   <>
                     <tr
-                      className={false ? "bg-white border-b" : ""}
+                      className={false ? "bg-white border-b" : "bg-white"}
                       key={index}
                     >
                       <th
@@ -171,37 +170,48 @@ const ProductsForm = ({
                                     type="text"
                                     className="py-0 border-0 bg-transparent outline-none italic text-slate-600"
                                     value={note}
-                                    onChange={() => { }}
+                                    onChange={() => {}}
                                   />
                                 </td>
                               </tr>
                             );
                           })}
-                        {product?.show_note ? <div className="flex">
-                          <button className="h-7 py-0 px-2 mr-0 bg-red-400 hover:bg-red-300 duration-200" onClick={() => {
-                            showInputNote(index, false);
-                          }}>Cancelar</button>
-                          <input
-                            ref={noteRef}
-                            className="h-7 mx-6"
-                            type="text"
-                            name="note"
-                            value={inputData?.note}
-                            onChange={HandleInputData}
-                          />
-                          <button
-                            className="h-7 py-0 px-2"
+                        {product?.show_note ? (
+                          <div className="flex">
+                            <button
+                              className="h-7 py-0 px-2 mr-0 bg-red-400 hover:bg-red-300 duration-200"
+                              onClick={() => {
+                                showInputNote(index, false);
+                              }}
+                            >
+                              Cancelar
+                            </button>
+                            <input
+                              ref={noteRef}
+                              className="h-7 mx-6"
+                              type="text"
+                              name="note"
+                              value={inputData?.note}
+                              onChange={HandleInputData}
+                            />
+                            <button
+                              className="h-7 py-0 px-2"
+                              onClick={() => {
+                                addNotesToProduct(index, inputData?.note);
+                              }}
+                            >
+                              Aceptar
+                            </button>
+                          </div>
+                        ) : (
+                          <FontAwesomeIcon
+                            className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 cursor-pointer"
+                            icon={faEdit}
                             onClick={() => {
-                              addNotesToProduct(index, inputData?.note);
+                              showInputNote(index, true);
                             }}
-                          >Aceptar</button>
-                        </div> : <FontAwesomeIcon
-                          className="bg-slate-200 hover:bg-slate-100 p-1 rounded-full relative top-1 cursor-pointer"
-                          icon={faEdit}
-                          onClick={() => {
-                            showInputNote(index, true);
-                          }}
-                        />}
+                          />
+                        )}
                       </td>
                       <td className="px-2 py-2 select-none text-center border-r-2">
                         <FontAwesomeIcon
@@ -287,17 +297,17 @@ const ProductsForm = ({
       <section className="mt-10 grid md:grid-cols-2">
         <section className="mb-10">
           <div className="mr-10 inline">
-            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none">
+            <label className="relative top-1  inline-flex items-center cursor-pointer outline-none ">
               <input
                 type="checkbox"
                 checked={toggles?.itbis}
                 value={toggles?.itbis}
                 name="itbis"
                 onClick={HandleToggleChange}
-                onChange={() => { }}
+                onChange={() => {}}
                 className="sr-only peer outline-none"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-toggle"></div>
               <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
                 Aplicar ITBIS
               </span>
@@ -311,10 +321,10 @@ const ProductsForm = ({
                 value={toggles?.tips}
                 name="tips"
                 onClick={HandleToggleChange}
-                onChange={() => { }}
+                onChange={() => {}}
                 className="sr-only peer outline-none"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-toggle"></div>
               <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
                 10% Legal
               </span>
@@ -328,10 +338,10 @@ const ProductsForm = ({
                 value={toggles?.dollar}
                 name="dollar"
                 onClick={HandleToggleChange}
-                onChange={() => { }}
+                onChange={() => {}}
                 className="sr-only peer outline-none"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-toggle"></div>
               <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
                 Cambio a Dólar
               </span>
@@ -345,10 +355,10 @@ const ProductsForm = ({
                 value={toggles?.code}
                 name="code"
                 onClick={HandleToggleChange}
-                onChange={() => { }}
+                onChange={() => {}}
                 className="sr-only peer outline-none"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-toggle"></div>
               <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
                 Mostrar Código
               </span>
@@ -362,10 +372,10 @@ const ProductsForm = ({
                 value={toggles?.cost}
                 name="cost"
                 onClick={HandleToggleChange}
-                onChange={() => { }}
+                onChange={() => {}}
                 className="sr-only peer outline-none"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none outline-none  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-toggle"></div>
               <span className="ms-3 text-sm font-medium text-gray-900 outline-none">
                 Mostrar Precio de Lista
               </span>
@@ -379,8 +389,8 @@ const ProductsForm = ({
               <p className="text-right">
                 {inputData?.discount.includes("%")
                   ? `(${inputData?.discount}) ${formatToDecimal(
-                    parseFloat(totals?.discount)
-                  )}`
+                      parseFloat(totals?.discount)
+                    )}`
                   : formatToDecimal(parseFloat(inputData?.discount))}
               </p>
             </li>
@@ -442,16 +452,25 @@ const ProductsForm = ({
             onChange={HandleInputData}
             autoComplete="off"
           />
-          <button className="w-full h-8 p-0 inline" onClick={showNotes}>
+          <button
+            className="w-full h-8 p-0 inline bg-blue-toggle"
+            onClick={showNotes}
+          >
             Añadir notas
           </button>
         </div>
         {/* Buttons */}
         <section className="grid grid-cols-2 gap-4  md:grid-cols-1 md:justify-items-end  md:gap-0 ">
-          <button className="button-2 w-full h-10 py-0 md:w-80 lg:w-96 lg:mb-0 md:mr-0" onClick={HandlePrintPreview}>
+          <button
+            className="button-2 w-full h-10  py-0 md:w-80 lg:w-96 lg:mb-0 md:mr-0"
+            onClick={HandlePrintPreview}
+          >
             Preview
           </button>
-          <button className="w-full h-10 py-0 md:w-80 md:mr-0 lg:w-96" onClick={HandlePrintQuote}>
+          <button
+            className="w-full h-10 py-0 md:w-80 md:mr-0 lg:w-96"
+            onClick={HandlePrintQuote}
+          >
             {quoteHasData ? "Guardar cambios" : "Registrar"}
           </button>
         </section>
