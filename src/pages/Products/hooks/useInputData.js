@@ -201,17 +201,34 @@ const useInputData = ({ divisionsData }) => {
 
   async function HandleImageChange(e) {
     const file = e.target.files[0];
+    const MAX_SIZE = 1 * 1024 * 1024; // 2 MB
+    const allowedTypes = ['image/jpeg', 'image/png'];
+
     if (file) {
-      const reader = new FileReader();
+        if (file.size > MAX_SIZE) {
+            toast.error('El tamaño del archivo no debe exceder un 1 MB.');
+            e.target.value = '';
+            return;
+        }
 
-      reader.onload = (e) => {
-        const base64 = e.target.result;
-        return setInputData({ ...inputData, image: base64 });
-      };
+        if (!allowedTypes.includes(file.type)) {
+            toast.error('Solo se permiten imágenes en formato JPG y PNG.');
+            e.target.value = ''; 
+            return;
+        }
 
-      reader.readAsDataURL(file);
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            const base64 = e.target.result;
+            setInputData({ ...inputData, image: base64 });
+        };
+
+        reader.readAsDataURL(file);
     }
-  }
+}
+
+
   return {
     inputData,
     ResetInputValues,
