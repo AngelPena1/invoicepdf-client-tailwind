@@ -199,6 +199,10 @@ const useInputData = ({ divisionsData }) => {
     });
   }
 
+  function HandleSetImageOnEdit(base64) {
+    return setInputData({...inputData, image: base64})
+  }
+
   async function HandleImageChange(e) {
     const file = e.target.files[0];
     const MAX_SIZE = 1 * 1024 * 1024; // 2 MB
@@ -242,6 +246,7 @@ const useInputData = ({ divisionsData }) => {
     HandleSubcategorySelect,
     HandleImageChange,
     HandleEditProduct,
+    HandleSetImageOnEdit,
   };
 };
 

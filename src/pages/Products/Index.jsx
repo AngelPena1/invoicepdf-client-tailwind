@@ -34,6 +34,7 @@ const Index = () => {
     HandleSubcategorySelect,
     HandleImageChange,
     HandleEditProduct,
+    HandleSetImageOnEdit,
   } = useInputData({ divisionsData });
 
   const { tab: currentTab, HandleChangeTab } = useTabNavigation({
@@ -68,7 +69,7 @@ const Index = () => {
 
   useEffect(() => {
     if (!imgData) return;
-    // HandleInputData({ ...inputData, image: imgData?.image });
+    HandleSetImageOnEdit(imgData?.image)
     // eslint-disable-next-line
   }, [imgData]);
 

@@ -2,7 +2,7 @@ import useGetData from "../../../hooks/useGetData";
 import { useEffect, useState } from "react";
 
 const useGetImgProduct = () => {
-  const [productId, setProductId] = useState();
+  const [productId, setProductId] = useState("");
   const [search, setSearch] = useState(false);
 
   const endpoint = `/product/${productId}/img`;
