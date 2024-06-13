@@ -3,15 +3,17 @@ import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import LoginForm2 from "./LoginForm2";
+import Form from "./components/Form";
 import useInputData from "./hooks/useInputData";
+import RestartPassword from "./components/RestartPassword";
 
 const LoginIndex = () => {
   const navigate = useNavigate();
 
   const [errMsg, setErrMsg] = useState(null);
 
-  const { username, password, HandleChangeUsername, HandleChangePassword } = useInputData()
+  const { username, password, HandleChangeUsername, HandleChangePassword } =
+    useInputData();
 
   const { setAuth } = useAuth();
 
@@ -63,7 +65,7 @@ const LoginIndex = () => {
 
   function setJwtCookie(refreshToken) {
     return Cookies.set("jwt", `${refreshToken}`, {
-      expires: 7
+      expires: 7,
     });
   }
 
@@ -75,7 +77,7 @@ const LoginIndex = () => {
       expires: 1,
     });
     Cookies.set("auth-invoice-access", `${JSON.stringify({ access })}`, {
-      expires: 1
+      expires: 1,
     });
     Cookies.set(
       "auth-invoice-company",
@@ -96,7 +98,8 @@ const LoginIndex = () => {
       const tokenCookie = Cookies.get("auth-invoice-accessToken");
       const rolesCookie = Cookies.get("auth-invoice-roles");
 
-      if (!usernameCookie || !tokenCookie || !companyCookie || !rolesCookie) return;
+      if (!usernameCookie || !tokenCookie || !companyCookie || !rolesCookie)
+        return;
 
       setAuth({
         username: usernameCookie,
@@ -114,13 +117,7 @@ const LoginIndex = () => {
 
   return (
     <>
-      {/* <LoginForm
-        usernameRef={usernameRef}
-        passwordRef={passwordRef}
-        errMsg={errMsg}
-        HandleLogin={HandleLogin}
-      /> */}
-      <LoginForm2
+      <Form
         HandleLogin={HandleLogin}
         errMsg={errMsg}
         username={username}
@@ -128,7 +125,6 @@ const LoginIndex = () => {
         password={password}
         HandleChangePassword={HandleChangePassword}
       />
-
     </>
   );
 };

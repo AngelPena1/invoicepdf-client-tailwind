@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import ProductSelect from "./pages/ProductSelect/Index";
 import Products from "./pages/Products/Index";
 import Client from "./pages/Clients/Index";
-import Login from "./pages/Login/LoginIndex";
+import Login from "./pages/Login/Index";
 import History from "./pages/History/Index";
 import Sign from "./pages/Sign/Index";
 
