@@ -1,18 +1,44 @@
 import { useEffect, useRef, useState } from "react";
-// import NavbarForm from "./NavbarForm";
 import NavbarForm2 from "./NavbarForm2";
 import BusinessModal from "../Modals/Business/Index";
 import useLogOut from "../../hooks/useLogout";
 import useAuth from "../../hooks/useAuth";
 import useToggles from "./hooks/useToggles";
+import { useNavigate } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../utils/capitalize";
 
 const navigation = [
-  { name: "Inicio", href: "/", rolesAllowed: [7397, 5829], isAccessRequired: false },
-  { name: "Productos", href: "/products", rolesAllowed: [7397, 5829], isAccessRequired: false },
-  { name: "Clientes", href: "/clients", rolesAllowed: [7397], isAccessRequired: false },
-  { name: "Historial", href: "/history", rolesAllowed: [7397, 5829], isAccessRequired: false },
-  { name: "Firmar", href: "/sign", rolesAllowed: [7397, 5829], isAccessRequired: true, accessName: "sign"},
+  {
+    name: "Inicio",
+    href: "/",
+    rolesAllowed: [7397, 5829],
+    isAccessRequired: false,
+  },
+  {
+    name: "Productos",
+    href: "/products",
+    rolesAllowed: [7397, 5829],
+    isAccessRequired: false,
+  },
+  {
+    name: "Clientes",
+    href: "/clients",
+    rolesAllowed: [7397],
+    isAccessRequired: false,
+  },
+  {
+    name: "Historial",
+    href: "/history",
+    rolesAllowed: [7397, 5829],
+    isAccessRequired: false,
+  },
+  {
+    name: "Firmar",
+    href: "/sign",
+    rolesAllowed: [7397, 5829],
+    isAccessRequired: true,
+    accessName: "sign",
+  },
 ];
 
 const NavbarIndex = () => {
@@ -24,6 +50,8 @@ const NavbarIndex = () => {
   const notificationRef = useRef(null);
   const settingsRef = useRef(null);
 
+  const navigate = useNavigate();
+
   const rutaActual = window.location.pathname;
   const [currentNavigation, setCurrentNavigation] = useState(rutaActual);
 
@@ -34,7 +62,7 @@ const NavbarIndex = () => {
 
   const username = capitalizeFirstLetter(auth?.username);
   const roles = auth?.roles;
-  
+
   const {
     show,
     showProfile,
@@ -45,15 +73,10 @@ const NavbarIndex = () => {
     hideSettings,
   } = useToggles();
 
-
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       toggleProfile(false);
     }
-
-    // if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-    //   toggleShows('menu_dropdown', false)
-    // }
 
     if (
       notificationRef.current &&
@@ -62,6 +85,10 @@ const NavbarIndex = () => {
       toggleNotifications(false);
     }
   };
+
+  function GoToHome() {
+    return navigate("/");
+  }
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -75,6 +102,7 @@ const NavbarIndex = () => {
   return (
     <>
       <NavbarForm2
+        logout={logout}
         roles={roles}
         dropdownRef={dropdownRef}
         navbarRef={navbarRef}
@@ -84,11 +112,11 @@ const NavbarIndex = () => {
         showNotifications={showNotifications}
         showMenuDropdown={show?.menu_dropdown}
         navigation={navigation}
-        logout={logout}
         currentNavigation={currentNavigation}
         toggleShows={toggleShows}
         toggleProfile={toggleProfile}
         toggleNotifications={toggleNotifications}
+        GoToHome={GoToHome}
         HandleCurrentNavigation={HandleCurrentNavigation}
       />
 

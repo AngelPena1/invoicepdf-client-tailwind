@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import ProtectedTab from "../ProtectedTab";
 import Logo from "../../assets/logo_1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -19,6 +18,7 @@ export default function NavbarForm({
   showProfileDropdown,
   currentNavigation,
   navigation,
+  GoToHome,
   HandleCurrentNavigation,
 }) {
   return (
@@ -46,11 +46,6 @@ export default function NavbarForm({
             >
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              {/*
-                                Icon when menu is closed.
-
-                                Menu open: "hidden", Menu closed: "block"
-                                */}
               <svg
                 name="collapse-menu"
                 className="block h-6 w-6"
@@ -67,11 +62,6 @@ export default function NavbarForm({
                   d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                 />
               </svg>
-              {/*
-                            Icon when menu is open.
-
-                            Menu open: "block", Menu closed: "hidden"
-                            */}
               <svg
                 className="hidden h-6 w-6"
                 fill="none"
@@ -89,8 +79,8 @@ export default function NavbarForm({
             </button>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex flex-shrink-0 items-center">
-              <img className="h-8 w-auto" src={Logo} alt="Your Company" />
+            <div onClick={GoToHome} className="flex flex-shrink-0 items-center">
+              <img className="h-8 w-auto" src={Logo} alt="Company Logo" />
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
@@ -235,9 +225,12 @@ export default function NavbarForm({
         >
           {navigation.map((item) => {
             return (
-              <ProtectedTab permission={item?.rolesAllowed}>
+              <AccessRequired
+                key={item?.name}
+                isAccessRequired={item?.isAccessRequired}
+                accessName={item?.accessName}
+              >
                 <Link
-                  key={item?.name}
                   name={item?.href}
                   to={item?.href}
                   className={
@@ -246,14 +239,14 @@ export default function NavbarForm({
                       : "text-gray-300 block hover:bg-gray-400 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                   }
                   aria-current="page"
-                  onClick={(e) => {
-                    toggleShows("menu_dropdown", false);
-                    HandleCurrentNavigation(e);
-                  }}
+                  onClick={(e) => [
+                    toggleShows("menu_dropdown", false),
+                    HandleCurrentNavigation(e)
+                  ]}
                 >
                   {item?.name}
                 </Link>
-              </ProtectedTab>
+              </AccessRequired>
             );
           })}
         </div>
