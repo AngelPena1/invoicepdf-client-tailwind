@@ -6,20 +6,45 @@ import Cookies from "js-cookie";
 import Form from "./components/Form";
 import useInputData from "./hooks/useInputData";
 import RestartPassword from "./components/RestartPassword";
+import useToggles from "./hooks/useToggles";
+import useChangePassword from "./hooks/useChangePassword";
 
 const LoginIndex = () => {
   const navigate = useNavigate();
 
+  const [successMsg, setSuccessMsg] = useState(null);
   const [errMsg, setErrMsg] = useState(null);
 
-  const { username, password, HandleChangeUsername, HandleChangePassword } =
-    useInputData();
+  const { toggles, HandleToggles } = useToggles();
+
+  const {
+    credentials,
+    newPassword,
+    accessToken,
+    ResetValues,
+    HandleChangeInput,
+    HandleAccessToken,
+  } = useInputData();
 
   const { setAuth } = useAuth();
+
+  const { postChangePassword } = useChangePassword({
+    accessToken,
+    password: newPassword?.change_password,
+    confirmPassword: newPassword?.confirmPassword,
+    HandleToggles,
+    ResetValues,
+    setErrMsg,
+    setSuccessMsg
+  });
 
   async function HandleLogin(e) {
     e.preventDefault();
     setErrMsg(null);
+
+    const username = credentials?.username;
+    const password = credentials?.password;
+
     if (username === "" || password === "")
       return setErrMsg("Campos faltantes");
 
@@ -30,6 +55,13 @@ const LoginIndex = () => {
       })
       .then(async (res) => {
         if (!res?.data?.isActive) return setErrMsg("Cuenta desactivada");
+
+        if (res?.data?.restart_password) {
+          HandleToggles('restart_password', true);
+          setSuccessMsg("Se requiere cambio de contraseña");
+          HandleAccessToken(res?.data?.accessToken);
+          return null;
+        }
 
         setAuth({
           username: username,
@@ -115,15 +147,21 @@ const LoginIndex = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    setErrMsg(null)
+  }, [toggles])
+
   return (
     <>
       <Form
-        HandleLogin={HandleLogin}
+        successMsg={successMsg}
         errMsg={errMsg}
-        username={username}
-        HandleChangeUsername={HandleChangeUsername}
-        password={password}
-        HandleChangePassword={HandleChangePassword}
+        credentials={credentials}
+        newPassword={newPassword}
+        toggles={toggles}
+        HandleLogin={HandleLogin}
+        HandleChangeInput={HandleChangeInput}
+        postChangePassword={postChangePassword}
       />
     </>
   );
