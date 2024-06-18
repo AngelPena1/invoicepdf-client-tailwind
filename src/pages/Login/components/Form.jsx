@@ -5,6 +5,7 @@ import RestartPassword from "./RestartPassword";
 const LoginForm2 = ({
   errMsg,
   successMsg,
+  actionMsg,
   credentials,
   newPassword,
   toggles,
@@ -18,8 +19,13 @@ const LoginForm2 = ({
         <div className="grid justify-center relative overflow-hidden">
           {/* Success message */}
           {successMsg && (
-            <div className="h-14 rounded-lg slide-in-top bg-green-400 text-center place-content-center absolute left-0 right-0">
+            <div className="h-14 rounded-lg slide-in-top bg-green-500 text-center place-content-center absolute left-0 right-0">
               <p className="text-white">{successMsg}</p>
+            </div>
+          )}
+          {actionMsg && (
+            <div className="h-14 rounded-lg slide-in-top bg-primary text-center place-content-center absolute left-0 right-0">
+              <p className="text-white">{actionMsg}</p>
             </div>
           )}
           {/* Error message */}

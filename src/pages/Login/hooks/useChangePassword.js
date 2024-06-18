@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import axios from "../../../api/axios";
 
 const useChangePassword = ({
@@ -10,14 +9,33 @@ const useChangePassword = ({
   setErrMsg,
   setSuccessMsg
 }) => {
+  
+
+  function isValidPwd(pwd1, pwd2) {
+
+    if(!pwd1 || !pwd2) {
+      setErrMsg("La contraseña no es válida");
+      return false
+    }
+
+    if(pwd1.trim() === "" || pwd2.trim() === "") {
+      setErrMsg("La contraseña no es válida");
+      return false
+    }
+    
+    if(pwd1 !== pwd2) {
+      setErrMsg("Las contraseñas no coinciden");
+      return false
+    }
+
+    return true
+  }
+
   async function postChangePassword(e) {
     e.preventDefault();
 
-    console.log(password, confirmPassword);
-    // if(password.trim() === "") return setErrMsg("Contraseña no valida.")
-    if (password !== confirmPassword)
-      return setErrMsg("Las contraseñas no coinciden");
-
+    if(!isValidPwd(password, confirmPassword)) return
+    
     await axios
       .post("user/change-password", {
         accessToken,
@@ -28,7 +46,7 @@ const useChangePassword = ({
         if (res.status === 204) {
           ResetValues()
           HandleToggles('restart_password', false);
-          setSuccessMsg("Cambio exitoso, vuelva a iniciar")
+          setSuccessMsg("Cambio exitoso, vuelva a iniciar sesión")
         }
       });
   }

@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Form from "./components/Form";
 import useInputData from "./hooks/useInputData";
-import RestartPassword from "./components/RestartPassword";
 import useToggles from "./hooks/useToggles";
 import useChangePassword from "./hooks/useChangePassword";
 
 const LoginIndex = () => {
   const navigate = useNavigate();
 
+  const [actionMsg, setActionMsg] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
   const [errMsg, setErrMsg] = useState(null);
 
@@ -58,7 +58,7 @@ const LoginIndex = () => {
 
         if (res?.data?.restart_password) {
           HandleToggles('restart_password', true);
-          setSuccessMsg("Se requiere cambio de contraseña");
+          setActionMsg("Se requiere cambio de contraseña");
           HandleAccessToken(res?.data?.accessToken);
           return null;
         }
@@ -149,13 +149,15 @@ const LoginIndex = () => {
 
   useEffect(() => {
     setErrMsg(null)
+    if(!toggles?.restart_password) return setActionMsg(null)
   }, [toggles])
 
   return (
     <>
       <Form
-        successMsg={successMsg}
+        actionMsg={actionMsg}
         errMsg={errMsg}
+        successMsg={successMsg}
         credentials={credentials}
         newPassword={newPassword}
         toggles={toggles}

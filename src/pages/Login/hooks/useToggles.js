@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const useToggles = () => {
   const [toggles, setToggles] = useState({
@@ -6,7 +6,7 @@ const useToggles = () => {
   });
 
   function HandleToggles(name, value) {
-    return setToggles({ ...toggles, [name]: value });
+    return setToggles({ ...toggles, [name]: value })
   }
 
   return { toggles, HandleToggles};
